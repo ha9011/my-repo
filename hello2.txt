@@ -2,4 +2,9 @@
 4
 5
 backup
+<<<<<<< HEAD
 backup2
+=======
+backup2
+minho
+>>>>>>> 7eaa5383daba02e86debcd7e76d3cc9edecd32c0
