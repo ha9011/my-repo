@@ -5,8 +5,10 @@ public class test {
 	
 		for(int a = 1 ; a < 10 ; a++) {
 			System.out.println(a);
+			System.out.println("안녕");
 		}
 
+		 
 	}
 
 }
