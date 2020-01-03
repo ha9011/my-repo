@@ -39,7 +39,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 			System.out.println("insert test result : " + result);
 			if(result==0) {//실패
-				
+				System.out.println("회원가입 실패");
 				return false;
 			}
 			
@@ -47,7 +47,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("회원가입 성공");
 		return true;
 	}
 
