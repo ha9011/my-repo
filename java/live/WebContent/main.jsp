@@ -23,11 +23,17 @@
 		</div>
 		
 		
-		<div id=middle><!--중앙 박스-->
+		<div id=middle><!--중앙 박스(검색배경) --> 
 			<h1>어디로 여행 </h1><br><!-- 미들 타이틀-->
-			<div id=date> <!-- 체크박스, 검색어 입력 , 버튼, 달력-->
-				
-				<input type="text">
+			<div id=searchhousefrm> <!-- 체크박스, 검색어 입력 , 버튼, 달력-->
+				<form action="" method="get">
+					<input type="text" name="destination" placeholder="목적지">
+					<input type="date" name="checkin" placeholder="체크인">
+					<input type="date" name="checkout" placeholder="체크아웃">
+					<input type="text" name="destination" placeholder="목적지">
+					<button type="reset">초기화</button>
+					<button type="submit">검색</button>
+				</form>
 			</div>
 	
 		</div>
