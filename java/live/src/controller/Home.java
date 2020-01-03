@@ -11,11 +11,7 @@ import bean.Forward;
 import service.MemberMM;
 import service.ProductMM;
 
-<<<<<<< HEAD
 @WebServlet({"/access","/logout","/SearchId","/SearchPw"})
-=======
-@WebServlet({"/joinfrm"})
->>>>>>> 7a9a61642d3b8d1abd6b5ed54cbfa702cf241cb4
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,9 +23,7 @@ public class Home extends HttpServlet {
 		MemberMM mm  = new MemberMM(request, response);
 		ProductMM pm = new ProductMM(request, response);
 		
-<<<<<<< HEAD
-		if(cmd.equals("/main")){
-=======
+
 		if(cmd.equals("/joinfrm")){
 			System.out.println("회원가입 접근");
 			String id = request.getParameter("id");
@@ -43,7 +37,6 @@ public class Home extends HttpServlet {
 			mm.join(id,pw,name,phonenum,email,gest);
 			
 			
->>>>>>> 7a9a61642d3b8d1abd6b5ed54cbfa702cf241cb4
 			fw = new Forward();
 			fw.setPath("main.jsp");
 			fw.setRedireact(false);
