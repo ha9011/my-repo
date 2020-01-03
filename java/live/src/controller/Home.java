@@ -11,7 +11,11 @@ import bean.Forward;
 import service.MemberMM;
 import service.ProductMM;
 
+<<<<<<< HEAD
+@WebServlet({"/access","/logout","/SearchId","/SearchPw"})
+=======
 @WebServlet({"/joinfrm"})
+>>>>>>> 7a9a61642d3b8d1abd6b5ed54cbfa702cf241cb4
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,6 +27,9 @@ public class Home extends HttpServlet {
 		MemberMM mm  = new MemberMM(request, response);
 		ProductMM pm = new ProductMM(request, response);
 		
+<<<<<<< HEAD
+		if(cmd.equals("/main")){
+=======
 		if(cmd.equals("/joinfrm")){
 			System.out.println("회원가입 접근");
 			String id = request.getParameter("id");
@@ -36,9 +43,19 @@ public class Home extends HttpServlet {
 			mm.join(id,pw,name,phonenum,email,gest);
 			
 			
+>>>>>>> 7a9a61642d3b8d1abd6b5ed54cbfa702cf241cb4
 			fw = new Forward();
-			fw.setPath("menu.jsp");
+			fw.setPath("main.jsp");
 			fw.setRedireact(false);
+		}else if(cmd.equals("/access")) { //로그인 폼으로 연결
+			fw=mm.access();
+		}else if(cmd.equals("/logout")) { //로그아웃으로 연결
+			fw=mm.logout();
+		}else if(cmd.equals("/SearchId")) { // 아이디 찾기 연결
+			System.out.println("접근아이디");
+			fw=mm.searchId();
+		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
+			fw=mm.searchPw();
 		}
 
 

@@ -18,13 +18,15 @@
 
 
 </head>
-<body>
+<body> 
+		<!-- 로그인 안된 경우  -->
 		<div id="header"><!-- 아이디 비번 로그인 회원가입 입력-->
 		<img id="rogo" alt="살다로고" src="./img/살다.png">
-			<a class=log>회원가입</a>
-			<a class=log>로그인</a>
+			<a href="signup.jsp" class=log>회원가입</a>
+			<a href="loginfrom.jsp"  class=log>로그인</a>
 		</div>
 		
+<<<<<<< HEAD
 		<div id=middleback>
 		<div id=middle><!--중앙 박스(검색배경) --> 
 			<div id=searchBox>
@@ -41,8 +43,22 @@
 					<button type="submit">검색</button>
 				</form>
 				</div>
+=======
+		
+		<div id=middle><!--중앙 박스-->
+			<h1>어디로 여행 </h1><br><!-- 미들 타이틀-->
+			<div id=date> <!-- 목적지, 체크인&아웃 , 인원 검색 창 , 버튼-->
+				
+				<input type="text" value="목적지">
+				
+>>>>>>> 66eb53b256bc93ff15e9ffa3a0f4cb9f55f1a6af
 			</div>
 		</div>
 		</div>
 </body>
+<script>
+
+
+</script>
+
 </html>

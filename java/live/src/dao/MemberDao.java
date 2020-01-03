@@ -39,7 +39,7 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 			System.out.println("insert test result : " + result);
 			if(result==0) {//실패
-				
+				System.out.println("회원가입 실패");
 				return false;
 			}
 			
@@ -47,7 +47,7 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("회원가입 성공");
 		return true;
 	}
 
@@ -74,5 +74,52 @@ public class MemberDao {
 
 		return result;
 	}
+	
+	// DB에서 아이디 찾음
+	public String findId(String name, String email) { 
+		
+		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? ";
+		String id = "";
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setNString(1, name);
+			pstmt.setNString(2, email);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getNString("ID"); // 미정
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return id;
+	}
+	
+	// DB에서 비밀번호 찾음
+	public String findPw(String id, String email, String name) {
+		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
+		String pw ="";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setNString(1, name);
+			pstmt.setNString(2, email);
+			pstmt.setNString(3, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getNString("PW"); // 미정
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return pw;
+	} 
+	
+
 
 }
