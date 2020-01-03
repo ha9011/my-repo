@@ -1,3 +1,4 @@
+
 package service;
 
 import java.io.File;
@@ -111,7 +112,17 @@ public class MemberMM {
 	}
 
 
-	
+	public Forward join(String id, String pw, String name, String phonenum, String email, String gest) {
+		
+		MemberDao mDao = new MemberDao();
+		mDao.join(id,pw,name,phonenum,email,gest);
+		/////
+		fw = new Forward();
+		fw.setPath("./index.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+
 	
 	
 }
