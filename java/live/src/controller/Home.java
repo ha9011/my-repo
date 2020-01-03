@@ -11,7 +11,7 @@ import bean.Forward;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({"/orderlist"})
+@WebServlet({"/joinfrm"})
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,7 +23,19 @@ public class Home extends HttpServlet {
 		MemberMM mm  = new MemberMM(request, response);
 		ProductMM pm = new ProductMM(request, response);
 		
-		if(cmd.equals("/menu")){
+		if(cmd.equals("/joinfrm")){
+			System.out.println("회원가입 접근");
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw1");
+			String name = request.getParameter("name");
+			String phonenum = request.getParameter("phonenum");
+			String email = request.getParameter("email");
+			String gest = request.getParameter("h_or_g");
+			System.out.println("test");
+			System.out.println(id+ pw+ name+ phonenum+ email+ gest);
+			mm.join(id,pw,name,phonenum,email,gest);
+			
+			
 			fw = new Forward();
 			fw.setPath("menu.jsp");
 			fw.setRedireact(false);
