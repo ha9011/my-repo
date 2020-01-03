@@ -11,7 +11,7 @@ import bean.Forward;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({"/orderlist"})
+@WebServlet({"/access","/logout","/SearchId","/SearchPw"})
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,10 +23,19 @@ public class Home extends HttpServlet {
 		MemberMM mm  = new MemberMM(request, response);
 		ProductMM pm = new ProductMM(request, response);
 		
-		if(cmd.equals("/menu")){
+		if(cmd.equals("/main")){
 			fw = new Forward();
-			fw.setPath("menu.jsp");
+			fw.setPath("main.jsp");
 			fw.setRedireact(false);
+		}else if(cmd.equals("/access")) { //로그인 폼으로 연결
+			fw=mm.access();
+		}else if(cmd.equals("/logout")) { //로그아웃으로 연결
+			fw=mm.logout();
+		}else if(cmd.equals("/SearchId")) { // 아이디 찾기 연결
+			System.out.println("접근아이디");
+			fw=mm.searchId();
+		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
+			fw=mm.searchPw();
 		}
 
 
