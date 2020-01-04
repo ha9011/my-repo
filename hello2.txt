@@ -10,6 +10,10 @@ minho
 >>>>>>> 7eaa5383daba02e86debcd7e76d3cc9edecd32c0
 
 mmmmiiiiinnnnnhhhhhhoooooooo
+<<<<<<< HEAD
 
 44
 
+=======
+1
+>>>>>>> 0c6ceedfe2098b6cb2cc4cc211863b24c09efab9
