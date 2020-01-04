@@ -2,13 +2,8 @@
 4
 5
 backup
-<<<<<<< HEAD
-backup2
-=======
-backup2
-minho
->>>>>>> 7eaa5383daba02e86debcd7e76d3cc9edecd32c0
 
+<<<<<<< HEAD
 mmmmiiiiinnnnnhhhhhhoooooooo
 <<<<<<< HEAD
 
@@ -17,3 +12,6 @@ mmmmiiiiinnnnnhhhhhhoooooooo
 =======
 1
 >>>>>>> 0c6ceedfe2098b6cb2cc4cc211863b24c09efab9
+=======
+
+>>>>>>> a53c0fec0d0c722b417d4f321d207afeebee3224

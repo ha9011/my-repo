@@ -1,3 +1,4 @@
+
 package service;
 
 import java.io.File;
@@ -32,6 +33,7 @@ public class MemberMM {
 		
 		MemberDao mDao = new MemberDao();
 		int result = mDao.access(id,pw);  //1:성공 -1:아이디오류 0:pw부재
+		
 		mDao.close();
 		if(result == -1) {
 			request.setAttribute("msgAccess", "ID가 존재하지 않습니다.");
@@ -45,25 +47,82 @@ public class MemberMM {
 		}
 
 		fw = new Forward();
-		fw.setPath("./index.jsp");
+		fw.setPath("./main.jsp");
 		fw.setRedireact(false);
 		return fw;
 	}
 
-
+	//로그아웃 시 실행되는 포워드
 	public Forward logout() {
 		
 		HttpSession session=request.getSession();
 		session.invalidate();//세션 초기화 
 		
 		fw = new Forward();
+		fw.setPath("./main.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+
+	//아이디 찾기시 실행되는 포워드 
+	public Forward searchId() {
+		
+		String name = request.getParameter("name"); //이름이랑 이메일 받아옴 
+		String email = request.getParameter("email");
+		String findId = null;
+		MemberDao mDao = new MemberDao(); //DB연결
+		
+		
+		findId = mDao.findId(name, email);
+		 
+		if(findId.equals("")) {
+			request.setAttribute("id","아이디가 없습니다.");//찾는 정보와 일치하지 않을 때
+		}else {
+			request.setAttribute("id",findId);
+		}
+		
+		fw = new Forward();
+		fw.setPath("./SearchId.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+
+	//비밀번호 찾기 시 실행되는 포워드 
+	public Forward searchPw() {
+
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String findPw = null;
+		MemberDao mDao = new MemberDao();
+		
+		findPw = mDao.findPw(id, email, name);
+		
+		if(findPw.equals("")) {
+			request.setAttribute("pw","비밀번호가 없습니다."); //찾는 정보와 일치하지 않을 때 
+		}else {
+			request.setAttribute("pw",findPw);
+		}
+		
+		fw = new Forward();
+		fw.setPath("./SearchPw.jsp");
+		fw.setRedireact(false);
+		
+		return fw;
+	}
+
+
+	public Forward join(String id, String pw, String name, String phonenum, String email, String gest) {
+		
+		MemberDao mDao = new MemberDao();
+		mDao.join(id,pw,name,phonenum,email,gest);
+		/////
+		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
 		return fw;
 	}
 
-
-	
 	
 	
 }
