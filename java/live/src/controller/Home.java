@@ -11,7 +11,7 @@ import bean.Forward;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({"/access","/logout","/SearchId","/SearchPw"})
+@WebServlet({"/access","/logout","/SearchId","/SearchPw","/registHouse","/registHouseDetail"})
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,6 +49,12 @@ public class Home extends HttpServlet {
 			fw=mm.searchId();
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
 			fw=mm.searchPw();
+		}else if(cmd.equals("/registHouse")) { //호스트가 집등록 버튼 누를 경우 (1단계) [하동원]
+			System.out.println("1단계");
+			fw=mm.registHouse();
+		}else if(cmd.equals("/registHouseDetail")) { //호스트가  집등록 (2단계)[하동원]
+			System.out.println("2단계");
+			fw=mm.registHouse();
 		}
 
 

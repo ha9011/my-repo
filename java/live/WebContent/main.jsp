@@ -6,7 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <style>
+
 	#header{font-family:"문체부훈민정음";width:98%;height:160px;border:none;text-align:right;}
 	.log{text-align:right;}
 	#rogo{float:left;width:230px;height:150px;}
@@ -27,6 +31,14 @@
 		</div>
 		
 
+		<!-- 호스트 로그인 된 경우 - 하동원  -->
+		<div><button id="registHouse">집등록</button></div>
+		 
+
+
+
+
+
 		<div id=middleback>
 		<div id=middle><!--중앙 박스(검색배경) --> 
 			<div id=searchBox>
@@ -38,7 +50,7 @@
 					<input type="text" name="destination" placeholder="목적지">
 					<input type="date" name="checkin" placeholder="체크인">
 					<input type="date" name="checkout" placeholder="체크아웃">
-					<input type="text" name="destination" placeholder="목적지">
+					<input type="text" name="destination" placeholder="목적지" >
 					<button type="reset">초기화</button>
 					<button type="submit">검색</button>
 				</form>
@@ -49,8 +61,54 @@
 			</div>
 </body>
 <script>
+	
+	//하동원
+	
+	$("#registHouse").click(Function() {    // [host] '집등록' 버튼 누를 경우 
+		location.href="./registHouse.jsp";
+	});
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//이예상
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//민호
+	
 </script>
 
 </html>

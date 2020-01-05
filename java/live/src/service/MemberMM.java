@@ -123,6 +123,80 @@ public class MemberMM {
 		return fw;
 	}
 
+	//하동원 구역
+	
+	public Forward registHouse() {
+		
+		MemberDao mDao = new MemberDao();
+		mDao.join(id,pw,name,phonenum,email,gest);
+		/////
+		fw = new Forward();
+		fw.setPath("./index.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//이예상 구역
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 평민호 구역
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
