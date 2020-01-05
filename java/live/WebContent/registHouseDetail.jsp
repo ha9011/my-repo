@@ -58,6 +58,8 @@
 #firstsubmit {
 	margin: 100px 0 0 0;
 }
+
+
 </style>
 
 <body>
@@ -194,16 +196,16 @@
 
 <script>
 let list ;
-let indexpic = [0,1,2];
+let indexpic ;
 $(function() {
     $("#imgInp").on('change', function(){
         
-    
-        list = readURL(this);
+    	indexpic = [0,1,2];
+        readURL(this,indexpic);
         console.log(typeof list);
         console.log(list);
         
-        readListURL(list,indexpic);
+       // readListURL(list,indexpic);
         
     });
     
@@ -213,32 +215,56 @@ $(function() {
 
 
 
-function readURL(input) {
+function readURL(input,indexpic) {
 	
 	
-	var files = input.files;
-	var total = input.files.length;
-	var filesArr = Array.prototype.slice.call(files);  // 객체 -> 배열
+	let files = input.files;
+	let total = input.files.length;
+	list = total;
+	let filesArr = Array.prototype.slice.call(files);  // 객체 -> 배열
 	
-	filesArr.forEach((e)=>{
+	filesArr.forEach((e,i)=>{
 		if(!e.type.match("image.*")){
 			alert("이미지 확장자가 아닙니다.")
 			return;
 		}
+		console.log(i);
+
+		console.log(indexpic)
+		console.log(indexpic.indexOf(i))
 		
-// 		var reader = new FileReader();
+		var reader = new FileReader();
+		if(indexpic.indexOf(i) !== -1){
+		
+			reader.onload = function(r){
+				console.dir(r);
+				
+				var img_html = "<div class='mySlides pic"+i+"'  style='display:inline-block' >  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
+				+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
+	     	//	var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
+	     		
+				$(".imgs_wrap").append(img_html);
+			}
+			reader.readAsDataURL(e)
+			
+		}else{
+			reader.onload = function(r){
+				console.dir(r);
+				
+				var img_html = "<div class='mySlides pic"+i+"' style='display:none'>  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
+				+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
+	     	//	var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
+	     		
+				$(".imgs_wrap").append(img_html);
+			}
+			reader.readAsDataURL(e)
+			
+		}
+ 		
 
 		
 		
-// 		reader.onload = function(r){
-// 			console.dir(r);
-			
-// 			var img_html = "<div class='mySlides'>  <div class='numbertext'>"+i+" / "+total+"</div> "
-// 			+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
-// // 			var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
-// 			$(".imgs_wrap").append(img_html);
-// 		}
-// 		reader.readAsDataURL(e)
+		
 
 		
 	});
@@ -260,70 +286,65 @@ function readURL(input) {
 	return filesArr;
 }
 
-function readListURL(list,indexpic) {
+function readListURL(indexpic) {
 	
 	
 	
-	var filesArr = list;  // 객체 -> 배열
-	var size = filesArr.length;
+	let files1 = $(".mySlides");
+	let total = files1.length;
+	let filesArr = Array.prototype.slice.call(files1);  // 객체 -> 배열
+	console.log(files1);
+	
+	console.log("========");
 	
 	
-	indexpic.forEach((e)=>{
-			console.log("과연 : " +e);
-			console.log(e);
-			console.log(filesArr[e])
-			if(!filesArr[e].type.match("image.*")){
-				alert("이미지 확장자가 아닙니다.")
-				return;
-			}
-			
-			var reader = new FileReader();
-			reader.onload = function(r){
-				console.log("과연 r : ");
-				console.dir(r);
-				
-				var img_html = "<div class='mySlides'>  <div class='numbertext'>"+(e+1)+" / "+size+"</div> "
-				+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
-	 			var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
-				$(".imgs_wrap").append(img_html);
-			}
-			reader.readAsDataURL(filesArr[e])
-	
-			
-			
+	filesArr.forEach((e,i)=>{
 		
+		if(i<3){
+			console.log("존재 : " + i);
+			$(e).css('display','inline-block');
+			
+		}else{
+			console.log("존재x : " + i);
+			$(e).css('display','none');
+			
+		}
 	
-
 	});
+	
+	
 }
 	
 let plusSlides = (e)=>{
-	
-	$(".imgs_wrap").empty();
+	let files2 = $(".mySlides");
+	//$(".imgs_wrap").empty();
+	console.log("list : " + list);
+
+	console.log("files : " + files2);
 	
 	if(e === -1){
 		console.log("처음 : " + indexpic);
 		indexpic = indexpic.map((v)=>{
-			if(v===0){
-				return v+(list.length-1);
-			}else{
-				return v-1;
-			}
+			
+				
+				$(files2[files2.length-1]).insertBefore(files2[0]);
+			
 		});
 		console.log("변경 : " + indexpic);
 		
-		 readListURL(list,indexpic);
+		readListURL(indexpic);
+		
 	}else if(e === 1){
+		console.log("tset");
+		console.log($(files2[0]));
 		console.log("처음 : " + indexpic);
 		indexpic = indexpic.map((v)=>{
-			if(v===list.length-1){
-				return v-(list.length-1);
-			}else{
-				return v+1;
-			}
+			
+				$(files2[0]).insertAfter(files2[files2.length-1]);
+			
 		});
 		console.log("변경 : " + indexpic);
-		 readListURL(list,indexpic);
+		readListURL(indexpic);
 	}
 	console.log(list);
 	console.log(e);
