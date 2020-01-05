@@ -41,6 +41,7 @@ public class Home extends HttpServlet {
 			fw.setPath("main.jsp");
 			fw.setRedireact(false);
 		}else if(cmd.equals("/access")) { //로그인 폼으로 연결
+			System.out.println("로그인접속");
 			fw=mm.access();
 		}else if(cmd.equals("/logout")) { //로그아웃으로 연결
 			fw=mm.logout();

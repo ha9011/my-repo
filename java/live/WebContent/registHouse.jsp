@@ -69,9 +69,11 @@
 
 
 
+
+
 	<div id="outfrm">
 		${id}님의 호스트 하우스 등록
-		<form id="innerfrm" action="registHouseDetail" method="get">
+		<form id="innerfrm" action="registHouse" method="get">
 			<div>
 			<div class="form-row">
 
@@ -113,6 +115,7 @@
 			<div class="form-group">
 				<label for="inputAddress">Address</label><br> <input
 					type="text" class="form-control" id="inputAddress"
+					name="address"
 					placeholder="주소를 입력해주세요.">&nbsp;
 				<button type="button" id="LSBtn" class="btn btn-primary">입력</button>
 			</div>
@@ -122,8 +125,10 @@
 				<div class="test" id="map"></div>
 				<div class="test">
 					<label class="test" for="exampleInputPassword1">상세주소</label> <input
-						class=" form-control test" type="type"
-						id="exampleInputPassword1" placeholder="ex) 102동 1001호">
+						class=" form-control test" type="text"
+						id="exampleInputPassword1" 
+						name="addressDetail"
+						placeholder="ex) 102동 1001호">
 				</div>
 
 			</div>
@@ -139,7 +144,7 @@
 
 
 
-
+<!-- name : housetype // attendanceNum // attendanceDir // address //  addressDetail -->
 
 </body>
 
