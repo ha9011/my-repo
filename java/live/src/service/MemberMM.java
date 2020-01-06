@@ -89,12 +89,13 @@ public class MemberMM {
 
 	//비밀번호 찾기 시 실행되는 포워드 
 	public Forward searchPw() {
-
+		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String findPw = null;
 		MemberDao mDao = new MemberDao();
+		
 		
 		findPw = mDao.findPw(id, email, name);
 		

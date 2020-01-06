@@ -1,20 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 20951888d82f7a9913dd512813cd3311086deb23
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 20951888d82f7a9913dd512813cd3311086deb23
 <style>
 
 div {
@@ -35,10 +26,7 @@ hr {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-<<<<<<< HEAD
-=======
 
->>>>>>> 20951888d82f7a9913dd512813cd3311086deb23
 	<div>
 		<form action="joinfrm">
 			<h1>회원가입</h1>
@@ -83,7 +71,7 @@ hr {
 <script>
 
    $("#same").keyup(function() {
->	   console.log('zzz');
+	   console.log('zzz');
    }
 
 
@@ -117,8 +105,4 @@ hr {
 
 	});
 </script>
-<<<<<<< HEAD
-=======
-
->>>>>>> 20951888d82f7a9913dd512813cd3311086deb23
 </html>

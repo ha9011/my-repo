@@ -99,6 +99,7 @@ public class MemberDao {
 	
 	// DB에서 비밀번호 찾음
 	public String findPw(String id, String email, String name) {
+		System.out.println("오냐");
 		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
 		String pw ="";
 		
@@ -109,7 +110,7 @@ public class MemberDao {
 			pstmt.setNString(3, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				id = rs.getNString("PW"); // 미정
+				pw = rs.getNString("PW"); // 미정
 				
 			}
 		} catch (SQLException e) {
