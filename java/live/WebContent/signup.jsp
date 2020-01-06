@@ -36,10 +36,8 @@ hr {
 		<form action="joinfrm">
 			<h1>회원가입</h1>
 
-
-
 			<pre>
-* 아이디                <input type="text" name="id" placeholder="아이디 입력"
+* 아이디                <input type="text" name="id" placeholder="아이디 입력" id="id"
 					minlength="6" maxlength="20"><button type="button" id="same">중복확인</button> 
 				<hr>
 * 비밀번호		<input type="password" name="pw1" id="pw1" minlength="3"
@@ -54,11 +52,13 @@ hr {
 				<hr>
 * 이름 			<input type="text" name="name" placeholder="이름 입력">
 				<hr>
+* 성별 			<input type="radio" name="gender" value="1" checked>남자     <input type="radio" name="gender" value="2">여자
+				<hr>
 * 이메일		<input type="text" name="email" placeholder="이메일 입력">
 				<hr>
 * 전화번호		<input type="text" name="phonenum" placeholder="전화번호 입력">
 				<hr>
-			<input type="radio" name="h_or_g" value="1" >게스트     <input type="radio" name="h_or_g" value="2">호스트
+			<input type="radio" name="h_or_g" value="1" checked >게스트     <input type="radio" name="h_or_g" value="2">호스트
 </pre>
 			<DIV ID="boot">
 				<hr>
@@ -75,9 +75,11 @@ hr {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 
-   $("#same").keyup(function() {
->	   console.log('zzz');
-   }
+
+   $("#same").click(function() {
+	   var cid = $("#id").val();
+	   location.href="duplicateID?id="+cid;
+   })
 
 
 
@@ -95,6 +97,7 @@ hr {
 		}
 
 	});
+	
 	$("#pw2").keyup(function() {
 		var pwd1 = $("#pw1").val();
 		var pwd2 = $("#pw2").val();

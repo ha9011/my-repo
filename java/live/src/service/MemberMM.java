@@ -112,10 +112,19 @@ public class MemberMM {
 	}
 
 
-	public Forward join(String id, String pw, String name, String phonenum, String email, String gest) {
+	public Forward join() {
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw1");
+		String name = request.getParameter("name");
+		String phonenum = request.getParameter("phonenum");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		String gest = request.getParameter("h_or_g");
+		
 		
 		MemberDao mDao = new MemberDao();
-		mDao.join(id,pw,name,phonenum,email,gest);
+		mDao.join(id,pw,name,phonenum,email,gest, gender);
 		/////
 		fw = new Forward();
 		fw.setPath("./index.jsp");
