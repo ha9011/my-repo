@@ -35,12 +35,12 @@ public class Home extends HttpServlet {
 		}else if(cmd.equals("/logout")) { //로그아웃으로 연결
 			fw=mm.logout();
 		}else if(cmd.equals("/SearchId")) { // 아이디 찾기 연결
-			System.out.println("접근아이디");
+			System.out.println("접근아이디z");
 			fw=mm.searchId();
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
 			fw=mm.searchPw();
 		}else if(cmd.equals("/registHouse")) { //호스트가 집등록 버튼 누를 경우 (1단계) [하동원]
-			System.out.println("1단계");
+			System.out.println("1단계z");
 			fw=mm.registHouse();
 		}else if(cmd.equals("/registHouseDetail")) { //호스트가  집등록 (2단계)[하동원]
 			System.out.println("2단계");

@@ -156,7 +156,7 @@ public class MemberMM {
 		
 
 
-		System.out.println("넘어온 값 확인 z");
+		
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("유형 : "+housetype);
 		System.out.println("수 : "+attendanceNum);
