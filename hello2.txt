@@ -3,4 +3,15 @@
 5
 backup
 
+<<<<<<< HEAD
+mmmmiiiiinnnnnhhhhhhoooooooo
+<<<<<<< HEAD
 
+44
+
+=======
+1
+>>>>>>> 0c6ceedfe2098b6cb2cc4cc211863b24c09efab9
+=======
+
+>>>>>>> a53c0fec0d0c722b417d4f321d207afeebee3224

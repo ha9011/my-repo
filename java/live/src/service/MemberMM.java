@@ -125,6 +125,104 @@ public class MemberMM {
 		return fw;
 	}//----------------------------------------------------------------
 
+	//하동원 구역
+	
+	public Forward registHouse() {  // 정보만 requset에 담기
+		
+		String housetype = request.getParameter("housetype");
+		
+		int attendanceNum = 0;
+		if(request.getParameter("attendanceNum").equals("direct")) {
+			attendanceNum = Integer.parseInt(request.getParameter("attendanceDir"));
+		}else {
+			attendanceNum = Integer.parseInt(request.getParameter("attendanceNum"));
+		}
+		String address = request.getParameter("address");
+		String addressDetail = request.getParameter("addressDetail");
+
+		System.out.println("넘어온 값 확인 ");
+		System.out.println("유형 : "+housetype);
+		System.out.println("수 : "+attendanceNum);
+		System.out.println("주소 : "+address);
+		System.out.println("디테일주소 : "+addressDetail);
+		
+		
+		request.setAttribute("housetype", housetype);
+		request.setAttribute("attendanceNum", attendanceNum);
+		request.setAttribute("address", address);
+		request.setAttribute("addressDetail", addressDetail);
+		
+		
+		
+		
+		
+		fw = new Forward();
+		fw.setPath("./registHouseDetail.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//이예상 구역
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 평민호 구역
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
