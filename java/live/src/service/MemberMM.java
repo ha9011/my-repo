@@ -119,10 +119,7 @@ public class MemberMM {
 	
 	//민호 ----------------------------------------------------------------------------------------------
 	public Forward join() {
-<<<<<<< HEAD
 
-=======
->>>>>>> 238715aef9e09f9856c6171a4b28d0f8bb091f53
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
@@ -134,11 +131,7 @@ public class MemberMM {
 		
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest, gender);
-<<<<<<< HEAD
-=======
-		/////
 
->>>>>>> 238715aef9e09f9856c6171a4b28d0f8bb091f53
 		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
@@ -163,6 +156,7 @@ public class MemberMM {
 		
 
 
+		System.out.println("넘어온 값 확인 z");
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("유형 : "+housetype);
 		System.out.println("수 : "+attendanceNum);
