@@ -89,12 +89,13 @@ public class MemberMM {
 
 	//비밀번호 찾기 시 실행되는 포워드 
 	public Forward searchPw() {
-
+		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String findPw = null;
 		MemberDao mDao = new MemberDao();
+		
 		
 		findPw = mDao.findPw(id, email, name);
 		
@@ -111,7 +112,7 @@ public class MemberMM {
 		return fw;
 	}
 
-	
+
 	
 	
 	//민호 ----------------------------------------------------------------------------------------------
@@ -120,10 +121,14 @@ public class MemberMM {
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
 		String phonenum = request.getParameter("phonenum");
+		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String gest = request.getParameter("h_or_g");
+
 		MemberDao mDao = new MemberDao();
-		mDao.join(id,pw,name,phonenum,email,gest);
+		mDao.join(id,pw,name,phonenum,email,gest, gender);
+		/////
+
 		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
@@ -208,10 +213,10 @@ public class MemberMM {
 	
 	
 	// 평민호 구역
-	public Forward checkId() {
-		string
-		return null;
-	}
+//	public Forward checkId() {
+//		string
+//		return null;
+//	}
 	
 	
 	

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 <style>
-
+boby{background-color:#0B2161;}
 
 </style>
 
@@ -18,10 +18,16 @@
 <h1>아이디 찾기</h1>
 <div>
 	<form action="SearchId">
-		이름<input name = "name"><br>
-		이메일<input name = "email"><br>
-		<button>아이디찾기</button>
-		<input type=button value="뒤로가기" onClick="history.back();">
+		
+		 
+		
+				<div id="middle">
+					이름<input name = "name"><br>
+					이메일<input name = "email"><br>
+					<button>아이디찾기</button>
+					<input type=button value="뒤로가기" onClick="history.back();">
+				</div>
+			</div>
 	</form>	
 	</div>
 

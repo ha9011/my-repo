@@ -24,18 +24,21 @@ public class MemberDao {
 		JdbcUtil.close(rs, pstmt, con);
 	}
 
-	public boolean join(String id, String pw, String name, String phonenum, String email, String gest) {// 게스트 , 성별
-		String sql = "insert into signup values(?,?,?,?,?,?)";
+	public boolean join(String id, String pw, String name, String phonenum, String email, String gest, String gender) {// 게스트 , 성별
+		String sql = "insert into MEMBER values(?,?,?,?,?,?,default,?)";
 		int result = 0;
 		try {
 		
 			pstmt = con.prepareStatement(sql);
 			pstmt.setNString(1, id);
 			pstmt.setNString(2, pw);
-			pstmt.setNString(3, name);
-			pstmt.setNString(4, email);
-			pstmt.setInt(5, Integer.parseInt(gest));
+			pstmt.setInt(3, Integer.parseInt(gender));
+			pstmt.setNString(4, name);
+			pstmt.setNString(5, email);
 			pstmt.setNString(6, phonenum);
+			
+			pstmt.setInt(7, Integer.parseInt(gest));
+			
 			result = pstmt.executeUpdate();
 			System.out.println("insert test result : " + result);
 			if(result==0) {//실패
@@ -99,6 +102,7 @@ public class MemberDao {
 	
 	// DB에서 비밀번호 찾음
 	public String findPw(String id, String email, String name) {
+		System.out.println("오냐");
 		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
 		String pw ="";
 		
@@ -109,7 +113,7 @@ public class MemberDao {
 			pstmt.setNString(3, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				id = rs.getNString("PW"); // 미정
+				pw = rs.getNString("PW"); // 미정
 				
 			}
 		} catch (SQLException e) {
