@@ -32,7 +32,7 @@
 #outfrm {
 	font-family: "문체부훈민정음";
 	width: 600px;
-	height: 900px;
+	height: 1200px;
 	border: 1px solid gray;
 	text-align: left;
 	margin: 100px auto;
@@ -60,7 +60,7 @@
 	margin: 0 0 5px 0;
 }
 
-#firstsubmit{
+#firstsubmit {
 	margin: 100px 0 0 0;
 }
 </style>
@@ -73,65 +73,76 @@
 
 	<div id="outfrm">
 		${id}님의 호스트 하우스 등록
-		<form id="innerfrm" action="registHouse" method="get">
+		<form id="innerfrm" action="registHouse" method="get" enctype="multipart/form-data">
 			<div>
-			<div class="form-row">
+				<div class="form-row">
 
-				<div class="form-group col-md-6">
-					<div class="input-group-prepend">
-						<label class="input-group-text" for="inputGroupSelect01">집 유형</label>
+
+
+					<div class="form-group">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">집
+								메인 사진</label>
+						</div>
+						<input type="file" class="form-control-file" id="imgInput" name="mainpic">
+						<img id="image_section" width="100%" src="" alt="your image" />
 					</div>
-					<select name="housetype" class="custom-select" id="inputGroupSelect01">
-						<option selected>Choose...</option>
-						<option value="아파트">아파트</option>
-						<option value="주택">주택</option>
-					</select>
-				</div>
 
-				<div class="form-group col-md-6">
-					<div class="input-group-prepend">
-						<label class="input-group-text" for="inputGroupSelect01">수용 인원</label>
+
+
+
+					<div class="form-group col-md-6">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">집
+								유형</label>
+						</div>
+						<select name="housetype" class="custom-select"
+							id="inputGroupSelect01">
+							<option selected>Choose...</option>
+							<option value="아파트">아파트</option>
+							<option value="주택">주택</option>
+						</select>
 					</div>
-					<select name="attendanceNum" class="custom-select" id="selbox">
-						<option selected>Choose...</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="6">6</option>
-						<option value="direct">직접입력</option>
-					</select>
-					
-					 <input
-					type="text" name="attendanceDir" class="form-control" id="selboxDirect"
-					placeholder="수용 가능 인원 직접입력">
-					
-				</div>
-			</div>
 
+					<div class="form-group col-md-6">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="inputGroupSelect01">수용
+								인원</label>
+						</div>
+						<select name="attendanceNum" class="custom-select" id="selbox">
+							<option selected>Choose...</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="6">6</option>
+							<option value="direct">직접입력</option>
+						</select> <input type="text" name="attendanceDir" class="form-control"
+							id="selboxDirect" placeholder="수용 가능 인원 직접입력">
 
-			<div class="form-group">
-				<label for="inputAddress">Address</label><br> <input
-					type="text" class="form-control" id="inputAddress"
-					name="address"
-					placeholder="주소를 입력해주세요.">&nbsp;
-				<button type="button" id="LSBtn" class="btn btn-primary">입력</button>
-			</div>
-
-			<div id="outputAddress" class="form-group test">
-				<div class="test">입력한 주소의 위치</div>
-				<div class="test" id="map"></div>
-				<div class="test">
-					<label class="test" for="exampleInputPassword1">상세주소</label> <input
-						class=" form-control test" type="text"
-						id="exampleInputPassword1" 
-						name="addressDetail"
-						placeholder="ex) 102동 1001호">
+					</div>
 				</div>
 
-			</div>
+
+				<div class="form-group">
+					<label for="inputAddress">Address</label><br> <input
+						type="text" class="form-control" id="inputAddress" name="address"
+						placeholder="주소를 입력해주세요.">&nbsp;
+					<button type="button" id="LSBtn" class="btn btn-primary">입력</button>
+				</div>
+
+				<div id="outputAddress" class="form-group test">
+					<div class="test">입력한 주소의 위치</div>
+					<div class="test" id="map"></div>
+					<div class="test">
+						<label class="test" for="exampleInputPassword1">상세주소</label> <input
+							class=" form-control test" type="text" id="exampleInputPassword1"
+							name="addressDetail" placeholder="ex) 102동 1001호">
+					</div>
+
+				</div>
 
 
 			</div>
@@ -144,12 +155,30 @@
 
 
 
-<!-- name : housetype // attendanceNum // attendanceDir // address //  addressDetail -->
+	<!-- name : housetype // attendanceNum // attendanceDir // address //  addressDetail -->
 
 </body>
 
 <script>
+function readURL(input) {
+	 if (input.files && input.files[0]) {
+	  var reader = new FileReader();
+	  
+	  reader.onload = function (e) {
+	   $('#image_section').attr('src', e.target.result);  
 
+	   $("#image_section").show();
+	  }
+	  
+	  reader.readAsDataURL(input.files[0]);
+	  }
+	}
+	  
+	  
+	  
+	$("#imgInput").change(function(){
+	   readURL(this);
+	});
 
 $(function(){
 
@@ -157,13 +186,11 @@ $(function(){
 
 $("#selboxDirect").hide();
 
+$("#image_section").hide();
 
 
 $("#selbox").change(function() {
-
-		
-
-                //직접입력을 누를 때 나타남
+       //직접입력을 누를 때 나타남
 
 		if($("#selbox").val() == "direct") {
 

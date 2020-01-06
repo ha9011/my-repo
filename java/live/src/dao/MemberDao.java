@@ -124,6 +124,85 @@ public class MemberDao {
 		return pw;
 	} 
 	
+	
+	///////////////////////////하동원 구역
+	
+	public String  getDuplicateID(String iD) {
+		
+		System.out.println("iD : "+iD);
+		String sql = "SELECT * FROM MEMBER WHERE ID = ? ";
+		String result = "없음";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, iD);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getNString("ID");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
+		return result;
+	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//////////////민호 구역
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///////////////////////예상 구역
 
 }

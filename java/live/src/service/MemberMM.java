@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -118,7 +119,10 @@ public class MemberMM {
 	
 	//민호 ----------------------------------------------------------------------------------------------
 	public Forward join() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 238715aef9e09f9856c6171a4b28d0f8bb091f53
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
@@ -130,6 +134,11 @@ public class MemberMM {
 		
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest, gender);
+<<<<<<< HEAD
+=======
+		/////
+
+>>>>>>> 238715aef9e09f9856c6171a4b28d0f8bb091f53
 		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
@@ -150,18 +159,23 @@ public class MemberMM {
 		}
 		String address = request.getParameter("address");
 		String addressDetail = request.getParameter("addressDetail");
+		String mainpic = request.getParameter("mainpic");
+		
+
 
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("유형 : "+housetype);
 		System.out.println("수 : "+attendanceNum);
 		System.out.println("주소 : "+address);
 		System.out.println("디테일주소 : "+addressDetail);
+		System.out.println("사진 : "+mainpic);
 		
 		
 		request.setAttribute("housetype", housetype);
 		request.setAttribute("attendanceNum", attendanceNum);
 		request.setAttribute("address", address);
 		request.setAttribute("addressDetail", addressDetail);
+		request.setAttribute("mainpic", mainpic);  // Chrysanthemum.jpg  
 		
 		
 		
@@ -175,7 +189,18 @@ public class MemberMM {
 	
 	
 	
-	
+	public String getAjaxduplicateID(String ID) {
+		
+		String test = "";
+		MemberDao mDao = new MemberDao();
+		test=mDao.getDuplicateID(ID);
+		
+		mDao.close();
+		
+		System.out.println("중복 결과 값 : " + test);
+		return test;
+		
+	}
 	
 	
 	
