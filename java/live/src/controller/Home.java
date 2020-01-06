@@ -25,21 +25,9 @@ public class Home extends HttpServlet {
 		
 
 		if(cmd.equals("/joinfrm")){
-			System.out.println("회원가입 접근");
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw1");
-			String name = request.getParameter("name");
-			String phonenum = request.getParameter("phonenum");
-			String email = request.getParameter("email");
-			String gest = request.getParameter("h_or_g");
-			System.out.println("test");
-			System.out.println(id+ pw+ name+ phonenum+ email+ gest);
-			mm.join(id,pw,name,phonenum,email,gest);
+			fw=mm.join();						
+		
 			
-			
-			fw = new Forward();
-			fw.setPath("main.jsp");
-			fw.setRedireact(false);
 		}else if(cmd.equals("/access")) { //로그인 폼으로 연결
 			System.out.println("로그인접속");
 			fw=mm.access();

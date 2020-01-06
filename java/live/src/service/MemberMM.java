@@ -115,8 +115,13 @@ public class MemberMM {
 	
 	
 	//민호 ----------------------------------------------------------------------------------------------
-	public Forward join(String id, String pw, String name, String phonenum, String email, String gest) {
-		
+	public Forward join() {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw1");
+		String name = request.getParameter("name");
+		String phonenum = request.getParameter("phonenum");
+		String email = request.getParameter("email");
+		String gest = request.getParameter("h_or_g");
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest);
 		fw = new Forward();
