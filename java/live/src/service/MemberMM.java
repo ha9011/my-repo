@@ -112,19 +112,36 @@ public class MemberMM {
 		return fw;
 	}
 
+<<<<<<< HEAD
+
+	public Forward join() {
+		
+=======
 	
 	
 	
 	//민호 ----------------------------------------------------------------------------------------------
 	public Forward join() {
+>>>>>>> 851d78ea54266f1ba889ab4fdf2321755622c0ad
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
 		String phonenum = request.getParameter("phonenum");
+<<<<<<< HEAD
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		String gest = request.getParameter("h_or_g");
+		
+		
+		MemberDao mDao = new MemberDao();
+		mDao.join(id,pw,name,phonenum,email,gest, gender);
+		/////
+=======
 		String email = request.getParameter("email");
 		String gest = request.getParameter("h_or_g");
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest);
+>>>>>>> 851d78ea54266f1ba889ab4fdf2321755622c0ad
 		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
