@@ -144,28 +144,23 @@ public class MemberMM {
 		}
 		String address = request.getParameter("address");
 		String addressDetail = request.getParameter("addressDetail");
-
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("유형 : "+housetype);
 		System.out.println("수 : "+attendanceNum);
 		System.out.println("주소 : "+address);
 		System.out.println("디테일주소 : "+addressDetail);
-		
-		
 		request.setAttribute("housetype", housetype);
 		request.setAttribute("attendanceNum", attendanceNum);
 		request.setAttribute("address", address);
 		request.setAttribute("addressDetail", addressDetail);
-		
-		
-		
-		
-		
 		fw = new Forward();
 		fw.setPath("./registHouseDetail.jsp");
 		fw.setRedireact(false);
 		return fw;
 	}
+
+
+	
 	
 	
 	
@@ -213,7 +208,10 @@ public class MemberMM {
 	
 	
 	// 평민호 구역
-	
+	public Forward checkId() {
+		string
+		return null;
+	}
 	
 	
 	
