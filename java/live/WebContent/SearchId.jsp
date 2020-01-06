@@ -7,34 +7,43 @@
 <title>Insert title here</title>
 
 <style>
-boby{background-color:#0B2161;}
-
+	
+	#rogo{width:200px;height:150;display:table;margin-left:auto;margin-right:auto;}
+	#main{width:500px;height:400px;background:#F2F2F2;display:table;margin-left:auto;margin-right:auto;text-align:center;}
+	button{background-color:#0B243B;color:white;width:100px;height:60px;font-weight:bold;}
+	#button{background-color:#0B243B;color:white;width:80px;height:60px;font-weight:bold;}
+	#middle{border:none;margin-left:20px;font-size:20px;font-weight:bold;}
+	
+	
+	
+	
 </style>
 
 </head>
 
 <body>
 
-<h1>아이디 찾기</h1>
-<div>
+<img id="rogo" alt="살다로고" src="./img/살다.png">
+<div id="main">
+
 	<form action="SearchId">
-		
-		<img id="rogo" alt="살다로고" src="./img/살다.png">
-			<div id="main">
+			<div >
 				<p>아이디 찾기|비밀번호 찾기</p>
-				<h6>-이름과 이메일 주소를 입력 후 "아이디 찾기"버튼을 클릭해 주시면 아이디를 찾을 수 있습니다.</h6>
-		
-		
+				<h4>-이름과 이메일 주소를 입력 후 "아이디 찾기"버튼을 클릭해 주시면 아이디를 찾을 수 있습니다.</h6>
 		
 				<div id="middle">
 					이름<input name = "name"><br>
 					이메일<input name = "email"><br>
+				</div>
+					&nbsp;
+				    &nbsp;
+				<div>
 					<button>아이디찾기</button>
-					<input type=button value="뒤로가기" onClick="history.back();">
+					<input id="button" type=button value="뒤로가기" onClick="history.back();">
 				</div>
 			</div>
 	</form>	
-	</div>
+</div>
 
 <div>${id}
 </div>

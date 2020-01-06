@@ -88,6 +88,7 @@ public class MemberDao {
 			pstmt.setNString(1, name);
 			pstmt.setNString(2, email);
 			rs=pstmt.executeQuery();
+			
 			if(rs.next()) {
 				id = rs.getNString("ID"); // 미정
 				
@@ -102,7 +103,6 @@ public class MemberDao {
 	
 	// DB에서 비밀번호 찾음
 	public String findPw(String id, String email, String name) {
-		System.out.println("오냐");
 		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
 		String pw ="";
 		

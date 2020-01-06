@@ -9,16 +9,16 @@
 <style>
 	a{text-decoration:none}
 	
- 	body{background-color:#F5CDAC; }
+ 	
  	#rogo{width:200px;height:150;display:table;margin-left:auto;margin-right:auto;}
 	#box{width:350px;height:300px;background:#F2F2F2;display:table;margin-left:auto;margin-right:auto;}
 	
 	
 	#title{text-align:left;border-bottom:1px solid black;margin-left:20px;margin-right:20px;}
 	#input{border:none;margin-left:20px;font-size:20px;font-weight:bold;}
-	#login{width:80px;height:60px;background-color:#EF7B2A;}
+	#login{color:white;width:80px;height:60px;background-color:#0B243B;}
 	#search{text-align:center;}
-	button{color:white;font-size:20px;font-weight:bold;width:150px;height:50px;background-color:#EF7B2A;display:table;margin-left:auto;margin-right:auto;}
+	button{color:white;font-size:20px;font-weight:bold;width:150px;height:50px;background-color:#0B243B;display:table;margin-left:auto;margin-right:auto;}
 	
 </style>
 
