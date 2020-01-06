@@ -233,13 +233,13 @@ function readURL(input,indexpic) {
 		console.log(indexpic)
 		console.log(indexpic.indexOf(i))
 		
-		var reader = new FileReader();
+		let reader = new FileReader();
 		if(indexpic.indexOf(i) !== -1){
 		
 			reader.onload = function(r){
 				console.dir(r);
 				
-				var img_html = "<div class='mySlides pic"+i+"'  style='display:inline-block' >  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
+				let img_html = "<div class='mySlides pic"+i+"'  style='display:inline-block' >  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
 				+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
 	     	//	var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
 	     		
@@ -251,7 +251,7 @@ function readURL(input,indexpic) {
 			reader.onload = function(r){
 				console.dir(r);
 				
-				var img_html = "<div class='mySlides pic"+i+"' style='display:none'>  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
+				let img_html = "<div class='mySlides pic"+i+"' style='display:none'>  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
 				+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
 	     	//	var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
 	     		

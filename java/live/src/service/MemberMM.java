@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -112,22 +113,16 @@ public class MemberMM {
 		return fw;
 	}
 
-<<<<<<< HEAD
 
-	public Forward join() {
-		
-=======
 	
 	
 	
 	//민호 ----------------------------------------------------------------------------------------------
 	public Forward join() {
->>>>>>> 851d78ea54266f1ba889ab4fdf2321755622c0ad
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
 		String phonenum = request.getParameter("phonenum");
-<<<<<<< HEAD
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String gest = request.getParameter("h_or_g");
@@ -136,12 +131,7 @@ public class MemberMM {
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest, gender);
 		/////
-=======
-		String email = request.getParameter("email");
-		String gest = request.getParameter("h_or_g");
-		MemberDao mDao = new MemberDao();
-		mDao.join(id,pw,name,phonenum,email,gest);
->>>>>>> 851d78ea54266f1ba889ab4fdf2321755622c0ad
+
 		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
@@ -162,18 +152,23 @@ public class MemberMM {
 		}
 		String address = request.getParameter("address");
 		String addressDetail = request.getParameter("addressDetail");
+		String mainpic = request.getParameter("mainpic");
+		
+
 
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("유형 : "+housetype);
 		System.out.println("수 : "+attendanceNum);
 		System.out.println("주소 : "+address);
 		System.out.println("디테일주소 : "+addressDetail);
+		System.out.println("사진 : "+mainpic);
 		
 		
 		request.setAttribute("housetype", housetype);
 		request.setAttribute("attendanceNum", attendanceNum);
 		request.setAttribute("address", address);
 		request.setAttribute("addressDetail", addressDetail);
+		request.setAttribute("mainpic", mainpic);  // Chrysanthemum.jpg  
 		
 		
 		
@@ -187,7 +182,18 @@ public class MemberMM {
 	
 	
 	
-	
+	public String getAjaxduplicateID(String ID) {
+		
+		String test = "";
+		MemberDao mDao = new MemberDao();
+		test=mDao.getDuplicateID(ID);
+		
+		mDao.close();
+		
+		System.out.println("중복 결과 값 : " + test);
+		return test;
+		
+	}
 	
 	
 	

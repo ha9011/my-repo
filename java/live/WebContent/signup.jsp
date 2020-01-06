@@ -18,6 +18,9 @@ hr {
 	color: gray;
 	width: 400px;
 }
+#checkid{
+	text-align:center;
+}
 
 #boot{align-content:center;}
 </style>
@@ -33,8 +36,7 @@ hr {
 
 			<pre>
 * 아이디                <input type="text" name="id" placeholder="아이디 입력" id="id"
-					minlength="6" maxlength="20"><button type="button" id="same">중복확인</button> 
-				<hr>
+					minlength="6" maxlength="20"><button type="button" id="same">중복확인</button><div id="checkid"></div><hr>
 * 비밀번호		<input type="password" name="pw1" id="pw1" minlength="3"
 					maxlength="20" placeholder="비밀번호 입력">  <span
 					id="alert-success"
@@ -70,17 +72,38 @@ hr {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 
-<<<<<<< HEAD
-   $("#same").keyup(function() {
-	   console.log('zzz');
-   }
-=======
 
    $("#same").click(function() {
 	   var cid = $("#id").val();
-	   location.href="duplicateID?id="+cid;
+
+	   
+	   $.ajax({
+			type : 'get',
+			url : "duplicateID", // restFul 방식
+			data : {data : cid},
+			contentType:'application/json; charset=UTF-8',
+			datatype:"html",
+			
+			success:function(data){
+				console.log(data);
+				if(data == "없음"){
+					$("#checkid").html("사용가능한 아이디입니다.");
+					
+				}else{
+
+					$("#checkid").html("이미 존재하는 아이디입니다.");
+					
+				}
+			},
+			error:function(error){
+				console.log(error);
+			}
+			
+		});
+   
+   
+   
    })
->>>>>>> 75f7a1037373ea236a841dc12bc10c1caff6ad30
 
 
 
