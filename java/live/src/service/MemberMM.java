@@ -27,7 +27,7 @@ public class MemberMM {
 	}
 
 	
-	//로그인 할때 실행되는 친구
+	//로그인 할때 실행되는 친구ㄴ
 	public Forward access() {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -210,7 +210,9 @@ public class MemberMM {
 	
 	
 	//이예상 구역
-	
+	public Forward SearchDetail() {
+		
+	}
 	
 	
 	
