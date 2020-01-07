@@ -63,13 +63,14 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				if (rs.getNString("PW").equals(pw)) {
-					result = 1; // 모두일치
+					
+					result = Integer.parseInt(rs.getNString("TYPE")); // 모두일치
 				} else {
-					result = 0; // 비번불일치
+					result = -1; // 비번불일치
 				}
-			} else {
-				result = -1; // 비번 불일치
-			}
+			}  
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -130,23 +131,22 @@ public class MemberDao {
 	public String  getDuplicateID(String iD) {
 		
 		System.out.println("iD : "+iD);
-		String sql = "SELECT * FROM MEMBER WHERE ID = ? ";
-		String result = "없음";
+		String sql = "SELECT * FROM MEMBER WHERE ID = ? "; //아이디 뽑아오는 쿼리문
+		String result = "없음"; 
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setNString(1, iD);
 			rs= pstmt.executeQuery();
 			
-			while(rs.next()) {
+			while(rs.next()) { //아이디가 있으면 리설트를 아이디를 넣어준다
 				result = rs.getNString("ID");
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-					
-		return result;
+		return result; //리설트 값을 리턴 
 	}
 
 

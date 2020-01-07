@@ -40,7 +40,7 @@
 		<div id="input" style="display:flex">
 			<div style="display:inline-block;text-align:right;">
 			<div>
-			ID&nbsp;&nbsp;<input type="text" name="id" ></input>
+			ID&nbsp;&nbsp;<input type="text" name="id" id="idput"></input>
 			</div>
 			
 			<div>
@@ -64,6 +64,7 @@
 		&nbsp;
 		&nbsp;
 		<a href="joinfrm"><button>회원가입</button></a>
+	
 	</form>
 	</div>
 	
@@ -71,6 +72,10 @@
 <script>
 	var frm=document.joinform;
 	//frm.longth(); 활용해서 반복문으로 값을 입력했는지 확인
+	
+	
+	
+	
 </script>
 
 

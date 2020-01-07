@@ -576,6 +576,28 @@ public class ProductDao {
 					
 		return result;
 	}
+
+	public int registerSQ() {
+		
+		String sql = "SELECT REGI_SQ.NEXTVAL FROM DUAL";
+		
+		int sqResult = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				sqResult = Integer.parseInt(rs.getNString("NEXTVAL"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
+		return sqResult;
+		
+	}
 	
 	
 
