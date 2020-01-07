@@ -166,7 +166,28 @@
 						<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a
 							class="next" onclick="plusSlides(1)">&#10095; </a>
 					</div>
-
+					
+					
+					<div><input type="hidden" value="${housetype}" name="housetype">
+					</div>
+					
+					<div><input type="hidden" value="${attendance}" name="attendance">
+					</div>
+					
+					<div><input type="hidden" value="${address}" name="address">
+					</div>
+					
+					<div><input type="hidden" value="${addressDetail}" name="addressDetail">
+					</div>
+					
+					<div><input type="hidden" value="${realFileName}" name="realFileName">
+					</div>
+					
+					<div><input type="hidden" value="${reginum}" name="reginum">
+					</div>
+					
+					
+					
 				</div>
 
 				<br>
