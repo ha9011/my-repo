@@ -70,7 +70,7 @@
 
 	<div id="outfrm">
 		${id}님의 호스트 하우스 등록
-		<form id="innerfrm" action="registHouse" method="get">
+		<form id="innerfrm" action="registHouseDetail" method="post" enctype="multipart/form-data">
 			<div>
 				<div class="form-row">
 
@@ -109,7 +109,7 @@
 							<label class="input-group-text" for="inputGroupSelect01">욕실
 								수</label>
 						</div>
-						<select name="attendanceNum" class="custom-select" id="selbox">
+						<select name="bathcnt" class="custom-select" id="selbox">
 							<option selected>Choose...</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -125,7 +125,7 @@
 							<label class="input-group-text" for="inputGroupSelect01">침대
 								수</label>
 						</div>
-						<select name="attendanceNum" class="custom-select" id="selbox">
+						<select name="bedcnt" class="custom-select" id="selbox">
 							<option selected>Choose...</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -141,7 +141,7 @@
 							<label class="input-group-text" for="inputGroupSelect01">화장실
 								수</label>
 						</div>
-						<select name="attendanceNum" class="custom-select" id="selbox">
+						<select name="toiletcnt" class="custom-select" id="selbox">
 							<option selected>Choose...</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -154,8 +154,8 @@
 					<!--사진첨부 -->
 					<div class="form-group" style="width: 100%;">
 						<label for="exampleFormControlFile1">Example file input</label> <input
-							multiple="multiple" name="houseimg[]" type="file"
-							class="form-control-file" id="imgInp">
+							name="houseimg[]" type="file"
+							class="form-control-file" id="imgInp" multiple>
 					</div>
 
 
@@ -166,7 +166,28 @@
 						<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a
 							class="next" onclick="plusSlides(1)">&#10095; </a>
 					</div>
-
+					
+					
+					<div><input type="hidden" value="${housetype}" name="housetype">
+					</div>
+					
+					<div><input type="hidden" value="${attendance}" name="attendance">
+					</div>
+					
+					<div><input type="hidden" value="${address}" name="address">
+					</div>
+					
+					<div><input type="hidden" value="${addressDetail}" name="addressDetail">
+					</div>
+					
+					<div><input type="hidden" value="${realFileName}" name="realFileName">
+					</div>
+					
+					<div><input type="hidden" value="${reginum}" name="reginum">
+					</div>
+					
+					
+					
 				</div>
 
 				<br>
