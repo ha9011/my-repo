@@ -63,13 +63,14 @@ public class MemberDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				if (rs.getNString("PW").equals(pw)) {
-					result = 1; // 모두일치
+					
+					result = Integer.parseInt(rs.getNString("TYPE")); // 모두일치
 				} else {
-					result = 0; // 비번불일치
+					result = -1; // 비번불일치
 				}
-			} else {
-				result = -1; // 비번 불일치
-			}
+			}  
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
