@@ -44,6 +44,7 @@ public class MemberMM {
 		if(result == -1) {
 			request.setAttribute("msgAccess", "아이디 또는 비밀번호가 틀립니다.");
 		}else{
+			session.setAttribute("id",id);
 			session.setAttribute("membertype",result);
 		}
 
