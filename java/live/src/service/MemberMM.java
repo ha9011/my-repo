@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
@@ -20,6 +21,9 @@ import dao.ProductDao;
 public class MemberMM {
 	HttpServletRequest request;
 	HttpServletResponse response;
+	
+	
+	
 	Forward fw = null;
 	public MemberMM(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
@@ -29,6 +33,7 @@ public class MemberMM {
 	
 	//로그인 할때 실행되는 친구ㄴ
 	public Forward access() {
+		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
@@ -37,14 +42,9 @@ public class MemberMM {
 		
 		mDao.close();
 		if(result == -1) {
-			request.setAttribute("msgAccess", "ID가 존재하지 않습니다.");
-		}else if(result == 0) {
-			request.setAttribute("msgAccess", "PW가 틀립니다.");
-		}else if(result == 1) {
-			HttpSession session = request.getSession();
-			session.setAttribute("id", id);
-		}else {
-			
+			request.setAttribute("msgAccess", "아이디 또는 비밀번호가 틀립니다.");
+		}else{
+			session.setAttribute("membertype",result);
 		}
 
 		fw = new Forward();
@@ -210,9 +210,7 @@ public class MemberMM {
 	
 	
 	//이예상 구역
-	public Forward SearchDetail() {
-		
-	}
+	
 	
 	
 	
