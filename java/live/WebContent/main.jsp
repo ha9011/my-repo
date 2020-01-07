@@ -25,6 +25,7 @@
 <body> 
 ${membertype}
 
+
 		<!-- 로그인 안된 경우  -->
 		<div id="header"><!-- 아이디 비번 로그인 회원가입 입력-->
 		<img id="rogo" alt="살다로고" src="./img/살다.png">
