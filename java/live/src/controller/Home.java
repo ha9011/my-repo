@@ -28,7 +28,11 @@ public class Home extends HttpServlet {
 		
 
 		if(cmd.equals("/joinfrm")){
-
+			System.out.println("회원가입 접근");
+			fw = mm.join();
+			fw=mm.join();						
+			System.out.println("회원가입 접근");
+			fw = mm.join();
 			System.out.println("회원가입 접근");
 			fw = mm.join();
 
