@@ -70,7 +70,7 @@
 
 	<div id="outfrm">
 		${id}님의 호스트 하우스 등록
-		<form id="innerfrm" action="registHouse" method="get" enctype="multipart/form-data">
+		<form id="innerfrm" action="registHouse" method="post" enctype="multipart/form-data">
 			<div>
 				<div class="form-row">
 

@@ -142,6 +142,11 @@ public class MemberMM {
 	
 	public Forward registHouse() {  // 정보만 requset에 담기
 		
+		
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, uploadDir, maxSize, encoding, new DefaultFileRenamePolicy());
+		
+		
 		String housetype = request.getParameter("housetype");
 		
 		int attendanceNum = 0;
