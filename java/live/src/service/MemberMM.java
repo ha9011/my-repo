@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -111,12 +112,10 @@ public class MemberMM {
 		
 		return fw;
 	}
-
-
-	
 	
 	//민호 ----------------------------------------------------------------------------------------------
 	public Forward join() {
+
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
@@ -127,7 +126,6 @@ public class MemberMM {
 
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest, gender);
-		/////
 
 		fw = new Forward();
 		fw.setPath("./index.jsp");
@@ -149,15 +147,31 @@ public class MemberMM {
 		}
 		String address = request.getParameter("address");
 		String addressDetail = request.getParameter("addressDetail");
+
+		String mainpic = request.getParameter("mainpic");
+
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("유형 : "+housetype);
 		System.out.println("수 : "+attendanceNum);
 		System.out.println("주소 : "+address);
 		System.out.println("디테일주소 : "+addressDetail);
+
+		System.out.println("사진 : "+mainpic);
+		
+		
+
 		request.setAttribute("housetype", housetype);
 		request.setAttribute("attendanceNum", attendanceNum);
 		request.setAttribute("address", address);
 		request.setAttribute("addressDetail", addressDetail);
+
+		request.setAttribute("mainpic", mainpic);  // Chrysanthemum.jpg  
+		
+		
+		
+		
+		
+
 		fw = new Forward();
 		fw.setPath("./registHouseDetail.jsp");
 		fw.setRedireact(false);
@@ -169,7 +183,18 @@ public class MemberMM {
 	
 	
 	
-	
+	public String getAjaxduplicateID(String ID) {
+		// 멤버다오 리서트의 리턴값을 받아온다
+		String test = "";
+		MemberDao mDao = new MemberDao(); //연결
+		test=mDao.getDuplicateID(ID); // 테스트에 리서트 값을 넣어준다 
+		
+		mDao.close();
+		
+		System.out.println("중복 결과 값 : " + test);
+		return test; //테스트 값을 사인업 석세스로 날려준다  
+		
+	}
 	
 	
 	

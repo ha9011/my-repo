@@ -88,6 +88,7 @@ public class MemberDao {
 			pstmt.setNString(1, name);
 			pstmt.setNString(2, email);
 			rs=pstmt.executeQuery();
+			
 			if(rs.next()) {
 				id = rs.getNString("ID"); // 미정
 				
@@ -102,7 +103,6 @@ public class MemberDao {
 	
 	// DB에서 비밀번호 찾음
 	public String findPw(String id, String email, String name) {
-		System.out.println("오냐");
 		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
 		String pw ="";
 		
@@ -124,6 +124,86 @@ public class MemberDao {
 		return pw;
 	} 
 	
+	
+	///////////////////////////하동원 구역
+	
+	public String  getDuplicateID(String iD) {
+		
+		System.out.println("iD : "+iD);
+		String sql = "SELECT * FROM MEMBER WHERE ID = ? "; //아이디 뽑아오는 쿼리문
+		String result = "없음"; 
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, iD);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) { //아이디가 있으면 리설트를 아이디를 넣어준다
+				result = rs.getNString("ID");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
+		return result; //리설트 값을 리턴 
+	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//////////////민호 구역
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///////////////////////예상 구역
 
 }

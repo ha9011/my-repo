@@ -18,9 +18,10 @@
 </head>
 
 <body>
+	<div id="main">
 	<form action="SearchPw">
 		<h1>비밀번호 찾기</h1>
-			<div>
+			<div id="input">
 	
 			아이디<input name ="id"><br>
 			이름<input name ="name"><br>
@@ -32,6 +33,8 @@
 			</div>
 	
 	</form>
+	</div>
+
 <div>${pw}
 </div>	
 	

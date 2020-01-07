@@ -555,7 +555,27 @@ public class ProductDao {
 		
 	}
 
-	
+	public String  getDuplicateID(String iD) {
+		
+		System.out.println("iD : "+iD);
+		String sql = "SELECT * FROM MEMBER WHERE ID = ? ";
+		String result = "";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, iD);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getNString("ID");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
+		return result;
+	}
 	
 	
 
