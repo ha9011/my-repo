@@ -143,10 +143,8 @@ public class MemberDao {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-					
 		return result; //리설트 값을 리턴 
 	}
 

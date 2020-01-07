@@ -16,49 +16,44 @@ import com.google.gson.reflect.TypeToken;
 import service.MemberMM;
 import service.ProductMM;
 
-
-@WebServlet({"/duplicateID"})
+@WebServlet({ "/duplicateID" })
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getServletPath();
 		System.out.println("rest CMD : " + cmd);
-		
-		MemberMM mm  = new MemberMM(request, response);
+
+		MemberMM mm = new MemberMM(request, response);
 		ProductMM pm = new ProductMM(request, response);
-		
-		
+
 		String json = null;
-		
-		if(cmd.equals("/duplicateID")) {
+
+		if (cmd.equals("/duplicateID")) {
 
 			String ID = request.getParameter("data");
-			System.out.println("==data== : "+ ID);
+			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
 		}
-	
-		
-		if(json!=null) {
+
+		if (json != null) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.write(json);
 		}
-		
+
 	}
-	
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
-
-
-	
 
 }
