@@ -29,15 +29,16 @@ public class FileServiceMM {
 	HttpServletRequest request;
 	HttpServletResponse response;
 	Forward fw = null;
-	HttpSession session = request.getSession();
+	
 	
 	public FileServiceMM(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 	}
-
+	
+	
 	public Forward executefirst() {
-
+		HttpSession session = request.getSession();
 		// db sq번호 얻기
 		//db에 넣기 
 		ProductDao pDao = new ProductDao();
@@ -119,7 +120,7 @@ public class FileServiceMM {
 
 	public Forward executesecond() throws IOException {
 	
-		
+		HttpSession session = request.getSession();
 		String picscollect = "";
 		String reginum = request.getParameter("reginum");
 		String id = (String)session.getAttribute("id");
@@ -209,7 +210,7 @@ public class FileServiceMM {
 	
 	public Forward registHousechdate() {  // 정보만 requset에 담기
 		
-		
+		HttpSession session = request.getSession();
 		String reginum = request.getParameter("reginum");
 		String id = (String)session.getAttribute("id");
 		System.out.println("등록 번호 : " +reginum);

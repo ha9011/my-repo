@@ -56,8 +56,8 @@
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-#registHouse {
-	display: none;
+#jib {
+	display: hidden;
 }
 </style>
 
@@ -75,7 +75,7 @@
 			href="signup.jsp" class=log>회원가입</a> <a href="loginform.jsp"
 			class=log>로그인</a>
 		<!-- 호스트 로그인 된 경우 - 하동원  -->
-		<a href="registHouse.jsp" id=registHouse>집등록</a>
+		<a href="registHouse.jsp" id=jib>집등록</a>
 	</div>
 
 
@@ -114,25 +114,31 @@
 //평민호
 
  window.onload = function () {
-	 var id1='<%=(String) session.getAttribute("id")%>';
+	
+	var id1='<%=(String) session.getAttribute("id")%>';
 	 console.log(id1);
+	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
 	 
 	 var id2='<%=session.getAttribute("membertype")%>';
 	 console.log(id2);
-	 var ocn2=document.getElementById("registHouse");
+	 console.log("-------------")
+	 var ocn2=document.getElementById("jib");
 	  
 	 
-	if(id1!=null){
+	if(id1!="null"){
+		console.log(id1);
 		console.log(ocn);
 		console.log("zzzzzzzzzzzzzzzzzzzzz");
 		ocn[0].style.display = 'none';
 		ocn[1].style.display = 'none';
+		
 	} //집등록 버튼 
 	
- 	 if(id2==2){
-		 console.log(ocn2)
-		 ocn2.style.dispaly ='inline';
+ 	 if(id2=="2"){
+ 		console.log("-------------")
+		 console.log(id2)
+		 ocn2.style.dispaly ='inline-block';
 		 }  
 	 
 }
