@@ -34,7 +34,7 @@ public class FileUpLoad extends HttpServlet {
 			System.out.println("집등록 2단계 접근");
 			fw = fs.executesecond();
 		}else if(cmd.equals("/registHousechdate")) { //집 마지막 데이터
-			System.out.println("3단계");
+			System.out.println("집등록 3단계 접근");
 			fw=fs.registHousechdate();
 		}
 		

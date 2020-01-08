@@ -579,17 +579,38 @@ public class ProductDao {
 		return result;
 	}
 
-	public int registerSQ() {
+	public int registerSQ(String id) {
 		
-		String sql = "SELECT REGI_SQ.NEXTVAL FROM DUAL";
-		
-		int sqResult = 0;
+		int result = 0;
+		String sql = "INSERT INTO REGISTHOUSE (H_RGNUM, H_ID) VALUeS(REGI_SQ.NEXTVAL, ?)";
+		System.out.println("번호 등록@@@@@@@@@@2");
 		try {
+			
 			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, id);
+			result = pstmt.executeUpdate();
+			
+			if(result != 0 ) {
+				System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String sql1 = "SELECT REGI_SQ.CURRVAL FROM DUAL";
+		
+		System.out.println("번호 보여주기@@@@@@@@@@2");
+		try {
+			pstmt = con.prepareStatement(sql1);
+		
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
-				sqResult = Integer.parseInt(rs.getNString("NEXTVAL"));
+				result = rs.getInt("CURRVAL");
 			}
 			
 		} catch (SQLException e) {
@@ -597,7 +618,68 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 					
-		return sqResult;
+		
+		return result;
+	
+		
+	}
+
+	public void registerHouse(String reginum, String id, String housetype, String attendance, String address, String addressDetail,
+			String realFileName, String parkarea, String roomscnt, String bathcnt, String bedcnt, String toiletcnt,
+			String picscollect, String mindate, String maxdate, int oneprice) {
+		
+		//String sql = "INSERT INTO REGISTHOUSE VALUSE(REGI_SQ.CURRVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "update REGISTHOUSE " + 
+				"set H_TYPE = ?," + 
+				"    H_MAINPIC = ?," + 
+				"    H_ATTENDANCE = ?," + 
+				"    H_ADDRESS = ?," + 
+				"    H_DETAILADD = ?," + 
+				"    H_PARKABLE = ?," + 
+				"    H_ROOMS = ?," + 
+				"    H_BATHROOMS = ?," + 
+				"    H_BEDROOMS = ?," + 
+				"    H_TOLILET = ?," + 
+				"    H_DETAILPICS = ?," + 
+				"    H_CHECKIN = ?," + 
+				"    H_CHECKOUT = ?," + 
+				"    H_ONEPRICE = ?" + 
+				"    WHERE H_RGNUM = ? and H_ID = ?";
+		try {
+			
+			pstmt= con.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(housetype));//
+			pstmt.setNString(2, realFileName);//
+			pstmt.setInt(3, Integer.parseInt(attendance));
+			pstmt.setNString(4, address);
+			pstmt.setNString(5, addressDetail);
+			pstmt.setInt(6, Integer.parseInt(parkarea));
+			pstmt.setInt(7, Integer.parseInt(roomscnt));
+			pstmt.setInt(8, Integer.parseInt(bathcnt));
+			pstmt.setInt(9, Integer.parseInt(bedcnt));
+			pstmt.setInt(10, Integer.parseInt(toiletcnt));
+			pstmt.setNString(11, picscollect);
+			pstmt.setNString(12, mindate);
+			pstmt.setNString(13, maxdate);
+			pstmt.setInt(14, oneprice);
+			pstmt.setInt(15, Integer.parseInt(reginum));
+			pstmt.setNString(16, id);
+			
+			
+			int result = pstmt.executeUpdate();
+			
+			
+			if(result != 0 ) {
+				System.out.println("하우스등록성공");
+			}else {
+				System.out.println("하우스등록실패");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
 		
 	}
 
@@ -672,6 +754,8 @@ public class ProductDao {
 		
 		return result;
 	}
+	
+	
 	
 	
 

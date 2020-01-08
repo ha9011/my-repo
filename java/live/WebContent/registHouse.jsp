@@ -96,8 +96,8 @@
 						<select name="housetype" class="custom-select"
 							id="inputGroupSelect01">
 							<option selected>Choose...</option>
-							<option value="아파트">아파트</option>
-							<option value="주택">주택</option>
+							<option value="1">아파트</option>
+							<option value="2">주택</option>
 						</select>
 					</div>
 
