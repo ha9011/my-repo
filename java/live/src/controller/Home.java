@@ -15,7 +15,10 @@ import service.ProductMM;
 
 @WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw"})
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cdb4a697aba794d9606838b0cc3c65b5502d037c
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,10 +54,16 @@ public class Home extends HttpServlet {
 			fw=mm.searchId();
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
 			fw=mm.searchPw();
+<<<<<<< HEAD
 		}
 
 
 		
+=======
+
+		}
+
+>>>>>>> cdb4a697aba794d9606838b0cc3c65b5502d037c
 		
 		if(fw!=null) {
 			if(fw.isRedireact()) {
