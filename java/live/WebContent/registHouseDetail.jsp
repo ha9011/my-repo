@@ -71,6 +71,10 @@
 	<div id="outfrm">
 		${id}님의 호스트 하우스 등록
 		<form id="innerfrm" action="registHouseDetail" method="post" enctype="multipart/form-data">
+			
+			<div><input type="hidden" value="${reginum}" name="reginum">
+					</div>
+			
 			<div>
 				<div class="form-row">
 
@@ -183,8 +187,7 @@
 					<div><input type="hidden" value="${realFileName}" name="realFileName">
 					</div>
 					
-					<div><input type="hidden" value="${reginum}" name="reginum">
-					</div>
+					
 					
 					
 					

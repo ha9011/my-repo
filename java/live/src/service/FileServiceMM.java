@@ -36,20 +36,18 @@ public class FileServiceMM {
 		this.response = response;
 	}
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> cceba8272900e9eeccdd66992194936a05bed4a8
 	public Forward executefirst() {
 		HttpSession session = request.getSession();
 		// db sq번호 얻기
 		//db에 넣기 
-		ProductDao pDao = new ProductDao();
-		int reginum = pDao.registerSQ();
 		String id = (String)session.getAttribute("id");
+		ProductDao pDao = new ProductDao();
+		int reginum = pDao.registerSQ(id);
 		
 		
-		String uploadPath = "C:/liveproject/java/live/WebContent/img/mainhouse/";
+		
+		//C:\git_repo\my-repo\java\live\WebContent\img\mainhouse
+		String uploadPath = "C:/git_repo/my-repo/java/live/WebContent/img/mainhouse/";
 		int size = 10 * 1024 * 1024; // 10Mb까지
 		String housetype = null;
 		String attendance = null;
@@ -67,8 +65,7 @@ public class FileServiceMM {
 
 		try {
 
-			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8",
-					new DefaultFileRenamePolicy());
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8",new DefaultFileRenamePolicy());
 
 			housetype = multi.getParameter("housetype");
 			attendance = multi.getParameter("attendanceNum");
@@ -125,8 +122,9 @@ public class FileServiceMM {
 	
 		HttpSession session = request.getSession();
 		String picscollect = "";
-		String reginum = request.getParameter("reginum");
+		String reginum = "";
 		String id = (String)session.getAttribute("id");
+		
 		System.out.println("등록 번호 : " +reginum);
 		System.out.println("id : " +id);		
 		
@@ -134,7 +132,10 @@ public class FileServiceMM {
 		if (isMultipart) { // multipart로 전송 되었을 경우
 			File temporaryDir = new File("c:/tmp/"); // 업로드 된 파일의 임시 저장 폴더를 설정
 			
-			String realDir = "C:/liveproject/java/live/WebContent/img/detailhouse/";
+			//C:\git_repo\my-repo\java\live\WebContent\img\mainhouse
+			//String uploadPath = "C:/git_repo/my-repo/java/live/WebContent/img/mainhouse/";
+			
+			String realDir = "C:/git_repo/my-repo/java/live/WebContent/img/detailhouse/";
 			// tmp의 폴더의 전송된 파일을 upload 폴더로 카피 한다.
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			factory.setSizeThreshold(1 * 1024 * 1024); // 1메가가 넘지 않으면 메모리에서 바로 사용
@@ -157,7 +158,11 @@ public class FileServiceMM {
 						try {
 							System.out.println(
 									"폼 파라미터: " + fileItem.getFieldName() + "=" + fileItem.getString("UTF-8"));
-							request.setAttribute(fileItem.getFieldName(), fileItem.getString("UTF-8"));            // 제일 중요 <= 침대 욕조 수 등 갯수 정리
+							request.setAttribute(fileItem.getFieldName(), fileItem.getString("UTF-8")); // 제일 중요 <= 침대 욕조 수 등 갯수 정리
+							if(fileItem.getFieldName().equals("reginum")) {
+								reginum = fileItem.getString("UTF-8");
+							}
+						
 						} catch (UnsupportedEncodingException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -176,7 +181,7 @@ public class FileServiceMM {
 							//System.out.println("파일 [sizeInBytes] : " + sizeInBytes + "<br/>");
 							
 							
-							File uploadedFile = new File(realDir, "h1_"+fileName); // 실제 디렉토리에 fileName으로 카피 된다.   // 파일 이름 변경
+							File uploadedFile = new File(realDir, id+reginum+"_"+fileName); // 실제 디렉토리에 fileName으로 카피 된다.   // 파일 이름 변경
 							
 							picscollect+=realDir+id+reginum+"_"+fileName+",";
 							
@@ -200,7 +205,7 @@ public class FileServiceMM {
 			System.out.println("인코딩 타입이 multipart/form-data 가 아님.");
 		}
 
-		
+		System.out.println("reginum ** 확인 : " + reginum);
 		System.out.println(picscollect);
 		request.setAttribute("picscollect", picscollect);            // 제일 중요 <= 침대 욕조 수 등 갯수 정리
 		
@@ -267,28 +272,32 @@ public class FileServiceMM {
 		
 		// mindate maxdate oneprice  // 저장되 있음
 		
-		System.out.println("housetype : " + housetype);
-		System.out.println("attendance : " + attendance);
-		System.out.println("address : " + address);
-		System.out.println("addressDetail : " + addressDetail);
-		System.out.println("realFileName : " + realFileName);
+		System.out.println("housetype : " + housetype);//
+		System.out.println("attendance : " + attendance);//
+		System.out.println("address : " + address);//
+		System.out.println("addressDetail : " + addressDetail);//
+		System.out.println("realFileName : " + realFileName);//
 		
-		System.out.println("parkarea : " + parkarea);
-		System.out.println("roomscnt : " + roomscnt);
-		System.out.println("bathcnt : " + bathcnt);
-		System.out.println("bedcnt : " + bedcnt);
-		System.out.println("toiletcnt : " + toiletcnt);
-		System.out.println("picscollect : " + picscollect);
+		System.out.println("parkarea : " + parkarea);//
+		System.out.println("roomscnt : " + roomscnt);//
+		System.out.println("bathcnt : " + bathcnt);//
+		System.out.println("bedcnt : " + bedcnt);//
+		System.out.println("toiletcnt : " + toiletcnt);//
+		System.out.println("picscollect : " + picscollect);//
 		
-		System.out.println("첫날 : "+mindate);
-		System.out.println("막날 : "+maxdate);
-		System.out.println("1박가격 : "+oneprice);
+		System.out.println("첫날 : "+mindate);//
+		System.out.println("막날 : "+maxdate);//
+		System.out.println("1박가격 : "+oneprice);//
 		
 		//db에 넣기 
-		//Product pDao = new Product();
-		//result = pDao.registerHouse(housetype, attendance, address, addressDetail, realFileName, parkarea, roomscnt, bathcnt, bedcnt, toiletcnt, picscollect, mindate, maxdate, oneprice);
+		ProductDao pDao = new ProductDao();
+		pDao.registerHouse(reginum, id,housetype, attendance, address, addressDetail, realFileName, parkarea, roomscnt, bathcnt, bedcnt, toiletcnt, picscollect, mindate, maxdate, oneprice);
 		
+		
+		
+		System.out.println("디비 전달");
 		//
+		
 		fw = new Forward();
 		fw.setPath("./main.jsp");
 		fw.setRedireact(false);

@@ -45,7 +45,8 @@
 				name='oneprice' placeholder="원" />
 			<button>개발</button>
 
-
+			<div><input type="hidden" value="${reginum}" name="reginum">
+					</div>
 
 
 			<div>
@@ -70,7 +71,7 @@
 			
 			<div>
 			
-				<input  value="${housetype}" name="housetype">
+				<input type="hidden" value="${housetype}" name="housetype">
 			</div>
 
 			<div>
@@ -78,7 +79,7 @@
 			</div>
 
 			<div>
-				<input value="${address}" name="address">
+				<input type="hidden" value="${address}" name="address">
 			</div>
 
 			<div>
@@ -93,8 +94,7 @@
 				<input type="hidden" value="${picscollect}" name="picscollect">
 			</div>
 
-			<div><input type="hidden" value="${reginum}" name="reginum">
-					</div>
+			
 					
 			<button>완료</button>
 		</form>

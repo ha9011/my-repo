@@ -13,13 +13,8 @@ import service.MemberMM;
 import service.ProductMM;
 
 
-<<<<<<< HEAD
 
 @WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchhouse"})
-=======
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw"})
-
->>>>>>> cceba8272900e9eeccdd66992194936a05bed4a8
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,14 +44,13 @@ public class Home extends HttpServlet {
 			System.out.println("로그인접속");
 			fw=mm.access();
 		}else if(cmd.equals("/logout")) { //로그아웃으로 연결
+			System.out.println("로그아웃접근");
 			fw=mm.logout();
 		}else if(cmd.equals("/SearchId")) { // 아이디 찾기 연결
 			System.out.println("접근아이디z");
 			fw=mm.searchId();
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
 			fw=mm.searchPw();
-<<<<<<< HEAD
-
 		}else if(cmd.equals("/searchhouse")) { //비밀번호 찾기 연결
 		//	fw=pm.searchHouse();
 
@@ -64,11 +58,6 @@ public class Home extends HttpServlet {
 
 
 		
-=======
-
-		}
-
->>>>>>> cceba8272900e9eeccdd66992194936a05bed4a8
 		
 		if(fw!=null) {
 			if(fw.isRedireact()) {

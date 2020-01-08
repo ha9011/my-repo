@@ -63,20 +63,6 @@
 
 
 </head>
-<<<<<<< HEAD
-<body> 
-${membertype}
-
-
-		<!-- 로그인 안된 경우  -->
-		<div id="header"><!-- 아이디 비번 로그인 회원가입 입력-->
-		<img id="rogo" alt="살다로고" src="./img/살다.png">
-			<a href="signup.jsp" class=log>회원가입</a>
-			<a href="loginform.jsp" class=log>로그인</a>
-		</div>
-		
-=======
->>>>>>> 021b4c713caee19f309b3038803403f9960ee2d5
 
 
 <body>
@@ -139,14 +125,9 @@ ${membertype}
 	 console.log("-------------")
 	 var ocn2=document.getElementById("jib");
 	  
-<<<<<<< HEAD
-	 console.log(typeof id2);
-	if(id1!='null'){
-=======
-	 
+
 	if(id1!="null"){
 		console.log(id1);
->>>>>>> cceba8272900e9eeccdd66992194936a05bed4a8
 		console.log(ocn);
 		console.log("zzzzzzzzzzzzzzzzzzzzz");
 		ocn[0].style.display = 'none';
@@ -154,18 +135,11 @@ ${membertype}
 		
 	} //집등록 버튼 
 	
-<<<<<<< HEAD
- 	 if(id2=='2'){
-		 console.log(ocn2)
-		 ocn2.style.dispaly ='inline';
-	}  
-=======
  	 if(id2=="2"){
  		console.log("-------------")
 		 console.log(id2)
 		 ocn2.style.dispaly ='inline-block';
 		 }  
->>>>>>> cceba8272900e9eeccdd66992194936a05bed4a8
 	 
 }
 
