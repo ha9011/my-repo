@@ -23,6 +23,11 @@
 	display: inline;
 }
 
+.logout {
+	text-align: right;
+	display: none;
+}
+
 #rogo {
 	float: left;
 	width: 230px;
@@ -56,32 +61,15 @@
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-#jib {
-	display: hidden;
+.jib {
+	display: none;
 }
 </style>
 
 
 </head>
-<<<<<<< HEAD
-<body> 
-${membertype}
-
-
-		<!-- 로그인 안된 경우  -->
-		<div id="header"><!-- 아이디 비번 로그인 회원가입 입력-->
-		<img id="rogo" alt="살다로고" src="./img/살다.png">
-			<a href="signup.jsp" class=log>회원가입</a>
-			<a href="loginform.jsp" class=log>로그인</a>
-		</div>
-		
-=======
->>>>>>> 021b4c713caee19f309b3038803403f9960ee2d5
-
 
 <body>
-	${membertype}
-
 	<!-- 로그인 안된 경우  -->
 	<div id="header">
 		<!-- 아이디 비번 로그인 회원가입 입력-->
@@ -89,12 +77,11 @@ ${membertype}
 			href="signup.jsp" class=log>회원가입</a> <a href="loginform.jsp"
 			class=log>로그인</a>
 		<!-- 호스트 로그인 된 경우 - 하동원  -->
-		<a href="registHouse.jsp" id=jib>집등록</a>
+		<a href="registHouse.jsp" class=jib>집등록</a> 
+		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
+		<button class=logout onclick="mypage_session();">마이페이지</button>>
 	</div>
 
-
-
-	<!-- <div><button id="registHouse">집등록</button></div> -->
 
 
 
@@ -126,88 +113,77 @@ ${membertype}
 </body>
 <script>
 //평민호
+ var id2="";
+	
 
  window.onload = function () {
 	
-	var id1='<%=(String) session.getAttribute("id")%>';
+	 var id1='<%=(String) session.getAttribute("id")%>'; 
+	 console.log('${sessionScope.id}');
 	 console.log(id1);
 	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
+	 var ocn3=document.getElementsByClassName("logout")
+	
 	 
-	 var id2='<%=session.getAttribute("membertype")%>';
-	 console.log(id2);
-	 console.log("-------------")
-	 var ocn2=document.getElementById("jib");
-	  
-	 
-	if(id1!="null"){
-		console.log(id1);
-		console.log(ocn);
-		console.log("zzzzzzzzzzzzzzzzzzzzz");
-		ocn[0].style.display = 'none';
-		ocn[1].style.display = 'none';
+	 id2='<%=session.getAttribute("membertype")%>';
+		console.log(id2);
+		console.log("-------------")
+		var ocn2 = document.getElementsByClassName("jib");
+
+		if (id1 != "null") {
+			console.log(id1);
+			console.log(ocn);
+			console.log("zzzzzzzzzzzzzzzzzzzzz");
+			ocn[0].style.display = 'none';
+			ocn[1].style.display = 'none';
+			ocn3[0].style.display = 'inline';
+			ocn3[1].style.display = 'inline';
+
+		} //집등록 버튼 
+
+		if (id2 == "1") {
+			console.log("-------------")
+
+			ocn2[0].style.display = 'none';
+		} else if (id2 == "2") {
+			console.log(ocn2);
+			console.log(id2);
+			console.log(typeof id2);
+			ocn2[0].style.display = 'block';
+		} else
+			ocn2[0].style.display = 'none';
+
+	}
+
+	function logout_session() {
+		console.log("logout");
+		location.href = 'logout'; //url logout 쏴주기
+	}
+	
+	function mypage_session() {
+		if(id2 =="1"){
+			console.log("게스트입니다");
+			location.href = "registHouse.jsp";
+		}else if (id2 == "2"){
+			console.log("호스트입니다");
+			location.href = "HostInfojsp.jsp";
+		}else {
+			console.log("어드민");
+			location.href = "signup.jsp";
+		}
 		
-	} //집등록 버튼 
-	
- 	 if(id2=="2"){
- 		console.log("-------------")
-		 console.log(id2)
-		 ocn2.style.dispaly ='inline-block';
-		 }  
-	 
-}
+	}
 
+	//하동원
 
+	/*   $("#registHouse").click(Function() {    // [host] '집등록' 버튼 누를 경우 
+	 location.href="registHouse.jsp";
+	 });   */
 
-
-
-
- 
- //하동원
-
-/*  $("#registHouse").click(Function() {    // [host] '집등록' 버튼 누를 경우 
-	location.href="registHouse.jsp";
-});  */
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//이예상
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	//민호
-	
 </script>
 
 </html>
