@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -72,18 +73,16 @@ hr {
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 
-
-   $("#same").click(function() {
-	   var cid = $("#id").val();
-
-	   
-	   $.ajax({
-			type : 'get',
+   $("#same").click(function() { //same 아이디를 가진 버튼 클릭시 펑션 열린다
+	   var cid = $("#id").val();  //cid에 id 아이디를 가진 벨류값 담고
+	   $.ajax({					 // 에이작스 열고
+			type : 'get',		//타입은 get 
 			url : "duplicateID", // restFul 방식
-			data : {data : cid},
+			data : {data : cid}, // cid를 data에 담는다 
 			contentType:'application/json; charset=UTF-8',
-			datatype:"html",
+			datatype:"html", //datatype html
 			
+			//서블릿이 성공하면 다시 돌아오는것
 			success:function(data){
 				console.log(data);
 				if(data == "없음"){
@@ -94,7 +93,10 @@ hr {
 					$("#checkid").html("이미 존재하는 아이디입니다.");
 					
 				}
-			},
+			}
+			
+			
+			,
 			error:function(error){
 				console.log(error);
 			}
@@ -104,8 +106,6 @@ hr {
    
    
    })
-
-
 
 	$("#pw1").keyup(function() {
 		var pwd1 = $("#pw1").val();

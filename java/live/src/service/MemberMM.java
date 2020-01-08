@@ -31,7 +31,7 @@ public class MemberMM {
 	}
 
 	
-	//로그인 할때 실행되는 친구ㄴ
+	//로그인 할때 실행되는 친구
 	public Forward access() {
 		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
@@ -41,10 +41,15 @@ public class MemberMM {
 		int result = mDao.access(id,pw);  //1:성공 -1:아이디오류 0:pw부재
 		
 		mDao.close();
+		
 		if(result == -1) {
 			request.setAttribute("msgAccess", "아이디 또는 비밀번호가 틀립니다.");
 		}else{
+<<<<<<< HEAD
 			session.setAttribute("id",id);
+=======
+			session.setAttribute("id", id);
+>>>>>>> 021b4c713caee19f309b3038803403f9960ee2d5
 			session.setAttribute("membertype",result);
 		}
 
@@ -113,10 +118,6 @@ public class MemberMM {
 		
 		return fw;
 	}
-
-
-	
-	
 	
 	//민호 ----------------------------------------------------------------------------------------------
 	public Forward join() {
@@ -127,8 +128,7 @@ public class MemberMM {
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String gest = request.getParameter("h_or_g");
-		
-		
+
 		MemberDao mDao = new MemberDao();
 		mDao.join(id,pw,name,phonenum,email,gest, gender);
 		fw = new Forward();
@@ -141,15 +141,52 @@ public class MemberMM {
 	
 	public Forward registHousechdate() {  // 정보만 requset에 담기
 		
+<<<<<<< HEAD
+		
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request, uploadDir, maxSize, encoding, new DefaultFileRenamePolicy());
+		
+		
+		String housetype = request.getParameter("housetype");
+=======
 		String mindate = request.getParameter("mindate");
 		String maxdate = request.getParameter("maxdate");
 		int oneprice = Integer.parseInt(request.getParameter("oneprice"));
+>>>>>>> c85219736a5ae2f6bd46fb62a0e7059adb928a28
 		
+<<<<<<< HEAD
+		int attendanceNum = 0;
+		if(request.getParameter("attendanceNum").equals("direct")) {
+			attendanceNum = Integer.parseInt(request.getParameter("attendanceDir"));
+		}else {
+			attendanceNum = Integer.parseInt(request.getParameter("attendanceNum"));
+		}
+		String address = request.getParameter("address");
+		String addressDetail = request.getParameter("addressDetail");
+=======
 		
+>>>>>>> 50242e7e0a40ed78dbba4dd6ad2d96b3e6c13893
 
+		String mainpic = request.getParameter("mainpic");
 
-		
 		System.out.println("넘어온 값 확인 ");
+<<<<<<< HEAD
+		System.out.println("유형 : "+housetype);
+		System.out.println("수 : "+attendanceNum);
+		System.out.println("주소 : "+address);
+		System.out.println("디테일주소 : "+addressDetail);
+
+		System.out.println("사진 : "+mainpic);
+		
+		
+
+		request.setAttribute("housetype", housetype);
+		request.setAttribute("attendanceNum", attendanceNum);
+		request.setAttribute("address", address);
+		request.setAttribute("addressDetail", addressDetail);
+
+		request.setAttribute("mainpic", mainpic);  // Chrysanthemum.jpg  
+=======
 		System.out.println("첫날 : "+mindate);
 		System.out.println("막날 : "+maxdate);
 		System.out.println("1박가격 : "+oneprice);
@@ -205,11 +242,13 @@ public class MemberMM {
 		
 		
 		
+>>>>>>> 50242e7e0a40ed78dbba4dd6ad2d96b3e6c13893
 		
 		
 		
 		
 		
+
 		fw = new Forward();
 		fw.setPath("./registHouseDetail.jsp");
 		fw.setRedireact(false);
@@ -217,23 +256,26 @@ public class MemberMM {
 		
 		
 	}
+
+
+	
 	
 	
 	
 	public String getAjaxduplicateID(String ID) {
-		
+		// 멤버다오 리서트의 리턴값을 받아온다
 		String test = "";
-		MemberDao mDao = new MemberDao();
-		test=mDao.getDuplicateID(ID);
+		MemberDao mDao = new MemberDao(); //연결
+		test=mDao.getDuplicateID(ID); // 테스트에 리서트 값을 넣어준다 
 		
 		mDao.close();
 		
 		System.out.println("중복 결과 값 : " + test);
-		return test;
+		return test; //테스트 값을 사인업 석세스로 날려준다  
 		
 	}
 	
-	
+
 	
 	
 	
@@ -249,6 +291,7 @@ public class MemberMM {
 	
 	
 	//이예상 구역
+
 	
 	
 	
@@ -272,10 +315,13 @@ public class MemberMM {
 	
 	
 	
-	
-	
+
+
 	// 평민호 구역
-	
+//	public Forward checkId() {
+//		string
+//		return null;
+//	}
 	
 	
 	
