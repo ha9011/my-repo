@@ -67,6 +67,10 @@
 </style>
 
 
+<<<<<<< HEAD
+=======
+</head>
+>>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
 
 <body>
 	<!-- 로그인 안된 경우  -->
@@ -122,7 +126,29 @@
 	 console.log(id1);
 	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
+<<<<<<< HEAD
 	 var ocn3=document.getElementsByClassName("logout")
+=======
+
+	 
+	 var id2='<%=session.getAttribute("membertype")%>';
+	 console.log(id2);
+	 console.log("-------------")
+	 var ocn2=document.getElementById("jib");
+	  
+
+	if(id1!="null"){
+		console.log(id1);
+		console.log(ocn);
+		console.log("zzzzzzzzzzzzzzzzzzzzz");
+		ocn[0].style.display = 'none';
+		ocn[1].style.display = 'none';
+		
+	} //집등록 버튼 
+
+	 var ocn3=document.getElementsByClassName("logout")
+
+>>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
 	
 	 
 	 id2='<%=session.getAttribute("membertype")%>';
