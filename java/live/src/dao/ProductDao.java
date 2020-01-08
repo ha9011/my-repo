@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import bean.Product;
 
 public class ProductDao {
@@ -597,6 +599,78 @@ public class ProductDao {
 					
 		return sqResult;
 		
+	}
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//--------------------예상--------------------------------------------------------	
+	
+	public String searchHouse(String destination, String checkin, String checkout, String person) {
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%?%' AND H_CHECKIN >='?' AND H_CHECKOUT <= '?' AND H_ATTENDANCE >= ?";
+				
+		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1,destination);
+			pstmt.setNString(2,checkin);
+			pstmt.setNString(3,checkin);
+			pstmt.setNString(4,person);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<HashMap<String,String>> seardetail = new ArrayList<HashMap<String,String>>();
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+				innerH.put("H_ONEPRICE", rs.getNString("H_ONEPRICE"));
+				
+				seardetail.add(innerH); 
+				List.add(seardetail);
+				
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		
+		Gson gs = new Gson();
+		
+		String result = gs.toJson(List); 
+		
+		System.out.println(List);
+		
+		return result;
 	}
 	
 	

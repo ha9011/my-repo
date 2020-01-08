@@ -49,7 +49,7 @@
 	top: 40%;
 	left: 30%;
 	width: auto;
-	height: auto
+	height: auto;
 }
 
 #searchhousefrm {
@@ -63,21 +63,6 @@
 
 
 </head>
-<<<<<<< HEAD
-<body> 
-${membertype}
-
-
-		<!-- 로그인 안된 경우  -->
-		<div id="header"><!-- 아이디 비번 로그인 회원가입 입력-->
-		<img id="rogo" alt="살다로고" src="./img/살다.png">
-			<a href="signup.jsp" class=log>회원가입</a>
-			<a href="loginform.jsp" class=log>로그인</a>
-		</div>
-		
-=======
->>>>>>> 021b4c713caee19f309b3038803403f9960ee2d5
-
 
 <body>
 	${membertype}
@@ -109,11 +94,11 @@ ${membertype}
 					<div>어디로 여행</div>
 					<br>
 					<!-- 미들 타이틀-->
-					<form action="" method="get">
+					<form action="searchHouse" method="get">
 						<input type="text" name="destination" placeholder="목적지"> <input
 							type="date" name="checkin" placeholder="체크인"> <input
 							type="date" name="checkout" placeholder="체크아웃"> <input
-							type="text" name="destination" placeholder="목적지">
+							type="text" name="person" placeholder="인원수">
 						<button type="reset">초기화</button>
 						<button type="submit">검색</button>
 					</form>

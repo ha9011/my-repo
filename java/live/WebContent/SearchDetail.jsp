@@ -23,15 +23,16 @@
 <body>
 <h1>검색 키워드 입력후 보이는 창 </h1>
 	
-	<form action="Search" method="get">
+	<form action="SearchDetail" method="get">
 			<div id="searchbox">
-				<input type="text" name="destination" value="destination">
+				<input type="text" name="destination" value="searchHouse">
 				<button type="submit">검색</button>
 			</div>
 			
 			<div id="middle">
 				<div id="list">
-					<h1>검색어 바탕으로 정보 불러와서 뿌려줌</h1>
+				<h1>입력한 검색 값에 해당하는 리스트를 보여줌</h1>
+					${result}
 				</div>
 				
 				

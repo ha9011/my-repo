@@ -48,7 +48,117 @@ public class ProductMM {
 		
 	}
 
+//----------예상-------------------------------------------------------------------------------------------
 	
+	
+public Forward searchHouse() {
+		
+		String destination = request.getParameter("destination");
+		String checkin = request.getParameter("checkin");
+		String checkout = request.getParameter("checkout");
+		String person = request.getParameter("person");
+		
+		String searchHouse = null;
+		
+		ProductDao pDao = new ProductDao();
+		
+		searchHouse = pDao.searchHouse(destination,checkin,checkout,person);
+		
+		pDao.close();
+		
+		fw = new Forward();
+		fw.setPath("./SearchDetail.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//---------------------------동원-------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//----------민호-------------------------------------------------------------------------------------------
 	
 	
 }
