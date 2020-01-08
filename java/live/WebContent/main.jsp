@@ -63,6 +63,20 @@
 
 
 </head>
+<<<<<<< HEAD
+<body> 
+${membertype}
+
+
+		<!-- 로그인 안된 경우  -->
+		<div id="header"><!-- 아이디 비번 로그인 회원가입 입력-->
+		<img id="rogo" alt="살다로고" src="./img/살다.png">
+			<a href="signup.jsp" class=log>회원가입</a>
+			<a href="loginform.jsp" class=log>로그인</a>
+		</div>
+		
+=======
+>>>>>>> 021b4c713caee19f309b3038803403f9960ee2d5
 
 
 <body>
