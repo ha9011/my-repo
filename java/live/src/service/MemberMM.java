@@ -42,19 +42,12 @@ public class MemberMM {
 
 		if (result == -1) {
 			request.setAttribute("msgAccess", "아이디 또는 비밀번호가 틀립니다.");
-<<<<<<< HEAD
-		}else{
 
-			session.setAttribute("id",id);
-			session.setAttribute("id",id);
-
-			session.setAttribute("membertype",result);
-=======
 		} else {
 			session.setAttribute("id", id);
 
 			session.setAttribute("membertype", result);
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
+
 		}
 	
 		fw = new Forward();
@@ -138,18 +131,11 @@ public class MemberMM {
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
 		return fw;
-<<<<<<< HEAD
-	}//----------------------------------------------------------------
 
-	//하동원 구역
-	
-	// ----------------------------------------------------------------
-=======
 	}// ----------------------------------------------------------------
 
 	// 하동원 구역
 
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
 
 	public String getAjaxduplicateID(String ID) {
 		// 멤버다오 리서트의 리턴값을 받아온다

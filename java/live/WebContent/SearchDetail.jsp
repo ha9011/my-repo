@@ -60,7 +60,7 @@
 	for(intest in $test ){
 		
 		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
-		var b = $('<div class="inner"><img width="200"height="150" alt=사진없음 src="./img/살다.png"></div>')
+		var b = $('<div class="inner"><img width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
 		var c = $('<div class="info">'+$test[intest][0]["H_ADDRESS"]+'<br>'+$test[intest][0]["H_ROOMS"]+'<br>'+$test[intest][0]["H_TOLILET"]+'<br>'+$test[intest][0]["H_ONEPRICE"]+'</div>')
 		a.append(b);
 		a.append(c);

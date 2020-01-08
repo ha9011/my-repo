@@ -48,6 +48,7 @@ public class FileServiceMM {
 		
 		//C:\git_repo\my-repo\java\live\WebContent\img\mainhouse
 		String uploadPath = "C:/git_repo/my-repo/java/live/WebContent/img/mainhouse/";
+		String uploadRealPath = "./img/mainhouse/";
 		int size = 10 * 1024 * 1024; // 10Mb까지
 		String housetype = null;
 		String attendance = null;
@@ -105,7 +106,7 @@ public class FileServiceMM {
 			System.out.println(sysfileName);
 
 			oldFile.renameTo(newFile); // 파일명 변경
-			request.setAttribute("realFileName", uploadPath+realFileName);
+			request.setAttribute("realFileName", uploadRealPath+realFileName);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -136,6 +137,7 @@ public class FileServiceMM {
 			//String uploadPath = "C:/git_repo/my-repo/java/live/WebContent/img/mainhouse/";
 			
 			String realDir = "C:/git_repo/my-repo/java/live/WebContent/img/detailhouse/";
+			String uploadRealPath = "./img/detailhouse/";
 			// tmp의 폴더의 전송된 파일을 upload 폴더로 카피 한다.
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			factory.setSizeThreshold(1 * 1024 * 1024); // 1메가가 넘지 않으면 메모리에서 바로 사용
@@ -183,7 +185,7 @@ public class FileServiceMM {
 							
 							File uploadedFile = new File(realDir, id+reginum+"_"+fileName); // 실제 디렉토리에 fileName으로 카피 된다.   // 파일 이름 변경
 							
-							picscollect+=realDir+id+reginum+"_"+fileName+",";
+							picscollect+=uploadRealPath+id+reginum+"_"+fileName+",";
 							
 							try {
 								fileItem.write(uploadedFile);

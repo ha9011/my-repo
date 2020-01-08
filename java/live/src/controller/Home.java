@@ -14,17 +14,9 @@ import service.ProductMM;
 
 
 
-<<<<<<< HEAD
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchhouse"})
-=======
-<<<<<<< HEAD
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse"})
-=======
 
 @WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse"})
 
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
->>>>>>> 75146673d7dd0dd88895f02ddd6edf7116a2ee26
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,34 +52,15 @@ public class Home extends HttpServlet {
 			System.out.println("접근아이디z");
 			fw=mm.searchId();
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
-<<<<<<< HEAD
-			fw=mm.searchPw();
-		}else if(cmd.equals("/searchhouse")) { //비밀번호 찾기 연결
-		//	fw=pm.searchHouse();
-
-		}
-
-=======
-<<<<<<< HEAD
 			fw=mm.searchPw();
 		}else if(cmd.equals("/searchHouse")) { //비밀번호 찾기 연결
 			System.out.println("오고있니");
 			fw=pm.searchHouse();
 		}
 		
-=======
-			fw=mm.searchPw();		
-
-
-		}else if(cmd.equals("/searchHouse")) { //비밀번호 찾기 연결
-			fw=pm.searchHouse();
-
-		}
 
 
 
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
->>>>>>> 75146673d7dd0dd88895f02ddd6edf7116a2ee26
 		
 		if(fw!=null) {
 			if(fw.isRedireact()) {
