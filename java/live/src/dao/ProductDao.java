@@ -712,7 +712,7 @@ public class ProductDao {
 //--------------------예상--------------------------------------------------------	
 	
 	public String searchHouse(String destination, String checkin, String checkout, String person) {
-		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%?%' AND H_CHECKIN >='?' AND H_CHECKOUT <= '?' AND H_ATTENDANCE >= ?";
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%' AND H_CHECKIN >=? AND H_CHECKOUT <= ? AND H_ATTENDANCE >= ?";
 				
 		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
 		
@@ -720,7 +720,7 @@ public class ProductDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setNString(1,destination);
 			pstmt.setNString(2,checkin);
-			pstmt.setNString(3,checkin);
+			pstmt.setNString(3,checkout);
 			pstmt.setNString(4,person);
 			rs= pstmt.executeQuery();
 			
