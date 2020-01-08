@@ -712,21 +712,24 @@ public class ProductDao {
 //--------------------예상--------------------------------------------------------	
 	
 	public String searchHouse(String destination, String checkin, String checkout, String person) {
-		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%?%' AND H_CHECKIN >='?' AND H_CHECKOUT <= '?' AND H_ATTENDANCE >= ?";
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%' AND H_CHECKIN <=? AND H_CHECKOUT >= ? AND H_ATTENDANCE >= ?";
 				
+		
 		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setNString(1,destination);
 			pstmt.setNString(2,checkin);
-			pstmt.setNString(3,checkin);
+			pstmt.setNString(3,checkout);
 			pstmt.setNString(4,person);
 			rs= pstmt.executeQuery();
 			
 			while(rs.next()) {
 				ArrayList<HashMap<String,String>> seardetail = new ArrayList<HashMap<String,String>>();
 				HashMap<String,String>  innerH = new HashMap<String,String>();
+				innerH.put("H_MAINPIC", rs.getNString("H_MAINPIC"));
+				innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
 				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
 				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
 				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
@@ -734,8 +737,6 @@ public class ProductDao {
 				
 				seardetail.add(innerH); 
 				List.add(seardetail);
-				
-				
 				
 			}
 			
@@ -750,15 +751,10 @@ public class ProductDao {
 		
 		String result = gs.toJson(List); 
 		
-		System.out.println(List);
+		System.out.println(result);
 		
 		return result;
 	}
-	
-	
-	
-	
 
-	
 
 }

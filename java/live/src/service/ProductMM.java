@@ -53,6 +53,7 @@ public class ProductMM {
 	
 public Forward searchHouse() {
 		
+	
 		String destination = request.getParameter("destination");
 		String checkin = request.getParameter("checkin");
 		String checkout = request.getParameter("checkout");
@@ -66,6 +67,9 @@ public Forward searchHouse() {
 		
 		pDao.close();
 		
+		
+		request.setAttribute("result",searchHouse);
+		request.setAttribute("destination",destination);
 		fw = new Forward();
 		fw.setPath("./SearchDetail.jsp");
 		fw.setRedireact(false);
