@@ -67,7 +67,14 @@
 </style>
 
 
+<<<<<<< HEAD
 </head>
+=======
+<<<<<<< HEAD
+=======
+</head>
+>>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
+>>>>>>> 75146673d7dd0dd88895f02ddd6edf7116a2ee26
 
 <body>
 	<!-- 로그인 안된 경우  -->
@@ -124,6 +131,9 @@
 	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
 <<<<<<< HEAD
+	 var ocn3=document.getElementsByClassName("logout")
+=======
+
 	 
 	 var id2='<%=session.getAttribute("membertype")%>';
 	 console.log(id2);
@@ -139,9 +149,10 @@
 		ocn[1].style.display = 'none';
 		
 	} //집등록 버튼 
-=======
+
 	 var ocn3=document.getElementsByClassName("logout")
->>>>>>> cdb4a697aba794d9606838b0cc3c65b5502d037c
+
+>>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
 	
 	 
 	 id2='<%=session.getAttribute("membertype")%>';
