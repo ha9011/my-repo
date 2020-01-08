@@ -44,18 +44,22 @@
 				
 				
 				<div id="map">
+				
 					<h1>지도에 해당하는 위치를 포커싱</h1>
+				
 				</div>
 			</div>
 	</form>
 </div>
 </body>
 <script>
-	var $test =${result};
+	var $test =${result};  
 	console.log("제이슨 변환 String -> obj");
 	console.log($test);
 	
 	var searchlist= document.getElementById("list");
+	
+	
 	
 	for(intest in $test ){
 		
@@ -66,7 +70,7 @@
 		a.append(c);
 		a.on('click', function() {
 			console.log($(this).attr("name"));
-			location.href="asldk?id="+$(this).attr("name");
+			location.href="detailregiinfo?id="+$(this).attr("name");
 			
 		} )
 		
@@ -86,7 +90,29 @@
 
 
 
-
+	
+	
+	///////////////////////////////////////////////// 하동원
+	
+	//${result}
+	var mapdetail ="";
+	
+	for(intest in $test ){
+		
+		var a = {}
+		console.log($test[intest][0]["H_RGNUM"]);
+		console.log($test[intest][0]["H_MAINPIC"]);
+		console.log($test[intest][0]["H_ADDRESS"]);
+		console.log($test[intest][0]["H_ROOMS"]);
+		console.log($test[intest][0]["H_TOLILET"]);
+		console.log($test[intest][0]["H_ONEPRICE"]);
+		
+	}
+	
+	
+	
+	
+	
 
 </script>
 </html>
