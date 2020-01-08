@@ -36,6 +36,10 @@ public class FileServiceMM {
 		this.response = response;
 	}
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> cceba8272900e9eeccdd66992194936a05bed4a8
 	public Forward executefirst() {
 		HttpSession session = request.getSession();
 		// db sq번호 얻기
