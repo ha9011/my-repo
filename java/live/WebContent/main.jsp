@@ -122,18 +122,18 @@
 	 console.log(id2);
 	 var ocn2=document.getElementById("registHouse");
 	  
-	 
-	if(id1!=null){
+	 console.log(typeof id2);
+	if(id1!='null'){
 		console.log(ocn);
 		console.log("zzzzzzzzzzzzzzzzzzzzz");
 		ocn[0].style.display = 'none';
 		ocn[1].style.display = 'none';
 	} //집등록 버튼 
 	
- 	 if(id2==2){
+ 	 if(id2=='2'){
 		 console.log(ocn2)
 		 ocn2.style.dispaly ='inline';
-		 }  
+	}  
 	 
 }
 
