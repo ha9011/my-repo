@@ -163,18 +163,11 @@ for(intest in $testt ){
 		inner.push(result[0].y);
 		inner.push(result[0].x);
 		
-		
-
-	        
-	            displayMarker(result[0].y, result[0].x);    
-	            bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
-	              
-
+		displayMarker(result[0].y, result[0].x);    
+	    bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
+	     
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-	      
-		
-		
-		
+	     
 		map.setBounds(bounds);
 		console.log(inner);
 		wedokuyngdo.push(inner);
