@@ -75,7 +75,52 @@
 			//location.href="detailregiinfo?id="+$(this).attr("name");
 			
 		} )
+		//http://t1.daumcdn.net/mapjsapi/images/marker.png
+		//http://i1.daumcdn.net/dmaps/apis/transparent.gif
+		a.mouseover(function() {
+			let b = $(this).attr("name");
+			console.log("들어옴 : " + b);
+			console.log(markers);
+			for(i in markers){
+				if(markers[i]["Wa"]===b){
+					var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
+					//console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="50px";
+				//	console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
+					
+					//29px, 42p
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 80px, 90px, 0px)"
+					
+					console.log("변경후 ");
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
+					
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
+				}
+			}
+		} )
 		
+		a.mouseout(function() {
+			let b = $(this).attr("name");
+			console.log("나감 : " + b);
+			for(i in markers){
+				if(markers[i]["Wa"]===b){
+					var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
+					console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="29px";
+					console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
+					
+					//29px, 42p
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 29px, 42p, 0px)"
+					
+					console.log("변경후 ");
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
+					
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
+				}
+			}
+		} )
 		
 		
 		
