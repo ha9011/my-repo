@@ -67,10 +67,8 @@
 </style>
 
 
-<<<<<<< HEAD
-=======
+
 </head>
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
 
 <body>
 	<!-- 로그인 안된 경우  -->
@@ -126,9 +124,7 @@
 	 console.log(id1);
 	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
-<<<<<<< HEAD
 	 var ocn3=document.getElementsByClassName("logout")
-=======
 
 	 
 	 var id2='<%=session.getAttribute("membertype")%>';
@@ -148,7 +144,6 @@
 
 	 var ocn3=document.getElementsByClassName("logout")
 
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
 	
 	 
 	 id2='<%=session.getAttribute("membertype")%>';
