@@ -128,22 +128,6 @@
 	 var ocn=document.getElementsByClassName("log");
 
 
-	 
-	 var id2='<%=session.getAttribute("membertype")%>';
-	 console.log(id2);
-	 console.log("-------------")
-	 var ocn2=document.getElementById("jib");
-	  
-
-	if(id1!="null"){
-		console.log(id1);
-		console.log(ocn);
-		console.log("zzzzzzzzzzzzzzzzzzzzz");
-		ocn[0].style.display = 'none';
-		ocn[1].style.display = 'none';
-		
-	} //집등록 버튼 
-
 	 var ocn3=document.getElementsByClassName("logout")
 
 
