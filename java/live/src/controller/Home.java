@@ -58,7 +58,6 @@ public class Home extends HttpServlet {
 			System.out.println("디테일 예약 정보");
 			//fw=pm.detailregiinfo();
 		}
-		
 
 
 		
