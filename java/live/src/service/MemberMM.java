@@ -42,12 +42,11 @@ public class MemberMM {
 
 		if (result == -1) {
 			request.setAttribute("msgAccess", "아이디 또는 비밀번호가 틀립니다.");
-	
 		} else {
 			session.setAttribute("id", id);
 			session.setAttribute("membertype", result);
 		}
-	
+
 		fw = new Forward();
 		fw.setPath("./main.jsp");
 		fw.setRedireact(false);
@@ -124,34 +123,112 @@ public class MemberMM {
 		String gest = request.getParameter("h_or_g");
 
 		MemberDao mDao = new MemberDao();
-		mDao.join(id,pw,name,phonenum,email,gest, gender);
+		mDao.join(id, pw, name, phonenum, email, gest, gender);
 		fw = new Forward();
 		fw.setPath("./index.jsp");
 		fw.setRedireact(false);
 		return fw;
-	}//----------------------------------------------------------------
-
-	//하동원 구역
-	
-	// ----------------------------------------------------------------
-
+	}
 	// 하동원 구역
-
 
 	public String getAjaxduplicateID(String ID) {
 		// 멤버다오 리서트의 리턴값을 받아온다
 		String test = "";
-		MemberDao mDao = new MemberDao(); //연결
-		test=mDao.getDuplicateID(ID); // 테스트에 리서트 값을 넣어준다 
-		
+		MemberDao mDao = new MemberDao(); // 연결
+		test = mDao.getDuplicateID(ID); // 테스트에 리서트 값을 넣어준다
+
 		mDao.close();
-		
+
 		System.out.println("중복 결과 값 : " + test);
-		return test; //테스트 값을 사인업 석세스로 날려준다  
-		
+		return test; // 테스트 값을 사인업 석세스로 날려준다
+
 	}
 
-// 이예상 구역
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+// 이예상 구역-------------------------------------------------------------------------------------
+	public Forward guestInfo() {
+		HttpSession session = request.getSession(true);
+			  
+		String id = (String) session.getAttribute(""); 
+			 
+			  String Myinfo=null;
+			  
+			  MemberDao mDao = new MemberDao();
+			  Myinfo=mDao.Myinfo(id);
+			  
+			  mDao.close();
+			  
+			  request.setAttribute("result",Myinfo);
+			  fw = new Forward();
+			  fw.setPath("./guestInfo.jsp");
+			  fw.setRedireact(false);
+			  return fw;
+	}
+	}
+/*	HttpSession session = request.getSession(true);
+
+String id = ""; // 세션 아이디 가져오기
+
+try {
+
+	id = (String) session.getAttribute("id"); // request에서 id 파라미터를 가져온다
+
+	if (id == null || id.equals("")) { // id가 Null 이거나 없을 경우
+
+		response.sendRedirect("loginform.jsp");
+
+	} else {
+
+	}*/
+
+	
+		/*	 
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}*/
+//------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 평민호 구역
 //	public Forward checkId() {
@@ -160,4 +237,3 @@ public class MemberMM {
 //	}
 
 
-}
