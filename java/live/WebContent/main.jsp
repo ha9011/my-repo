@@ -166,13 +166,13 @@
 		
 		if(id2 =="1"){
 			console.log("게스트입니다");
-			location.href = "guestInfo.jsp";
+			location.href = "guestInfo";
 		}else if (id2 == "2"){
 			console.log("호스트입니다");
-			location.href = "HostInfojsp.jsp";
+			location.href = "HostInfojsp";
 		}else {
 			console.log("어드민");
-			location.href = "Admininfo.jsp";
+			location.href = "Admininfo";
 		}
 		
 	}

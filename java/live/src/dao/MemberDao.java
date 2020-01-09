@@ -156,80 +156,6 @@ public class MemberDao {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
-	public String Myinfo(String id) {
-		String Sql = "SELECT ID, NAME, EMAIL, PHONE FROM MEMBER WHERE ID=?";
-		
-		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();	
-		
-		try {
-			pstmt=con.prepareStatement(Sql);
-			pstmt.setNString(1, id);
-			rs=pstmt.executeQuery();
-			
-			
-			while(rs.next()) {
-
-				ArrayList<HashMap<String,String>> info = new ArrayList<HashMap<String,String>>();	
-				HashMap<String,String>  myinfo = new HashMap<String,String>();
-				myinfo.put("ID",rs.getNString("ID"));
-				myinfo.put("NAME",rs.getNString("NAME"));
-				myinfo.put("EMAIL",rs.getNString("EMAIL"));
-				myinfo.put("PHONE",rs.getNString("PHONE"));
-				
-				info.add(myinfo);
-				List.add(info);
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Gson gs = new Gson();
-		
-		String result = gs.toJson(List); 
-		
-		System.out.println(result);
-		
-		return result;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -267,5 +193,64 @@ public class MemberDao {
 
 
 	///////////////////////예상 구역
+
+
+	
+	//--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
+		public String Myinfo(String id) {
+			System.out.println("id : "+id);
+			String Sql = "SELECT PROFILE, ID, NAME, EMAIL, PHONE FROM MEMBER WHERE ID=?";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();	
+			
+			try {
+				pstmt=con.prepareStatement(Sql);
+				pstmt.setNString(1, id);
+				rs=pstmt.executeQuery();
+				
+				
+				while(rs.next()) {
+
+					ArrayList<HashMap<String,String>> info = new ArrayList<HashMap<String,String>>();	
+					HashMap<String,String>  myinfo = new HashMap<String,String>();
+					myinfo.put("ID",rs.getNString("ID"));
+					myinfo.put("NAME",rs.getNString("NAME"));
+					myinfo.put("EMAIL",rs.getNString("EMAIL"));
+					myinfo.put("PHONE",rs.getNString("PHONE"));
+					myinfo.put("PROFILE",rs.getNString("PROFILE"));
+					
+					info.add(myinfo);
+					List.add(info);
+					
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Gson gs = new Gson();
+			
+			String result = gs.toJson(List); 
+			
+			System.out.println(result);
+			
+			return result;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

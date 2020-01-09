@@ -171,7 +171,7 @@ public class MemberMM {
 	public Forward guestInfo() {
 		HttpSession session = request.getSession(true);
 			  
-		String id = (String) session.getAttribute(""); 
+		String id = (String) session.getAttribute("id"); 
 			 
 			  String Myinfo=null;
 			  
