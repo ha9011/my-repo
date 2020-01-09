@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
 
 <style>
 body{display:table;margin-left:auto;margin-right:auto; }
@@ -17,28 +20,28 @@ body{display:table;margin-left:auto;margin-right:auto; }
 	#myhouselist{border:1px solid black;width:1200px;height:400px;margin-bottom:20px;}
 	
 	
+	#oo{visibility:hidden;}
+	#info{font-size:20px;font-weight:bold;}
 
 </style>
 
 </head>
 <body>
 
-<h1>호스트 마이페이지 </h1>
-	<form action="HostInfo">
-		
+<h1>게스트 마이페이지 </h1>
+		<input type="file" id="oo" name="gg" >
 		<div id="header">
 			
+			
 			<div id="img">
-				<h1>프로필 사진 </h1> -- db에 기본 사진 불러옴
-				<button>사진 변경</button>
-			</div>
 				
+			</div>
+
 			<div id="info">
-				<h1>프로필 정보 및 정산금액 </h1>
+				
 			</div>
 		
 		</div>
-		
 		
 		
 		<div id="requestlist">
@@ -52,27 +55,71 @@ body{display:table;margin-left:auto;margin-right:auto; }
 		<div id="myhouselist">
 			<h1>내 보유 집 목록 </h1>
 		</div>
+	
+	
+
+<script>
+	
+
+
+
+
+var $test =${result};  
+console.log("제이슨 변환 String -> obj");
+console.log($test);
+
+console.log($test[0][0]["PROFILE"]);
+
+
+var propic = document.getElementById("img");
+
+var a = $('<div class= "propic"><img id ="pro" width=300px height=250px src = "'+$test[0][0]["PROFILE"]+'"></div>');
+var b = $('<button id ="change">사진변경</button>')
+	
+ 	 b.on('click',function() {
+ 		 
+		console.log("사진변경");
 		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</form>
+		$("#oo").click();
+		
+});
+ 	
+ 	$("#img").append(a);
+	$("#img").append(b);
 
+	$("#oo").change(function(){
+		readURL(this);
+	})
+	
+	
+	function readURL(input) {
+		 if (input.files && input.files[0]){
+			 console.log(input.files[0])
+				  	
+			 var reader = new FileReader();
+		  
+		  reader.onload = function (e) {
+			  console.log(e)
+				
+		   $('#pro').attr('src', e.target.result);  
 
-
+		  // $("#image_section").show();
+		  }
+		  
+		  reader.readAsDataURL(input.files[0]);
+		  }
+		}
+	
+	var c = $('<div class = "myinfo">'+"아이디:"+$test[0][0]["ID"]+"<br>"+"이름:"+$test[0][0]["NAME"]+"<br>"+"이메일:"+$test[0][0]["EMAIL"]+"<br>"+"전화번호:"+$test[0][0]["PHONE"]+"<br>"+'</div>')
+		$("#info").append(c);
+	
+	
+	
+	console.log($test[0][0]["ID"]);
+	console.log($test[0][0]["NAME"]);
+	console.log($test[0][0]["EMAIL"]);
+	console.log($test[0][0]["PHONE"]);
+	
+</script>
 </body>
 </html>

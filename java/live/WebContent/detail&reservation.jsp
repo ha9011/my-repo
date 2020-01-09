@@ -87,8 +87,11 @@ console.dir($("a1"));
 
 $(function() {
 	  $('input[name="daterange"]').daterangepicker({	     
-		 opens: 'left'
+		 
+		  opens: 'left'
 	  }, function(start, end, label) {
+		  
+		  console.dir($(this));
 	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 	    $("#a1").val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
 	  });
@@ -99,7 +102,7 @@ $(function() {
 	
 	
 	
-	var $test=${result};
+	var $test=[];
 	
 	var a = $('<div class="detail"></div>');
 	
