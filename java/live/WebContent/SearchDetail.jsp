@@ -6,20 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#body{margin:0 5%}
-	#searchbox{border:3px solid #0B3861;width:600px;height:60px;text-align:center;margin-bottom:30px;}
-	input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
-	button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
-	#middle{width:100%;height:100%;overflow:hidden;border:none;}
-	#list{border:none;float:left;width:40%;}
-	.out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
-		.inner{display:inline-flex;}
-		.info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
-	
-	#map{border:2px solid #0B3861;float:right;width:56%;}
-	
-	
-	
+   #body{margin:0 5%}
+   #searchbox{border:3px solid #0B3861;width:100%;height:60px;text-align:center;margin-bottom:30px;}
+   input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
+   button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
+   #middle{width:100%;height:100%;overflow:hidden;border:none;}
+   #list{border:none;float:left;width:40%;}
+   .out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
+      .inner{display:inline-flex;}
+      .info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
+   
+   #map{border:2px solid #0B3861;float:right;width:56%;}
+   
+   
+   
 </style>
 
 
@@ -28,93 +28,132 @@
 <body>
 <div id = "body">
 <h1>검색 키워드 입력후 보이는 창 </h1>
-	
-	<form action="SearchDetail" method="get">
-			<div id="searchbox">
-				<input type="text" name="destination" value=${destination}>
-				<button type="submit">검색</button>
-			</div>
-			
-			<div id="middle">
-				<div id="list"></div>
-				
-				
-				<div id="maplay">
-				
-					<div id="map" style="width:500px;height:400px;"></div>
-				
-				</div>
-			</div>
-	</form>
+   
+   <form action="SearchDetail" method="get">
+        <div id="searchbox">
+            <input type="text" name="destination" value=${destination}>
+            <button type="submit">검색</button>
+         </div>
+         
+         <div id="middle">
+            <div id="list"></div>
+            
+            
+            <div id="maplay">
+            
+               <div id="map" style="width:500px;height:400px;"></div>
+            	
+            </div>
+         </div>
+   </form>
 </div>
 </body>
 <script>
-	var $test =${result};  
-	console.log("제이슨 변환 String -> obj");
-	console.log($test);
+/* 	$.ajax({
 	
-	var searchlist= document.getElementById("list");
-	
-	
-	
-	for(intest in $test ){
+		type:'get',
+		url:'',
+		//data 생략
+		dataType:"json",
+		success:function(data){ //서버통신 성공시 콜백함수
+			console.log(data);
+			fctName(data,position);
 		
-		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
-		
-		var b = $('<div class="inner"><img width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
-
-		var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
-		a.append(b);
-		a.append(c);
-		
-		a.on('click', function() {
-			console.log($(this).attr("name"));
-			location.href="detailregiinfo?id="+$(this).attr("name");
-			
-		} )
-		
-		console.log(a.attr("name"));
-		
-		
-		$("#list").append(a)
-		
-		console.log($test[intest][0]["H_RGNUM"]);
-		console.log($test[intest][0]["H_MAINPIC"]);
-		console.log($test[intest][0]["H_ADDRESS"]);
-		console.log($test[intest][0]["H_ROOMS"]);
-		console.log($test[intest][0]["H_TOLILET"]);
-		console.log($test[intest][0]["H_ONEPRICE"]);
-		
-	}
-	
+		},error:function(error){
+			console.log(error);
+		}
+	});//ajax end
+ */
 
 
 
 
-	
-	
-	///////////////////////////////////////////////// 하동원
-	
-	//${result}
-	console.log("=====하동원=========");
-	let mapdetail =new Array;
-	console.log(mapdetail);
-	
-	
-	for(intest in $test ){
-		let innerList = new Array;
-		
-		innerList.push($test[intest][0]["H_RGNUM"]);
-		innerList.push($test[intest][0]["H_ADDRESS"]);
-		mapdetail.push(innerList);
-	}
-	
-	console.log("========데이터구조[완]=========")
-	console.log(mapdetail);
-	
-	
-	
-	
+
+
+
+
+   var $test =${result};  
+   console.log("제이슨 변환 String -> obj");
+   console.log($test);
+   
+   var searchlist= document.getElementById("list");
+   
+   
+   
+   for(intest in $test ){
+      
+      var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
+      
+      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
+      
+      
+      
+      var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+      a.append(b);
+      a.append(c);
+      
+      a.on('click', function() {
+         console.log("z");
+         console.log($(this).attr("name"));
+         //location.href="detailregiinfo?id="+$(this).attr("name");
+         
+         
+         
+      } )
+     
+      console.log(a.attr("name"));
+      
+      
+      $("#list").append(a)
+      
+      console.log($test[intest][0]["H_RGNUM"]);
+      console.log($test[intest][0]["H_MAINPIC"]);
+      console.log($test[intest][0]["H_ADDRESS"]);
+      console.log($test[intest][0]["H_ROOMS"]);
+      console.log($test[intest][0]["H_TOLILET"]);
+      console.log($test[intest][0]["H_ONEPRICE"]);
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   }
+   
+
+
+
+
+   
+   
+   ///////////////////////////////////////////////// 하동원
+   
+   //${result}
+   console.log("=====하동원=========");
+   let mapdetail =new Array;
+   console.log(mapdetail);
+   
+   
+   for(intest in $test ){
+      let innerList = new Array;
+      
+      innerList.push($test[intest][0]["H_RGNUM"]);
+      innerList.push($test[intest][0]["H_ADDRESS"]);
+      mapdetail.push(innerList);
+   }
+   
+   console.log("========데이터구조[완]=========")
+   console.log(mapdetail);
+   
+   
+   
+   
 
 </script>
 
@@ -123,14 +162,15 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54a97da9ea0c80921e6f0c3700f67b67&libraries=services"></script>
 
 <script>
+let markers = [];
 let $testt = ${result}
-var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 
 
 
 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+let mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
@@ -154,32 +194,34 @@ let bounds = new kakao.maps.LatLngBounds();
 console.log(wedokuyngdo);
 //주소로 좌표를 검색합니다
 
-for(intest in $testt ){
-	let innerList = new Array;
-	//innerList.push($test[intest][0]["H_RGNUM"]);
-	innerList.push($testt[intest][0]["H_ADDRESS"]);
+for(let intest in $testt ){
+   let innerList = new Array;
+   //innerList.push($test[intest][0]["H_RGNUM"]);
+   innerList.push($testt[intest][0]["H_ADDRESS"]);
 
-	geocoder.addressSearch($testt[intest][0]["H_ADDRESS"], function(result, status) {
+   geocoder.addressSearch($testt[intest][0]["H_ADDRESS"], function(result, status ) {
 
-	    // 정상적으로 검색이 완료됐으면 
-	if (status === kakao.maps.services.Status.OK) {
-		console.log("돌기");
-		let inner = new Array;
-		inner.push(result[0].y);
-		inner.push(result[0].x);
-		
-		displayMarker(result[0].y, result[0].x);    
-	    bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
-	     
-	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-	     
-		map.setBounds(bounds);
-		console.log(inner);
-		wedokuyngdo.push(inner);
-	} 
-	
-	    
-	});  
+       // 정상적으로 검색이 완료됐으면 
+   if (status === kakao.maps.services.Status.OK) {
+      console.log("돌기 :  "+ $test[intest][0]["H_RGNUM"]);
+      let inner = new Array;
+      inner.push(result[0].y);
+      inner.push(result[0].x);
+      
+      displayMarker(result[0].y, result[0].x, $test[intest][0]["H_RGNUM"]);    
+       bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
+        
+           // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        
+      map.setBounds(bounds);
+      console.log(inner);
+      wedokuyngdo.push(inner);
+      
+      
+   } 
+   
+       
+   });  
 
 }
 
@@ -191,32 +233,41 @@ console.log(wedokuyngdo);
 
 for(i in wedokuyngdo){
 
-	console.log("test");
+   console.log("test");
 
-	console.log("위도 : " +i[0]);
-	console.log("경도 : " +i[1]);
+   console.log("위도 : " +i[0]);
+   console.log("경도 : " +i[1]);
 }
 
 
-function displayMarker(y,x) {
+function displayMarker(y,x,reginum) {
     
     // 마커를 생성하고 지도에 표시합니다
     var marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(y, x) ,
-  		zIndex: "하동원"
+        zIndex: reginum
     });
+    
+    markers.push(marker);
+    
 
     // 마커에 클릭이벤트를 등록합니다
     kakao.maps.event.addListener(marker, 'click', function() {
         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-       	var content = '<div style="padding:5px;z-index:1;">zzzzzzzzzzzzzzzzzzzzzzzzzzzzzhh</div>';
-       	console.dir(marker);
+          var content = '<div style="padding:5px;z-index:1;">zzzzzzzzzzzzzzzzzzzzzzzzzzzzzhh</div>';
+          console.dir(marker);
         infowindow.setContent(content);
         infowindow.open(map, marker);
     });
 }  
 
+console.log("==markers==");
+console.log(markers);
+
+console.log("==zzz==");
+console.dir($("#daum.maps.Marker.Area:1"))
+console.log($("#daum.maps.Marker.Area:1"))
 
 
 

@@ -16,7 +16,7 @@ import com.google.gson.reflect.TypeToken;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({ "/duplicateID","/changeprofilepic" })
+@WebServlet({ "/duplicateID" })
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,11 +36,6 @@ public class RestController extends HttpServlet {
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
-		}else if (cmd.equals("/changeprofilepic")){
-			System.out.println("sadsadsa");
-			String ID = request.getParameter("data");
-			System.out.println("==data== : " + ID);
-			json = mm.getAjaxchangepropic(ID);
 		}
 
 		
