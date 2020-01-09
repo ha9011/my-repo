@@ -163,6 +163,33 @@ public Forward searchHouse() {
 	
 	
 	//----------민호-------------------------------------------------------------------------------------------
-	
+	public Forward detailregiinfo(){
+		
+		String detailId = request.getParameter("id");
+		System.out.println(detailId);
+		String detailregiinfo = null;
+		
+		ProductDao pDao = new ProductDao();
+		
+		detailregiinfo = pDao.detailregiinfo(detailId);
+		
+		pDao.close();
+		
+		
+		request.setAttribute("result",detailregiinfo);
+		
+		fw = new Forward();
+		fw.setPath("./detail&reservation.jsp");
+		fw.setRedireact(false);
+		return fw;
+		
+		
+		
+	}
+
+
+
+
+
 	
 }

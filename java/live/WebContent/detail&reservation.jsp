@@ -1,126 +1,129 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style type="text/css">
-#pic {
-   border: blue solid 1px;
-}
-
-#middle {
-   width: 100%;
-   height: 100%;
-   overflow: hidden;
-   border: none;
-}
-
-#list {
-   border: 2px solid #0B3861;
-   float: left;
-   width: 48%;
-}
-
-#map {
-   border: 2px solid #0B3861;
-   float: right;
-   width: 51%;
-}
-
-#whogi {
-   border: 2px solid #0B3861;
-   float: left;
-   width: 100%;
-   height: 400px;
-}
-
-#reply {
-   border: 2px solid #0B3861;
-   float: left;
-   width: 48%;
-}
-
-#rreply {
-   border: 2px solid #0B3861;
-   float: right;
-   width: 48%;
-}
-
-#you {
-   border: 2px solid #0B3861;
-   float: left;
-   width: 100%;
-}
-
-#후기{
-   border: 2px solid #0B3861;
-   float: left;
-   width: 48%;
-   height: 400px;
-}
-
-#id{
-   border: 2px solid #0B3861;
-   float: left;
-   width: 48%;
-   height: 400px;
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<style>
+   body{margin:0 5%;}
+   #top{display:flex;}
+      #img{margin-bottom:2%;width:70%;height:800px;overflow:hidden;border:none;}
+         #mainimg{border:1px solid black;width:70%;height:40%;margin-bottom:10px;}
+         #subimg{border:1px solid black;width:90%;height:57%;}
+      #reservation{display:inline-flex;width:30%;height:300px;border:1px solid black;margin-left:2%;}
    
-}
-#alert{
- border: 2px solid #0B3861
-}
-
+   #middle{display:flex;;margin-bottom:2%;;width:100%;height:50%;overflow:hidden;}
+      #review{margin-bottom:2%;border:1px solid black;width:50%;height:48%;}
+      #reple{margin-bottom:2%;border:1px solid black;width:50%;height:48%;margin-left:10px;}
+      
+   
+   #bottom{width:100%;height:50%;overflow:hidden;border:1px solid black;}
+ .detail{border:1px solid black;width:95%;height:230px;display:flex; margin:auto;}
+		.inner{display:inline-flex;}
+		.info{width:200px;height:150px;display:inline-flex;}
+   #a1{ height :30%;
+   }
 </style>
 
 </head>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
 <body>
 
-   <form action="detailGS" method="get">
+<h1>예약 디테일 페이지 </h1>
+<form action="">
       
-      
-      <div id="pic">숙소사진 출력창</div>
-      
-      
-      
-      <div id="middle">
-         <div id="list">
-            <h1>검색정보 불러와서 뿌려줌</h1>
-         </div>
-
-
-         <div id="map">
-            <h1>날짜선택 예약 창</h1>
-         </div>
-
-      </div>
-      
-      
-      
-      <div id="whogi">
+   <div id="top">
          
-         <div id="후기">
-            <h1>후기창</h1>
+      <div id="img">
+            <div id = "mainimg">
+               <h1>메인사진</h1>
+            </div>
+            <div id = "subimg">
+               <h1>슬라이드사진</h1>
+            </div>
+      </div>
+            
+      
+            
+            <div id="reservation">
+               <h1>날짜 예약</h1> 
+               <input type="date" name="daterange" id="a1" >
+               
+            </div>
+      
+   </div>
+      
+      
+      
+      <div id= "middle">
+      
+         <div id="review">
+            <h1>후기</h1>
          </div>
-
-
-         <div id="id">
-            <ul>
-               <li>화장실이 몇개입니까</li>
-                 <ul>
-                 <li>충분</li>
-                 </ul>
-           </ul>
+      
+         <div id="reple">
+            <h1>댓글 대댓글</h1>
          </div>
-        
+      
       </div>
       
-   </form>
-  <div id="alert">주의사항 </div>
+      <div id = "bottom">
+         <h1>주의사항</h1>
+      </div>
+      
+      
+   
+</form>
 
+<script>
+
+console.dir($("a1"));
+
+
+$(function() {
+	  $('input[name="daterange"]').daterangepicker({	     
+		 opens: 'left'
+	  }, function(start, end, label) {
+	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	    $("#a1").val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
+	  });
+	});
+	
+	
+	
+	
+	
+	
+	var $test=${result};
+	
+	var a = $('<div class="detail"></div>');
+	
+	console.log($test[0][0]["H_MAINPIC"]);
+	var b = $('<div class="mainpic"><img width="200" height="150" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
+	var c = $('<div class="info">'+'주소:  '+$test[0][0]["H_ADDRESS"]+'  '+$test[0][0]["H_DETAILADD"]+'<br>'
+			+'숙박가능 날짜:  '+$test[0][0]["H_CHECKIN"]+'~'+$test[0][0]["H_CHECKOUT"]+'<br>'
+			+'수용가능인원:  '+$test[0][0]["H_ATTENDANCE"]+'<br>'
+			+'1박가격:  '+$test[0][0]["H_ONEPRICE"]+'<br>'
+			+'방갯수:  '+$test[0][0]["H_ROOMS"]+'<br>'
+			+'침대수:  '+$test[0][0]["H_BEDROOMS"]+'<br>'
+			+'화장실:  '+$test[0][0]["H_TOLILET"]+'<br>'
+			+'주차가능:  '+$test[0][0]["H_PARKABLE"]+'<br>'
+			+'욕실:  '+$test[0][0]["H_BATHROOMS"]+'<br>'+
+			'</div>')
+	a.append(b);
+	a.append(c);
+	$("#mainimg").append(a);
+	
+	console.log($test);
+	console.dir($test);
+	console.log($test[0]);
+	console.dir($test[0]);
+</script>
 
 
 </body>

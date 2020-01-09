@@ -60,10 +60,13 @@
 	for(intest in $test ){
 		
 		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
+		
 		var b = $('<div class="inner"><img width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
+
 		var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
 		a.append(b);
 		a.append(c);
+		
 		a.on('click', function() {
 			console.log($(this).attr("name"));
 			location.href="detailregiinfo?id="+$(this).attr("name");
@@ -71,6 +74,8 @@
 		} )
 		
 		console.log(a.attr("name"));
+		
+		
 		$("#list").append(a)
 		
 		console.log($test[intest][0]["H_RGNUM"]);
