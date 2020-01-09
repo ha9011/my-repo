@@ -9,8 +9,8 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <style>
+
 #header {
 	width: 98%;
 	height: 160px;
@@ -67,7 +67,7 @@
 </style>
 
 
-</head>
+
 
 </head>
 
@@ -129,8 +129,6 @@
 
 
 	 var ocn3=document.getElementsByClassName("logout")
-
-
 	 
 	 id2='<%=session.getAttribute("membertype")%>';
 		console.log(id2);
@@ -168,15 +166,18 @@
 	}
 	
 	function mypage_session() {
+		
+		alert("마이페이지로 이동");
+		
 		if(id2 =="1"){
 			console.log("게스트입니다");
-			location.href = "registHouse.jsp";
+			location.href = "guestInfo.jsp";
 		}else if (id2 == "2"){
 			console.log("호스트입니다");
 			location.href = "HostInfojsp.jsp";
 		}else {
 			console.log("어드민");
-			location.href = "signup.jsp";
+			location.href = "Admininfo.jsp";
 		}
 		
 	}

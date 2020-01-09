@@ -28,7 +28,8 @@ body{display:table;margin-left:auto;margin-right:auto; }
 		<div id="header">
 			
 			<div id="img">
-				<h1>프로필 사진 </h1>
+				<h1>프로필 사진 </h1> -- db에 기본 사진 불러옴
+				<button>사진 변경</button>
 			</div>
 				
 			<div id="info">
