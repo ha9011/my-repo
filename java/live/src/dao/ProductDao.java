@@ -758,5 +758,77 @@ public class ProductDao {
 		return result;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//평민호
+	
+	/*public String detailregiinfo(String id) {
+
+		String sql= "";
+
+				
+		
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1,destination);
+			
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<HashMap<String,String>> seardetail = new ArrayList<HashMap<String,String>>();
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				innerH.put("H_MAINPIC", rs.getNString("H_MAINPIC"));
+				innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+				innerH.put("H_ONEPRICE", rs.getNString("H_ONEPRICE"));
+				
+				seardetail.add(innerH); 
+				List.add(seardetail);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		
+		Gson gs = new Gson();
+		
+		String result = gs.toJson(List); 
+		
+		System.out.println(result);
+		
+		return result;*/
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
