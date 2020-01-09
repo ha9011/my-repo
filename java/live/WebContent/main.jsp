@@ -101,6 +101,7 @@
 					<!-- 미들 타이틀-->
 					<form action="searchHouse" method="get">
 						<input type="text" name="destination" placeholder="목적지"> <input
+							
 							type="date" name="checkin" placeholder="체크인"> <input
 							type="date" name="checkout" placeholder="체크아웃"> <input
 							type="text" name="person" placeholder="인원수">

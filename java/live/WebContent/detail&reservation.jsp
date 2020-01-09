@@ -52,7 +52,7 @@
             
             <div id="reservation">
                <h1>날짜 예약</h1> 
-               <input type="date" name="daterange" id="a1" >
+               <input type="text" name="daterange" id="a1" value="2020-01-03 ~ 2020-01-05">
                
             </div>
       
@@ -128,3 +128,8 @@ $(function() {
 
 </body>
 </html>
+
+
+
+
+
