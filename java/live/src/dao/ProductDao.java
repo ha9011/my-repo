@@ -756,5 +756,85 @@ public class ProductDao {
 		return result;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//평민호
+	
+	public String detailregiinfo(String id) {
+
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_RGNUM = ?";
+
+		ArrayList<ArrayList<HashMap<String,String>>> detailregiinfo = new ArrayList<ArrayList<HashMap<String,String>>>();	
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1,id);
+			
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<HashMap<String,String>> seardetail = new ArrayList<HashMap<String,String>>();
+				
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				innerH.put("H_RGNUM", rs.getNString("H_RGNUM"));
+				innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+				innerH.put("H_ATTENDANCE", rs.getNString("H_ATTENDANCE"));
+				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				innerH.put("H_DETAILADD", rs.getNString("H_DETAILADD"));
+				innerH.put("H_PARKABLE", rs.getNString("H_PARKABLE"));
+				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+				innerH.put("H_BATHROOMS", rs.getNString("H_BATHROOMS"));
+				innerH.put("H_BEDROOMS", rs.getNString("H_BEDROOMS"));
+				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+				innerH.put("H_DETAILPICS", rs.getNString("H_DETAILPICS"));
+				innerH.put("H_CHECKIN", rs.getNString("H_CHECKIN"));
+				innerH.put("H_CHECKOUT", rs.getNString("H_CHECKOUT"));
+				innerH.put("H_ONEPRICE", rs.getNString("H_ONEPRICE"));
+				
+				seardetail.add(innerH); 
+				detailregiinfo.add(seardetail);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		
+		Gson gs = new Gson();
+		
+		String result = gs.toJson(detailregiinfo); 
+		
+		System.out.println(result);
+		
+		return result;
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

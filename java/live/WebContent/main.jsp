@@ -65,7 +65,12 @@
 	display: none;
 }
 </style>
+
+
+
+
 </head>
+
 
 <body>
 	<!-- 로그인 안된 경우  -->
@@ -122,7 +127,7 @@
 	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
 
-	 
+
 	 var ocn3=document.getElementsByClassName("logout")
 	 
 	 id2='<%=session.getAttribute("membertype")%>';

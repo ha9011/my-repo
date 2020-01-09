@@ -60,10 +60,13 @@
 	for(intest in $test ){
 		
 		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
+		
 		var b = $('<div class="inner"><img width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
+
 		var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
 		a.append(b);
 		a.append(c);
+		
 		a.on('click', function() {
 			console.log($(this).attr("name"));
 			location.href="detailregiinfo?id="+$(this).attr("name");
@@ -71,6 +74,8 @@
 		} )
 		
 		console.log(a.attr("name"));
+		
+		
 		$("#list").append(a)
 		
 		console.log($test[intest][0]["H_RGNUM"]);
@@ -163,18 +168,11 @@ for(intest in $testt ){
 		inner.push(result[0].y);
 		inner.push(result[0].x);
 		
-		
-
-	        
-	            displayMarker(result[0].y, result[0].x);    
-	            bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
-	              
-
+		displayMarker(result[0].y, result[0].x);    
+	    bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
+	     
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-	      
-		
-		
-		
+	     
 		map.setBounds(bounds);
 		console.log(inner);
 		wedokuyngdo.push(inner);
