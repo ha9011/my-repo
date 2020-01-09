@@ -14,7 +14,9 @@ import service.ProductMM;
 
 
 
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo"})
+
+@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo","/guestInfo"})
+
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -57,6 +59,9 @@ public class Home extends HttpServlet {
 		}else if(cmd.equals("/detailregiinfo")) { //비밀번호 찾기 연결
 			System.out.println("디테일 예약 정보");
 			//fw=pm.detailregiinfo();
+		}else if(cmd.equals("/guestInfo")) { //비밀번호 찾기 연결
+			System.out.println("디테일 예약 정보");
+			//fw=mm.guestInfo();
 		}
 
 

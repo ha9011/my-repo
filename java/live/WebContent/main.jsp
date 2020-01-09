@@ -9,8 +9,8 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <style>
+
 #header {
 	width: 98%;
 	height: 160px;
