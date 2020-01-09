@@ -36,12 +36,9 @@ public class RestController extends HttpServlet {
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
+
 		}
 
-		
-		
-		
-		
 		if (json != null) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
