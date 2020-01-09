@@ -54,16 +54,14 @@ public class Home extends HttpServlet {
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
 			fw=mm.searchPw();
 		}else if(cmd.equals("/searchHouse")) { //비밀번호 찾기 연결
-			System.out.println("오고있니");
 			fw=pm.searchHouse();
 		}else if(cmd.equals("/detailregiinfo")) { //비밀번호 찾기 연결
 			System.out.println("디테일 예약 정보");
 			fw=pm.detailregiinfo();
 		}else if(cmd.equals("/guestInfo")) { //비밀번호 찾기 연결
-			System.out.println("디테일 예약 정보");
-			//fw=mm.guestInfo();
+			System.out.println("마이페이지");
+			fw=mm.guestInfo();
 		}
-		
 
 
 		
