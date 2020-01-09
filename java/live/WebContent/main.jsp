@@ -65,16 +65,7 @@
 	display: none;
 }
 </style>
-
-
-<<<<<<< HEAD
 </head>
-=======
-<<<<<<< HEAD
-=======
-</head>
->>>>>>> f8ecab94e1ac7a9e78578700df26edf9a622c3a4
->>>>>>> 75146673d7dd0dd88895f02ddd6edf7116a2ee26
 
 <body>
 	<!-- 로그인 안된 경우  -->
@@ -131,26 +122,8 @@
 	 console.log("-------------")
 	 var ocn=document.getElementsByClassName("log");
 
-
 	 
-	 var id2='<%=session.getAttribute("membertype")%>';
-	 console.log(id2);
-	 console.log("-------------")
-	 var ocn2=document.getElementById("jib");
-	  
-
-	if(id1!="null"){
-		console.log(id1);
-		console.log(ocn);
-		console.log("zzzzzzzzzzzzzzzzzzzzz");
-		ocn[0].style.display = 'none';
-		ocn[1].style.display = 'none';
-		
-	} //집등록 버튼 
-
 	 var ocn3=document.getElementsByClassName("logout")
-
-
 	 
 	 id2='<%=session.getAttribute("membertype")%>';
 		console.log(id2);
@@ -188,15 +161,18 @@
 	}
 	
 	function mypage_session() {
+		
+		alert("마이페이지로 이동");
+		
 		if(id2 =="1"){
 			console.log("게스트입니다");
-			location.href = "registHouse.jsp";
+			location.href = "guestInfo.jsp";
 		}else if (id2 == "2"){
 			console.log("호스트입니다");
 			location.href = "HostInfojsp.jsp";
 		}else {
 			console.log("어드민");
-			location.href = "signup.jsp";
+			location.href = "Admininfo.jsp";
 		}
 		
 	}

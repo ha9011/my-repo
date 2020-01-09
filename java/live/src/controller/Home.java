@@ -66,7 +66,6 @@ public class Home extends HttpServlet {
 		
 
 
-
 		
 		if(fw!=null) {
 			if(fw.isRedireact()) {
@@ -75,8 +74,8 @@ public class Home extends HttpServlet {
 				request.getRequestDispatcher(fw.getPath()).forward(request, response);
 			}
 		}
-	}
 	
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request,response);

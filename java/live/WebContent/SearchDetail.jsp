@@ -11,10 +11,10 @@
 	input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
 	button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
 	#middle{width:100%;height:100%;overflow:hidden;border:none;}
-	#list{border:2px solid #0B3861;float:left;width:40%;}
-	.out{border:1px solid black;width:100%;height:200px;display:flex;}
+	#list{border:none;float:left;width:40%;}
+	.out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
 		.inner{display:inline-flex;}
-		.info{width:200px;height:150px;display:inline-flex;}
+		.info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
 	
 	#map{border:2px solid #0B3861;float:right;width:56%;}
 	
@@ -36,10 +36,7 @@
 			</div>
 			
 			<div id="middle">
-				<div id="list">
-					
-					
-				</div>
+				<div id="list"></div>
 				
 				
 				<div id="maplay">
@@ -64,7 +61,7 @@
 		
 		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
 		var b = $('<div class="inner"><img width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
-		var c = $('<div class="info">'+$test[intest][0]["H_ADDRESS"]+'<br>'+$test[intest][0]["H_ROOMS"]+'<br>'+$test[intest][0]["H_TOLILET"]+'<br>'+$test[intest][0]["H_ONEPRICE"]+'</div>')
+		var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
 		a.append(b);
 		a.append(c);
 		a.on('click', function() {
