@@ -80,7 +80,22 @@ public Forward searchHouse() {
 	
 	
 	
-	
+	public String getAjaxchangeSearch() {
+		String destination = request.getParameter("data");
+		System.out.println(destination);
+		
+		
+		String searchHouse = null;
+		
+		ProductDao pDao = new ProductDao();
+		
+		searchHouse = pDao.searchHouse(destination);
+		
+		pDao.close();
+		
+		
+		return searchHouse;
+	}
 	
 	
 	
@@ -201,6 +216,11 @@ public Forward searchHouse() {
 		
 		
 	}
+
+
+
+	
+
 
 
 

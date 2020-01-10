@@ -104,20 +104,7 @@ var b = $('<button id ="change">사진변경</button>')
 		  }
 		
 
-		$.ajax({
-			
-			type:'get',
-			url:'changeprofilepic',
-			//data 생략
-			dataType:"json",
-			success:function(data){ //서버통신 성공시 콜백함수
-				console.log(data);
-				fctName(data,position);
-				
-			},error:function(error){
-				console.log(error);
-			}
-		});//ajax end
+		
 		
 	
 	

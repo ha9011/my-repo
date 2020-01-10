@@ -6,20 +6,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#body{margin:0 5%}
-	#searchbox{border:3px solid #0B3861;width:600px;height:60px;text-align:center;margin-bottom:30px;}
-	input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
-	button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
-	#middle{width:100%;height:100%;overflow:hidden;border:none;}
-	#list{border:none;float:left;width:40%;}
-	.out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
-		.inner{display:inline-flex;}
-		.info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
-	
-	#map{border:2px solid #0B3861;float:right;width:56%;}
-	
-	
-	
+   #body{margin:0 5%}
+   #searchbox{border:3px solid #0B3861;width:100%;height:60px;text-align:center;margin-bottom:30px;}
+   input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
+   button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
+   #middle{width:100%;height:100%;overflow:hidden;border:none;}
+   #list{border:none;float:left;width:40%;}
+   .out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
+      .inner{display:inline-flex;}
+      .info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
+   
+   #map{border:2px solid #0B3861;float:right;width:56%;}
+   
+   
+   
 </style>
 
 
@@ -28,47 +28,69 @@
 <body>
 <div id = "body">
 <h1>검색 키워드 입력후 보이는 창 </h1>
-	
-	<form action="SearchDetail" method="get">
-			<div id="searchbox">
-				<input type="text" name="destination" value=${destination}>
-				<button type="submit">검색</button>
-			</div>
-			
-			<div id="middle">
-				<div id="list"></div>
-				
-				
-				<div id="maplay">
-				
-					<div id="map" style="width:500px;height:400px;"></div>
-				
-				</div>
-			</div>
-	</form>
+   
+  
+        <div id="searchbox">
+            <input id= "subsearch" type="text" name="destination" value=${destination}>
+            <button type="button" id="btn1">검색</button>
+         </div>
+         
+         <div id="middle">
+            <div id="list"></div>
+            
+            
+            <div id="maplay">
+            
+               <div id="map" style="width:500px;height:400px;"></div>
+            	
+            </div>
+         </div>
+   
 </div>
 </body>
 <script>
-	var $test =${result};  
-	console.log("제이슨 변환 String -> obj");
-	console.log($test);
-	
-	var searchlist= document.getElementById("list");
-	
-	
-	
-	for(intest in $test ){
+//---------------------------예상--------------------------------------------
+   var $test =${result};  
+   console.log("제이슨 변환 String -> obj");
+   console.log($test);
+   
+   var searchlist= document.getElementById("list");
+   
+   
+   
+   for(intest in $test ){
+      
+      var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
+      
+      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
+      
+      
+      
+      var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+      a.append(b);
+      a.append(c);
+      
+      a.on('click', function() {
+         console.log("z");
+         console.log($(this).attr("name"));
+         location.href="detailregiinfo?id="+$(this).attr("name");
+         
+         
+         
+      } )
+     
+      console.log(a.attr("name"));
+      
+      
+      $("#list").append(a)
+           
+   }
+   
+
+   $('#btn1').click(function() {
+		var a =$("#subsearch").val()
 		
-		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
-		
-		var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
-		
-		
-		
-		var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
-		a.append(b);
-		a.append(c);
-		
+
 		a.on('click', function() {
 			console.log("z");
 			console.log($(this).attr("name"));
@@ -119,58 +141,99 @@
 					
 					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
 				}
+
+	  $.ajax({
+			type:'get',
+			url:'changeSearch',//restful방식
+			data:{data:a},
+			//contentType:"application/json",
+			//서버에서 받을때 
+			dataType:"json",
+			//callback 딴짓하다가 이벤트가 생길시 부름.
+			success:function(data){
+				console.log(data);
+				 
+				$('#list').empty();
+				
+				for(intest in data ){
+				      
+				      var a = $('<div class="out" name = '+data[intest][0]["H_RGNUM"]+'></div>')
+				      
+				      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+data[intest][0]["H_MAINPIC"]+'"></div>')
+				      
+				      
+				      
+				      var c = $('<div class="info">'+'주소지:'+data[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+data[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+data[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+data[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+				      a.append(b);
+				      a.append(c);
+				      
+				      a.on('click', function() {
+				         console.log("z");
+				         console.log($(this).attr("name"));
+				         location.href="detailregiinfo?id="+$(this).attr("name");
+				         
+				         
+				         
+				      } )
+				     
+				      console.log(a.attr("name"));
+				      
+				      
+				      $("#list").append(a)
+				     
+				   }
+				
+				
+				
+			},
+			error:function(error){
+				console.log(error);
+
 			}
-		} )
-		
-		
-		
-		
-		
-		
-		console.log(a.attr("name"));
-		
-		
-		$("#list").append(a)
-		
-		console.log($test[intest][0]["H_RGNUM"]);
-		console.log($test[intest][0]["H_MAINPIC"]);
-		console.log($test[intest][0]["H_ADDRESS"]);
-		console.log($test[intest][0]["H_ROOMS"]);
-		console.log($test[intest][0]["H_TOLILET"]);
-		console.log($test[intest][0]["H_ONEPRICE"]);
-		
-	}
+			
+		});//ajax end 
 	
 
+   
+   
+//---------------------------------------------------------------------------------------------------------------------
 
 
-
-	
-	
-	///////////////////////////////////////////////// 하동원
-	
-	//${result}
-	console.log("=====하동원=========");
-	let mapdetail =new Array;
-	console.log(mapdetail);
-	
-	
-	for(intest in $test ){
-		let innerList = new Array;
-		
-		innerList.push($test[intest][0]["H_RGNUM"]);
-		innerList.push($test[intest][0]["H_ADDRESS"]);
-		mapdetail.push(innerList);
-	}
-	
-	console.log("========데이터구조[완]=========")
-	console.log(mapdetail);
-	
-	
-	
-	
+   
+   
+   ///////////////////////////////////////////////// 하동원
+   
+   //${result}
+   console.log("=====하동원=========");
+   let mapdetail =new Array;
+   console.log(mapdetail);
+   
+   
+   for(intest in $test ){
+      let innerList = new Array;
+      
+      innerList.push($test[intest][0]["H_RGNUM"]);
+      innerList.push($test[intest][0]["H_ADDRESS"]);
+      mapdetail.push(innerList);
+   }
+   
+   console.log("========데이터구조[완]=========")
+   console.log(mapdetail);
+   
+   
+   
+   
 
 </script>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -210,33 +273,33 @@ console.log(wedokuyngdo);
 //주소로 좌표를 검색합니다
 
 for(let intest in $testt ){
-	let innerList = new Array;
-	//innerList.push($test[intest][0]["H_RGNUM"]);
-	innerList.push($testt[intest][0]["H_ADDRESS"]);
+   let innerList = new Array;
+   //innerList.push($test[intest][0]["H_RGNUM"]);
+   innerList.push($testt[intest][0]["H_ADDRESS"]);
 
-	geocoder.addressSearch($testt[intest][0]["H_ADDRESS"], function(result, status ) {
+   geocoder.addressSearch($testt[intest][0]["H_ADDRESS"], function(result, status ) {
 
-	    // 정상적으로 검색이 완료됐으면 
-	if (status === kakao.maps.services.Status.OK) {
-		console.log("돌기 :  "+ $test[intest][0]["H_RGNUM"]);
-		let inner = new Array;
-		inner.push(result[0].y);
-		inner.push(result[0].x);
-		
-		displayMarker(result[0].y, result[0].x, $test[intest][0]["H_RGNUM"]);    
-	    bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
-	     
-	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-	     
-		map.setBounds(bounds);
-		console.log(inner);
-		wedokuyngdo.push(inner);
-		
-		
-	} 
-	
-	    
-	});  
+       // 정상적으로 검색이 완료됐으면 
+   if (status === kakao.maps.services.Status.OK) {
+      console.log("돌기 :  "+ $test[intest][0]["H_RGNUM"]);
+      let inner = new Array;
+      inner.push(result[0].y);
+      inner.push(result[0].x);
+      
+      displayMarker(result[0].y, result[0].x, $test[intest][0]["H_RGNUM"]);    
+       bounds.extend(new kakao.maps.LatLng(result[0].y, result[0].x));
+        
+           // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        
+      map.setBounds(bounds);
+      console.log(inner);
+      wedokuyngdo.push(inner);
+      
+      
+   } 
+   
+       
+   });  
 
 }
 
@@ -248,10 +311,10 @@ console.log(wedokuyngdo);
 
 for(i in wedokuyngdo){
 
-	console.log("test");
+   console.log("test");
 
-	console.log("위도 : " +i[0]);
-	console.log("경도 : " +i[1]);
+   console.log("위도 : " +i[0]);
+   console.log("경도 : " +i[1]);
 }
 
 
@@ -261,7 +324,7 @@ function displayMarker(y,x,reginum) {
     var marker = new kakao.maps.Marker({
         map: map,
         position: new kakao.maps.LatLng(y, x) ,
-  		zIndex: reginum
+        zIndex: reginum
     });
     
     markers.push(marker);
@@ -270,8 +333,8 @@ function displayMarker(y,x,reginum) {
     // 마커에 클릭이벤트를 등록합니다
     kakao.maps.event.addListener(marker, 'click', function() {
         // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-       	var content = '<div style="padding:5px;z-index:1;">zzzzzzzzzzzzzzzzzzzzzzzzzzzzzhh</div>';
-       	console.dir(marker);
+          var content = '<div style="padding:5px;z-index:1;">zzzzzzzzzzzzzzzzzzzzzzzzzzzzzhh</div>';
+          console.dir(marker);
         infowindow.setContent(content);
         infowindow.open(map, marker);
     });
@@ -287,6 +350,5 @@ console.log($("#daum.maps.Marker.Area:1"))
 
 
 </script>
-
 
 </html>

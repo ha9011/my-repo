@@ -45,6 +45,12 @@
       <div id="img">
             <div id = "mainimg">
               
+<<<<<<< HEAD
+=======
+            </div>
+            <div id = "subimg">
+               <h1>슬라이드사진</h1>
+>>>>>>> 084cb6f4c3a6f9d8666fb6db3807a41ea24b8d75
             </div>
            
       </div>
@@ -132,10 +138,14 @@ $("#replepush").click(function() {
 	console.log(id1);
 	console.log(temp);
 	
+
 	repledata.push(type);
 	repledata.push(rep);
 	repledata.push(id1);
 	repledata.push(temp);
+
+	var $test=${result};
+
 	
 	console.log(repledata);
 	
@@ -233,7 +243,7 @@ $(function() {
    console.log($test);
    console.dir($test);
    console.log($test[0]);
-   console.dir($test[0]);
+
 </script>
 
 

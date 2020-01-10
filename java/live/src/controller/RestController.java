@@ -18,7 +18,9 @@ import com.google.gson.reflect.TypeToken;
 import service.MemberMM;
 import service.ProductMM;
 
+
 @WebServlet({ "/duplicateID","/changeprofilepic","/inputreple" })
+
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +40,8 @@ public class RestController extends HttpServlet {
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
+
+
 		}else if (cmd.equals("/changeprofilepic")){
 			System.out.println("sadsadsa");
 			String ID = request.getParameter("data");
@@ -56,15 +60,19 @@ public class RestController extends HttpServlet {
 				System.out.println(mList.get(i));	
 			}
 			 json=mm.inputreple(mList);
+		}else if (cmd.equals("/changeSearch")){
+			System.out.println("검색어 변경");
+			
+			json = pm.getAjaxchangeSearch();
 		}
-
-
-
+		
+		
 		if (json != null) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.write(json);
 		}
+		
 
 	}
 
