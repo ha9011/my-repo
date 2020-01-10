@@ -186,7 +186,7 @@ public class MemberMM {
 			  fw.setRedireact(false);
 			  return fw;
 	}
-	}
+}
 /*	HttpSession session = request.getSession(true);
 
 String id = ""; // 세션 아이디 가져오기

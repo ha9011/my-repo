@@ -43,9 +43,18 @@
             <div id = "mainimg">
               
             </div>
-            <div id = "subimg">
+            
+            <div id = imgs_wrap>
+            
                <h1>슬라이드사진</h1>
+            
+           
+            
+            
             </div>
+             <a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a
+							class="next" onclick="plusSlides(1)">&#10095; </a>
+           
       </div>
             
       
@@ -126,6 +135,106 @@ $(function() {
 	console.dir($test);
 	console.log($test[0]);
 	console.dir($test[0]);
+	
+	
+	
+	
+	
+	
+	
+	//하동원 detail 사진!
+	
+	
+	var a = $test[0][0]["H_DETAILPICS"];
+	var jbSplit = a.split(',');
+	console.log(jbSplit);	
+	var result = jbSplit.slice(0, jbSplit.length-1 )
+	console.log(result);	
+
+	let indexpic = [0,1,2];
+	
+	
+	for(let i in result){
+		if(i<=2){  // 3 이상일때
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="100px" height="100px" src="'+result[i] +'" ></div>') );
+				
+		}else{
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="100px" height="100px" src="'+result[i] +'" ></div>')  );
+			
+		}
+		
+	}
+	
+	
+
+	function readListURL(indexpic) {
+		
+		console.log("사진 변경 띠 " )
+		
+		let files1 = $(".mySlides");
+		let total = files1.length;
+		let filesArr = Array.prototype.slice.call(files1);  // 객체 -> 배열
+		console.log(files1);
+		
+		console.log("========");
+		
+		
+		filesArr.forEach((e,i)=>{
+			
+			if(i<3){
+				console.log("존재 : " + i);
+				$(e).css('display','inline-block');
+				
+			}else{
+				console.log("존재x : " + i);
+				$(e).css('display','none');
+				
+			}
+		
+		});
+		
+		
+	}
+
+	
+	let plusSlides = (e)=>{
+		console.log("화살표 눌렀습니다 : " + e)
+		let files2 = $(".mySlides");   // myslides 모으기
+		
+		//console.log("list : " + list);
+
+		console.log("files : " + files2);
+		
+		if(e === -1){
+			console.log("처음 : " + indexpic);
+			indexpic = indexpic.map((v)=>{
+				
+					
+					$(files2[files2.length-1]).insertBefore(files2[0]);
+				
+			});
+			console.log("변경 : " + indexpic);
+			
+			readListURL(indexpic);
+			
+		}else if(e === 1){
+			console.log("tset");
+			console.log($(files2[0]));
+			console.log("처음 : " + indexpic);
+			indexpic = indexpic.map((v)=>{
+				
+					$(files2[0]).insertAfter(files2[files2.length-1]);
+				
+			});
+			console.log("변경 : " + indexpic);
+			readListURL(indexpic);
+		}
+		
+		console.log(e);
+	}
+	
+	
+	
 </script>
 
 
