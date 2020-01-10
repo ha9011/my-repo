@@ -72,7 +72,7 @@
 		a.on('click', function() {
 			console.log("z");
 			console.log($(this).attr("name"));
-			//location.href="detailregiinfo?id="+$(this).attr("name");
+			location.href="detailregiinfo?rgnum="+$(this).attr("name");
 			
 		} )
 		//http://t1.daumcdn.net/mapjsapi/images/marker.png
