@@ -26,6 +26,11 @@
 .logout {
 	text-align: right;
 	display: none;
+	border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B3861;
+	
 }
 
 #rogo {
@@ -82,7 +87,7 @@
 		<!-- 호스트 로그인 된 경우 - 하동원  -->
 		<a href="registHouse.jsp" class=jib>집등록</a> 
 		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
-		<button class=logout onclick="mypage_session();">마이페이지</button>>
+		<button class=logout onclick="mypage_session();">마이페이지</button>
 	</div>
 
 

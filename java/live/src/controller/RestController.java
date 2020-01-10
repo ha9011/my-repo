@@ -37,15 +37,9 @@ public class RestController extends HttpServlet {
 			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
 
-
-		}else if (cmd.equals("/changeprofilepic")){
-			System.out.println("sadsadsa");
-			String ID = request.getParameter("data");
-			System.out.println("==data== : " + ID);
-			//json = mm.getAjaxchangepropic(ID);
+			
 		}else if (cmd.equals("/changeSearch")){
 			System.out.println("검색어 변경");
-			
 			json = pm.getAjaxchangeSearch();
 		}
 		

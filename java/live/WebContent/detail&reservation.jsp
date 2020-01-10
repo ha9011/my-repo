@@ -9,12 +9,15 @@
 <style>
    body{margin:0 5%;}
    #top{display:flex;}
-      #img{margin-bottom:2%;width:70%;height:800px;overflow:hidden;border:none;}
+      #img{margin-bottom:2%;width:70%;height:50%;overflow:hidden;border:none;}
          #mainimg{border:1px solid black;width:70%;height:40%;margin-bottom:10px;}
-         #subimg{border:1px solid black;width:90%;height:57%;}
-      #reservation{display:inline-flex;width:30%;height:300px;border:1px solid black;margin-left:2%;}
+      #reservation{display:inline-flex;width:30%;height:300px;border:1px solid black;margin-left:2%;margin-bottom:10px;}
+      
+  /*  #sldimg{margin-bottom:2%;width:70%;height:800px;overflow:hidden;border:none;} */
+   	#subimg{border:1px solid black;width:100%;height:40%;margin-bottom:10px;}
    
    #middle{display:flex;;margin-bottom:2%;;width:100%;height:50%;overflow:hidden;}
+   	 
       #review{margin-bottom:2%;border:1px solid black;width:50%;height:48%;}
       #reple{margin-bottom:2%;border:1px solid black;width:50%;height:48%;margin-left:10px;}
       
@@ -43,24 +46,26 @@
             <div id = "mainimg">
               
             </div>
-            <div id = "subimg">
-               <h1>슬라이드사진</h1>
-            </div>
+           
       </div>
             
       
             
             <div id="reservation">
-               <h1>날짜 예약</h1> 
-               <input type="text" name="daterange" id="a1" value="2020-01-03 ~ 2020-01-05">
+               <h1>예약<h1> 
+               <input type="text" name="daterange" id="a1" value="예약날짜 선택">
                
             </div>
       
    </div>
-      
+     
+       <div id = "subimg">
+               <h1>슬라이드사진</h1>
+            </div>
       
       
       <div id= "middle">
+      
       
          <div id="review">
             <h1>후기</h1>
@@ -84,14 +89,21 @@
 
 console.dir($("a1"));
 
-
+ var date = new Date();
+ console.dir(date);
 $(function() {
-	  $('input[name="daterange"]').daterangepicker({	     
+	
+	  $('input[name="daterange"]').daterangepicker({     
 		 
-		  opens: 'left'
+		 
+		 minDate:new Date(),
+		 maxDate: "4" 
+		 
+		 
+		
 	  }, function(start, end, label) {
 		  
-		  console.dir($(this));
+		console.dir($(this));
 	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 	    $("#a1").val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
 	  });

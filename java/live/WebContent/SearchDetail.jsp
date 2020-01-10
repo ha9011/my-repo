@@ -6,17 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-   #body{margin:0 5%}
-   #searchbox{border:3px solid #0B3861;width:100%;height:60px;text-align:center;margin-bottom:30px;}
-   input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
-   button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
-   #middle{width:100%;height:100%;overflow:hidden;border:none;}
-   #list{border:none;float:left;width:40%;}
-   .out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
+   #body{width:100%;height:100%; }
+   #searchbox{border:3px solid #0B3861;width:40%;height:60px;margin-bottom:30px;}
+   input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;text-align:center;}
+   button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;float:right;margin-top:3px;margin-right:10px;}
+   #middle{width:100%;height:100%;overflow:hidden;}
+   #list{border-right:5px solid #0B3861;float:left;width:43%;height:100%;}
+   .out{border:2px solid #0B3861;;width:90%;height:150px;display:flex;margin-bottom:10px;}
       .inner{display:inline-flex;}
       .info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
    
-   #map{border:2px solid #0B3861;float:right;width:56%;}
+   #map{border:none;float:right;width:56%;}
    
    
    
@@ -27,7 +27,7 @@
 </head>
 <body>
 <div id = "body">
-<h1>검색 키워드 입력후 보이는 창 </h1>
+
    
   
         <div id="searchbox">
@@ -41,7 +41,7 @@
             
             <div id="maplay">
             
-               <div id="map" style="width:500px;height:400px;"></div>
+               <div id="map" style="width:56%;height:700px;"></div>
             	
             </div>
          </div>

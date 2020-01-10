@@ -235,8 +235,37 @@ public class MemberDao {
 			
 			return result;
 		}
-	}
 
+		public void changepropic(String propic, String id) {
+			String sql = "UPDATE MEMBER SET PROFILE =? WHERE ID = ?";
+			int result = 0;
+			try {
+			
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1, propic);
+				pstmt.setNString(2, id);
+			
+				
+		
+				
+				result = pstmt.executeUpdate();
+				System.out.println("insert test result : " + result);
+				if(result==0) {//실패
+					System.out.println("프로필 실패");
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("프로필 성공");
+			
+		}	
+			
+			
+		
+		}
 
 
 
