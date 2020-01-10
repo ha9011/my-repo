@@ -41,7 +41,7 @@
          
       <div id="img">
             <div id = "mainimg">
-               <h1>메인사진</h1>
+              
             </div>
             <div id = "subimg">
                <h1>슬라이드사진</h1>
@@ -52,7 +52,7 @@
             
             <div id="reservation">
                <h1>날짜 예약</h1> 
-               <input type="date" name="daterange" id="a1" >
+               <input type="text" name="daterange" id="a1" value="2020-01-03 ~ 2020-01-05">
                
             </div>
       
@@ -102,7 +102,7 @@ $(function() {
 	
 	
 	
-	var $test=[];
+	var $test=${result};
 	
 	var a = $('<div class="detail"></div>');
 	
@@ -131,3 +131,8 @@ $(function() {
 
 </body>
 </html>
+
+
+
+
+

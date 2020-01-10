@@ -29,10 +29,10 @@
 <div id = "body">
 <h1>검색 키워드 입력후 보이는 창 </h1>
    
-   <form action="SearchDetail" method="get">
+  
         <div id="searchbox">
-            <input type="text" name="destination" value=${destination}>
-            <button type="submit">검색</button>
+            <input id= "subsearch" type="text" name="destination" value=${destination}>
+            <button type="button" id="btn1">검색</button>
          </div>
          
          <div id="middle">
@@ -45,114 +45,12 @@
             	
             </div>
          </div>
-   </form>
+   
 </div>
 </body>
 <script>
-/* 	$.ajax({
-	
-<<<<<<< HEAD
-		type:'get',
-		url:'',
-		//data 생략
-		dataType:"json",
-		success:function(data){ //서버통신 성공시 콜백함수
-			console.log(data);
-			fctName(data,position);
-=======
-	var searchlist= document.getElementById("list");
-	
-	
-	
-	for(intest in $test ){
-		
-		var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
-		
-		var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
-		
-		
-		
-		var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
-		a.append(b);
-		a.append(c);
-		
-		a.on('click', function() {
-			console.log("z");
-			console.log($(this).attr("name"));
-			//location.href="detailregiinfo?id="+$(this).attr("name");
-			
-		} )
-		//http://t1.daumcdn.net/mapjsapi/images/marker.png
-		//http://i1.daumcdn.net/dmaps/apis/transparent.gif
-		a.mouseover(function() {
-			let b = $(this).attr("name");
-			console.log("들어옴 : " + b);
-			console.log(markers);
-			for(i in markers){
-				if(markers[i]["Wa"]===b){
-					var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
-					//console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
-					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="50px";
-				//	console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
-					
-					//29px, 42p
-					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 80px, 90px, 0px)"
-					
-					console.log("변경후 ");
-					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
-					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
-					
-					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
-				}
-			}
-		} )
-		
-		a.mouseout(function() {
-			let b = $(this).attr("name");
-			console.log("나감 : " + b);
-			for(i in markers){
-				if(markers[i]["Wa"]===b){
-					var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
-					console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
-					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="29px";
-					console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
-					
-					//29px, 42p
-					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 29px, 42p, 0px)"
-					
-					console.log("변경후 ");
-					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
-					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
-					
-					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
-				}
-			}
-		} )
-		
-		
-		
-		
-		
-		
-		console.log(a.attr("name"));
-		
-		
-		$("#list").append(a)
->>>>>>> 29292953c9c807080140c6040eeb31155c707c08
-		
-		},error:function(error){
-			console.log(error);
-		}
-	});//ajax end
- */
 
-
-
-
-
-
-
-
+//---------------------------예상--------------------------------------------
    var $test =${result};  
    console.log("제이슨 변환 String -> obj");
    console.log($test);
@@ -176,7 +74,7 @@
       a.on('click', function() {
          console.log("z");
          console.log($(this).attr("name"));
-         //location.href="detailregiinfo?id="+$(this).attr("name");
+         location.href="detailregiinfo?id="+$(this).attr("name");
          
          
          
@@ -186,29 +84,67 @@
       
       
       $("#list").append(a)
-      
-      console.log($test[intest][0]["H_RGNUM"]);
-      console.log($test[intest][0]["H_MAINPIC"]);
-      console.log($test[intest][0]["H_ADDRESS"]);
-      console.log($test[intest][0]["H_ROOMS"]);
-      console.log($test[intest][0]["H_TOLILET"]);
-      console.log($test[intest][0]["H_ONEPRICE"]);
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+           
    }
    
 
+   $('#btn1').click(function() {
+		var a =$("#subsearch").val()
+		
+	  $.ajax({
+			type:'get',
+			url:'changeSearch',//restful방식
+			data:{data:a},
+			//contentType:"application/json",
+			//서버에서 받을때 
+			dataType:"json",
+			//callback 딴짓하다가 이벤트가 생길시 부름.
+			success:function(data){
+				console.log(data);
+				 
+				$('#list').empty();
+				
+				for(intest in data ){
+				      
+				      var a = $('<div class="out" name = '+data[intest][0]["H_RGNUM"]+'></div>')
+				      
+				      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+data[intest][0]["H_MAINPIC"]+'"></div>')
+				      
+				      
+				      
+				      var c = $('<div class="info">'+'주소지:'+data[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+data[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+data[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+data[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+				      a.append(b);
+				      a.append(c);
+				      
+				      a.on('click', function() {
+				         console.log("z");
+				         console.log($(this).attr("name"));
+				         location.href="detailregiinfo?id="+$(this).attr("name");
+				         
+				         
+				         
+				      } )
+				     
+				      console.log(a.attr("name"));
+				      
+				      
+				      $("#list").append(a)
+				     
+				   }
+				
+				
+				
+			},
+			error:function(error){
+				console.log(error);
+			}
+			
+		});//ajax end 
+	});//btn1 end
 
+   
+   
+//---------------------------------------------------------------------------------------------------------------------
 
 
    
@@ -237,6 +173,15 @@
    
 
 </script>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -304,6 +249,10 @@ for(let intest in $testt ){
        
    });  
 
+}
+
+
+
 
 console.log("===위도 경도==");
 console.log(wedokuyngdo);
@@ -324,7 +273,6 @@ function displayMarker(y,x,reginum) {
         map: map,
         position: new kakao.maps.LatLng(y, x) ,
         zIndex: reginum
-  		zIndex: reginum
     });
     
     markers.push(marker);
@@ -350,6 +298,5 @@ console.log($("#daum.maps.Marker.Area:1"))
 
 
 </script>
-
 
 </html>
