@@ -16,9 +16,9 @@ import com.google.gson.reflect.TypeToken;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({ "/duplicateID","/changeprofilepic" })
+@WebServlet({ "/duplicateID","/changeSearch" })
 public class RestController extends HttpServlet {
-	private static final long serialVersionUID = 1L;W
+	private static final long serialVersionUID = 1L;
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,34 +36,26 @@ public class RestController extends HttpServlet {
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
-<<<<<<< HEAD
-		}else if (cmd.equals("/changeprofilepic")) {
 
-			String ID = request.getParameter("data");
-			System.out.println("==data== : " + ID);
-			json = mm.getAjaxduplicateID(ID);
-=======
+
 		}else if (cmd.equals("/changeprofilepic")){
 			System.out.println("sadsadsa");
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
-			json = mm.getAjaxchangepropic(ID);
->>>>>>> 43859222a79f203a08f971e8f485fb98d3e1f0f1
+			//json = mm.getAjaxchangepropic(ID);
+		}else if (cmd.equals("/changeSearch")){
+			System.out.println("검색어 변경");
+			
+			json = pm.getAjaxchangeSearch();
 		}
-
 		
 		
-		
-		
-<<<<<<< HEAD
-		
-=======
->>>>>>> 43859222a79f203a08f971e8f485fb98d3e1f0f1
 		if (json != null) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.write(json);
 		}
+		
 
 	}
 
