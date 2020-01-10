@@ -3,6 +3,7 @@ package service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -129,6 +130,8 @@ public class MemberMM {
 		fw.setRedireact(false);
 		return fw;
 	}
+	
+	
 	// 하동원 구역
 
 	public String getAjaxduplicateID(String ID) {
@@ -188,50 +191,51 @@ public class MemberMM {
 	           fw.setRedireact(false);
 	           return fw;
 	   }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // 평민호 구역
-//	public Forward checkId() {
-//		string
-//		return null;
-//	}
+
+  public String inputreple(ArrayList<String> mList) { // TODO Auto-generated method stub
+	  MemberDao mDao = new MemberDao(); // 연결 test =
+	  System.out.println(mList);
+	  String outreple = null;
+	  
+	  
+	  int reple = mDao.inputreple(mList); // 테스트에 리서트 값을 넣어준다
+	  if(reple==0) {
+		  System.out.println("인서트 실패");
+		  return null;
+	  } 
+	  
+	  outreple = mDao.outreple(mList.get(1));
+	  mDao.close();
+	  
+	  
+	  
+	  
+	  return outreple;//스트링;
+  } 
+ 
+}
 
 

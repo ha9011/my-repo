@@ -162,10 +162,74 @@ public class MemberDao {
 
 
 	//////////////민호 구역
+	
+	public int inputreple(ArrayList<String> mList) {
+		
+	
+		String sql = "INSERT INTO REPLE VALUES(RP_SEQ.NEXTVAL,?,SYSDATE,?,?,?)"; //시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
+		int result = 0; 
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, mList.get(2));
+			pstmt.setNString(2, mList.get(3));
+			pstmt.setNString(3, mList.get(0));
+			pstmt.setNString(4, mList.get(1));
+			result= pstmt.executeUpdate();
+			
+			if(result==0) {
+				System.out.println("댓글저장실패");
+			}else{
+				System.out.println("댓글저장성공");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result; //리설트 값을 리
+		
+	}
 
 
-
-
+	public String outreple(String string) {
+		String sql = "SELECT * FROM reple where RP_RGNUM=?"; //시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
+		
+		ArrayList<ArrayList<HashMap<String,String>>> mList = new ArrayList<ArrayList<HashMap<String,String>>>();	
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, string);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) { //아이디가 있으면 리설트를 아이디를 넣어준다
+				ArrayList<HashMap<String,String>> mList1 = new ArrayList<HashMap<String,String>>();
+				
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				
+				innerH.put("RP_NUM",rs.getNString("RP_NUM"));
+				innerH.put("RP_ID",rs.getNString("RP_ID"));
+				innerH.put("RP_TIME",rs.getNString("RP_TIME"));
+				innerH.put("RP_CONTENT",rs.getNString("RP_CONTENT"));
+				innerH.put("RP_TYPE",rs.getNString("RP_TYPE"));
+				innerH.put("RP_RGNUM",rs.getNString("RP_RGNUM"));
+				
+				mList1.add(innerH);
+				mList.add(mList1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	Gson gs = new Gson();
+		
+		String result = gs.toJson(mList); 
+		
+		System.out.println(result);
+		
+		return result; //리설트 값을 리
+		
+	}
 
 
 
@@ -235,6 +299,7 @@ public class MemberDao {
 			
 			return result;
 		}
+
 
 		public void changepropic(String propic, String id) {
 			String sql = "UPDATE MEMBER SET PROFILE =? WHERE ID = ?";
