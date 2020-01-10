@@ -93,6 +93,7 @@
 	<div id=middleback>
 		<div id=middle>
 			<!--중앙 박스(검색배경) -->
+			
 			<div id=searchBox>
 
 
