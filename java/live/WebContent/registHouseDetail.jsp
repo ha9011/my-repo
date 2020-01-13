@@ -219,8 +219,10 @@
 </body>
 
 <script>
+
 let list ;
 let indexpic ;
+
 $(function() {
     $("#imgInp").on('change', function(){
         
@@ -229,7 +231,7 @@ $(function() {
         console.log(typeof list);
         console.log(list);
         
-       // readListURL(list,indexpic);
+       //readListURL(list,indexpic);
         
     });
     

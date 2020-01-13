@@ -173,6 +173,7 @@ public class MemberMM {
 	
 	
 // 이예상 구역-------------------------------------------------------------------------------------
+
 	public Forward guestInfo() { //게스트 마이페이지
 	      HttpSession session = request.getSession(true);
 	           
@@ -271,7 +272,7 @@ public Forward HostInfo() {//호스트 마이페이지
 	  outreple = mDao.outreple(mList.get(1));
 	  mDao.close();
 	  
-	  
+	  System.out.println("ajax 대댓글 작성 성공");
 	  
 	  
 	  return outreple;//스트링;

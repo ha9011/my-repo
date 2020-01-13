@@ -14,6 +14,7 @@ body{overflow:scroll;}
 
 #header {
 
+
 	width: 98%;
 	height: 160px;
 	border: none;
@@ -142,6 +143,7 @@ body{overflow:scroll;}
 	</div>
 
 </body>
+
 <script>
 //평민호
  var id2="";

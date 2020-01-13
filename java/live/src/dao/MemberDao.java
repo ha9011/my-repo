@@ -233,14 +233,72 @@ public class MemberDao {
 
 
 
+	public int inrreple(ArrayList<String> mList,String id) {
+		String sql="INSERT INTO RREPLE VALUES(RRP_SEQ.NEXTVAL,?,?,SYSDATE,?)";
+		int result = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, mList.get(1));
+			pstmt.setNString(2, id);
+			pstmt.setNString(3, mList.get(0));
+			result=pstmt.executeUpdate();
+			
+			if(result==0) {
+				System.out.println("댓글저장실패");
+			}else{
+				System.out.println("댓글저장성공");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 
 
 
 
 
 
+	public String inrreple(String string) {
+		String sql = "SELECT * FROM rreple where RRP_RP_NUM=?";
+		System.out.println();
+		ArrayList<ArrayList<HashMap<String,String>>> mList = new ArrayList<ArrayList<HashMap<String,String>>>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, string);
 
-
+						rs= pstmt.executeQuery();
+			while(rs.next()) { //아이디가 있으면 리설트를 아이디를 넣어준다
+				ArrayList<HashMap<String,String>> mList1 = new ArrayList<HashMap<String,String>>();
+				
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				
+				innerH.put("RRP_NUM",rs.getNString("RRP_NUM"));
+				innerH.put("RRP_RP_NUM",rs.getNString("RRP_RP_NUM"));
+				innerH.put("RRP_ID",rs.getNString("RRP_ID"));
+				innerH.put("RRP_TIME",rs.getNString("RRP_TIME"));
+				innerH.put("RRP_CONTENT",rs.getNString("RRP_CONTENT"));
+				
+				mList1.add(innerH);
+				mList.add(mList1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		Gson gs = new Gson();
+		
+		String result = gs.toJson(mList); 
+		
+		System.out.println(result);
+		
+		return result;
+		
+	}
 
 
 
@@ -298,9 +356,7 @@ public class MemberDao {
 				pstmt.setNString(1, propic);
 				pstmt.setNString(2, id);
 			
-				
-		
-				
+			
 				result = pstmt.executeUpdate();
 				System.out.println("insert test result : " + result);
 				if(result==0) {//실패

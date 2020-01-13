@@ -19,7 +19,8 @@ import service.MemberMM;
 import service.ProductMM;
 
 
-@WebServlet({ "/duplicateID","/changeSearch","/inputreple","/houseupload"})
+
+@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,8 @@ public class RestController extends HttpServlet {
 		System.out.println("rest CMD : " + cmd);
 
 		MemberMM mm = new MemberMM(request, response);
-		ProductMM pm = new ProductMM(request, response);
+		ProductMM pm = new ProductMM(
+				request, response);
 
 		String json = null;
 
@@ -40,6 +42,13 @@ public class RestController extends HttpServlet {
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
 			json = mm.getAjaxduplicateID(ID);
+
+		}else if (cmd.equals("/changeprofilepic")){
+			System.out.println("sadsadsa");
+			String ID = request.getParameter("data");
+			System.out.println("==data== : " + ID);
+			//json = mm.getAjaxchangepropic(ID);
+		
 		}else if (cmd.equals("/inputreple")) {
 			System.out.println("댓글저장중");
 			String Reple=request.getParameter("reple");
@@ -53,14 +62,36 @@ public class RestController extends HttpServlet {
 				System.out.println(mList.get(i));	
 			}
 			 json=mm.inputreple(mList);
+		
+		
 		}else if (cmd.equals("/changeSearch")){
 			System.out.println("검색어 변경");
 			json = pm.getAjaxchangeSearch();
+		
+		}else if (cmd.equals("/inputrreple")) {
+			String RReple=request.getParameter("rreple");
+			System.out.println(RReple);
+			Gson gs = new Gson();
+			ArrayList<String> mList= new ArrayList<String>();
+			mList = gs.fromJson(RReple, new TypeToken<ArrayList<String>>() {
+			}.getType());
+			for(int i=0; i<mList.size();i++) {
+				System.out.println(mList.get(i));	
+			}
+			json = pm.inputrreple(mList);
+		}else if (cmd.equals("/showrreple")) {
+			String replenum=request.getParameter("replenum");
+			
+			json = pm.showrreple(replenum);
 		}else if (cmd.equals("/houseupload")){
 			System.out.println("업로드 승인");
 			json = pm.getAjaxhouseupload();
-			
 		}
+		
+		
+		
+		
+		
 		
 		
 		if (json != null) {
