@@ -86,13 +86,14 @@
       console.log(a.attr("name"));
       
       
-      $("#list").append(a)
+      $("#list").append(a)  //--------------검색 리스트 가져오는 것 
            
    }
    
 
-   $('#btn1').click(function() {
-      var a =$("#subsearch").val()
+  
+       
+      
       
 
       a.on('click', function() {
@@ -100,7 +101,7 @@
          console.log($(this).attr("name"));
          location.href="detailregiinfo?rgnum="+$(this).attr("name");
          
-      } )
+      });
       //http://t1.daumcdn.net/mapjsapi/images/marker.png
       //http://i1.daumcdn.net/dmaps/apis/transparent.gif
       a.mouseover(function() {
@@ -148,14 +149,16 @@
          }
       })
 
+      
+      $('#btn1').click(function() { //검색 버튼 클릭시 db에서 가져온 새 리스트를 뿌려줌 
+      var a =$("#subsearch").val()
+      
      $.ajax({
          type:'get',
          url:'changeSearch',//restful방식
          data:{data:a},
-         //contentType:"application/json",
          //서버에서 받을때 
          dataType:"json",
-         //callback 딴짓하다가 이벤트가 생길시 부름.
          success:function(data){
             console.log(data);
              

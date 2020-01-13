@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -49,10 +50,27 @@ public class ProductMM {
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //----------예상-------------------------------------------------------------------------------------------
 	
 	
-public Forward searchHouse() {
+public Forward searchHouse() { //처음 검색 페이지
 		
 	
 		String destination = request.getParameter("destination");
@@ -75,12 +93,12 @@ public Forward searchHouse() {
 		fw.setPath("./SearchDetail.jsp");
 		fw.setRedireact(false);
 		return fw;
-	}
+	}//처음 검색 페이지 끝
 	
 	
 	
 	
-	public String getAjaxchangeSearch() {
+	public String getAjaxchangeSearch() { //-- 재검색
 		String destination = request.getParameter("data");
 		System.out.println(destination);
 		
@@ -95,11 +113,54 @@ public Forward searchHouse() {
 		
 		
 		return searchHouse;
-	}
+	}//-- 재검색 끝
+
 	
 	
 	
+	public Forward houseupload() {//관리자 게시글 승인
+		String adminH = null;
+		
+		ProductDao pDao = new ProductDao();
+		adminH = pDao.adminH();
+		
+		pDao.close();
+		
+		request.setAttribute("HU",adminH);
+		
+		
+		fw = new Forward();
+		fw.setPath("./AdminInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}//관리자 게시글 승인 끝
+
 	
+	
+
+	public String getAjaxhouseupload() { //-- 승인, 거절 AJAX
+		String adminH = null;
+		String data=request.getParameter("data");
+		ArrayList<String> app = new  ArrayList<String>();
+		Gson gs = new Gson();
+		app = gs.fromJson(data, new TypeToken<ArrayList<String>>() {
+		}.getType());
+		
+		System.out.println(app);//[,]
+		
+		String req = null;
+		
+		ProductDao pDao = new ProductDao();
+		
+		pDao.req(app);
+		
+		adminH = pDao.adminH();
+		
+		pDao.close();
+		
+		return adminH ;
+	}//-- 승인, 거절 AJAX 끝
+
 	
 	
 	
@@ -217,6 +278,17 @@ public Forward searchHouse() {
 		
 	}
 
+
+
+
+
+
+
+	
+
+
+
+	
 
 
 	

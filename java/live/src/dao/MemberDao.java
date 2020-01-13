@@ -128,7 +128,7 @@ public class MemberDao {
 	} 
 	
 	
-	///////////////////////////하동원 구역
+	///------------------////////////////////////하동원 구역-----------------------------------------------------------------------------
 	
 	public String  getDuplicateID(String iD) {
 		
@@ -161,7 +161,7 @@ public class MemberDao {
 
 
 
-	//////////////민호 구역
+	//------------////////////민호 구역------------------------------------------------------------------------------------------------------------
 	
 	public int inputreple(ArrayList<String> mList) {
 		
@@ -247,20 +247,8 @@ public class MemberDao {
 
 
 
-
-
-
-
-
-
-
-
-
-	///////////////////////예상 구역
-
-
 	
-	//--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
+//--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
 		public String Myinfo(String id) {
 			System.out.println("id : "+id);
 			String Sql = "SELECT PROFILE, ID, NAME, EMAIL, PHONE FROM MEMBER WHERE ID=?";
@@ -298,10 +286,10 @@ public class MemberDao {
 			System.out.println(result);
 			
 			return result;
-		}
+		} //마이페이지 끝
 
 
-		public void changepropic(String propic, String id) {
+		public void changepropic(String propic, String id) { //프로필 사진 변경 및 저장
 			String sql = "UPDATE MEMBER SET PROFILE =? WHERE ID = ?";
 			int result = 0;
 			try {
@@ -330,21 +318,6 @@ public class MemberDao {
 			
 			
 		
-		}
+		}//프로필 사진 변경 및 저장 끝
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//--------------------------------------------------------------------------------------------------------------------------

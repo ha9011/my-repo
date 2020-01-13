@@ -173,7 +173,7 @@ public class MemberMM {
 	
 	
 // 이예상 구역-------------------------------------------------------------------------------------
-	public Forward guestInfo() {
+	public Forward guestInfo() { //게스트 마이페이지
 	      HttpSession session = request.getSession(true);
 	           
 	      String id = (String) session.getAttribute("id"); 
@@ -190,11 +190,52 @@ public class MemberMM {
 	           fw.setPath("./guestInfo.jsp");
 	           fw.setRedireact(false);
 	           return fw;
-	   }
+	   }//게스트 마이페이지 끝
 
 	
+
+public Forward AdminInfo() {//관리자 마이페이지
 	
+	HttpSession session = request.getSession(true);
+     
+     String id = (String) session.getAttribute("id"); 
+         
+          String Myinfo=null;
+          
+          MemberDao mDao = new MemberDao();
+          Myinfo=mDao.Myinfo(id);
+          
+          mDao.close();
+          
+          request.setAttribute("result",Myinfo);
+          fw = new Forward();
+          fw.setPath("./AdminInfo.jsp");
+          fw.setRedireact(false);
+          return fw;
 	
+} //관리자 마이페이지 끝
+
+
+
+public Forward HostInfo() {//호스트 마이페이지
+	HttpSession session = request.getSession(true);
+    
+    String id = (String) session.getAttribute("id"); 
+        
+         String Myinfo=null;
+         
+         MemberDao mDao = new MemberDao();
+         Myinfo=mDao.Myinfo(id);
+         
+         mDao.close();
+         
+         request.setAttribute("result",Myinfo);
+         fw = new Forward();
+         fw.setPath("./HostInfo.jsp");
+         fw.setRedireact(false);
+         return fw;
+
+}//호스트 마이페이지 끝
 	
 	
 	
@@ -234,8 +275,10 @@ public class MemberMM {
 	  
 	  
 	  return outreple;//스트링;
-  } 
- 
+  }
+
+
+
 }
 
 

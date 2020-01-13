@@ -9,7 +9,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
-<style>
 #body{margin:0,auto;}
 	#header{width:1200px;height:300px;overflow:hidden;border:none;}
 		#img{border:2px solid #0B3861;float:left;width:300px;height:280px;}
@@ -101,12 +100,12 @@ var c = $('<button id = "save">사진저장</button>')
 		 }
 	}
 	
-	$("#oo").change(function(){
+	$("#oo").change(function(){//--사진 변경되면서 클릭시 저장실행되는 것 
 		readURL(this);
 	})
 	
-	var c = $('<div class = "myinfo">'+"아이디:"+$test[0][0]["ID"]+"<br>"+"이름:"+$test[0][0]["NAME"]+"<br>"+"이메일:"+$test[0][0]["EMAIL"]+"<br>"+"전화번호:"+$test[0][0]["PHONE"]+"<br>"+'</div>')
-		$("#info").append(c);
+	var d = $('<div class = "myinfo">'+"아이디:"+$test[0][0]["ID"]+"<br>"+"이름:"+$test[0][0]["NAME"]+"<br>"+"이메일:"+$test[0][0]["EMAIL"]+"<br>"+"전화번호:"+$test[0][0]["PHONE"]+"<br>"+'</div>')
+		$("#info").append(d);
 	
 
 	
