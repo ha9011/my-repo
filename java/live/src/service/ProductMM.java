@@ -181,7 +181,7 @@ public Forward searchHouse() {
 	//----------민호-------------------------------------------------------------------------------------------
 	public Forward detailregiinfo(){
 		
-		String detailId = request.getParameter("rgnum");
+		String detailId = request.getParameter("id");
 		System.out.println(detailId);
 		String detailregiinfo = null;
 		
@@ -215,6 +215,49 @@ public Forward searchHouse() {
 		
 		
 		
+	}
+
+
+
+
+	public String inputrreple(ArrayList<String> mList) {
+		MemberDao mDao = new MemberDao();
+		String inrreple= null;
+		
+		HttpSession session =request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		
+		int reple = mDao.inrreple(mList,id); // 테스트에 리서트 값을 넣어준다
+		  if(reple==0) {
+			  System.out.println("인서트 실패");
+			  return null;
+		  } 
+		  
+		  inrreple=mDao.inrreple(mList.get(1));
+		  
+		System.out.println("대댓글 입력");
+		System.out.println(mList);
+		
+		
+		
+		return inrreple;
+	}
+
+
+
+
+	public String showrreple(String replenum) {
+		
+		String inrreple= null;
+		MemberDao mDao = new MemberDao();
+		inrreple=mDao.inrreple(replenum);
+		  
+		System.out.println("대댓글 출력");
+		
+		
+		
+		return inrreple;
 	}
 
 

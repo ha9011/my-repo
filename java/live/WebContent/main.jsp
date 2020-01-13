@@ -14,6 +14,7 @@
 
 #header {
 
+
 	width: 98%;
 	height: 160px;
 	border: none;
@@ -103,6 +104,7 @@
 					<br>
 					<!-- 미들 타이틀-->
 					<form action="searchHouse" method="get">
+					
 						<input type="text" name="destination" placeholder="목적지"> <input
 							
 							type="date" name="checkin" placeholder="체크인"> <input
