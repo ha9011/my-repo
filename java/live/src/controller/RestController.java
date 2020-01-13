@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,12 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({ "/duplicateID","/changeSearch" })
+
+@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple" })
+
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -43,6 +47,19 @@ public class RestController extends HttpServlet {
 			String ID = request.getParameter("data");
 			System.out.println("==data== : " + ID);
 			//json = mm.getAjaxchangepropic(ID);
+		}else if (cmd.equals("/inputreple")) {
+			System.out.println("댓글저장중");
+			String Reple=request.getParameter("reple");
+			System.out.println(Reple);
+			
+			Gson gs = new Gson();
+			ArrayList<String> mList= new ArrayList<String>();
+			mList = gs.fromJson(Reple, new TypeToken<ArrayList<String>>() {
+			}.getType());
+			for(int i=0; i<mList.size();i++) {
+				System.out.println(mList.get(i));	
+			}
+			 json=mm.inputreple(mList);
 		}else if (cmd.equals("/changeSearch")){
 			System.out.println("검색어 변경");
 			

@@ -66,6 +66,58 @@
       
       var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
       
+      a.on('click', function() {
+			console.log("z");
+			console.log($(this).attr("name"));
+			location.href="detailregiinfo?rgnum="+$(this).attr("name");
+			
+		} )
+		//http://t1.daumcdn.net/mapjsapi/images/marker.png
+		//http://i1.daumcdn.net/dmaps/apis/transparent.gif
+		a.mouseover(function() {
+			let b = $(this).attr("name");
+			console.log("들어옴 : " + b);
+			console.log(markers);
+			for(i in markers){
+				if(markers[i]["Wa"]===b){
+					var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
+					//console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="50px";
+				//	console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
+					
+					//29px, 42p
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 80px, 90px, 0px)"
+					
+					console.log("변경후 ");
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
+					
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
+				}
+			}
+		} )
+		
+		a.mouseout(function() {
+			let b = $(this).attr("name");
+			console.log("나감 : " + b);
+			for(i in markers){
+				if(markers[i]["Wa"]===b){
+					var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
+					console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="29px";
+					console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
+					
+					//29px, 42p
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 29px, 42p, 0px)"
+					
+					console.log("변경후 ");
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
+					console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
+					
+					markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
+				}
+			}
+		})
       var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
       
       
@@ -91,7 +143,13 @@
    }
    
 
-   $('#btn1').click(function() {
+  
+		
+
+		
+
+		
+	 $('#btn1').click(function() {
 		var a =$("#subsearch").val()
 		
 	  $.ajax({
@@ -123,7 +181,7 @@
 				      a.on('click', function() {
 				         console.log("z");
 				         console.log($(this).attr("name"));
-				         location.href="detailregiinfo?id="+$(this).attr("name");
+				         location.href="detailregiinfo?rgnum="+$(this).attr("name");
 				         
 				         
 				         
@@ -268,19 +326,16 @@
 			},
 			error:function(error){
 				console.log(error);
+
 			}
 			
-		});//ajax end 
-	});//btn1 end
-
-   
-   
-//---------------------------------------------------------------------------------------------------------------------
+	  })//ajax end
+   }); 
+	
 
 
+		</script>
    
-   
-   ///////////////////////////////////////////////// 하동원
    
   
    
@@ -288,7 +343,6 @@
    
    
 
-</script>
 
 
 
@@ -309,7 +363,7 @@ console.log("=====하동원=========");
 let mapdetail =new Array;
 console.log(mapdetail);
 
-
+var $test =${result}; 
 for(intest in $test ){
    let innerList = new Array;
    
@@ -425,8 +479,8 @@ console.log("==markers==");
 console.log(markers);
 
 console.log("==zzz==");
-console.dir($("#daum.maps.Marker.Area:1"))
-console.log($("#daum.maps.Marker.Area:1"))
+console.dir($("#daum.maps.Marker.Area:1"));
+console.log($("#daum.maps.Marker.Area:1"));
 
 
 

@@ -16,6 +16,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import bean.Forward;
 import bean.Product;
+import dao.MemberDao;
 import dao.ProductDao;
 
 public class ProductMM {
@@ -184,6 +185,8 @@ public Forward searchHouse() {
 		System.out.println(detailId);
 		String detailregiinfo = null;
 		
+		String outreple = null;
+		
 		ProductDao pDao = new ProductDao();
 		
 		detailregiinfo = pDao.detailregiinfo(detailId);
@@ -192,6 +195,18 @@ public Forward searchHouse() {
 		
 		
 		request.setAttribute("result",detailregiinfo);
+		
+		
+		MemberDao mDao = new MemberDao();
+		outreple = mDao.outreple(detailId);
+		
+		
+		  mDao.close();
+		request.setAttribute("reple", outreple);
+		
+		
+		
+		
 		
 		fw = new Forward();
 		fw.setPath("./detail&reservation.jsp");

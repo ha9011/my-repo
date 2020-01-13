@@ -50,7 +50,7 @@ public class FileServiceMM {
 		String uploadPath = "C:/git_repo/my-repo/java/live/WebContent/img/mainhouse/";
 		String uploadRealPath = "./img/mainhouse/";
 		int size = 10 * 1024 * 1024; // 10Mb까지
-		String housetype = null;
+		String housetype = null; 
 		String attendance = null;
 		String address = null;
 		String addressDetail = null;
