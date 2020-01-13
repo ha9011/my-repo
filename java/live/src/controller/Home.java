@@ -15,7 +15,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo","/guestInfo"})
+@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo","/guestInfo","/AdminInfo","/HostInfo"})
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -53,17 +53,23 @@ public class Home extends HttpServlet {
 			fw=mm.searchId();
 		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
 			fw=mm.searchPw();
-		}else if(cmd.equals("/searchHouse")) { //비밀번호 찾기 연결
+		}else if(cmd.equals("/searchHouse")) { //검색
 			fw=pm.searchHouse();
-		}else if(cmd.equals("/detailregiinfo")) { //비밀번호 찾기 연결
+		}else if(cmd.equals("/detailregiinfo")) {
 			System.out.println("디테일 예약 정보");
 			fw=pm.detailregiinfo();
-		}else if(cmd.equals("/guestInfo")) { //비밀번호 찾기 연결
-			System.out.println("마이페이지");
+		}else if(cmd.equals("/guestInfo")) { 
+			System.out.println("게스트마이페이지");
 			fw=mm.guestInfo();
+		}else if(cmd.equals("/AdminInfo")) {
+			System.out.println("관리자마이페이지");
+			fw=mm.AdminInfo();
+			fw=pm.houseupload();
+		}else if(cmd.equals("/HostInfo")) { 
+				System.out.println("호스트마이페이지");
+				fw=mm.HostInfo();	
 		}
-
-
+		
 		
 		if(fw!=null) {
 			if(fw.isRedireact()) {

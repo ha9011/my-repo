@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
    #body{margin:0 5%}
-   #searchbox{border:3px solid #0B3861;width:100%;height:60px;text-align:center;margin-bottom:30px;}
+   #searchbox{border:3px solid #0B3861;width:40%;height:60px;text-align:center;margin-bottom:30px;}
    input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
    button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
    #middle{width:100%;height:100%;overflow:hidden;border:none;}
@@ -43,7 +43,10 @@
             
             <div id="maplay">
             
-               <div id="map" style="width:500px;height:400px;">
+
+
+               <div id="map" style="width:50%;height:800px;">
+
                
                </div>
                
@@ -77,7 +80,7 @@
       a.on('click', function() {
          console.log("z");
          console.log($(this).attr("name"));
-         location.href="detailregiinfo?id="+$(this).attr("name");
+         location.href="detailregiinfo?rgnum="+$(this).attr("name");
          
          
          
@@ -86,7 +89,7 @@
       console.log(a.attr("name"));
       
       
-      $("#list").append(a)
+      $("#list").append(a)  //--------------검색 리스트 가져오는 것 
            
    }
    
@@ -100,7 +103,7 @@
          console.log($(this).attr("name"));
          location.href="detailregiinfo?rgnum="+$(this).attr("name");
          
-      } )
+      });
       //http://t1.daumcdn.net/mapjsapi/images/marker.png
       //http://i1.daumcdn.net/dmaps/apis/transparent.gif
       a.mouseover(function() {
@@ -148,14 +151,19 @@
          }
       })
 
+      
+      $('#btn1').click(function() { //검색 버튼 클릭시 db에서 가져온 새 리스트를 뿌려줌 
+      var a =$("#subsearch").val()
+      
      $.ajax({
          type:'get',
          url:'changeSearch',//restful방식
          data:{data:a},
          //contentType:"application/json",
          //서버에서 받을때 
-         dataType:"json",
          //callback 딴짓하다가 이벤트가 생길시 부름.
+         //서버에서 받을때 
+         dataType:"json",
          success:function(data){
             console.log(data);
              
@@ -177,7 +185,7 @@
                   a.on('click', function() {
                      console.log("z");
                      console.log($(this).attr("name"));
-                     location.href="detailregiinfo?rgnum="+$(this).attr("name");
+                     location.href="detailregiinfo?id="+$(this).attr("name");
                      
                      
                      

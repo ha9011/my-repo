@@ -18,7 +18,6 @@
       #subimg{border:1px solid black;width:100%;height:40%;margin-bottom:10px;}
    
    #middle{display:flex;;margin-bottom:2%;;width:100%;height:50%;overflow:hidden;}
-       
       #review{margin-bottom:2%;border:1px solid black;width:50%;height:48%;}
       #reple{margin-bottom:2%;border:1px solid black;width:50%;height:48%;margin-left:10px;}
       
@@ -29,19 +28,7 @@
       .info{width:200px;height:150px;display:inline-flex;}
    #a1{ height :30%;
    }
-   .reple{
-   border: 1px solid black; margin: 2px;
-   }
- 
- .rreple{
-  border: 1px solid blue; margin: 1px;
-  display: none;
-  
-  font-size: 5px;
- /*  width: 300px;
-  height: 10px; */
-  }
-  
+
 </style>
 
 </head>
@@ -57,11 +44,12 @@
          
       <div id="img">
             <div id = "mainimg">
-              
 
             </div>
+
             <div id = "subimg">
                <h1>슬라이드사진</h1>
+
 
             </div>
            
@@ -108,6 +96,30 @@
 
 
 <script>
+
+
+console.dir($("a1"));
+
+ var date = new Date();
+ console.dir(date);
+$(function() {
+	
+	  $('input[name="daterange"]').daterangepicker({     
+		 
+		 
+		 minDate:new Date(),
+		 maxDate: "4" 
+		 
+		 
+		
+	  }, function(start, end, label) {
+		  
+		console.dir($(this));
+	    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+	    $("#a1").val(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'))
+	  });
+	});
+
 	
 ////////////페이지 부를때 바로 부르는 댓글
 	for(i in ${reple}){

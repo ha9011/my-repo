@@ -148,6 +148,8 @@ public class MemberMM {
 	}
 
 	
+
+	
 	
 	
 	
@@ -171,67 +173,84 @@ public class MemberMM {
 	
 	
 // 이예상 구역-------------------------------------------------------------------------------------
-	public Forward guestInfo() {
-		HttpSession session = request.getSession(true);
-			  
-		String id = (String) session.getAttribute("id"); 
-			 
-			  String Myinfo=null;
-			  
-			  MemberDao mDao = new MemberDao();
-			  Myinfo=mDao.Myinfo(id);
-			  
-			  mDao.close();
-			  
-			  request.setAttribute("result",Myinfo);
-			  fw = new Forward();
-			  fw.setPath("./guestInfo.jsp");
-			  fw.setRedireact(false);
-			  return fw;
-	}
-
-
-	
-/*	HttpSession session = request.getSession(true);
-
-String id = ""; // 세션 아이디 가져오기
-
-try {
-
-	id = (String) session.getAttribute("id"); // request에서 id 파라미터를 가져온다
-
-	if (id == null || id.equals("")) { // id가 Null 이거나 없을 경우
-
-		response.sendRedirect("loginform.jsp");
-
-	} else {
-
-	}*/
+	public Forward guestInfo() { //게스트 마이페이지
+	      HttpSession session = request.getSession(true);
+	           
+	      String id = (String) session.getAttribute("id"); 
+	          
+	           String Myinfo=null;
+	           
+	           MemberDao mDao = new MemberDao();
+	           Myinfo=mDao.Myinfo(id);
+	           
+	           mDao.close();
+	           
+	           request.setAttribute("result",Myinfo);
+	           fw = new Forward();
+	           fw.setPath("./guestInfo.jsp");
+	           fw.setRedireact(false);
+	           return fw;
+	   }//게스트 마이페이지 끝
 
 	
-		/*	 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 
-	}*/
+public Forward AdminInfo() {//관리자 마이페이지
+	
+	HttpSession session = request.getSession(true);
+     
+     String id = (String) session.getAttribute("id"); 
+         
+          String Myinfo=null;
+          
+          MemberDao mDao = new MemberDao();
+          Myinfo=mDao.Myinfo(id);
+          
+          mDao.close();
+          
+          request.setAttribute("result",Myinfo);
+          fw = new Forward();
+          fw.setPath("./AdminInfo.jsp");
+          fw.setRedireact(false);
+          return fw;
+	
+} //관리자 마이페이지 끝
+
+
+
+public Forward HostInfo() {//호스트 마이페이지
+	HttpSession session = request.getSession(true);
+    
+    String id = (String) session.getAttribute("id"); 
+        
+         String Myinfo=null;
+         
+         MemberDao mDao = new MemberDao();
+         Myinfo=mDao.Myinfo(id);
+         
+         mDao.close();
+         
+         request.setAttribute("result",Myinfo);
+         fw = new Forward();
+         fw.setPath("./HostInfo.jsp");
+         fw.setRedireact(false);
+         return fw;
+
+}//호스트 마이페이지 끝
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -256,8 +275,10 @@ try {
 	  
 	  
 	  return outreple;//스트링;
-  } 
- 
+  }
+
+
+
 }
 
 
