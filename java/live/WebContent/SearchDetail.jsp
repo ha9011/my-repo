@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style>
    #body{margin:0 5%}
-   #searchbox{border:3px solid #0B3861;width:100%;height:60px;text-align:center;margin-bottom:30px;}
+   #searchbox{border:3px solid #0B3861;width:40%;height:60px;text-align:center;margin-bottom:30px;}
    input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
    button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
    #middle{width:100%;height:100%;overflow:hidden;border:none;}
@@ -43,10 +43,14 @@
             
             <div id="maplay">
             
-               <div id="map" style="width:500px;height:400px;">
+
+
+
+               <div id="map" style="width:50%;height:800px;">
+
                
                </div>
-            	
+               
             </div>
          </div>
    
@@ -67,9 +71,10 @@
       var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
       
       a.on('click', function() {
+
 			console.log("z");
 			console.log($(this).attr("name"));
-			location.href="detailregiinfo?rgnum="+$(this).attr("name");
+			 location.href="detailregiinfo?rgnum="+$(this).attr("name");
 			
 		} )
 		//http://t1.daumcdn.net/mapjsapi/images/marker.png
@@ -129,7 +134,8 @@
       a.on('click', function() {
          console.log("z");
          console.log($(this).attr("name"));
-         location.href="detailregiinfo?id="+$(this).attr("name");
+         location.href="detailregiinfo?rgnum="+$(this).attr("name");
+
          
          
          
@@ -139,10 +145,12 @@
       
       
       $("#list").append(a)
+
            
    }
    
-
+//ajax
+//<<<<<<< HEAD
   
 		
 
@@ -334,8 +342,10 @@
 	
 
 
-		</script>
-   
+	
+
+
+      </script>
    
   
    
@@ -356,6 +366,9 @@
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54a97da9ea0c80921e6f0c3700f67b67&libraries=services"></script>
+
+
+
 
 <script>
 //${result}

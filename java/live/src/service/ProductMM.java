@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -49,10 +50,27 @@ public class ProductMM {
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //----------예상-------------------------------------------------------------------------------------------
 	
 	
-public Forward searchHouse() {
+public Forward searchHouse() { //처음 검색 페이지
 		
 	
 		String destination = request.getParameter("destination");
@@ -75,12 +93,12 @@ public Forward searchHouse() {
 		fw.setPath("./SearchDetail.jsp");
 		fw.setRedireact(false);
 		return fw;
-	}
+	}//처음 검색 페이지 끝
 	
 	
 	
 	
-	public String getAjaxchangeSearch() {
+	public String getAjaxchangeSearch() { //-- 재검색
 		String destination = request.getParameter("data");
 		System.out.println(destination);
 		
@@ -95,11 +113,54 @@ public Forward searchHouse() {
 		
 		
 		return searchHouse;
-	}
+	}//-- 재검색 끝
+
 	
 	
 	
+	public Forward houseupload() {//관리자 게시글 승인
+		String adminH = null;
+		
+		ProductDao pDao = new ProductDao();
+		adminH = pDao.adminH();
+		
+		pDao.close();
+		
+		request.setAttribute("HU",adminH);
+		
+		
+		fw = new Forward();
+		fw.setPath("./AdminInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}//관리자 게시글 승인 끝
+
 	
+	
+
+	public String getAjaxhouseupload() { //-- 승인, 거절 AJAX
+		String adminH = null;
+		String data=request.getParameter("data");
+		ArrayList<String> app = new  ArrayList<String>();
+		Gson gs = new Gson();
+		app = gs.fromJson(data, new TypeToken<ArrayList<String>>() {
+		}.getType());
+		
+		System.out.println(app);//[,]
+		
+		String req = null;
+		
+		ProductDao pDao = new ProductDao();
+		
+		pDao.req(app);
+		
+		adminH = pDao.adminH();
+		
+		pDao.close();
+		
+		return adminH ;
+	}//-- 승인, 거절 AJAX 끝
+
 	
 	
 	
@@ -181,7 +242,7 @@ public Forward searchHouse() {
 	//----------민호-------------------------------------------------------------------------------------------
 	public Forward detailregiinfo(){
 		
-		String detailId = request.getParameter("id");
+		String detailId = request.getParameter("rgnum");
 		System.out.println(detailId);
 		String detailregiinfo = null;
 		
@@ -219,7 +280,46 @@ public Forward searchHouse() {
 
 
 
-	
+
+	public String inputrreple(ArrayList<String> mList) {
+		MemberDao mDao = new MemberDao();
+		String inrreple= null;
+		
+		HttpSession session =request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		
+		int reple = mDao.inrreple(mList,id); // 테스트에 리서트 값을 넣어준다
+		  if(reple==0) {
+			  System.out.println("인서트 실패");
+			  return null;
+		  } 
+		  
+		  inrreple=mDao.inrreple(mList.get(1));
+		  
+		System.out.println("대댓글 입력");
+		System.out.println(mList);
+		
+		
+		
+		return inrreple;
+	}
+
+
+
+
+	public String showrreple(String replenum) {
+		
+		String inrreple= null;
+		MemberDao mDao = new MemberDao();
+		inrreple=mDao.inrreple(replenum);
+		  
+		System.out.println("대댓글 출력");
+		
+		
+		
+		return inrreple;
+	}
 
 
 

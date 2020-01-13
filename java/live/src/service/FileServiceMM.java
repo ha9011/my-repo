@@ -307,5 +307,144 @@ public class FileServiceMM {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//-----------------------------------------------------------------------------예상
+	public Forward updateprofile() {
+		HttpSession session = request.getSession();
+		// db sq번호 얻기
+		//db에 넣기 
+		String id = (String)session.getAttribute("id");
+		
+		String re = "";
+		
+		
+		String uploadPath= "C:/gitlive/my-repo/java/live/WebContent/img/profile/";
+		System.out.println(uploadPath);
+		
+		//C:\gitlive\my-repo\java\live\WebContent\img\profile
+		//C:\git_repo\my-repo\java\live\WebContent\img\mainhouse
+		String uploadRealPath = "./img/profile/";
+		
+		int size = 10 * 1024 * 1024; // 10Mb까지
+		
+		String sysfileName = null;// upload폴더(서버)에 저장된 파일이름
+		String orifileName = null;// 원래 파일 이름
+
+		File forder = new File(uploadRealPath);
+		if (!forder.exists()) {
+			forder.mkdir();
+			System.out.println("폴더가 생성됌");
+		}
+
+		
+		try {
+
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8",new DefaultFileRenamePolicy());
+
+			
+			orifileName = multi.getOriginalFileName("propic");
+			sysfileName = multi.getFilesystemName("propic");
+			// 응닫페이지 출력
+
+		
+			System.out.println("orifileName : " + orifileName);
+			System.out.println("sysfileName : " + sysfileName);
+
+			
+			request.setAttribute("uploadRealPath", uploadRealPath);
+			request.setAttribute("orifileName", orifileName);
+			request.setAttribute("sysfileName", sysfileName);
+	//		request.setAttribute("reginum", reginum);
+			
+			
+
+			int i = -1;
+			i = sysfileName.lastIndexOf("."); // 파일 확장자 위치
+			String realFileName = id+"_" + sysfileName.substring(i, sysfileName.length()); // 현재시간과 확장자 합치기
+
+			File oldFile = new File(uploadPath + sysfileName);// 원래이름
+			
+			File newFile1 = new File(uploadPath + realFileName);
+			newFile1.delete();
+			File newFile = new File(uploadPath + realFileName);//새로운 이름
+
+			System.out.println(realFileName);
+			System.out.println(sysfileName);
+
+			
+			
+			oldFile.renameTo(newFile); // 파일명 변경
+			
+			request.setAttribute("realFileName", uploadRealPath+realFileName);
+			re = uploadRealPath+realFileName;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		 MemberDao mDao = new MemberDao();
+		
+		 mDao.changepropic(re,id);
+		
+		
+
+		
+		String Myinfo=null;
+		
+		  Myinfo=mDao.Myinfo(id);
+		  
+		  mDao.close();
+		  
+		  request.setAttribute("result",Myinfo);
+		  fw = new Forward();
+		  fw.setPath("./guestInfo.jsp");
+		  fw.setRedireact(false);
+		  return fw;
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

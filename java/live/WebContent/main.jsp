@@ -14,6 +14,7 @@
 
 #header {
 
+
 	width: 98%;
 	height: 160px;
 	border: none;
@@ -28,6 +29,12 @@
 .logout {
 	text-align: right;
 	display: none;
+	border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B3861;
+	
+	
 }
 
 #rogo {
@@ -65,7 +72,15 @@
 
 .jib {
 	display: none;
+	/* color:white; */
+	text-decoration:none;
+	/* border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B3861; */
 }
+
+
 </style>
 
 
@@ -82,9 +97,10 @@
 			href="signup.jsp" class=log>회원가입</a> <a href="loginform.jsp"
 			class=log>로그인</a>
 		<!-- 호스트 로그인 된 경우 - 하동원  -->
-		<a href="registHouse.jsp" class=jib>집등록</a> 
+		
 		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
-		<button class=logout onclick="mypage_session();">마이페이지</button>>
+		<button class=logout onclick="mypage_session();">마이페이지</button>
+		<a href="registHouse.jsp" class=jib>집등록</a>
 	</div>
 
 
@@ -103,6 +119,7 @@
 					<br>
 					<!-- 미들 타이틀-->
 					<form action="searchHouse" method="get">
+					
 						<input type="text" name="destination" placeholder="목적지"> <input
 							
 							type="date" name="checkin" placeholder="체크인"> <input
@@ -179,10 +196,10 @@
 			location.href = "guestInfo";
 		}else if (id2 == "2"){
 			console.log("호스트입니다");
-			location.href = "HostInfojsp";
+			location.href = "HostInfo";
 		}else {
 			console.log("어드민");
-			location.href = "Admininfo";
+			location.href = "AdminInfo";
 		}
 		
 	}

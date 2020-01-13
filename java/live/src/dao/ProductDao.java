@@ -711,8 +711,8 @@ public class ProductDao {
 	
 //--------------------예상--------------------------------------------------------	
 	
-	public String searchHouse(String destination, String checkin, String checkout, String person) {
-		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%' AND H_CHECKIN <=? AND H_CHECKOUT >= ? AND H_ATTENDANCE >= ?";
+	public String searchHouse(String destination, String checkin, String checkout, String person) { //---메인에서 검색함
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%' AND H_CHECKIN <=? AND H_CHECKOUT >= ? AND H_ATTENDANCE >= ? AND H_CHECK=1";
 				
 		
 		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
@@ -754,10 +754,14 @@ public class ProductDao {
 		System.out.println(result);
 		
 		return result;
-	}
+	} //메인 검색 끝
+	
+	
+	
+	
 
-	public String searchHouse(String destination) {
-		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%'";
+	public String searchHouse(String destination) { //---검색창 에서 검색함
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%' AND H_CHECK=1";
 				
 		
 		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
@@ -796,19 +800,109 @@ public class ProductDao {
 		System.out.println(result);
 		
 		return result;
-	}
-
-	
-
+	}//검색창에서 검색 끝 
 
 	
 	
 	
+	public String adminH() { //-- 호스트 집 업로드 승인 
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_CHECK = 0";
+		
+		ArrayList<ArrayList<HashMap<String,String>>> houseup = new ArrayList<ArrayList<HashMap<String,String>>>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<HashMap<String,String>> houseInfo = new ArrayList<HashMap<String,String>>();
+				
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+				innerH.put("H_ID",rs.getNString("H_ID"));
+				innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+				innerH.put("H_ATTENDANCE", rs.getNString("H_ATTENDANCE"));
+				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				innerH.put("H_DETAILADD", rs.getNString("H_DETAILADD"));
+				innerH.put("H_PARKABLE", rs.getNString("H_PARKABLE"));
+				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+				innerH.put("H_BATHROOMS", rs.getNString("H_BATHROOMS"));
+				innerH.put("H_BEDROOMS", rs.getNString("H_BEDROOMS"));
+				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+
+				
+				houseInfo.add(innerH); 
+				houseup.add(houseInfo);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		
+		Gson gs = new Gson();
+		
+		String HU = gs.toJson(houseup); 
+		
+		System.out.println(HU);
+		
+		return HU;
+	}// 관리자 집 업로드 승인 끝
+	
+
+	
+	public void req(ArrayList<String> app) { // 관리자 집 승인  AJAX 
+		String sql= "";
+		if(app.get(1).equals("승인")){
+			 sql += "UPDATE REGISTHOUSE SET H_CHECK =1 WHERE H_RGNUM =?";
+		}else {
+			 sql += "UPDATE REGISTHOUSE SET H_CHECK =2 WHERE H_RGNUM =?";
+		}	
+		int result = 0;
+		
+		System.out.println(sql);
+		System.out.println(app);
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, app.get(0));
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("UPDATE test result : " + result);
+			if(result==0) {//실패
+				System.out.println("승인실패");
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("승인성공");
+		
+		
+		
+		}// 관리자 집 승인  AJAX 끝
+
 	
 	
 	
 	
-	//평민호
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//평민호----------------------------------------------------------------------------------------------------------------------------------------------------
 	
 	public String detailregiinfo(String id) {
 
@@ -862,6 +956,9 @@ public class ProductDao {
 		
 		return result;
 	}
+
+	
+	
 
 	
 	
