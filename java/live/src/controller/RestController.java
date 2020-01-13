@@ -82,7 +82,6 @@ public class RestController extends HttpServlet {
 		}else if (cmd.equals("/showrreple")) {
 			String replenum=request.getParameter("replenum");
 			
-			
 			json = pm.showrreple(replenum);
 		}else if (cmd.equals("/houseupload")){
 			System.out.println("업로드 승인");
