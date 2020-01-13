@@ -43,7 +43,11 @@
             
             <div id="maplay">
             
+
+
+
                <div id="map" style="width:50%;height:800px;">
+
                
                </div>
                
@@ -66,42 +70,13 @@
       
       var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
       
-      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
-      
-      
-      
-      var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
-      a.append(b);
-      a.append(c);
-      
       a.on('click', function() {
+
          console.log("z");
          console.log($(this).attr("name"));
          location.href="detailregiinfo?rgnum="+$(this).attr("name");
-         
-         
          
       } )
-     
-      console.log(a.attr("name"));
-      
-      
-      $("#list").append(a)  //--------------검색 리스트 가져오는 것 
-           
-   }
-   
-
-  
-       
-      
-      
-
-      a.on('click', function() {
-         console.log("z");
-         console.log($(this).attr("name"));
-         location.href="detailregiinfo?rgnum="+$(this).attr("name");
-         
-      });
       //http://t1.daumcdn.net/mapjsapi/images/marker.png
       //http://i1.daumcdn.net/dmaps/apis/transparent.gif
       a.mouseover(function() {
@@ -148,17 +123,51 @@
             }
          }
       })
+      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
+      
+      
+      
+      var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+      a.append(b);
+      a.append(c);
+      
+      a.on('click', function() {
+         console.log("z");
+         console.log($(this).attr("name"));
+         location.href="detailregiinfo?id="+$(this).attr("name");
+
+         
+         
+         
+      } )
+     
+      console.log(a.attr("name"));
+      
+      
+      $("#list").append(a)
+
+           
+   }
+   
+//ajax
+//<<<<<<< HEAD
+  
+      
 
       
-      $('#btn1').click(function() { //검색 버튼 클릭시 db에서 가져온 새 리스트를 뿌려줌 
+
+      
+    $('#btn1').click(function() {
       var a =$("#subsearch").val()
       
      $.ajax({
          type:'get',
          url:'changeSearch',//restful방식
          data:{data:a},
+         //contentType:"application/json",
          //서버에서 받을때 
          dataType:"json",
+         //callback 딴짓하다가 이벤트가 생길시 부름.
          success:function(data){
             console.log(data);
              
@@ -180,7 +189,7 @@
                   a.on('click', function() {
                      console.log("z");
                      console.log($(this).attr("name"));
-                     location.href="detailregiinfo?id="+$(this).attr("name");
+                     location.href="detailregiinfo?rgnum="+$(this).attr("name");
                      
                      
                      
@@ -333,8 +342,10 @@
    
 
 
-      </script>
    
+
+
+      </script>
    
   
    
@@ -355,6 +366,9 @@
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54a97da9ea0c80921e6f0c3700f67b67&libraries=services"></script>
+
+
+
 
 <script>
 //${result}

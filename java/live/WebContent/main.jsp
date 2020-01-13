@@ -10,7 +10,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-
+body{overflow:scroll;}
 
 #header {
 
@@ -23,6 +23,8 @@
 .log {
 	text-align: right;
 	display: inline;
+	color:white;
+	text-decoration:none;
 }
 
 .logout {
@@ -44,8 +46,8 @@
 
 #middleback {
 	width: 100%;
-	height: 300px;
-	background-image: url("./img/main.jpg");
+	height: 700px;
+	background-image: url("./img/main2.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
@@ -55,6 +57,7 @@
 	color: white;
 	width: 100%;
 	height: 100%;
+	
 }
 
 #searchBox {
@@ -62,7 +65,8 @@
 	top: 40%;
 	left: 30%;
 	width: auto;
-	height: auto;
+	height:70%;
+	text-align:center;
 }
 
 #searchhousefrm {
@@ -71,15 +75,21 @@
 
 .jib {
 	display: none;
-	/* color:white; */
-	text-decoration:none;
-	/* border:none;
-	font-size:20px;
 	color:white;
-	background-color:#0B3861; */
+	text-decoration:none;
+	
 }
 
+.btn{border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B3861;
+}
 
+.input{width:200px;
+	   height:30px;
+	   color:gray;
+}
 </style>
 
 
@@ -92,14 +102,14 @@
 	<!-- 로그인 안된 경우  -->
 	<div id="header">
 		<!-- 아이디 비번 로그인 회원가입 입력-->
-		<img id="rogo" alt="살다로고" src="./img/살다.png"> <a
-			href="signup.jsp" class=log>회원가입</a> <a href="loginform.jsp"
-			class=log>로그인</a>
+		<img id="rogo" alt="살다로고" src="./img/살다.png">
+		 <button class="btn"><a href="signup.jsp" class=log>회원가입</a></button> 
+		 <button class="btn"><a href="loginform.jsp"class=log>로그인</a></button>
 		<!-- 호스트 로그인 된 경우 - 하동원  -->
 		
 		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
 		<button class=logout onclick="mypage_session();">마이페이지</button>
-		<a href="registHouse.jsp" class=jib>집등록</a>
+		<button class ="btn"><a href="registHouse.jsp" class=jib>집등록</a></button>
 	</div>
 
 
@@ -114,17 +124,16 @@
 
 				<div id=searchhousefrm>
 					<!-- 체크박스, 검색어 입력 , 버튼, 달력-->
-					<div>어디로 여행</div>
+					<div><h1>어디로 여행가나요</h1></div>
 					<br>
 					<!-- 미들 타이틀-->
 					<form action="searchHouse" method="get">
-						<input type="text" name="destination" placeholder="목적지"> <input
-							
-							type="date" name="checkin" placeholder="체크인"> <input
-							type="date" name="checkout" placeholder="체크아웃"> <input
-							type="text" name="person" placeholder="인원수">
-						<button type="reset">초기화</button>
-						<button type="submit">검색</button>
+						<input class=input type="text" name="destination" placeholder="목적지"> 
+						<input class=input type="date" name="checkin" placeholder="체크인"> 
+						<input class=input type="date" name="checkout" placeholder="체크아웃"> 
+						<input class=input type="text" name="person" placeholder="인원수">
+						<button class="btn" type="reset">초기화</button>
+						<button class="btn" type="submit">검색</button>
 					</form>
 				</div>
 
