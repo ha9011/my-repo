@@ -22,8 +22,8 @@ public class JdbcUtil {
 	public static Connection getConnection() {
 		Connection con = null;
 		try {
-			//con = DriverManager.getConnection("jdbc:oracle:thin:@106.243.194.226:4000:xe", "liveroom", "1111");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.54:1521:xe", "liveroom", "1111");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@106.243.194.226:4000:xe", "liveroom", "1111");
+			//con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.54:1521:xe", "liveroom", "1111");
 			//con.setAutoCommit(false); 수동 커밋 하겠다.
 			System.out.println("Connection Success!");
 		} catch (SQLException se) {
