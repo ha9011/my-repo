@@ -63,6 +63,10 @@ public class RestController extends HttpServlet {
 			}
 			 json=mm.inputreple(mList);
 		
+			 
+			 
+			 
+			 
 		
 		}else if (cmd.equals("/changeSearch")){
 			System.out.println("검색어 변경");

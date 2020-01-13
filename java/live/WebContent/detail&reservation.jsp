@@ -285,10 +285,12 @@ $("#replepush").click(function() {
 	
 	console.log($("#chc").prop('checked'));
 	console.log("동작");
-	var repledata = [];
-	var id1 = '${id}';
-	var temp = $("#input").val();
-	var rep = $test[0][0]["H_RGNUM"];
+	
+	
+	var repledata = []; //리플데이터를 키 데이터 형식으로 넣어줄 틀
+	var id1 = '${id}'; //리플 아이디 아마세션에서 뽑아온 이엘
+	var temp = $("#input").val(); //리플컨텐츠
+	var rep = $test[0][0]["H_RGNUM"]; //리플 방넘버
 	
 	console.log("=====================ajax")
 	console.log($test)
@@ -306,13 +308,14 @@ $("#replepush").click(function() {
 
 	
 	console.log(repledata);
- 	var result=JSON.stringify(repledata);
+ 	var result=JSON.stringify(repledata); //배열을 제이슨을 통해서 스트링으로 바꾸고 리설트에 삽입 
 	
- 	$.ajax({
-		type : 'get',
+ 	$.ajax({//에이작스 시작
+		type : 'get', 
 		url : "inputreple",
 		data : {reple : result},
 		datatype:"json",
+		//여기까지 하고 서블릿으로 간다
 		
 		//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
 		
