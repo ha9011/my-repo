@@ -87,6 +87,7 @@ public class RestController extends HttpServlet {
 			String replenum=request.getParameter("replenum");
 			
 			json = pm.showrreple(replenum);
+			
 		}else if (cmd.equals("/houseupload")){
 			System.out.println("업로드 승인");
 			json = pm.getAjaxhouseupload();

@@ -9,25 +9,33 @@
 
 <style>
    body{margin:0 5%;}
-   #top{display:flex;}
-      #img{margin-bottom:2%;width:70%;height:50%;overflow:hidden;border:none;}
-         #mainimg{border:1px solid black;width:70%;height:40%;margin-bottom:10px;}
-      #reservation{display:inline-flex;width:30%;height:300px;border:1px solid black;margin-left:2%;margin-bottom:10px;}
+  #top{border : 1px solid black; width:100%;}
+   #img{margin-bottom:2%;width:100%;height:50%;overflow:hidden;border:none;}
+   #detail{border:1px solid black;width:95%;height:250px; display:flex; margin : 10px auto;}	
+   .info{width:400px; height:250px; display:inline-block; margin : 0px 0px 0px 20px}
+   .mainpic{width:250px; height:250px; display:inline-block;}
+   #mainimg{}
       
+    #imgs_wrap{margin : 0 auto; display : inline-block;}  
   /*  #sldimg{margin-bottom:2%;width:70%;height:800px;overflow:hidden;border:none;} */
-      #subimg{border:1px solid black;width:100%;height:40%;margin-bottom:10px;}
+    #subimg{border:1px solid black;width:100%;height:40%;margin-bottom:10px;}
    
-   #middle{display:flex;;margin-bottom:2%;;width:100%;height:50%;overflow:hidden;}
-      #review{margin-bottom:2%;border:1px solid black;width:50%;height:48%;}
-      #reple{margin-bottom:2%;border:1px solid black;width:50%;height:48%;margin-left:10px;}
+   #middle{display:flex;; margin :10px 0px 10px 0px ; width:100% ; height:50%; border : 1px solid black}
+   
+   #review{margin : 5px 5px 5px 5px; border:1px solid black; width:50%; height:50%;}
+   #rightpart{margin : 5px 5px 5px 5px; border:1px solid black; width:50%; height:50%;}
+   #reservation{margin : 5px 5px 5px 5px; width:97%; height:200px; border:1px solid black;text-align: center;}
+   #reple{margin : 5px 5px 5px 5px; width:97%; height:50%; border:1px solid black;}
       
    
    #bottom{width:100%;height:50%;overflow:hidden;border:1px solid black;}
- .detail{border:1px solid black;width:95%;height:230px;display:flex; margin:auto;}
+ 
       .inner{display:inline-flex;}
-      .info{width:200px;height:150px;display:inline-flex;}
-   #a1{ height :30%;
-   }
+      
+  
+   #imgdetail{text-align: center; }
+	.mySlides{margin : 0px 20px}
+	.nextbtn{display : inline-block;}
 
 </style>
 
@@ -43,43 +51,34 @@
 <body>
 
 	<h1>예약 디테일 페이지</h1>
-	<form action="">
+	
 		<div>
 			<div id="top">
 
 				<div id="img">
 					<div id="mainimg"></div>
-
+					
+					<div id="imgdetail">
+					<div class="nextbtn">
+					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					</div>
 					<div id=imgs_wrap>
 
-						<h1>슬라이드사진</h1>
-
-
-
-
-
 					</div>
-					<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a
-						class="next" onclick="plusSlides(1)">&#10095; </a>
-
+					<div class="nextbtn">
+					 <a	class="next" onclick="plusSlides(1)">&#10095; </a>
+					 </div>
+					</div>
 				</div>
 
 
 			</div>
 
-			<div id="reservation">
-
-				<h1>예약</h1>
-				<input type="text" id="datepicker1"> ~
-   				 <input type="text" id="datepicker2">
-
-			</div>
+			
 
 		</div>
 
-		<div id="subimg">
-			<h1>슬라이드사진</h1>
-		</div>
+		
 
 
 		<div id="middle">
@@ -89,8 +88,23 @@
 				<h1>후기</h1>
 			</div>
 
+			
+			<div id="rightpart">
+			<div id="reservation">
+
+				<h1>예약</h1>
+				<form>
+				<input type="text" id="datepicker1"> ~
+   				<input type="text" id="datepicker2">
+   				<input type="text" id="datepicker2">
+   				
+   				<button>예약하기</button>
+				</form>
+			</div>
+
 			<div id="reple">
-				<h1>댓글 대댓글</h1>
+				<h1>문의사항</h1>
+				<hr>
 				<div id="showreple"></div>
 				<br>
 				<div id="rreple">aa</div>
@@ -101,7 +115,7 @@
 					<input id="chc" type="checkbox" name="비밀" value="비밀글">비밀글
 				</div>
 			</div>
-
+			</div>
 
 		</div>
 
@@ -113,7 +127,6 @@
 
 
 
-	</form>
 
 	<script>
 
@@ -130,7 +143,7 @@
 	   				+'<button id="'+${reple}[i][0]["RP_NUM"]+'" class="rreplebtn">'+'답글'+'</button>'+'<br>'+'</div>');
 	   				
 	   var c = $('<div class="rreple" id="rreple'+${reple}[i][0]["RP_NUM"]+'"></div>');
-	   var d = 	$('<div class="rreplecnt" id="rreplecnt'+${reple}[i][0]["RP_NUM"]+'"></div><input type="text" id="rreplecontent'+${reple}[i][0]["RP_NUM"]+'" ><button class="rrepleput" id="'+${reple}[i][0]["RP_NUM"]+'">'+'등록'+'</button>');
+	   var d = 	$('<div class="rreplecnt" id="rreplecnt'+${reple}[i][0]["RP_NUM"]+'"></div>');
 	  
 	   
 	   c.append(d);			
@@ -153,14 +166,12 @@
 	}
 	
 	
-	//대댓창 보여주는 펑션		
+	//대댓창 보여주는 펑션	AJAX	
 	 $(".rreplebtn").on("click",function(){  //답글창 누르면 나옴   --> ajax로 바꿔줄것. 댓글 나오도록 하는 것 !!
 		 
 			var temp = $(this).attr('id');  // 해당 댓글 번호 
 			console.log($(this).attr('id'));
 			$('#rreple'+$(this).attr('id')).css("display", "block");   	
-			
-			
 			
 			$.ajax({
 				type : 'get',
@@ -192,6 +203,68 @@
 					   
 					   
 					}
+					
+					var d= $('<input type="text" id="rreplecontent'+temp+'" ><button class="rrepleput" id="'+temp+'">'+'등록'+'</button>');
+					$("#rreplecnt"+temp).after(d);
+					
+					//대댓글 디비에 보내기 성공했음	(ajax)
+					$(".rreple").on('click','.rrepleput',function() {
+						
+						
+						$("#rreplecnt").empty();   // rreplecnt <- 대댓글이 쌓이는 곳 // 댓글 쓰면 타 댓글 다 사라지고 보여짐 일단 몰라
+						var temp =$(this).attr('id');
+						var a=$("#rreplecontent"+temp).val();
+						console.log(a);
+						
+						var rrepledata=[];
+						
+						
+						rrepledata.push(a);
+						rrepledata.push(temp);
+						
+						var result=JSON.stringify(rrepledata);
+						
+						$.ajax({
+							type : 'get',
+							url : "inputrreple",
+							data : {rreple : result},
+							datatype:"json",
+							
+							//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
+							
+							success:function(rreple){
+							
+								$("#rreplecnt"+temp).empty();
+							var obj=JSON.parse(rreple);
+								
+								console.log(typeof obj);
+								console.log(obj);
+								console.dir(obj);
+								for(i in obj){
+									console.log("나와줘제발");
+									console.log(obj[i][0]["RRP_CONTENT"]);
+								   
+								   
+								   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
+										   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
+								   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
+										   
+								   $("#rreplecnt"+temp).append(a);
+								   
+								   console.log("test======temp : " + temp);
+								   console.dir($("#rreplecnt"+temp));
+								
+								}
+							}	,
+							error:function(error){
+								console.log(error);
+							}
+							
+							
+						});
+						
+					}) 
+					
 				}	,
 				error:function(error){
 					console.log(error);
@@ -203,71 +276,12 @@
 			 
 			 
 	 });
+	
+	
 
-	//대댓글 디비에 보내기 성공했음	(ajax)
-	$(".rrepleput").click(function() {
-		
-		
-		$("#rreplecnt").empty();   // rreplecnt <- 대댓글이 쌓이는 곳 // 댓글 쓰면 타 댓글 다 사라지고 보여짐 일단 몰라
-		var temp =$(this).attr('id');
-		var a=$("#rreplecontent"+temp).val();
-		console.log(a);
-		
-		var rrepledata=[];
-		
-		
-		rrepledata.push(a);
-		rrepledata.push(temp);
-		
-		var result=JSON.stringify(rrepledata);
-		
-		$.ajax({
-			type : 'get',
-			url : "inputrreple",
-			data : {rreple : result},
-			datatype:"json",
-			
-			//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
-			
-			success:function(rreple){
-			
-				$("#rreplecnt"+temp).empty();
-			var obj=JSON.parse(rreple);
-				
-				console.log(typeof obj);
-				console.log(obj);
-				console.dir(obj);
-				for(i in obj){
-					console.log("나와줘제발");
-					console.log(obj[i][0]["RRP_CONTENT"]);
-				   
-				   
-				   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
-						   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
-				   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
-						   
-				   $("#rreplecnt"+temp).append(a);
-				   
-				   console.log("test======temp : " + temp);
-				   console.dir($("#rreplecnt"+temp));
-				
-				}
-			}	,
-			error:function(error){
-				console.log(error);
-			}
-			
-			
-		});
-		
-	}) 
+	
  
 
-	
-	
-	
-	
-	
 	
 	
 ///에이작스로 추가된 댓글 추가하는 곳
@@ -359,10 +373,10 @@ $("#replepush").click(function() {
    /////////////////////////////디테일 방정보 보여주기
    var $test=${result};
    
-   var a = $('<div class="detail"></div>');
+   var a = $('<div id="detail"></div>');
    
    //console.log($test[0][0]["H_MAINPIC"]);
-   var b = $('<div class="mainpic"><img width="200" height="150" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
+   var b = $('<div class="mainpic"><img width="250" height="250" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
    var c = $('<div class="info">'+'주소:  '+$test[0][0]["H_ADDRESS"]+'  '+$test[0][0]["H_DETAILADD"]+'<br>'
          +'숙박가능 날짜:  '+$test[0][0]["H_CHECKIN"]+'~'+$test[0][0]["H_CHECKOUT"]+'<br>'
          +'수용가능인원:  '+$test[0][0]["H_ATTENDANCE"]+'<br>'
@@ -444,10 +458,10 @@ $("#replepush").click(function() {
 	
 	for(let i in result){
 		if(i<=2){  // 3 이상일때
-			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="100px" height="100px" src="'+result[i] +'" ></div>') );
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="200px" height="200px" src="'+result[i] +'" ></div>') );
 				
 		}else{
-			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="100px" height="100px" src="'+result[i] +'" ></div>')  );
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="200px" height="200px" src="'+result[i] +'" ></div>')  );
 			
 		}
 		
