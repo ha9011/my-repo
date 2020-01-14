@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -71,8 +72,9 @@ public class ProductMM {
 	
 	
 public Forward searchHouse() { //처음 검색 페이지
+		HttpSession session = request.getSession();
 		
-	
+		String loginID = (String)session.getAttribute("id");
 		String destination = request.getParameter("destination");
 		String checkin = request.getParameter("checkin");
 		String checkout = request.getParameter("checkout");
@@ -80,15 +82,31 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		String searchHouse = null;
 		
+		String searchLike = null;
+		
+		
 		ProductDao pDao = new ProductDao();
 		
 		searchHouse = pDao.searchHouse(destination,checkin,checkout,person);
 		
+		System.out.println("아이디 검사 : " +  loginID);
+		if(loginID==null) {
+		}else {
+			System.out.println("라이크 검사 ");
+			searchLike = pDao.searchLike(loginID);
+		}
+		
+		
+		
 		pDao.close();
-		
-		
 		request.setAttribute("result",searchHouse);
 		request.setAttribute("destination",destination);
+		request.setAttribute("searchLike",searchLike);
+		
+		
+		
+		
+		
 		fw = new Forward();
 		fw.setPath("./SearchDetail.jsp");
 		fw.setRedireact(false);
@@ -241,7 +259,31 @@ public Forward searchHouse() { //처음 검색 페이지
 	
 //---------------------------동원-------------------------------------------------------------------------
 	
-	
+	public String getAjaxlikechecked() {
+		
+		int exist = 0;
+		String a = request.getParameter("data");
+		ArrayList<String> likearr = new ArrayList<String>();
+		
+		
+		Gson gs = new Gson();
+		
+		likearr = gs.fromJson(a, new TypeToken<ArrayList<String>>(){}.getType());
+		
+		
+		MemberDao mDao = new MemberDao();    // select 부터 있는지 없는 지 검색 // 1 아니면 0을 뱉어야함  (있고 / 없고)
+		exist = mDao.existChLike(likearr);
+		
+		if(exist==0) { // 0이면 insert
+			mDao.insertLike(likearr);
+		}else if(exist==1) { // 1이면 update
+			mDao.updateLike(likearr);
+		}
+		
+		
+		
+		return "성공";
+	}
 	
 	
 	
@@ -290,6 +332,7 @@ public Forward searchHouse() { //처음 검색 페이지
 		String detailregiinfo = null;
 		String outreple = null;
 		String hostId = null;
+		String checkDate = null;
 		
 		
 		ProductDao pDao = new ProductDao();
@@ -310,7 +353,18 @@ public Forward searchHouse() { //처음 검색 페이지
 		mDao2.close();
 		request.setAttribute("findhostid", hostId);
 		
+		
+		MemberDao mDao3 = new MemberDao();
+		checkDate = mDao3.checkReserDate(detailId); // 예약된 날짜 긁어오기.
+		mDao3.close();
+		
+		
+		request.setAttribute("findhostid", checkDate);
+		
+		
 		request.setAttribute("rgnum", detailId);
+		
+		
 		
 		
 		
@@ -363,5 +417,10 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		return inrreple;
 	}
+
+
+
+
+	
 
 }

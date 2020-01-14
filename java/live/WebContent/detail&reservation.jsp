@@ -177,16 +177,15 @@ body {
 
 				<h1>예약</h1>
 				<form action="reservation">
-					<input type="text" name="sdate" id="datepicker1"> ~~ <input type="text"  name="edate" id="datepicker2"><button type="button" id="dtcommit">날짜확정</button>
-					<br> 
-					총액 : <input name="tprice" type="text" id="totalprice" placeholder="">원<br>
-					인원 : <input name="tperson" type="number" id="person" value="">명<br>    
-					
-					<input type="hidden" name="hostid" id="hostid" value=${findhostid}><br>
-					<input type="hidden" name="guestid" id="guestid" value=${id}><br>
-					<input type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
-					
-
+					<input type="text" name="sdate" id="datepicker1"> ~~ <input
+						type="text" name="edate" id="datepicker2">
+					<button type="button" id="dtcommit">날짜확정</button>
+					<br> 총액 : <input name="tprice" type="text" id="totalprice"
+						placeholder="">원<br> 인원 : <input name="tperson"
+						type="number" id="person" value="">명 <input type="hidden"
+						name="hostid" id="hostid" value=${findhostid}> <input
+						type="hidden" name="guestid" id="guestid" value=${id}> <input
+						type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
 					<button>예약하기</button>
 				</form>
 			</div>
@@ -490,6 +489,18 @@ $("#replepush").click(function() {
 
    
    
+   //인원 버튼 
+   $("#person").keyup(function(){
+	   console.log(typeof $test[0][0]["H_ATTENDANCE"])
+	   if($(this).val()>Number($test[0][0]["H_ATTENDANCE"])){
+		   alert("수용인원을 초과하였습니다. 최대인원 : "+$test[0][0]["H_ATTENDANCE"]);   
+		   $(this).val("")	;
+		   $(this).focus()	;
+	   }else{
+		      
+	   }
+	    
+   })
   
    
    
@@ -632,7 +643,7 @@ $("#replepush").click(function() {
 	var disabledDays = [];  //"2020-01-15"
 		
 	$(document).ready(function(){
-		$("#datepicker1, #datepicker2").datepicker({
+		$("#datepicker1").datepicker({
 			
 		 	dateFormat: 'yy-mm-dd',
 		    prevText: '이전 달',
@@ -644,7 +655,61 @@ $("#replepush").click(function() {
 		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		    showMonthAfterYear: true,
 		  
-		    minDate: new Date(),
+		    minDate:new Date($test[0][0]["H_CHECKIN"].substr(0,10)),
+		    maxDate: new Date($test[0][0]["H_CHECKOUT"].substr(0,10)),
+			beforeShowDay:function(date){
+		        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+		        return [ disabledDays.indexOf(string) == -1 ]
+		    },
+ 		    onSelect: function(dateText) {  
+		    	console.log(typeof dateText)
+		    	console.log(dateText)  // 2020-01-21
+		    	var select = new Date(dateText);
+		    	
+		    	if(a=="Invalid Date"){
+		    		
+		    	}else{
+		    		$("#datepicker1").datepicker('option', 'minDate', new Date(dateText));
+		    		$("#datepicker2").datepicker('option', 'minDate', new Date(dateText));
+	    			
+		    		
+		    		for(i in disabledDays){
+		    			var ss = new Date(disabledDays[i])
+		    			console.log(select.getDate());
+		    			console.log(ss.getDate());
+		    			console.log(ss.getDate()-select.getDate())
+		    			if(ss.getDate()-select.getDate()>0){ //양수일때  // 1일차이일때 이벤트도 줘야함.
+		    				$("#datepicker1").datepicker('option', 'maxDate', new Date(disabledDays[i]));
+		    				$("#datepicker2").datepicker('option', 'maxDate', new Date(disabledDays[i]));
+		    				break;
+		    			}else{ //음수일때
+		    				
+		    			}
+		    			
+		    		}
+		    		
+		    	}
+		    	
+ 		    }
+
+
+
+			});
+		
+		
+	$("#datepicker2").datepicker({
+			
+		 	dateFormat: 'yy-mm-dd',
+		    prevText: '이전 달',
+		    nextText: '다음 달',
+		    monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		    dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		    dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		    showMonthAfterYear: true,
+		  
+		    minDate:new Date($test[0][0]["H_CHECKIN"].substr(0,10)),
 		    maxDate: new Date($test[0][0]["H_CHECKOUT"].substr(0,10)),
 			beforeShowDay:function(date){
 		        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
@@ -653,14 +718,14 @@ $("#replepush").click(function() {
  		    onSelect: function(dateText) {  
 		    	console.log(dateText)
 		    	var a = new Date(disabledDays[0]);
-		    	$("#datepicker1").datepicker('option', 'maxDate', new Date(disabledDays[0]));
-		    	$("#datepicker2").datepicker('option', 'maxDate', new Date(disabledDays[0]));
-    			
+		    	
  		    }
 
 
 
 			});
+			
+			
 		
 	});
 	
@@ -689,7 +754,44 @@ $("#replepush").click(function() {
 	})
 	
 	
-	 var listDate = [];
+var listDate = [];
+var checkeddate = ${findhostid};
+for(i in checkeddate){
+	
+	var st = new Date(checkeddate[i][0]);
+
+	var smonth = st.getUTCMonth() + 1; //months from 1-12
+	var sday = st.getUTCDate();
+	var syear = st.getUTCFullYear();
+	if(smonth<10){
+		st = syear + "-0" + smonth + "-" + sday;
+			
+	}else{
+		st = syear + "-" + smonth + "-" + sday;
+		
+	}
+	console.log("st : " +st)
+	//
+	var ed = new Date(checkeddate[i][1]);
+
+	var emonth = ed.getUTCMonth() + 1; //months from 1-12
+	var eday = ed.getUTCDate();
+	var eyear = ed.getUTCFullYear();
+
+	if(emonth<10){
+		ed = eyear + "-0" + emonth + "-" + eday;
+			
+	}else{
+		ed = eyear + "-" + emonth + "-" + eday;
+		
+	}
+	
+	console.log("ed : " +ed)
+	//
+	getDateRange(st,ed,disabledDays)	
+}
+
+
 	function getDateRange(startDate, endDate, listDate){
 
         var dateMove = new Date(startDate);
@@ -719,15 +821,12 @@ $("#replepush").click(function() {
 
     };
    
-
-    
-
-    getDateRange('2017-02-01', '2017-02-05', listDate);
-
 	
-	console.log(listDate);
+	console.log(disabledDays);
 
-	
+
+	console.log("????");
+	console.log(${findhostid})
 </script>
 
 

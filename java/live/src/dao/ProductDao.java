@@ -940,7 +940,39 @@ public class ProductDao {
 	}
 
 	
-	
+		public String searchLike(String loginID) {
+			
+			String sql= "SELECT * FROM LIKETABLE WHERE L_ID = ?";
+
+			HashMap<String,Integer> likelist =new HashMap<String, Integer>();	
+			
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,loginID);
+				
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					likelist.put(rs.getNString("L_H_RGNUM"), rs.getInt("L_TYPE"));
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String result = gs.toJson(likelist); 
+			
+			System.out.println(result);
+			
+			return result;
+		}
+
 	
 
 	
@@ -1035,6 +1067,8 @@ public class ProductDao {
 		return result;
 	}
 
+	
+	
 	
 	
 	

@@ -1,63 +1,118 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-   #body{margin:0 5%}
-   #searchbox{border:3px solid #0B3861;width:40%;height:60px;text-align:center;margin-bottom:30px;}
-   input{border:none;width:500px;height:50px;font-size:15px;font-weight:bold;margin-top:1px;}
-   button{background-color:#0B3861;border:none;width:70px;height:50px;color:white;font-weight:bold;}
-   #middle{width:100%;height:100%;overflow:hidden;border:none;}
-   #list{border:none;float:left;width:40%;}
-   .out{border:2px solid #0B3861;;width:100%;height:150px;display:flex;margin-bottom:10px;}
-      .inner{display:inline-flex;}
-      .info{margin-left:20px;width:200px;height:150px;display:inline-flex;font-size:20px;}
-   
-   #map{border:2px solid #0B3861;float:right;width:56%;}
-   
-   
-   
+#body {
+	margin: 0 5%
+}
+
+#searchbox {
+	border: 3px solid #0B3861;
+	width: 40%;
+	height: 60px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+input {
+	border: none;
+	width: 500px;
+	height: 50px;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 1px;
+}
+
+button {
+	background-color: #0B3861;
+	border: none;
+	width: 70px;
+	height: 50px;
+	color: white;
+	font-weight: bold;
+}
+
+#middle {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	border: none;
+}
+
+#list {
+	border: none;
+	float: left;
+	width: 40%;
+}
+
+.out {
+	border: 2px solid #0B3861;;
+	width: 100%;
+	height: 150px;
+	display: flex;
+	margin-bottom: 10px;
+}
+
+.inner {
+	display: inline-flex;
+}
+
+.info {
+	margin-left: 20px;
+	width: 200px;
+	height: 150px;
+	display: inline-flex;
+	font-size: 20px;
+}
+
+#map {
+	border: 2px solid #0B3861;
+	float: right;
+	width: 56%;
+}
 </style>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-<div id = "body">
-<h1>검색 키워드 입력후 보이는 창 </h1>
-   
-  
-        <div id="searchbox">
-            <input id= "subsearch" type="text" name="destination" value=${destination}>
-            <button type="button" id="btn1">검색</button>
-         </div>
-         
-         <div id="middle">
-            <div id="list">
-            
-            </div>
-            
-            
-            <div id="maplay">
-            
+	<div id="body">
+		<h1>검색 키워드 입력후 보이는 창</h1>
+
+
+		<div id="searchbox">
+			<input id="subsearch" type="text" name="destination"
+				value=${destination}>
+			<button type="button" id="btn1">검색</button>
+		</div>
+
+		<div id="middle">
+			<div id="list"></div>
+
+
+			<div id="maplay">
 
 
 
-               <div id="map" style="width:50%;height:800px;">
 
-               
-               </div>
-               
-            </div>
-         </div>
-   
-</div>
+				<div id="map" style="width: 50%; height: 800px;"></div>
+
+			</div>
+		</div>
+
+	</div>
 </body>
 <script>
 //---------------------------예상--------------------------------------------
+	console.log("좋아요 리스트 ==");
+	var likelist = '${searchLike}';
+	
+	
    var $test =${result};  
    console.log("제이슨 변환 String -> obj");
    console.log($test);
@@ -70,13 +125,7 @@
       
       var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
       
-      a.on('click', function() {
-
-         console.log("z");
-         console.log($(this).attr("name"));
-         location.href="detailregiinfo?rgnum="+$(this).attr("name");
-         
-      } )
+    
       //http://t1.daumcdn.net/mapjsapi/images/marker.png
       //http://i1.daumcdn.net/dmaps/apis/transparent.gif
       a.mouseover(function() {
@@ -123,23 +172,44 @@
             }
          }
       })
-      var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
       
+      var b = $('<div class="inner" ><img name = '+$test[intest][0]["H_RGNUM"]+' class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
       
+       $(document).on('click','.gg', function() {
+                      console.log("zzzz");
+                      console.log($(this).attr("name"));
+                      location.href="detailregiinfo?rgnum="+$(this).attr("name");
+                   } );
       
       var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+      
       a.append(b);
       a.append(c);
       
-      a.on('click', function() {
-         console.log("z");
-         console.log($(this).attr("name"));
-         location.href="detailregiinfo?rgnum="+$(this).attr("name");
-
-         
-         
-         
-      } )
+      var idcheck = '${id}';
+      
+      if(idcheck===''){ // 비로그인 //하트 안보이게
+    	        
+     	  
+      }else{  // 로그인 하트 보이게
+    	  if(likelist[$test[intest][0]["H_RGNUM"]]===1){
+    		  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="1" width="40" height="40" src="./img/like.png"></div><div>');
+    	      
+    	      a.append(d);
+    	  }else if(likelist[$test[intest][0]["H_RGNUM"]]===0){
+    		  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
+    	      
+    	      a.append(d);
+    	  }else{
+			  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
+    	      
+    	      a.append(d);
+    	  }
+      }
+     
+      
+      
+     
      
       console.log(a.attr("name"));
       
@@ -149,14 +219,65 @@
            
    }
    
+   
+   
+ 
+   
+   $(document).on('click','.likech',function(){
+	   	console.log($(this).attr("name"));
+		console.log($(this).data("name"));
+	   	
+	 	if($(this).attr("name")==="1"){
+	 		
+	 		$(this).attr("name", "0");
+	 		$(this).attr("src", "./img/donlike.png");
+	 	}else{
+	 		$(this).attr("name", "1");
+	 		$(this).attr("src", "./img/like.png");
+	 	}
+	 	
+	 	var likeval = $(this).attr("name");
+	 	var likeid = '${id}';
+	 	var likename = $(this).data("name")
+	 	
+	 	var likearr=[]
+	 	likearr.push(likeval);
+	 	likearr.push(likeid);
+	 	likearr.push(likename);
+	 	console.log("===ajax like 보낼 데이터 ====")
+	 	console.log(likearr);
+	 	
+	 	var result = JSON.stringify(likearr);
+	 	$.ajax({ // 업로드 요청 받아오는 ajax
+	 	    type:'get',
+	 	    url:'likechecked',//restful방식
+	 	    data:{data:result},
+	 	    //서버에서 받을때 
+	 	    dataType:"html",
+	 	    
+	 	    success:function(data){
+	 	    	console.log("ajax 성공")
+	 	       
+	 		},
+	 		error:function(error){
+	 	    	console.log("ajax 실패")
+				console.log(error);
+	 		}
+	 	}); //ajax end  
+   })
+   
+   
+   
+   
 //ajax
   
       
 
-      
+     
 
       
     $('#btn1').click(function() {
+      console.log("ajax검색");
       var a =$("#subsearch").val()
       
      $.ajax({
@@ -177,24 +298,70 @@
                   
                   var a = $('<div class="out" name = '+data[intest][0]["H_RGNUM"]+'></div>')
                   
-                  var b = $('<div class="inner"><img class="gg" width="200"height="150" alt=사진없음 src="'+data[intest][0]["H_MAINPIC"]+'"></div>')
-                  
-                  
+                  var b = $('<div class="inner" ><img name = '+data[intest][0]["H_RGNUM"]+' class="gg" width="200"height="150" alt=사진없음 src="'+data[intest][0]["H_MAINPIC"]+'"></div>')
                   
                   var c = $('<div class="info">'+'주소지:'+data[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+data[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+data[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+data[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+                 
                   a.append(b);
                   a.append(c);
                   
-                  a.on('click', function() {
-                     console.log("z");
-                     console.log($(this).attr("name"));
-                     location.href="detailregiinfo?rgnum="+$(this).attr("name");
-                     
-                     
-                     
-                  } )
+                  $(document).on('mouseover','.out',function() {
+                      let b = $(this).attr("name");
+                      console.log("들어옴 : " + b);
+                      console.log(markers);
+                      for(i in markers){
+                         if(markers[i]["Wa"]===b){
+                            var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
+                            //console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
+                            markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="50px";
+                         //   console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
+                            
+                            //29px, 42p
+                            markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 80px, 90px, 0px)"
+                            
+                            console.log("변경후 ");
+                            console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
+                            console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
+                            
+                            markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
+                         }
+                      }
+                   } )
+                   
+                    $(document).on('mouseout','.out',function() {
+                      let b = $(this).attr("name");
+                      console.log("나감 : " + b);
+                      for(i in markers){
+                         if(markers[i]["Wa"]===b){
+                            var x = markers[i]["pd"]["previousSibling"]["previousSibling"];
+                            console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]);
+                            markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]="29px";
+                            console.dir(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["height"]);
+                            
+                            //29px, 42p
+                            markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"] = "rect(0px, 29px, 42p, 0px)"
+                            
+                            console.log("변경후 ");
+                            console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["clip"]);
+                            console.log(markers[i]["pd"]["previousSibling"]["previousSibling"]["style"]["width"]);
+                            
+                            markers[i]["pd"]["previousSibling"]["previousSibling"]["img"];
+                         }
+                      }
+                   })
+                  
+                  
+                  
+                  
+                  
+                  $(document).on('click','.gg', function() {
+                      console.log("zzzz");
+                      console.log($(this).attr("name"));
+                      location.href="detailregiinfo?rgnum="+$(this).attr("name");
+                   } );
                  
-                  console.log(a.attr("name"));
+                 
+                  
                   
                   
                   $("#list").append(a)
@@ -345,12 +512,6 @@
 
 
       </script>
-   
-  
-   
-   
-   
-   
 
 
 
@@ -364,7 +525,14 @@
 
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54a97da9ea0c80921e6f0c3700f67b67&libraries=services"></script>
+
+
+
+
+
+
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54a97da9ea0c80921e6f0c3700f67b67&libraries=services"></script>
 
 
 
@@ -493,7 +661,6 @@ console.log(markers);
 console.log("==zzz==");
 console.dir($("#daum.maps.Marker.Area:1"));
 console.log($("#daum.maps.Marker.Area:1"));
-
 
 
 </script>
