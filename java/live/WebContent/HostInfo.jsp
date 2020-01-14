@@ -15,19 +15,29 @@
 	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;}
 	
 	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+		.mainpic{display: inline-block; font-size:18px;}
 	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
-	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;text-align:center;}
+	#checkoutlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+		.checkout{margin-top:20px;}
+		.mainbox{font-size:18px;margin-left:10px;}
+		 #star_grade a{text-decoration: none;color: gray;}
+   		 #star_grade a.on{color:red;}
+	
+	
+	
 	#oo{visibility:hidden;}
 	#info{font-size:20px;font-weight:bold;}
 
 h5{display:inline; margin-left:40px;}
+.btn{float: right;margin-right:10px;width:70px;height:50px;}
 
 </style>
 
 </head>
 <body>
 <div id="body">
-<h1>게스트 마이페이지 </h1>
+<h1>호스트 마이페이지 </h1>
 <form action="profileupdate" method="post"enctype="multipart/form-data">
 		<input type="file" id="oo" name="propic" >
 		
@@ -47,6 +57,21 @@ h5{display:inline; margin-left:40px;}
 		
 		<div id="requestlist">
 			<h1>게스트 예약 요청 </h1>
+		</div>
+		
+		<div id="checkoutlist">
+			<h1>체크아웃리스트 및 별점 </h1>
+			<button id="open">버튼 열기</button>
+    		<div class="modal-wrapper" style="display: none;">
+      			<div class="modal">
+        	<div class="modal-title">안녕하세요</div>
+        		<p>모달 내용은 어쩌고 저쩌고..</p>
+       				 <div class="close-wrapper">
+          				<button id="close">닫기</button>
+       			 </div>
+     		 </div>
+    	</div>
+			
 		</div>
 		
 		<div id="houseupload">
@@ -115,23 +140,196 @@ var c = $('<button id = "save">사진저장</button>')
 		$("#info").append(d);
 	
 
-	
-//---------------------------------------------------예상------------마이페이지 정보 보여주기 끝----------------------------------------------------------------------
-
-
 //--------------------------------------------------예상------------게스트 예약요청 ------------------------------------------------------------------------------
+var $reList =${reserlist};  
+console.log($reList);
+
+var reservation = document.getElementById("requestlist");
+
+
+for(intest in $reList ){
+	
+	var o= new Date($reList[intest][0]["R_CHECKOUT"]);
+	var checkout=o.toLocaleDateString();
+	console.log(checkout);
+
+	var i= new Date($reList[intest][0]["R_CHECKIN"]);
+	var checkin=i.toLocaleDateString();
+	console.log(checkin);
+	
+	
+	var a = $('<div class= "mainpic" style="display:flex;"><img id ="pro" width=150px height=70px src = "'+$reList[intest][0]["H_MAINPIC"]+'"></div>');
+	var b = $('<div class= "request">'+
+		" |예약 요청자:"+$reList[intest][0]["R_GUESTID"]+
+		" |요청인원:"+$reList[intest][0]["R_PERSON"]+
+		" |체크인날짜:"+checkin+
+		" |체크아웃날짜:"+checkout+
+		" |전체 가격:"+$reList[intest][0]["R_TOTALPRICE"]+"만원"+"&nbsp"+"&nbsp"+"&nbsp"+
+		'</div>'); 
+		
+	
+	
+var c = $('<button class= "btn" name="'+$reList[intest][0]["R_RGNUM"]+'" id = "app">승인</button>')	
+var d = $('<button class= "btn" name="'+$reList[intest][0]["R_RGNUM"]+'" id = "can">거절</button>')	
+
+
+$("#requestlist").append(a);
+a.append(b);
+b.append(d);
+b.append(c);
+
+}
+
+ var test = function(){
+	console.log("ttt");
+}
+
+
+
+$("#requestlist").on('click','.btn',function() {
+	console.log("클릭")
+	console.log($(this).attr("name"));
+	var app =$(this).attr("name");
+	var can =$(this).html();
+	
+	var num = [];
+	num.push(app);
+	num.push(can);
+	console.log(num);
+	var result = JSON.stringify(num);
+
+	console.log(result);
+	
+	 $.ajax({ // 업로드 요청 받아오는 ajax
+    type:'get',
+    url:'requestlist',//restful방식
+    data:{data:result},
+    //서버에서 받을때 
+    dataType:"json",
+    
+    success:function(data){
+    	console.log("ajax 성공")
+    	
+       console.log("승인해야할 것들");
+       console.log(data);
+       
+    $('#requestlist').empty();
+       
+    for(intest in data){
+    	
+    	var o= new Date(data[intest][0]["R_CHECKOUT"]);
+    	var checkout=o.toLocaleDateString();
+    	console.log(checkout);
+
+    	var i= new Date(data[intest][0]["R_CHECKIN"]);
+    	var checkin=i.toLocaleDateString();
+    	console.log(checkin);
+    	
+    	
+    	var a = $('<div class= "mainpic" style="display:flex;"><img id ="pro" width=150px height=70px src = "'+data[intest][0]["H_MAINPIC"]+'"></div>');
+    	var b = $('<div class= "request">'+
+    		" |예약 요청자:"+data[intest][0]["R_GUESTID"]+
+    		" |요청인원:"+data[intest][0]["R_PERSON"]+
+    		" |체크인날짜:"+checkin+
+    		" |체크아웃날짜:"+checkout+
+    		" |전체 가격:"+data[intest][0]["R_TOTALPRICE"]+"만원"+"&nbsp"+"&nbsp"+"&nbsp"+
+    		'</div>'); 
+    		
+    	
+    	
+    var c = $('<button class= "btn" name="'+data[intest][0]["R_RGNUM"]+'" id = "app">승인</button>')	
+    var d = $('<button class= "btn" name="'+data[intest][0]["R_RGNUM"]+'" id = "can">거절</button>')	
+
+
+    $("#requestlist").append(a);
+    a.append(b);
+    b.append(d);
+    b.append(c);
+    }
+       
+	},
+	error:function(error){
+    	console.log("ajax 실패")
+
+		console.log(error);
+	}
+}); //ajax end  	
+
+});
+//--------------------------------------------------예상------------체크아웃 별점------------------------------------------------------------------------------
+
+var $CL =${checkoutlist};  
+console.log($CL);
+
+var checkoutlist = document.getElementById("checkoutlist");
+
+for(intest in $CL ){
+	
+	var o= new Date($reList[intest][0]["R_CHECKOUT"]);
+	var checkout=o.toLocaleDateString();
+	console.log(checkout);
+
+	var i= new Date($reList[intest][0]["R_CHECKIN"]);
+	var checkin=i.toLocaleDateString();
+	console.log(checkin);
+	
+	
+	var a = $('<div class= "mainbox" style="display:flex;"></div>');
+	var b = $('<div class= "checkout">'+
+		" 게스트 아이디:"+$CL[intest][0]["R_GUESTID"]+
+		" |게스트 인원"+$CL[intest][0]["R_PERSON"]+
+		" |체크인날짜:"+checkin+
+		" |체크아웃날짜:"+checkout+"&nbsp"+"&nbsp"+"&nbsp"+
+		'</div>'); 
+	
+	var c =$('<p style="display:inline-block" id="star_grade">'+'<a href="#">★</a>'+'<a href="#">★</a>'+'<a href="#">★</a>'+'<a href="#">★</a>'+'<a href="#">★</a>'+'</p>');
+
+	
+	 $('#star_grade a').click(function(){ //별점 효과
+         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+         return false;
+     });
+	
+	 
+	 const open = document.getElementById("open");
+	 const close = document.getElementById("close");
+	 const modal = document.querySelector(".modal-wrapper");
+	 open.onclick = () => {
+	   modal.style.display = "flex";
+	 };
+	 close.onclick = () => {
+	   modal.style.display = "none";
+	 };
+	 
+	 
+
+$("#checkoutlist").append(a);
+a.append(b);
+a.append(c);
+
+}
 
 
 
 
 
-//--------------------------------------------------예상------------게스트 예약요청  끝------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
 //--------------------------------------------------예상------------내 게시물 등록현황------------------------------------------------------------------------------
 
 var $home =${hostH};  
-console.log("제이슨 변환 String -> obj");
 console.log($home);
 
 var houseup = document.getElementById("houseupload"); 
@@ -164,23 +362,41 @@ $("#houseupload").append(a);
 
 
 
-//--------------------------------------------------예상------------내 게시물 등록현황 끝------------------------------------------------------------------------------
-
 //--------------------------------------------------예상------------내 집 보유 리스트------------------------------------------------------------------------------
 
+var $homeL =${hostHL};  
+console.log("제이슨 변환 String -> obj");
+console.log($homeL);
+
+var myhome = document.getElementById("myhouselist"); 
 
 
+for(intest in $homeL ){
+	if(intest%4==0){
+		var br = $('<br><br>');
+		$("#myhouselist").append(br);
+	}
+	var a = $('<div class= "mainpic"style="margin:10px;"><img class= "mainpicc" name = '+$homeL[intest][0]["H_RGNUM"]+' id ="pro" width=200px height=100px src = "'+$homeL[intest][0]["H_MAINPIC"]+'"></div>');
+	
+	var b = $('<div class= "request" >'+
+		" |주소:"+$homeL[intest][0]["H_ADDRESS"]+"<br>"+
+		" |상세주소:"+$homeL[intest][0]["H_DETAILADD"]+
+		'</div>'); 
+	
+$("#myhouselist").append(a);
+	a.append(b);
+
+	 $(".mainpicc").on('click', function() {
+
+         console.log("z");
+         console.log($(this).attr("name"));
+         location.href="detailregiinfo?rgnum="+$(this).attr("name");
+         
+      });
+}
 
 //--------------------------------------------------예상------------내 집 보유 리스트 끝------------------------------------------------------------------------------
-
-
 </script>
 
 </body>
 </html>
-
-
-
-
-
-

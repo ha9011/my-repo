@@ -20,7 +20,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload"})
+@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -87,8 +87,10 @@ public class RestController extends HttpServlet {
 		}else if (cmd.equals("/houseupload")){
 			System.out.println("업로드 승인");
 			json = pm.getAjaxhouseupload();
+		}else if (cmd.equals("/requestlist")){
+			System.out.println("업로드 승인");
+			json = pm.getAjaxrequestlist();
 		}
-		
 		
 		
 		
