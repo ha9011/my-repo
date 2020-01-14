@@ -687,6 +687,7 @@ public class ProductDao {
 
 	
 	
+
 	
 	
 	
@@ -957,6 +958,34 @@ public class ProductDao {
 		return result;
 	}
 
+	public int reservation(String regnum, String guestid, String hostid, String sdate, String edate, String tperson, String tprice) {
+		int result = 0;
+			
+		String sql = "INSERT INTO RESERVATION VALUES(RESER_SQ.NEXTVAL,?,?,?,?,?,?,0,?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,Integer.parseInt(regnum));
+			pstmt.setNString(2,guestid);
+			pstmt.setNString(3,hostid);
+			pstmt.setNString(4,sdate);
+			pstmt.setNString(5,edate);
+			pstmt.setInt(6,Integer.parseInt(tperson));
+			pstmt.setInt(7,Integer.parseInt(tprice));
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+			
+		return result;
+	}
+
+	
 	
 	
 

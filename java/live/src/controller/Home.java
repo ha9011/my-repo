@@ -12,15 +12,11 @@ import service.FileServiceMM;
 import service.MemberMM;
 import service.ProductMM;
 
-
-
-
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo","/guestInfo","/AdminInfo","/HostInfo"})
+@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse", "/detailregiinfo",
+		"/guestInfo", "/AdminInfo", "/HostInfo", "/reservation" })
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -66,8 +62,11 @@ public class Home extends HttpServlet {
 			fw=mm.AdminInfo();
 			fw=pm.houseupload();
 		}else if(cmd.equals("/HostInfo")) { 
-				System.out.println("호스트마이페이지");
-				fw=mm.HostInfo();	
+			System.out.println("호스트마이페이지");
+			fw=mm.HostInfo();	
+		}else if(cmd.equals("/reservation")) { 
+			System.out.println("예약등록");
+			fw=mm.reservation();	
 		}
 		
 		
@@ -81,11 +80,13 @@ public class Home extends HttpServlet {
 	
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 }

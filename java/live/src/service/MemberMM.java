@@ -147,7 +147,36 @@ public class MemberMM {
 
 	}
 
-	
+	 public Forward reservation() {
+
+			String sdate = request.getParameter("sdate"); // 체크인
+			String edate = request.getParameter("edate"); // 체크 아웃
+			String tprice = request.getParameter("tprice"); // 토탈
+			String tperson = request.getParameter("tperson"); // 인원
+			String hostid = request.getParameter("hostid"); // 호스트
+			String guestid = request.getParameter("guestid"); //게스트
+			String regnum = request.getParameter("regnum"); // 방번호
+			System.out.println(sdate);
+			System.out.println(edate);
+			System.out.println(tprice);
+			System.out.println(tperson);
+			System.out.println(hostid);
+			System.out.println(guestid);
+			System.out.println(regnum);
+			
+			int result =0;
+			ProductDao pDao = new ProductDao(); // 연결
+			result = pDao.reservation(regnum, guestid, hostid, sdate, edate, tperson, tprice); 
+		 
+			
+			System.out.println("reservation : " + result);
+		 
+			fw = new Forward();
+		    fw.setPath("./main.jsp");
+		    fw.setRedireact(false);
+		    return fw;
+	}
+
 
 	
 	
@@ -278,6 +307,7 @@ public Forward HostInfo() {//호스트 마이페이지
 	  return outreple;//스트링;
   }
 
+ 
 
 
 }

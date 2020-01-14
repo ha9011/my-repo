@@ -242,30 +242,34 @@ public Forward searchHouse() { //처음 검색 페이지
 	//----------민호-------------------------------------------------------------------------------------------
 	public Forward detailregiinfo(){
 		
+		
+		
 		String detailId = request.getParameter("rgnum");
 		System.out.println(detailId);
 		String detailregiinfo = null;
-		
 		String outreple = null;
+		String hostId = null;
+		
 		
 		ProductDao pDao = new ProductDao();
-		
 		detailregiinfo = pDao.detailregiinfo(detailId);
-		
 		pDao.close();
-		
-		
 		request.setAttribute("result",detailregiinfo);
 		
 		
-		MemberDao mDao = new MemberDao();
-		outreple = mDao.outreple(detailId);
-		
-		
-		  mDao.close();
+		MemberDao mDao1 = new MemberDao();
+		outreple = mDao1.outreple(detailId);
+		mDao1.close();
 		request.setAttribute("reple", outreple);
 		
 		
+		
+		MemberDao mDao2 = new MemberDao();
+		hostId = mDao2.findHostId(detailId);
+		mDao2.close();
+		request.setAttribute("findhostid", hostId);
+		
+		request.setAttribute("rgnum", detailId);
 		
 		
 		
@@ -273,8 +277,6 @@ public Forward searchHouse() { //처음 검색 페이지
 		fw.setPath("./detail&reservation.jsp");
 		fw.setRedireact(false);
 		return fw;
-		
-		
 		
 	}
 

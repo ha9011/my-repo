@@ -152,6 +152,38 @@ public class MemberDao {
 	}
 
 	
+	public String findHostId(String detailId) {
+		
+		System.out.println("detailId : " + detailId);
+		
+		String sql = "SELECT H_ID FROM REGISTHOUSE WHERE H_RGNUM = ? "; //아이디 뽑아오는 쿼리문
+		String result = "없음"; 
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, detailId);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) { //아이디가 있으면 리설트를 아이디를 넣어준다
+				result = rs.getNString("H_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result; //리설트 값을 리턴 
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -370,7 +402,10 @@ public class MemberDao {
 			}
 			System.out.println("프로필 성공");
 			
-		}	
+		}
+
+		
+		
 			
 			
 		

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,35 +9,119 @@
 
 
 <style>
-   body{margin:0 5%;}
-  #top{border : 1px solid black; width:100%;}
-   #img{margin-bottom:2%;width:100%;height:50%;overflow:hidden;border:none;}
-   #detail{border:1px solid black;width:95%;height:250px; display:flex; margin : 10px auto;}	
-   .info{width:400px; height:250px; display:inline-block; margin : 0px 0px 0px 20px}
-   .mainpic{width:250px; height:250px; display:inline-block;}
-   #mainimg{}
-      
-    #imgs_wrap{margin : 0 auto; display : inline-block;}  
-  /*  #sldimg{margin-bottom:2%;width:70%;height:800px;overflow:hidden;border:none;} */
-    #subimg{border:1px solid black;width:100%;height:40%;margin-bottom:10px;}
-   
-   #middle{display:flex;; margin :10px 0px 10px 0px ; width:100% ; height:50%; border : 1px solid black}
-   
-   #review{margin : 5px 5px 5px 5px; border:1px solid black; width:50%; height:50%;}
-   #rightpart{margin : 5px 5px 5px 5px; border:1px solid black; width:50%; height:50%;}
-   #reservation{margin : 5px 5px 5px 5px; width:97%; height:200px; border:1px solid black;text-align: center;}
-   #reple{margin : 5px 5px 5px 5px; width:97%; height:50%; border:1px solid black;}
-      
-   
-   #bottom{width:100%;height:50%;overflow:hidden;border:1px solid black;}
- 
-      .inner{display:inline-flex;}
-      
-  
-   #imgdetail{text-align: center; }
-	.mySlides{margin : 0px 20px}
-	.nextbtn{display : inline-block;}
+body {
+	margin: 0 5%;
+}
 
+#top {
+	border: 1px solid black;
+	width: 100%;
+}
+
+#img {
+	margin-bottom: 2%;
+	width: 100%;
+	height: 50%;
+	overflow: hidden;
+	border: none;
+}
+
+#detail {
+	border: 1px solid black;
+	width: 95%;
+	height: 250px;
+	display: flex;
+	margin: 10px auto;
+}
+
+.info {
+	width: 400px;
+	height: 250px;
+	display: inline-block;
+	margin: 0px 0px 0px 20px
+}
+
+.mainpic {
+	width: 250px;
+	height: 250px;
+	display: inline-block;
+}
+
+#mainimg {
+	
+}
+
+#imgs_wrap {
+	margin: 0 auto;
+	display: inline-block;
+}
+/*  #sldimg{margin-bottom:2%;width:70%;height:800px;overflow:hidden;border:none;} */
+#subimg {
+	border: 1px solid black;
+	width: 100%;
+	height: 40%;
+	margin-bottom: 10px;
+}
+
+#middle {
+	display: flex;;
+	margin: 10px 0px 10px 0px;
+	width: 100%;
+	height: 50%;
+	border: 1px solid black
+}
+
+#review {
+	margin: 5px 5px 5px 5px;
+	border: 1px solid black;
+	width: 50%;
+	height: 50%;
+}
+
+#rightpart {
+	margin: 5px 5px 5px 5px;
+	border: 1px solid black;
+	width: 50%;
+	height: 50%;
+}
+
+#reservation {
+	margin: 5px 5px 5px 5px;
+	width: 97%;
+	height: 200px;
+	border: 1px solid black;
+	text-align: center;
+}
+
+#reple {
+	margin: 5px 5px 5px 5px;
+	width: 97%;
+	height: 50%;
+	border: 1px solid black;
+}
+
+#bottom {
+	width: 100%;
+	height: 50%;
+	overflow: hidden;
+	border: 1px solid black;
+}
+
+.inner {
+	display: inline-flex;
+}
+
+#imgdetail {
+	text-align: center;
+}
+
+.mySlides {
+	margin: 0px 20px
+}
+
+.nextbtn {
+	display: inline-block;
+}
 </style>
 
 </head>
@@ -51,54 +136,58 @@
 <body>
 
 	<h1>예약 디테일 페이지</h1>
-	
-		<div>
-			<div id="top">
 
-				<div id="img">
-					<div id="mainimg"></div>
-					
-					<div id="imgdetail">
-					<div class="nextbtn">
-					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-					</div>
-					<div id=imgs_wrap>
+	<div>
+		<div id="top">
 
-					</div>
+			<div id="img">
+				<div id="mainimg"></div>
+
+				<div id="imgdetail">
 					<div class="nextbtn">
-					 <a	class="next" onclick="plusSlides(1)">&#10095; </a>
-					 </div>
+						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					</div>
+					<div id=imgs_wrap></div>
+					<div class="nextbtn">
+						<a class="next" onclick="plusSlides(1)">&#10095; </a>
 					</div>
 				</div>
-
-
 			</div>
 
-			
 
 		</div>
 
-		
 
 
-		<div id="middle">
+	</div>
 
 
-			<div id="review">
-				<h1>후기</h1>
-			</div>
 
-			
-			<div id="rightpart">
+
+	<div id="middle">
+
+
+		<div id="review">
+			<h1>후기</h1>
+		</div>
+
+
+		<div id="rightpart">
 			<div id="reservation">
 
 				<h1>예약</h1>
-				<form>
-				<input type="text" id="datepicker1"> ~
-   				<input type="text" id="datepicker2">
-   				<input type="text" id="datepicker2">
-   				
-   				<button>예약하기</button>
+				<form action="reservation">
+					<input type="text" name="sdate" id="datepicker1"> ~~ <input type="text"  name="edate" id="datepicker2"><button type="button" id="dtcommit">날짜확정</button>
+					<br> 
+					총액 : <input name="tprice" type="text" id="totalprice" placeholder="">원<br>
+					인원 : <input name="tperson" type="number" id="person" value="">명<br>    
+					
+					<input type="hidden" name="hostid" id="hostid" value=${findhostid}><br>
+					<input type="hidden" name="guestid" id="guestid" value=${id}><br>
+					<input type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
+					
+
+					<button>예약하기</button>
 				</form>
 			</div>
 
@@ -115,15 +204,15 @@
 					<input id="chc" type="checkbox" name="비밀" value="비밀글">비밀글
 				</div>
 			</div>
-			</div>
-
 		</div>
 
+	</div>
 
 
-		<div id="bottom">
-			<h1>주의사항</h1>
-		</div>
+
+	<div id="bottom">
+		<h1>주의사항</h1>
+	</div>
 
 
 
@@ -384,6 +473,13 @@ $("#replepush").click(function() {
          +'주차가능:  '+$test[0][0]["H_PARKABLE"]+'<br>'
          +'욕실:  '+$test[0][0]["H_BATHROOMS"]+'<br>'+
          '</div>')
+         
+         
+   $("#totalprice").attr('placeholder', 'PRICE PER night : '+$test[0][0]["H_ONEPRICE"] +"원"  ); 
+   $("#person").attr('placeholder', '최대인원 : '+$test[0][0]["H_ATTENDANCE"] +"명"  ); // 넘길때 이벤트 줘야함.
+   
+   
+   
    a.append(b);
    a.append(c);
    $("#mainimg").append(a);
@@ -554,11 +650,13 @@ $("#replepush").click(function() {
 		        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
 		        return [ disabledDays.indexOf(string) == -1 ]
 		    },
-// 		    onSelect: function(dateText) {  
-// 		    	console.log(disabledDays[0])
-// 		    	var a = new Date(disabledDays[0]);
-// 		    	$("#datepicker1").datepicker('option', 'maxDate', new Date(disabledDays[0]));
-//            }
+ 		    onSelect: function(dateText) {  
+		    	console.log(dateText)
+		    	var a = new Date(disabledDays[0]);
+		    	$("#datepicker1").datepicker('option', 'maxDate', new Date(disabledDays[0]));
+		    	$("#datepicker2").datepicker('option', 'maxDate', new Date(disabledDays[0]));
+    			
+ 		    }
 
 
 
@@ -566,6 +664,29 @@ $("#replepush").click(function() {
 		
 	});
 	
+	$('#dtcommit').on('click',function(){
+		console.log("testtest");
+		
+		var sdate = $('#datepicker1').val();  
+		var ddate = $('#datepicker2').val();  
+		  
+		var ar1 = sdate.split('-');
+	    var ar2 = ddate.split('-');  
+	    
+	    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+	    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+		  
+	    var dif = da2 - da1;
+	    var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+	    var cMonth = cDay * 30;// 월 만듬
+	    var cYear = cMonth * 12; // 년 만듬
+		
+	    if(sdate && ddate){
+			console.log(parseInt(dif/cDay))
+			$("#totalprice").val(parseInt(dif/cDay)*$test[0][0]["H_ONEPRICE"]);
+		 } 
+
+	})
 	
 	
 	 var listDate = [];
