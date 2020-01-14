@@ -892,6 +892,56 @@ public class ProductDao {
 	
 	
 	
+		public String hostH(String id) {//호스트가 요청한 집 게시물 등록현황
+			String sql= "SELECT * FROM REGISTHOUSE WHERE H_ID=? AND H_CHECK = 0";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> houseup = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,id);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> myhouseinfo = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("H_ATTENDANCE", rs.getNString("H_ATTENDANCE"));
+					innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+					innerH.put("H_PARKABLE", rs.getNString("H_PARKABLE"));
+					innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+					innerH.put("H_BATHROOMS", rs.getNString("H_BATHROOMS"));
+					innerH.put("H_BEDROOMS", rs.getNString("H_BEDROOMS"));
+					innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+
+					
+					myhouseinfo.add(innerH); 
+					houseup.add(myhouseinfo);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String hostH = gs.toJson(houseup); 
+			
+			System.out.println(hostH);
+			
+			return hostH;
+	
+	}
+
+	
+	
+	
 
 	
 	
@@ -985,6 +1035,7 @@ public class ProductDao {
 		return result;
 	}
 
+	
 	
 	
 	

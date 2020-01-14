@@ -12,8 +12,7 @@ import service.FileServiceMM;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse", "/detailregiinfo",
-		"/guestInfo", "/AdminInfo", "/HostInfo", "/reservation" })
+@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo","/guestInfo","/AdminInfo","/HostInfo","/hostupload","/reservation"})
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -59,14 +58,17 @@ public class Home extends HttpServlet {
 			fw=mm.guestInfo();
 		}else if(cmd.equals("/AdminInfo")) {
 			System.out.println("관리자마이페이지");
-			fw=mm.AdminInfo();
-			fw=pm.houseupload();
+			fw=mm.AdminInfo();//관리자 마이페이지
+			fw=pm.houseupload();//관리자가 받은 집 게시물 등록요청
 		}else if(cmd.equals("/HostInfo")) { 
-			System.out.println("호스트마이페이지");
-			fw=mm.HostInfo();	
+System.out.println("호스트마이페이지");
+fw=mm.HostInfo();//호스트 마이페이지
+fw=pm.hostupload();//호스트가 등록한 게시물 요청
+fw=pm.myhouse();//호스트 집 보유 목록	
 		}else if(cmd.equals("/reservation")) { 
 			System.out.println("예약등록");
 			fw=mm.reservation();	
+				
 		}
 		
 		
