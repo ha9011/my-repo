@@ -10,12 +10,14 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-body{overflow:scroll;}
+body{overflow:scroll;
+	 }
+	 
 
 #header {
 
-
-	width: 98%;
+	
+	width: 100%;
 	height: 160px;
 	border: none;
 	text-align: right;
@@ -34,7 +36,7 @@ body{overflow:scroll;}
 	border:none;
 	font-size:20px;
 	color:white;
-	background-color:#0B3861;
+	background-color:#0B243B;
 	
 	
 }
@@ -46,6 +48,7 @@ body{overflow:scroll;}
 }
 
 #middleback {
+	
 	width: 100%;
 	height: 700px;
 	background-image: url("./img/main2.jpg");
@@ -54,6 +57,7 @@ body{overflow:scroll;}
 }
 
 #middle {
+	
 	position: relative;
 	color: white;
 	width: 100%;
@@ -84,13 +88,41 @@ body{overflow:scroll;}
 .btn{border:none;
 	font-size:20px;
 	color:white;
-	background-color:#0B3861;
+	background-color:#0B243B;
 }
 
 .input{width:200px;
 	   height:30px;
 	   color:gray;
 }
+/* --------------------------------------------header & middle end---------------------------------------------------------------------------- */
+#hf{margin-top:20px;
+	background-color:#0B243B;
+	color:white;
+}
+
+#home{width:100%;
+	  height:50%;
+	  border:1px solid black;
+	  display:flex;
+}
+#review{width:47%;
+		height:45%;
+		border:1px solid black;
+		margin: auto;
+}
+
+#topstar{width:47%;
+		height:45%;
+		border:1px solid black;
+		margin: auto;
+}
+#footer{margin-top:100px;
+		width:100%;
+		height:30%;
+		text-align:center;
+}
+
 </style>
 
 
@@ -141,11 +173,36 @@ body{overflow:scroll;}
 			</div>
 		</div>
 	</div>
-
+	
+	<div id ="hf">
+	<div id ="home">
+	
+		<div id="review">
+			<h1>후기 높은 숙소</h1>
+		</div>
+		
+		<div id="topstar">
+			<h1>별점 높은 숙소</h1>
+		</div>
+		
+	</div>
+	
+	<div id="footer">
+		<p>업체명 : ㈜살아보다 사업자등록번호 : 111-11-11111
+			주소 : 인천 남구 학익동 663-1 태승빌딩 5층 (1층 홈플러스) 전화번호 : 032-876-3332
+			Copyrights(c) ㈜살아보다 </p>
+			<h3>since 2020</h3>
+	</div>
+	</div>	
+			
+			
+			
+			
 </body>
 
 <script>
-//평민호
+
+//--------------평민호-----------------------------------------------------------------------------------------------------------
  var id2="";
 	
 
@@ -211,16 +268,35 @@ body{overflow:scroll;}
 		}
 		
 	}
+//--------민호----------------------------------------------------------------------------------------------------------------
 
-	//하동원
+//---------이예상-------------------------------------------------------------------------------------------------------------
 
-	/*   $("#registHouse").click(Function() {    // [host] '집등록' 버튼 누를 경우 
-	 location.href="registHouse.jsp";
-	 });   */
+//후기 높은 숙소 불러오기
 
-	//이예상
 
-	//민호
+
+
+
+
+
+
+
+
+
+//별점 높은 숙소 불러오기 
+
+
+
+
+
+
+
+
+//---------이예상-------------------------------------------------------------------------------------------------------------
+
+
+	
 </script>
 
 </html>

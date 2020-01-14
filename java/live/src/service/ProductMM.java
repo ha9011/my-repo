@@ -165,13 +165,54 @@ public Forward searchHouse() { //처음 검색 페이지
 	
 	
 	
+
+	public Forward hostupload() { //호스트가 업로드한 게시물 현황
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String hostH = null;
+		
+		ProductDao pDao = new ProductDao();
+		hostH = pDao.hostH(id);
+		
+		pDao.close();
+		
+		request.setAttribute("hostH",hostH);
+		
+		
+		fw = new Forward();
+		fw.setPath("./HostInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}//호스트가 업로드한 게시물 현황 끝
 	
 	
 	
 	
-	
-	
-	
+
+
+	public Forward myhouse() { //호스트 집 리스트
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String hostH = null;
+		
+		ProductDao pDao = new ProductDao();
+		hostH = pDao.hostH(id);
+		
+		pDao.close();
+		
+		request.setAttribute("hostH",hostH);
+		
+		
+		fw = new Forward();
+		fw.setPath("./HostInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}//호스트 집 리스트 끝 
+
 	
 	
 	
@@ -242,36 +283,43 @@ public Forward searchHouse() { //처음 검색 페이지
 	//----------민호-------------------------------------------------------------------------------------------
 	public Forward detailregiinfo(){
 		
-		String detailId = request.getParameter("rgnum"); //방번호를 디테일 아이디에 넣기,디테일 창에 방에대한 정보 넣으려고
-		System.out.println(detailId); //디테일 아이디 확인 
-		String detailregiinfo = null; //변수 선언 
-		
-		String outreple = null; // 변수 선언 
-		
-		ProductDao pDao = new ProductDao(); //프로덕트 다오 연결 
-		
-		detailregiinfo = pDao.detailregiinfo(detailId); //디테일레지 인포에 디테일아이디에 담긴 방번호로  방정보 긁어서 다른 디테일 레지인포에 저장
-		
-		pDao.close(); //연결 종료 
+
 		
 		
-		request.setAttribute("result",detailregiinfo); // 리설트 이엘에 필요한 방정보들 저장  
+		String detailId = request.getParameter("rgnum");
+		System.out.println(detailId);
+		String detailregiinfo = null;
+		String outreple = null;
+		String hostId = null;
+		
+		
+		ProductDao pDao = new ProductDao();
+		detailregiinfo = pDao.detailregiinfo(detailId);
+		pDao.close();
+		request.setAttribute("result",detailregiinfo);
+		
+		
+		MemberDao mDao1 = new MemberDao();
+		outreple = mDao1.outreple(detailId);
+		mDao1.close();
+		request.setAttribute("reple", outreple);
+		
+		
+
+		MemberDao mDao2 = new MemberDao();
+		hostId = mDao2.findHostId(detailId);
+		mDao2.close();
+		request.setAttribute("findhostid", hostId);
+		
+		request.setAttribute("rgnum", detailId);
 		
 		
 		
-		
-		
-		//
-		MemberDao mDao = new MemberDao(); // 엠다오 연결 
-		outreple = mDao.outreple(detailId); // 아웃리플에 방번호로  그 방에 관련된 리플 긁어오기
-		mDao.close(); // 엠다오 연결 종료 하고 
-		request.setAttribute("reple", outreple); // 리플 이엘에 아웃리플 정보 담기 
+	
 		fw = new Forward(); // 값을 가지고 가기위한 포워딩 객체
 		fw.setPath("./detail&reservation.jsp"); //여기까지 범위 설정 
 		fw.setRedireact(false); // 값을 갖고 넘어가기 위한 포워딩
 		return fw; //포워드에 데이터 담긴거 리턴 
-		
-		
 		
 	}
 
@@ -318,10 +366,4 @@ public Forward searchHouse() { //처음 검색 페이지
 		return inrreple;
 	}
 
-
-
-
-
-
-	
 }

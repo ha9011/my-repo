@@ -12,80 +12,82 @@ import service.FileServiceMM;
 import service.MemberMM;
 import service.ProductMM;
 
-
-
-
-@WebServlet({"/joinfrm","/access","/logout","/SearchId","/SearchPw","/searchHouse","/detailregiinfo","/guestInfo","/AdminInfo","/HostInfo"})
+@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse",
+		"/detailregiinfo", "/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation" })
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		String cmd=request.getServletPath();
+		String cmd = request.getServletPath();
 		Forward fw = null;
-		MemberMM mm  = new MemberMM(request, response);
+		MemberMM mm = new MemberMM(request, response);
 		ProductMM pm = new ProductMM(request, response);
 		FileServiceMM fs = new FileServiceMM(request, response);
-		
 
-		if(cmd.equals("/joinfrm")){
+		if (cmd.equals("/joinfrm")) {
 
 			System.out.println("회원가입 접근");
 			fw = mm.join();
-			fw=mm.join();						
+			fw = mm.join();
 			System.out.println("회원가입 접근");
 			fw = mm.join();
 			System.out.println("회원가입 접근");
 			fw = mm.join();
 
-
-		}else if(cmd.equals("/access")) { //로그인 폼으로 연결
+		} else if (cmd.equals("/access")) { // 로그인 폼으로 연결
 			System.out.println("로그인접속");
-			fw=mm.access();
-		}else if(cmd.equals("/logout")) { //로그아웃으로 연결
+			fw = mm.access();
+		} else if (cmd.equals("/logout")) { // 로그아웃으로 연결
 			System.out.println("로그아웃접근");
-			fw=mm.logout();
-		}else if(cmd.equals("/SearchId")) { // 아이디 찾기 연결
+			fw = mm.logout();
+		} else if (cmd.equals("/SearchId")) { // 아이디 찾기 연결
 			System.out.println("접근아이디z");
-			fw=mm.searchId();
-		}else if(cmd.equals("/SearchPw")) { //비밀번호 찾기 연결
-			fw=mm.searchPw();
-		}else if(cmd.equals("/searchHouse")) { //검색
-			fw=pm.searchHouse();
-		}else if(cmd.equals("/detailregiinfo")) {
+			fw = mm.searchId();
+		} else if (cmd.equals("/SearchPw")) { // 비밀번호 찾기 연결
+			fw = mm.searchPw();
+		} else if (cmd.equals("/searchHouse")) { // 검색
+			fw = pm.searchHouse();
+		} else if (cmd.equals("/detailregiinfo")) {
 			System.out.println("디테일 예약 정보");
-			fw=pm.detailregiinfo();
-		}else if(cmd.equals("/guestInfo")) { 
+			fw = pm.detailregiinfo();
+		} else if (cmd.equals("/guestInfo")) {
 			System.out.println("게스트마이페이지");
-			fw=mm.guestInfo();
-		}else if(cmd.equals("/AdminInfo")) {
+			fw = mm.guestInfo();
+			
+		} else if (cmd.equals("/AdminInfo")) {
 			System.out.println("관리자마이페이지");
-			fw=mm.AdminInfo();
-			fw=pm.houseupload();
-		}else if(cmd.equals("/HostInfo")) { 
-				System.out.println("호스트마이페이지");
-				fw=mm.HostInfo();	
-		}
-		
-		
-		if(fw!=null) {
-			if(fw.isRedireact()) {
+			fw = mm.AdminInfo();// 관리자 마이페이지
+			fw = pm.houseupload();// 관리자가 받은 집 게시물 등록요청
+		} else if (cmd.equals("/HostInfo")) {
+			System.out.println("호스트마이페이지");
+			fw = mm.HostInfo();// 호스트 마이페이지
+			fw = pm.hostupload();// 호스트가 등록한 게시물 요청
+			fw = pm.myhouse();// 호스트 집 보유 목록
+		} else if (cmd.equals("/reservation")) {
+			System.out.println("예약등록");
+			fw = mm.reservation();
+
+		} 
+		if (fw != null) {
+			if (fw.isRedireact()) {
 				response.sendRedirect(fw.getPath());
-			}else {
+			} else {
 				request.getRequestDispatcher(fw.getPath()).forward(request, response);
 			}
 		}
-	
+
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 }

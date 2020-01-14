@@ -9,16 +9,18 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
-#body{margin:0,auto;}
+#body{margin:0,auto;overflow:scroll;}
 	#header{width:1200px;height:300px;overflow:hidden;border:none;}
 		#img{border:2px solid #0B3861;float:left;width:300px;height:280px;}
 	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;}
 	
-	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;}
-	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;}
-	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;}
+	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 	#oo{visibility:hidden;}
 	#info{font-size:20px;font-weight:bold;}
+
+h5{display:inline; margin-left:40px;}
 
 </style>
 
@@ -58,7 +60,7 @@
 	
 </div>
 <script>
-//---------------------------------------예상-----------------------------------------------------------------------------------------
+//---------------------------------------예상------------마이페이지 정보-----------------------------------------------------------------------------
 
 
 var $test =${result};  
@@ -114,34 +116,62 @@ var c = $('<button id = "save">사진저장</button>')
 	
 
 	
-//---------------------------------------------------예상----------------------------------------------------------------------------------
+//---------------------------------------------------예상------------마이페이지 정보 보여주기 끝----------------------------------------------------------------------
+
+
+//--------------------------------------------------예상------------게스트 예약요청 ------------------------------------------------------------------------------
 
 
 
 
 
+//--------------------------------------------------예상------------게스트 예약요청  끝------------------------------------------------------------------------------
+
+
+//--------------------------------------------------예상------------내 게시물 등록현황------------------------------------------------------------------------------
+
+var $home =${hostH};  
+console.log("제이슨 변환 String -> obj");
+console.log($home);
+
+var houseup = document.getElementById("houseupload"); 
+
+
+for(intest in $home ){
+	var a = $('<div class= "mainpic"style="display:flex;"><img id ="pro" width=100px height=50px src = "'+$home[intest][0]["H_MAINPIC"]+'"></div>');
+	
+	var b = $('<div class= "request" >'+
+		" |주소:"+$home[intest][0]["H_ADDRESS"]+
+		" |상세주소:"+$home[intest][0]["H_DETAILADD"]+
+		" |인원수:"+$home[intest][0]["H_ATTENDANCE"]+
+		" |방 수:"+$home[intest][0]["H_ROOMS"]+
+		" |침실 수:"+$home[intest][0]["H_BEDROOMS"]+
+		" |화장실:"+$home[intest][0]["H_TOLILET"]+
+		" |샤워실:"+$home[intest][0]["H_PARKABLE"]+
+		" |주차장:"+$home[intest][0]["H_PARKABLE"]+
+		"<h5>ㆍㆍㆍ승인대기중ㆍㆍㆍ</h5>"+
+		'</div>'); 
+	
+		
 
 
 
 
+$("#houseupload").append(a);
+	a.append(b);
+
+}
+
+
+
+//--------------------------------------------------예상------------내 게시물 등록현황 끝------------------------------------------------------------------------------
+
+//--------------------------------------------------예상------------내 집 보유 리스트------------------------------------------------------------------------------
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//--------------------------------------------------예상------------내 집 보유 리스트 끝------------------------------------------------------------------------------
 
 
 </script>

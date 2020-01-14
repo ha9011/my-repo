@@ -687,6 +687,7 @@ public class ProductDao {
 
 	
 	
+
 	
 	
 	
@@ -891,6 +892,56 @@ public class ProductDao {
 	
 	
 	
+		public String hostH(String id) {//호스트가 요청한 집 게시물 등록현황
+			String sql= "SELECT * FROM REGISTHOUSE WHERE H_ID=? AND H_CHECK = 0";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> houseup = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,id);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> myhouseinfo = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("H_ATTENDANCE", rs.getNString("H_ATTENDANCE"));
+					innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+					innerH.put("H_PARKABLE", rs.getNString("H_PARKABLE"));
+					innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+					innerH.put("H_BATHROOMS", rs.getNString("H_BATHROOMS"));
+					innerH.put("H_BEDROOMS", rs.getNString("H_BEDROOMS"));
+					innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+
+					
+					myhouseinfo.add(innerH); 
+					houseup.add(myhouseinfo);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String hostH = gs.toJson(houseup); 
+			
+			System.out.println(hostH);
+			
+			return hostH;
+	
+	}
+
+	
+	
+	
 
 	
 	
@@ -957,6 +1008,35 @@ public class ProductDao {
 		return result;
 	}
 
+	public int reservation(String regnum, String guestid, String hostid, String sdate, String edate, String tperson, String tprice) {
+		int result = 0;
+			
+		String sql = "INSERT INTO RESERVATION VALUES(RESER_SQ.NEXTVAL,?,?,?,?,?,?,0,?)";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,Integer.parseInt(regnum));
+			pstmt.setNString(2,guestid);
+			pstmt.setNString(3,hostid);
+			pstmt.setNString(4,sdate);
+			pstmt.setNString(5,edate);
+			pstmt.setInt(6,Integer.parseInt(tperson));
+			pstmt.setInt(7,Integer.parseInt(tprice));
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+			
+		return result;
+	}
+
+	
+	
 	
 	
 
