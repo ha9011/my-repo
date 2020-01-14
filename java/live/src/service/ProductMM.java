@@ -165,13 +165,54 @@ public Forward searchHouse() { //처음 검색 페이지
 	
 	
 	
+
+	public Forward hostupload() { //호스트가 업로드한 게시물 현황
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String hostH = null;
+		
+		ProductDao pDao = new ProductDao();
+		hostH = pDao.hostH(id);
+		
+		pDao.close();
+		
+		request.setAttribute("hostH",hostH);
+		
+		
+		fw = new Forward();
+		fw.setPath("./HostInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}//호스트가 업로드한 게시물 현황 끝
 	
 	
 	
 	
-	
-	
-	
+
+
+	public Forward myhouse() { //호스트 집 리스트
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String hostH = null;
+		
+		ProductDao pDao = new ProductDao();
+		hostH = pDao.hostH(id);
+		
+		pDao.close();
+		
+		request.setAttribute("hostH",hostH);
+		
+		
+		fw = new Forward();
+		fw.setPath("./HostInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}//호스트 집 리스트 끝 
+
 	
 	
 	
@@ -321,10 +362,4 @@ public Forward searchHouse() { //처음 검색 페이지
 		return inrreple;
 	}
 
-
-
-
-
-
-	
 }
