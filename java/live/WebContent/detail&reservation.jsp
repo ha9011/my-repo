@@ -373,75 +373,72 @@ body {
 
 	
 	
-///에이작스로 추가된 댓글 추가하는 곳
 
-$("#replepush").click(function() {
 
-	var $test=${result};
-	  $("#showreple").empty();
-	var type;
-	if($("#chc").prop('checked')){
+$("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버튼 클릭시 클릭 이벤트를 준다
+	  $("#showreple").empty(); //쇼리플창  초기화 해주는 곳
+	var type; //비밀인지 아닌지 타입을 담을 변수
+	//
+	if($("#chc").prop('checked')){ //체크박스 값을 담는다
 	 type=1;
 	}else{
 	 type=0;	
-	}
+	} 
+	console.log($("#chc").prop('checked')); // 체크박스 동작 확인
+	//
 	
-	console.log($("#chc").prop('checked'));
-	console.log("동작");
-	var repledata = [];
-	var id1 = '${id}';
-	var temp = $("#input").val();
-	var rep = $test[0][0]["H_RGNUM"];
+	var repledata = []; //리플데이터를 키 데이터 형식으로 넣어줄 틀
+	var id1 = '${id}'; //리플 아이디 아마세션에서 뽑아온 이엘
+	var temp = $("#input").val(); //리플컨텐츠
+	var rep = $test[0][0]["H_RGNUM"]; //리플 방넘버
 	
 	console.log("=====================ajax")
 	console.log($test)
 	console.log(rep);
 	console.log(id1);
-	console.log(temp);
+	console.log(temp); // 만든 값들을 출력한다
 	
 
-	repledata.push(type);
+	repledata.push(type); //배열에 필요한 값들 넣어주기
 	repledata.push(rep);
 	repledata.push(id1);
 	repledata.push(temp);
-
 	
-
+	console.log(repledata); // 마지막으로 만들어진 배열을 확인해본다
 	
-	console.log(repledata);
- 	var result=JSON.stringify(repledata);
+ 	var result=JSON.stringify(repledata); //배열을 같은 오브잭트 형식을  스트링파이를  이용해서 스트링으로 바꾸고 리설트에 삽입 
 	
- 	$.ajax({
-		type : 'get',
+ 	$.ajax({//에이작스 시작 // 입력과 출력을 한번에 가능함 ??
+		type : 'get',  
 		url : "inputreple",
-		data : {reple : result},
-		datatype:"json",
+		data : {reple : result}, //리플 이엘에 리설트가 담아진다
+		datatype:"json",    //여기까지 하고 서블릿으로 간다
+							
+							//서블릿 성공하고 여기로 돌아온다  $test[0][0]["H_RGNUM"];
 		
-		//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
-		
-		success:function(reple){
-			var result = JSON.parse(reple);
+		success:function(reple){   //서블릿에서의 과정들 성공후에 돌아온다 리설트리턴 값에는 객체화 된 엠리스트가 돌아온다 
+			var result = JSON.parse(reple); //리서트 제이슨으로 파싱한다-->파싱은 스트링을 오브젝트 형태로 바꿔준다.   
 			
 			
-			console.log(typeof result);
-			console.log(result);
-			console.dir(result);
-			for(i in result){
+			console.log(typeof result); //리설트에 타입을 알아보기 위해
+			console.log(result); // 단순 리설트 값
+			console.dir(result); // 상세하게 뜯어보기
+			for(i in result){ // i에 리설트를 다 담고
 				console.log(result[i]);
 			   
-			   var a = $('<div class="printreple"></div>');
+			   var a = $('<div class="printreple"></div>'); //div생성하는 a 변수
 			   
 			   var b = $('<div class="reple">'+'댓글번호 :  '+result[i][0]["RP_NUM"]+'아이디 :  '+result[i][0]["RP_ID"]+'<br>'
 					   +'     '+result[i][0]["RP_TIME"]+'<br>'
 			   				+'<div class innerreple>'+result[i][0]["RP_CONTENT"]+'<br>'+result[i][0]["RP_TYPE"]+'</div>'+'</div>')
-					   
-			   a.append(b);
+					   //필요한 데이터를 필요한 형태로 출력하는 b 변수
+			   a.append(b); //a에 b를 넣는다. 필요한 정보의 형태를 다 만든거
 			   
-			   $("#showreple").append(a);
+			   $("#showreple").append(a); //출력하고자 하는 부분에 완성된 a변수를 뿌려준다
 			
 			}
 		}	,
-		error:function(error){
+		error:function(error){ //에러시 에러 뜨게하기
 			console.log(error);
 		}
 		
@@ -457,9 +454,9 @@ $("#replepush").click(function() {
    
    
    /////////////////////////////디테일 방정보 보여주기
-   var $test=${result};
+   var $test=${result}; //프로덕트 엠엠에서 방정보를 담은 리설트 이엘 갖고 온것 
    
-   var a = $('<div id="detail"></div>');
+   var a = $('<div id="detail"></div>'); // DIV새엇ㅇ
    
    //console.log($test[0][0]["H_MAINPIC"]);
    var b = $('<div class="mainpic"><img width="250" height="250" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
@@ -482,14 +479,9 @@ $("#replepush").click(function() {
    
    a.append(b);
    a.append(c);
-   $("#mainimg").append(a);
+   $("#mainimg").append(a); //완성 형태를 원하는 곳에 뿌려주기
    
-   console.log($test);
-   console.dir($test);
-   console.log($test[0]);
 
-   
-   
   
    
    

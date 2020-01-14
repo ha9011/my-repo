@@ -359,6 +359,7 @@ public Forward searchHouse() { //처음 검색 페이지
 	//----------민호-------------------------------------------------------------------------------------------
 	public Forward detailregiinfo(){
 		
+
 		
 		
 		String detailId = request.getParameter("rgnum");
@@ -380,7 +381,7 @@ public Forward searchHouse() { //처음 검색 페이지
 		request.setAttribute("reple", outreple);
 		
 		
-		
+
 		MemberDao mDao2 = new MemberDao();
 		hostId = mDao2.findHostId(detailId);
 		mDao2.close();
@@ -390,10 +391,11 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		
 		
-		fw = new Forward();
-		fw.setPath("./detail&reservation.jsp");
-		fw.setRedireact(false);
-		return fw;
+	
+		fw = new Forward(); // 값을 가지고 가기위한 포워딩 객체
+		fw.setPath("./detail&reservation.jsp"); //여기까지 범위 설정 
+		fw.setRedireact(false); // 값을 갖고 넘어가기 위한 포워딩
+		return fw; //포워드에 데이터 담긴거 리턴 
 		
 	}
 
