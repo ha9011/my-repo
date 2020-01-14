@@ -187,6 +187,7 @@ public class MemberMM {
 	           mDao.close();
 	           
 	           request.setAttribute("result",Myinfo);
+//	           
 	           fw = new Forward();
 	           fw.setPath("./guestInfo.jsp");
 	           fw.setRedireact(false);
@@ -257,25 +258,23 @@ public Forward HostInfo() {//호스트 마이페이지
 
 // 평민호 구역
 
-  public String inputreple(ArrayList<String> mList) { // TODO Auto-generated method stub
-	  MemberDao mDao = new MemberDao(); // 연결 test =
-	  System.out.println(mList);
-	  String outreple = null;
+  public String inputreple(ArrayList<String> mList) { //컨트롤러에서 넘어온 스트링 들은 엠리스트
+	  MemberDao mDao = new MemberDao(); // 엠다오 연결 
+	  System.out.println(mList); // 엠리스트 잘 왔나 확인
+	  String outreple = null; //출력을 위해서 담을 아웃리플 선언 
 	  
 	  
-	  int reple = mDao.inputreple(mList); // 테스트에 리서트 값을 넣어준다
-	  if(reple==0) {
+	  int reple = mDao.inputreple(mList); // 엠다오에 인풋리플 리턴값을 리플에 담기 //엠다오로 가
+	  if(reple==0) { //리서트 실패하면 출력 되면 안되니깐 if 문을 열고 리턴 null로 끝
 		  System.out.println("인서트 실패");
 		  return null;
 	  } 
 	  
-	  outreple = mDao.outreple(mList.get(1));
-	  mDao.close();
-	  
-	  System.out.println("ajax 대댓글 작성 성공");
+	  outreple = mDao.outreple(mList.get(1)); //한번에 출력 까지 하기 위해서 만들고
+	  mDao.close();// 엠다오 연결 클로스
 	  
 	  
-	  return outreple;//스트링;
+	  return outreple;//스트링 리플 리턴값
   }
 
 

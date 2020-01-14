@@ -167,17 +167,17 @@ public class MemberDao {
 		
 	
 		String sql = "INSERT INTO REPLE VALUES(RP_SEQ.NEXTVAL,?,SYSDATE,?,?,?)"; //시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
-		int result = 0; 
+		int result = 0; // 인서트 성공 실패를 판단하기위해 인트 변수
 		
 		try {
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql); 
 			pstmt.setNString(1, mList.get(2));
 			pstmt.setNString(2, mList.get(3));
 			pstmt.setNString(3, mList.get(0));
-			pstmt.setNString(4, mList.get(1));
-			result= pstmt.executeUpdate();
+			pstmt.setNString(4, mList.get(1)); //sql문 순서에 맞게  엔스트링을 넣어준다
+			result= pstmt.executeUpdate(); //sql값을 리설트에 담기
 			
-			if(result==0) {
+			if(result==0) { //댓글 저장 성공 실패 여부 확인 if 문 
 				System.out.println("댓글저장실패");
 			}else{
 				System.out.println("댓글저장성공");
@@ -186,7 +186,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result; //리설트 값을 리
+		return result; //리설트 값을 리턴
 		
 	}
 
@@ -194,40 +194,40 @@ public class MemberDao {
 	public String outreple(String string) {
 		String sql = "SELECT * FROM reple where RP_RGNUM=?"; //시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
 		
-		ArrayList<ArrayList<HashMap<String,String>>> mList = new ArrayList<ArrayList<HashMap<String,String>>>();	
+		ArrayList<ArrayList<HashMap<String,String>>> mList = new ArrayList<ArrayList<HashMap<String,String>>>();	//데이터 포장하고
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setNString(1, string);
-			rs= pstmt.executeQuery();
+			rs= pstmt.executeQuery(); //결과 값을 rs에 올리고
 			
-			while(rs.next()) { //아이디가 있으면 리설트를 아이디를 넣어준다
-				ArrayList<HashMap<String,String>> mList1 = new ArrayList<HashMap<String,String>>();
+			while(rs.next()) { //아이디가 있으면 리설트에 아이디를 넣어준다
+				ArrayList<HashMap<String,String>> mList1 = new ArrayList<HashMap<String,String>>(); //제일 처음 리스트에서 하나 열어서 넣어주는것 !!데이터 형태 잘 생각하기
 				
-				HashMap<String,String>  innerH = new HashMap<String,String>();
+				HashMap<String,String>  innerH = new HashMap<String,String>(); //제일 안쪽에 데이터 형식 
 				
-				innerH.put("RP_NUM",rs.getNString("RP_NUM"));
+				innerH.put("RP_NUM",rs.getNString("RP_NUM")); //데이터를 (키,데이터) 형태로 넣어주기
 				innerH.put("RP_ID",rs.getNString("RP_ID"));
 				innerH.put("RP_TIME",rs.getNString("RP_TIME"));
 				innerH.put("RP_CONTENT",rs.getNString("RP_CONTENT"));
 				innerH.put("RP_TYPE",rs.getNString("RP_TYPE"));
 				innerH.put("RP_RGNUM",rs.getNString("RP_RGNUM"));
 				
-				mList1.add(innerH);
-				mList.add(mList1);
+				mList1.add(innerH); //제일 안에 데이터를 하나 밖에 넣어주고 
+				mList.add(mList1); //그 중간 데이터를 제일 밖에 넣어주고
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-	Gson gs = new Gson();
+		Gson gs = new Gson(); //json으로 받아온걸 자동으로 객체로 전환 하기 위한 gson 오픈 
 		
-		String result = gs.toJson(mList); 
+		String result = gs.toJson(mList);  //리설트에 gs.toJson(mList)담기 --->쥐슨으로 제이슨에 엠리스트를 객체로 바꿔서 리설트에 담았다
 		
-		System.out.println(result);
+		System.out.println(result); // 리설트가 잘 넘어왔나 확인하고 
 		
-		return result; //리설트 값을 리
+		return result; //리설트 값을 리턴 
 		
 	}
 
