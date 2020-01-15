@@ -316,7 +316,17 @@ public Forward searchHouse() { //처음 검색 페이지
 
 	
 	
-	
+
+	public String getAjaxstarscore(String starscore) {
+		
+		
+		
+		
+		return null;
+	}
+
+
+
 	
 	
 	
@@ -494,7 +504,6 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		return inrreple;
 	}
-
 
 
 

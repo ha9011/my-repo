@@ -20,6 +20,7 @@ body{overflow:scroll;
 	width: 100%;
 	height: 160px;
 	border: none;
+
 	text-align: right;
 }
 

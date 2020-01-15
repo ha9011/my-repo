@@ -193,11 +193,16 @@ body {
 			<div id="reple">
 				<h1>문의사항</h1>
 				<hr>
-				<div id="showreple"></div>
+				<div id="showreple"></div> <!-- 여기에 댓글이 들어감 -->
 				<br>
-				<div id="rreple">aa</div>
+				
+				
+				<div id="rreple"></div>    <!-- 삭제 체크중 -->
+				
+				<div id=replepaging></div>
+				<hr>
 				<div id="inputreple">
-					<input type="text" id="input"
+					<input  type="text" id="input"
 						placeholder="주제와 무관한 댓글, 악플은 삭제될 수 있습니다.">
 					<button type="button" id="replepush">등록</button>
 					<input id="chc" type="checkbox" name="비밀" value="비밀글">비밀글
@@ -221,37 +226,50 @@ body {
 
 	
 ////////////페이지 부를때 바로 부르는 댓글
+
 	for(i in ${reple}){
-	
-	   
-	   var a = $('<div class="printreple"></div>');
-	   
-	   var b = $('<div class="reple">'+'댓글번호 :  '+${reple}[i][0]["RP_NUM"]+'아이디 :  '+${reple}[i][0]["RP_ID"]+${reple}[i][0]["RP_TIME"]+'<br>'
-	   				+${reple}[i][0]["RP_CONTENT"]+'<br>'
-	   				+'<button id="'+${reple}[i][0]["RP_NUM"]+'" class="rreplebtn">'+'답글'+'</button>'+'<br>'+'</div>');
-	   				
-	   var c = $('<div class="rreple" id="rreple'+${reple}[i][0]["RP_NUM"]+'"></div>');
-	   var d = 	$('<div class="rreplecnt" id="rreplecnt'+${reple}[i][0]["RP_NUM"]+'"></div>');
-	  
-	   
-	   c.append(d);			
-	   
-	   
-//  	   				+'<div class="rreple" id="rreple'+${reple}[i][0]["RP_NUM"]+'"><div><input type="text" id="rreplecontent'+${reple}[i][0]["RP_NUM"]'">'
-//  	   				+'<button class="rrepleput" id="'+${reple}[i][0]["RP_NUM"]+'">'+'등록'+'</button></div></div>'); 
-	   				
-	   				
-	   		
-	   console.log("--")
-	   console.log(b);
-	   
-	   a.append(b);
-		a.append(c);	
-	   $("#showreple").append(a);
+		console.log(${reple}.length);
+		console.log(Math.ceil(${reple}.length/10));  // 페이지 수 // 10페이지당 1개
+		
+		
+		
+	   if(i <=9){  // 10페이지부터 보여주기  - 시작점  총 10개
+		   var a = $('<div class="printreple"></div>');
+		   
+		   var b = $('<div class="reple">'+'댓글번호 :  '+${reple}[i][0]["RP_NUM"]+'아이디 :  '+${reple}[i][0]["RP_ID"]+${reple}[i][0]["RP_TIME"]+'<br>'
+		   				+${reple}[i][0]["RP_CONTENT"]+'<br>'
+		   				+'<button id="'+${reple}[i][0]["RP_NUM"]+'" class="rreplebtn">'+'답글'+'</button>'+'<br>'+'</div>');
+		   				
+		   var c = $('<div class="rreple" id="rreple'+${reple}[i][0]["RP_NUM"]+'"></div>');
+		   var d = 	$('<div class="rreplecnt" id="rreplecnt'+${reple}[i][0]["RP_NUM"]+'"></div>');    // 댓글 쓰면 가장 마지막 페이지로 전환
+		  
+		   
+		   c.append(d);			
+		   
+		   
+//	  	   				+'<div class="rreple" id="rreple'+${reple}[i][0]["RP_NUM"]+'"><div><input type="text" id="rreplecontent'+${reple}[i][0]["RP_NUM"]'">'
+//	  	   				+'<button class="rrepleput" id="'+${reple}[i][0]["RP_NUM"]+'">'+'등록'+'</button></div></div>'); 
+		   		
+		   console.log("--")
+		   console.log(b);
+		   
+		   a.append(b);
+			a.append(c);	
+		   $("#showreple").append(a);
+	   }	   
+	   	
+		
+		
 	
 
 	   
 	}
+	
+	// 페이징 id = replepaging
+	  for(var i = 1 ; i <= Math.ceil(${reple}.length/10) ; i ++){
+		  $("#replepaging").append(i);
+	}
+	
 	
 	
 	//대댓창 보여주는 펑션	AJAX	
@@ -495,47 +513,6 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	    
    })
   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    
    
    
