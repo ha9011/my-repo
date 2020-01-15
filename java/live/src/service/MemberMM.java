@@ -184,16 +184,18 @@ public class MemberMM {
 
 		String Myinfo = null;
 		String MyReser = null;
-
+		String Write=null;
 		MemberDao mDao = new MemberDao();
 		Myinfo = mDao.Myinfo(id);
 		MyReser = mDao.MyReser(id);
-
+		Write = mDao.Write(id);
 		mDao.close();
 
 		request.setAttribute("result", Myinfo);
 		request.setAttribute("MyReser", MyReser);
-
+		request.setAttribute("sleepwell", Write);
+		
+		
 		fw = new Forward();
 		fw.setPath("./guestInfo.jsp");
 		fw.setRedireact(false);
