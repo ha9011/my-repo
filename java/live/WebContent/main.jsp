@@ -22,6 +22,7 @@ body{overflow:scroll;
 	height: 160px;
 	border: none;
 
+
 	text-align: right;
 }
 

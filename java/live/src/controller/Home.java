@@ -13,7 +13,7 @@ import service.MemberMM;
 import service.ProductMM;
 
 
-@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation" })
+@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation","/hostreview" })
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,11 +31,7 @@ public class Home extends HttpServlet {
 
 			System.out.println("회원가입 접근");
 			fw = mm.join();
-			fw = mm.join();
-			System.out.println("회원가입 접근");
-			fw = mm.join();
-			System.out.println("회원가입 접근");
-			fw = mm.join();
+		
 
 		} else if (cmd.equals("/access")) { // 로그인 폼으로 연결
 			System.out.println("로그인접속");
@@ -66,12 +62,22 @@ public class Home extends HttpServlet {
 			fw = mm.HostInfo();// 호스트 마이페이지
 			fw = pm.hostupload();// 호스트가 등록한 게시물 요청
 			fw = pm.myhouse();// 호스트 집 보유 목록
+			fw = pm.reserlist();// 호스트가 받은 예약 리스트
+	        fw = pm.checkoutlist();// 호스트가 게스트에게 주는 평점 및 후기 체크아웃 리스트 
+	     
 		} else if (cmd.equals("/reservation")) {
 			System.out.println("예약등록");
 			fw = mm.reservation();
 
+		}else if (cmd.equals("/hostreview")) {
+			System.out.println("호스트리뷰");
+		   fw = pm.hostreview();
+		   fw = mm.HostInfo();// 호스트 마이페이지
+			fw = pm.hostupload();// 호스트가 등록한 게시물 요청
+			fw = pm.myhouse();// 호스트 집 보유 목록
+			fw = pm.reserlist();// 호스트가 받은 예약 리스트
+	        fw = pm.checkoutlist();// 호스트가 게스트에게 주는 평점 및 후기 체크아웃 리스트 
 		}
-
 		
 		if (fw != null) {
 			if (fw.isRedireact()) {

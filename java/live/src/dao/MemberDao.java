@@ -580,6 +580,41 @@ public class MemberDao {
 	
 	
 	
+	public int updatereserveGreview(String hrenum) {
+	      String sql = "UPDATE RESERVATION SET R_GREVIEW =1 WHERE R_RGNUM = ?";
+	      int result = 0;
+	      try {
+
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setNString(1, hrenum);
+
+	         result = pstmt.executeUpdate();
+	         System.out.println("UPDATE test result : " + result);
+	         if (result == 0) {// 실패
+	            System.out.println("리뷰 확정 실패");
+	            return result;
+
+	         }
+
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	      System.out.println("리뷰 확정 성공");
+	      return result;
+	   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
 	
 	

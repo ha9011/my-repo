@@ -176,6 +176,7 @@ body {
 			<div id="reservation">
 
 				<h1>예약</h1>
+				
 				<form action="reservation">
 					<input type="text" name="sdate" id="datepicker1"> ~~ <input
 						type="text" name="edate" id="datepicker2">

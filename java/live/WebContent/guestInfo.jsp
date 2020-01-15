@@ -399,8 +399,6 @@ $(".cancelRoom").click(function() {
 	});
 
 
-})
-
 
 
 
