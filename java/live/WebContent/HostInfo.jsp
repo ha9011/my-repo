@@ -373,11 +373,11 @@ $('.star_grade span').click(function(){ //별점 효과
 	
 	
 	var S =$(this).attr($(this).parent().children('.on').length);
-	var I =$(this).html();
+	//var I =$(this).html();
 	
 	var num = [];
 	num.push(S);
-	num.push(I);
+	//num.push(I);
 	console.log(num);
 	var result = JSON.stringify(num);
 
