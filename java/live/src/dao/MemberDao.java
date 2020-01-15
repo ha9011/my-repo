@@ -459,11 +459,64 @@ public class MemberDao {
 		return result;
 
 	}
+	
+	public String Write(String id) {
+		String Sql = "SELECT H_MAINPIC,R_RGNUM,R_H_RGNUM,R_HOSTID,R_CHECKIN,R_CHECKOUT,R_PERSON,R_TOTALPRICE,R_TYPE FROM RESERVATION R,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_GUESTID=? AND R_CHECKOUT<SYSDATE";
+		
+		ArrayList<ArrayList<HashMap<String, String>>> ReviewList = new ArrayList<ArrayList<HashMap<String, String>>>();
+		 try {
+			pstmt=con.prepareStatement(Sql);
+			pstmt.setNString(1, id);
+			rs=pstmt.executeQuery();
+			
+			while (rs.next()) {
+
+				ArrayList<HashMap<String, String>> Review = new ArrayList<HashMap<String, String>>();
+				HashMap<String, String> myReview = new HashMap<String, String>();
+
+				myReview.put("H_MAINPIC", rs.getNString("H_MAINPIC"));
+				myReview.put("R_RGNUM", rs.getNString("R_RGNUM"));
+				myReview.put("R_H_RGNUM", rs.getNString("R_H_RGNUM"));
+				myReview.put("R_HOSTID", rs.getNString("R_HOSTID"));
+				myReview.put("R_CHECKIN", rs.getNString("R_CHECKIN"));
+				myReview.put("R_CHECKOUT", rs.getNString("R_CHECKOUT"));
+				myReview.put("R_PERSON", rs.getNString("R_PERSON"));
+				myReview.put("R_TOTALPRICE", rs.getNString("R_TOTALPRICE"));
+				myReview.put("R_TYPE", rs.getNString("R_TYPE"));
+
+				Review.add(myReview);
+				ReviewList.add(Review);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  Gson gs = new Gson();
+
+			String result = gs.toJson(ReviewList);
+			System.out.println("내 숙박내역");
+			System.out.println(result);
+
+			return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 	public String MyReser(String id) {
 
-		String Sql = "SELECT H_MAINPIC,R_RGNUM,R_H_RGNUM,R_HOSTID,R_CHECKIN,R_CHECKOUT,R_PERSON,R_TOTALPRICE,R_TYPE FROM RESERVATION R,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_GUESTID=?";
+		String Sql = "SELECT H_MAINPIC,R_RGNUM,R_H_RGNUM,R_HOSTID,R_CHECKIN,R_CHECKOUT,R_PERSON,R_TOTALPRICE,R_TYPE FROM RESERVATION R,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_GUESTID=? AND R_CHECKOUT>=SYSDATE";
 
 		ArrayList<ArrayList<HashMap<String, String>>> ReserList = new ArrayList<ArrayList<HashMap<String, String>>>();
 
@@ -596,6 +649,7 @@ public class MemberDao {
 
 	}
 
+	
 }// 프로필 사진 변경 및 저장 끝
 
 //--------------------------------------------------------------------------------------------------------------------------

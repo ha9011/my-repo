@@ -43,6 +43,19 @@
 }
 
 #myhouselist {
+	overflow: scroll;
+	border: 2px solid #0B3861;
+	width: 1200px;
+	height: 700px;
+	margin-bottom: 20px;
+	border: 2px solid #0B3861;
+}
+
+.review {
+	display: flex;
+}
+
+#myhouselist {
 	border: 2px solid #0B3861;
 	width: 1200px;
 	height: 700px;
@@ -76,6 +89,34 @@
 }
 </style>
 
+<!--모달창 -->
+<style>
+/* The Modal (background) */
+.searchModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 10; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.search-modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 70%; /* Could be more or less, depending on screen size */
+	
+}
+ .star_grade span{text-decoration: none;color: gray;}
+          .star_grade span.on{color:red;}
+</style>
+
 </head>
 <body>
 	<div id="body">
@@ -98,12 +139,53 @@
 		</div>
 		<div id="myhouselist">
 			<h1>내 숙박내역</h1>
+			<div id="sleepwell"></div>
 		</div>
+
+		<!--모달 만들기  -->
+		<div id="modal" class="searchModal">
+			<div class="search-modal-content">
+				<div class="page-header">
+					<h1>숙박후기</h1>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-sm-12">
+								<h2>고객님의 목소리를 들려주세요.</h2>
+							</div>
+							<div>
+							
+							<div id="reviewCont"><textarea type="text" placeholder="댓글을 입력해주세요" style= "width:500px; height: 200px;"></textarea>
+							<div id="reviewPic" style="border: 1px solid black; width:500px">사진부탁해요</div>
+							<div><p style="display:inline-block" name="shownum" class="star_grade"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></p></div>
+							</div>
+							
+							<button id="goodreview" 
+								style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;">등록</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div></div>
+				<div
+					style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
+					onClick="closeModal();">
+					<span class="pop_bt modalCloseBtn" style="font-size: 13pt;">닫기
+					</span>
+				</div>
+			</div>
+		</div>
+
+
+
 
 
 	</div>
 	<script>
 //---------------------------------------예상-----------------------------------------------------------------------------------------
+
 
 
 var $test =${result}; //내정보 다 담겨 있는거지   
@@ -167,6 +249,77 @@ var c = $('<button id = "save">사진저장</button>')
 
 
 //---------------------------------------------------------------------민호----------------------------게스트 예약진행중 취소 창 --------------------------
+
+
+$('.star_grade span').click(function(){ //별점 효과
+    $(this).parent().children("span").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+     $(this).addClass("on").prevAll("span").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+     //console.log($(this).parent().attr("name"));
+    //#star_grade span.on
+    var star=($(this).parent().children('.on').length);
+});
+    //모달 실행하고 
+    
+  /*   $.ajax({ // 업로드 요청 받아오는 ajax
+    type:'get',
+    url:'hostreview',//restful방식
+    data:{data:star},
+    //서버에서 받을때 
+    dataType:"json",
+    
+    success:function(data){
+       console.log("ajax 성공")
+       
+       console.log("승인해야할 것들");
+       console.log(data);
+       
+
+    });
+
+ */
+
+
+
+
+
+
+var $test =${sleepwell}; //내정보 다 담겨 있는거지   
+console.log("");
+console.log($test);
+
+for (i in $test){
+	var checkin=new Date($test[i][0]["R_CHECKIN"]);
+	var checkout=new Date($test[i][0]["R_CHECKOUT"]);
+
+	var checkintime=checkin.toLocaleDateString();
+	var checkouttime=checkout.toLocaleDateString();
+	
+var a1 = $('<div class= "review"><img id ="Homepic" width=300px height=250px src = "'+$test[i][0]["H_MAINPIC"]+'"></div>');
+var b1 = $('<div id="reviewCont">'+'<div id="ReviewCont1">'+'방 등록번호:  '+$test[i][0]["R_H_RGNUM"]+'<br>'+
+'호스트아이디:  '+$test[i][0]["R_HOSTID"]+'<br>'+'  인원수:  '+$test[i][0]["R_PERSON"]+'<br>'
++'체크인:  '+checkintime+'<br>'+'  체크아웃:  '+checkouttime+'<br>'+'  총가격:  '+$test[i][0]["R_TOTALPRICE"]+'</div>');
+var c1 = $('<button class= "WriteReview">후기작성</button>')	
+ 		 
+a1.append(b1);		
+a1.append(c1);
+
+$("#sleepwell").append(a1);
+
+
+	 
+	
+	$('.WriteReview').click(function(){
+	$("#modal").show();
+	});
+	function closeModal() {
+	$('.searchModal').hide();
+	};
+}; 
+ 
+
+
+
+
 
 
 console.log(${MyReser});//예약 정보가 담겨있다
