@@ -12,8 +12,8 @@ import service.FileServiceMM;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse", "/detailregiinfo",
-		"/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation" })
+
+@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation" })
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -56,6 +56,7 @@ public class Home extends HttpServlet {
 		} else if (cmd.equals("/guestInfo")) {
 			System.out.println("게스트마이페이지");
 			fw = mm.guestInfo();
+
 		} else if (cmd.equals("/AdminInfo")) {
 			System.out.println("관리자마이페이지");
 			fw = mm.AdminInfo();// 관리자 마이페이지
@@ -71,6 +72,7 @@ public class Home extends HttpServlet {
 
 		}
 
+		
 		if (fw != null) {
 			if (fw.isRedireact()) {
 				response.sendRedirect(fw.getPath());

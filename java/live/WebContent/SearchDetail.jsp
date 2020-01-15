@@ -110,7 +110,8 @@ button {
 <script>
 //---------------------------예상--------------------------------------------
 	console.log("좋아요 리스트 ==");
-	var likelist = '${searchLike}';
+	console.log('${searchLike}');
+	var likelist = ${searchLike};
 	
 	
    var $test =${result};  
@@ -121,7 +122,7 @@ button {
    
    
    
-   for(intest in $test ){
+   for(intest in $test ){  // 처음 화면 보여주기
       
       var a = $('<div class="out" name = '+$test[intest][0]["H_RGNUM"]+'></div>')
       
@@ -188,19 +189,33 @@ button {
       
       var idcheck = '${id}';
       
+      
       if(idcheck===''){ // 비로그인 //하트 안보이게
-    	        
+    	        console.log("하트 이미지 로그인 안됨")
      	  
       }else{  // 로그인 하트 보이게
-    	  if(likelist[$test[intest][0]["H_RGNUM"]]===1){
-    		  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="1" width="40" height="40" src="./img/like.png"></div><div>');
+
+	        console.log("하트 이미지 로그인 됨")
+	        console.log("해당 방 번호 : "+$test[intest][0]["H_RGNUM"])
+	        
+	        console.log("해당 방 번호 : "+ typeof $test[intest][0]["H_RGNUM"])
+	        
+	        console.log("해당 방 번호 : "+typeof likelist)
+	        
+	        
+    	  if(likelist[$test[intest][0]["H_RGNUM"]]===1){ 
+  	        console.log("로그인 하트")
+
+  	        var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="1" width="40" height="40" src="./img/like.png"></div><div>');
     	      
     	      a.append(d);
     	  }else if(likelist[$test[intest][0]["H_RGNUM"]]===0){
+    		  console.log("로그인 하트X")
     		  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
     	      
     	      a.append(d);
     	  }else{
+    		  console.log("로그인 하트Xx")
 			  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
     	      
     	      a.append(d);
@@ -380,8 +395,8 @@ button {
             for(intest in data ){
                let innerList = new Array;
                
-               innerList.push($test[intest][0]["H_RGNUM"]);
-               innerList.push($test[intest][0]["H_ADDRESS"]);
+               innerList.push(data[intest][0]["H_RGNUM"]);
+               innerList.push(data[intest][0]["H_ADDRESS"]);
                mapdetail.push(innerList);
             }
 
@@ -535,12 +550,12 @@ button {
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54a97da9ea0c80921e6f0c3700f67b67&libraries=services"></script>
 
 
-
-
 <script>
 //${result}
-console.log("=====하동원=========");
-let mapdetail =new Array;
+console.log("=====하동원 지도 부분 kakao=========");
+
+
+let mapdetail =new Array;    // [[방번호, 주소],[방번호, 주소]...]
 console.log(mapdetail);
 
 var $test =${result}; 
@@ -555,7 +570,12 @@ for(intest in $test ){
 console.log("========데이터구조[완]=========")
 console.log(mapdetail);
 
-let markers = [];
+
+//////
+
+
+let markers = [];  // [[경도,위도],[경도,위도]...]
+
 let $testt = ${result}
 let infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -633,7 +653,7 @@ for(i in wedokuyngdo){
 }
 
 
-function displayMarker(y,x,reginum) {
+function displayMarker(y,x,reginum) {  // 마커를 지도에 표시하는 것
     
     // 마커를 생성하고 지도에 표시합니다
     var marker = new kakao.maps.Marker({
@@ -642,7 +662,7 @@ function displayMarker(y,x,reginum) {
         zIndex: reginum
     });
     
-    markers.push(marker);
+    markers.push(marker);    // 경도 위도에 추가
     
 
     // 마커에 클릭이벤트를 등록합니다

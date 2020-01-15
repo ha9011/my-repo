@@ -939,22 +939,29 @@ public class ProductDao {
 	
 	}
 
-	
-		public String searchLike(String loginID) {
-			
-			String sql= "SELECT * FROM LIKETABLE WHERE L_ID = ?";
 
-			HashMap<String,Integer> likelist =new HashMap<String, Integer>();	
+		public String hostHL(String id) { //호스트 보유 집 리스트
+			String sql= "SELECT * FROM REGISTHOUSE WHERE H_ID=? AND H_CHECK = 1";
 			
+			ArrayList<ArrayList<HashMap<String,String>>> houseup = new ArrayList<ArrayList<HashMap<String,String>>>();
 			
 			try {
 				pstmt = con.prepareStatement(sql);
-				pstmt.setNString(1,loginID);
-				
+				pstmt.setNString(1,id);
 				rs= pstmt.executeQuery();
 				
 				while(rs.next()) {
-					likelist.put(rs.getNString("L_H_RGNUM"), rs.getInt("L_TYPE"));
+					ArrayList<HashMap<String,String>> myhouseinfo = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("H_DETAILADD", rs.getNString("H_DETAILADD"));
+					innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+
+					myhouseinfo.add(innerH); 
+					houseup.add(myhouseinfo);
+					
 				}
 				
 			} catch (SQLException e) {
@@ -966,15 +973,181 @@ public class ProductDao {
 			
 			Gson gs = new Gson();
 			
-			String result = gs.toJson(likelist); 
+			String hostHL = gs.toJson(houseup); 
 			
-			System.out.println(result);
+			System.out.println(hostHL);
 			
-			return result;
+			return hostHL;
+	
+	}
+	
+		
+		public String searchLike(String loginID) {
+			
+			String sql= "SELECT * FROM LIKETABLE WHERE L_ID = ?";
+
+			HashMap<String,Integer> likelist =new HashMap<String, Integer>();	
+			
+			
+			
+				try {
+					pstmt = con.prepareStatement(sql);
+					pstmt.setNString(1,loginID);
+					
+					rs= pstmt.executeQuery();
+					
+					while(rs.next()) {
+						likelist.put(rs.getNString("L_H_RGNUM"), rs.getInt("L_TYPE"));
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				Gson gs = new Gson();
+				
+				
+				String reserlist = gs.toJson(likelist); 
+				
+				System.out.println(reserlist);
+				
+				return reserlist;
+				
+				
 		}
 
 	
+	
+		public String reservlist(String id) {
+			
+			String sql="SELECT R_PERSON, H_MAINPIC,R_RGNUM, R_GUESTID,R_CHECKIN,R_CHECKOUT,R_TOTALPRICE FROM RESERVATION R ,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_HOSTID=?AND R_TYPE=0";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> reL = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,id);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> reserL = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("R_RGNUM",rs.getNString("R_RGNUM"));
+					innerH.put("R_GUESTID",rs.getNString("R_GUESTID"));
+					innerH.put("R_PERSON",rs.getNString("R_PERSON"));
+					innerH.put("R_CHECKIN",rs.getNString("R_CHECKIN"));
+					innerH.put("R_CHECKOUT",rs.getNString("R_CHECKOUT"));
+					innerH.put("R_TOTALPRICE",rs.getNString("R_TOTALPRICE"));
+					
+					
+					reserL.add(innerH); 
+					reL.add(reserL);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+		
+			String reserlist = gs.toJson(reL); 
+			
+			System.out.println(reserlist);
+			
+			return reserlist;
+	
+	}
+		
+		
 
+		public void reserlist(ArrayList<String> ap) {// 호스트 예약 승인
+			//[1, 승인]
+			String sql= "";
+			if(ap.get(1).equals("승인")){
+				 sql += "UPDATE RESERVATION SET R_TYPE =1 WHERE R_RGNUM =?";
+			}else {
+				 sql += "UPDATE RESERVATION SET R_TYPE =2 WHERE R_RGNUM =?";
+			}	
+			int result = 0;
+			
+			System.out.println(sql);
+			System.out.println(ap);
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,Integer.parseInt(ap.get(0)));
+				
+				result = pstmt.executeUpdate();
+				
+				System.out.println("UPDATE test result : " + result);
+				
+				if(result==0) {//실패
+					System.out.println("승인실패123");
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+			}// 호스트 예약 승인  AJAX 끝
+		
+		
+
+		public String checkoutlist(String id) { // 체크아웃 리스트 가져옴
+			String sql="SELECT * FROM RESERVATION WHERE R_CHECKOUT<=SYSDATE AND R_HOSTID=?";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> checkList = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,id);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("R_RGNUM",rs.getNString("R_RGNUM"));
+					innerH.put("R_GUESTID",rs.getNString("R_GUESTID"));
+					innerH.put("R_CHECKIN",rs.getNString("R_CHECKIN"));
+					innerH.put("R_CHECKOUT",rs.getNString("R_CHECKOUT"));
+					innerH.put("R_PERSON",rs.getNString("R_PERSON"));
+					
+					
+					list.add(innerH); 
+					checkList.add(list);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String checkoutlist = gs.toJson(checkList); 
+			
+			System.out.println(checkoutlist);
+			
+			return checkoutlist;
+			
+	}
+	
+		
+		
 	
 	
 	
@@ -1066,6 +1239,9 @@ public class ProductDao {
 			
 		return result;
 	}
+
+
+	
 
 	
 	
