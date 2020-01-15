@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>살아보다</title>
 
 
 <script
@@ -138,7 +138,7 @@ body{overflow:scroll;
 	<!-- 로그인 안된 경우  -->
 	<div id="header">
 		<!-- 아이디 비번 로그인 회원가입 입력-->
-		<img id="rogo" alt="살다로고" src="./img/살다.png">
+		<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 		 <button class="btn"><a href="signup.jsp" class=log>회원가입</a></button> 
 		 <button class="btn"><a href="loginform.jsp"class=log>로그인</a></button>
 		<!-- 호스트 로그인 된 경우 - 하동원  -->

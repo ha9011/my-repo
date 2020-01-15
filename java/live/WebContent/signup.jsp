@@ -48,6 +48,11 @@ font-size: 20px; color : black;
 	margin: auto;
 	background-color:#F2F2F2;
 }
+#boot{align-content:center;}
+
+#middle{
+		margin:auto;
+}
 </style>
 
 <script
