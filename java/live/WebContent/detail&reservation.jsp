@@ -9,12 +9,20 @@
 
 
 <style>
+#header{width:100%;
+		height:150px;
+}
+#rogo {
+	float: left;
+	width: 250px;
+	height: 150px;
+}
 body {
-	margin: 0 5%;
+	margin:1%;
 }
 
 #top {
-	border: 1px solid black;
+	border:none;
 	width: 100%;
 }
 
@@ -47,7 +55,7 @@ body {
 	display: inline-block;
 }
 
-#mainimg {
+#mainimg {margin: 5px 5px 5px 5px;
 	
 }
 
@@ -87,10 +95,11 @@ body {
 
 #reservation {
 	margin: 5px 5px 5px 5px;
-	width: 97%;
+	width: 50%;
 	height: 200px;
 	border: 1px solid black;
 	text-align: center;
+	float:right;
 }
 
 #reple {
@@ -120,8 +129,12 @@ body {
 }
 
 .nextbtn {
+	
+	font-size:50px;
 	display: inline-block;
 }
+/* ---------------------------------------------------------------------------------------------------- */
+#reserInfoP{display: flex;}
 </style>
 
 </head>
@@ -134,15 +147,13 @@ body {
 
 
 <body>
-
-	<h1>예약 디테일 페이지</h1>
-
+<div id="header">
+<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+</div>
+	
 	<div>
 		<div id="top">
-
 			<div id="img">
-				<div id="mainimg"></div>
-
 				<div id="imgdetail">
 					<div class="nextbtn">
 						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -153,27 +164,10 @@ body {
 					</div>
 				</div>
 			</div>
-
-
-		</div>
-
-
-
-	</div>
-
-
-
-
-	<div id="middle">
-
-
-		<div id="review">
-			<h1>후기</h1>
-		</div>
-
-
-		<div id="rightpart">
-			<div id="reservation">
+			<div id="reserInfoP">
+				<div id="mainimg"></div> <!--메인이미지 및 정보를 슬라이드 밑으로 가져와서 예약이랑 묶음 -->
+				
+				<div id="reservation">
 
 				<h1>예약</h1>
 				<form action="reservation">
@@ -189,6 +183,23 @@ body {
 					<button>예약하기</button>
 				</form>
 			</div>
+			</div>	
+		</div>
+	</div>
+
+
+
+
+	<div id="middle">
+
+
+		<div id="review">
+			<h1>후기</h1>
+		</div>
+
+
+		<div id="rightpart">
+			
 
 			<div id="reple">
 				<h1>문의사항</h1>
@@ -532,10 +543,10 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	
 	for(let i in result){
 		if(i<=2){  // 3 이상일때
-			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="200px" height="200px" src="'+result[i] +'" ></div>') );
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="500px" height="400px" src="'+result[i] +'" ></div>') );
 				
 		}else{
-			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="200px" height="200px" src="'+result[i] +'" ></div>')  );
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="500px" height="400px" src="'+result[i] +'" ></div>')  );
 			
 		}
 		

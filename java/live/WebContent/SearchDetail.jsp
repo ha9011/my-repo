@@ -7,10 +7,11 @@
 <title>Insert title here</title>
 <style>
 #body {
-	margin: 0 5%
+	margin:1%;
 }
 
 #searchbox {
+	float:left;
 	border: 3px solid #0B3861;
 	width: 40%;
 	height: 60px;
@@ -20,17 +21,20 @@
 
 input {
 	border: none;
-	width: 500px;
+	width: 80%;
 	height: 50px;
-	font-size: 15px;
+	font-size: 20px;
 	font-weight: bold;
 	margin-top: 1px;
 }
 
 button {
+	float:right;
+	margin-right:5px;
+	margin-top:5px;
 	background-color: #0B3861;
 	border: none;
-	width: 70px;
+	width: 90px;
 	height: 50px;
 	color: white;
 	font-weight: bold;
@@ -44,14 +48,15 @@ button {
 }
 
 #list {
-	border: none;
+	border:none;
 	float: left;
-	width: 40%;
+	width: 42%;
+	
 }
 
 .out {
-	border: 2px solid #0B3861;;
-	width: 100%;
+	border-bottom:2px solid #0B3861;
+	width: 90%;
 	height: 150px;
 	display: flex;
 	margin-bottom: 10px;
@@ -69,11 +74,17 @@ button {
 	font-size: 20px;
 }
 
-#map {
-	border: 2px solid #0B3861;
+
+#maplay {
+	border-left:2px solid #0B3861;
 	float: right;
 	width: 56%;
 }
+
+#map{
+	 margin-left:25px;
+}
+	
 </style>
 
 
@@ -82,8 +93,6 @@ button {
 </head>
 <body>
 	<div id="body">
-		<h1>검색 키워드 입력후 보이는 창</h1>
-
 
 		<div id="searchbox">
 			<input id="subsearch" type="text" name="destination"
@@ -96,12 +105,7 @@ button {
 
 
 			<div id="maplay">
-
-
-
-
-				<div id="map" style="width: 50%; height: 800px;"></div>
-
+					<div id="map" style="width: 98%; height: 1000px;"></div>
 			</div>
 		</div>
 

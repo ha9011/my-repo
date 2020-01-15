@@ -24,6 +24,11 @@ hr {
 }
 
 #boot{align-content:center;}
+
+#middle{
+		margin:auto;
+}
+
 </style>
 
 <script
@@ -31,7 +36,7 @@ hr {
 </head>
 <body>
 
-	<div>
+	<div id="middle">
 		<form action="joinfrm">
 			<h1>회원가입</h1>
 

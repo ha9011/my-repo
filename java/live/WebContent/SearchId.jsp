@@ -14,23 +14,21 @@
 	#button{background-color:#0B243B;color:white;width:80px;height:60px;font-weight:bold;}
 	#middle{border:none;margin-left:20px;font-size:20px;font-weight:bold;}
 	
-	
-	
-	
+
 </style>
 
 </head>
 
 <body>
-
-<img id="rogo" alt="살다로고" src="./img/살다.png">
+<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 <div id="main">
 
 	<form action="SearchId">
 
-			<div >
-				<p>아이디 찾기|비밀번호 찾기</p>
-				<h4>-이름과 이메일 주소를 입력 후 "아이디 찾기"버튼을 클릭해 주시면 아이디를 찾을 수 있습니다.</h6>
+			<div>
+				<a href="searchId.jsp">아이디 찾기|</a>
+				<a href="searchPw.jsp">비밀번호 찾기</a>
+				<h4>이름과 이메일 주소를 입력 후 "아이디 찾기"버튼을 클릭해 주시면 아이디를 찾을 수 있습니다.</h6>
 
 		
 				<div id="middle">
@@ -40,14 +38,16 @@
 					&nbsp;
 				    &nbsp;
 				<div>
-					<button>아이디찾기</button>
+					<button id="open">아이디찾기</button>
 					<input id="button" type=button value="뒤로가기" onClick="history.back();">
+				</div>
+				<div id="findid">찾는 ${id}
 				</div>
 			</div>
 	</form>	
 </div>
 
-<div>${id}
-</div>
+
 </body>
+
 </html>

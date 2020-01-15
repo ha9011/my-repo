@@ -66,6 +66,9 @@ public class Home extends HttpServlet {
 			fw = mm.HostInfo();// 호스트 마이페이지
 			fw = pm.hostupload();// 호스트가 등록한 게시물 요청
 			fw = pm.myhouse();// 호스트 집 보유 목록
+			fw = pm.reserlist();// 호스트가 받은 예약 리스트
+			fw = pm.checkoutlist();// 호스트가 게스트에게 주는 평점 및 후기 체크아웃 리스트 
+			
 		} else if (cmd.equals("/reservation")) {
 			System.out.println("예약등록");
 			fw = mm.reservation();

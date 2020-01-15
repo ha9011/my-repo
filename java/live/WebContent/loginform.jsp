@@ -26,7 +26,7 @@
 <body>
 
 
-	<img id="rogo" alt="살다로고" src="./img/살다.png">
+	<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 	
 	<div id=box>
 	<div id= title>
@@ -64,6 +64,7 @@
 		&nbsp;
 		&nbsp;
 		<a href="joinfrm"><button>회원가입</button></a>
+		
 	
 	</form>
 	</div>
