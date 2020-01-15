@@ -197,14 +197,14 @@ public Forward searchHouse() { //처음 검색 페이지
 	    
 	    String id = (String) session.getAttribute("id"); 
 	    
-		String hostH = null;
+		String hostHL = null;
 		
 		ProductDao pDao = new ProductDao();
-		hostH = pDao.hostH(id);
+		hostHL = pDao.hostHL(id);
 		
 		pDao.close();
 		
-		request.setAttribute("hostH",hostH);
+		request.setAttribute("hostHL",hostHL);
 		
 		
 		fw = new Forward();
@@ -215,11 +215,87 @@ public Forward searchHouse() { //처음 검색 페이지
 
 	
 	
+
+
+	public Forward reserlist() { //호스트가 받은 예약리스트 
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String reserlist = null;
+		
+		ProductDao pDao = new ProductDao();
+		reserlist = pDao.reservlist(id);
+		
+		pDao.close();
+		
+		request.setAttribute("reserlist",reserlist);
+		System.out.println(reserlist);
+		
+		fw = new Forward();
+		fw.setPath("./HostInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	} //호스트가 받은 예약리스트 끝
+
 	
 	
-	
-	
-	
+
+
+	public String getAjaxrequestlist() {  //호스트 예약 승인 거절
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String reservlist= null;
+		String data=request.getParameter("data");
+		
+		ArrayList<String> ap = new  ArrayList<String>();
+		
+		Gson gs = new Gson();
+		ap = gs.fromJson(data, new TypeToken<ArrayList<String>>() {
+			
+		}.getType());
+		
+		System.out.println(ap);//[,]
+		
+
+		
+		ProductDao pDao = new ProductDao();
+		
+		pDao.reserlist(ap);
+
+		reservlist = pDao.reservlist(id);
+		
+		pDao.close();
+		return reservlist ;
+	}//-- 승인, 거절 AJAX 끝
+
+
+
+	public Forward checkoutlist() {
+		
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id"); 
+	    
+		String  checkoutlist= null;
+		
+		ProductDao pDao = new ProductDao();
+		checkoutlist = pDao.checkoutlist(id);
+		
+		pDao.close();
+		
+		request.setAttribute("checkoutlist",checkoutlist);
+		System.out.println(checkoutlist);
+		
+		fw = new Forward();
+		fw.setPath("./HostInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+
+	}
+
 	
 	
 	
@@ -365,5 +441,9 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		return inrreple;
 	}
+
+
+
+
 
 }

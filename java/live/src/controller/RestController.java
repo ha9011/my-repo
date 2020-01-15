@@ -20,7 +20,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({ "/cancelroom","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload"})
+@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -87,21 +87,19 @@ public class RestController extends HttpServlet {
 			json = pm.inputrreple(mList);
 		}else if (cmd.equals("/showrreple")) {
 			String replenum=request.getParameter("replenum");
-			
 			json = pm.showrreple(replenum);
-			
 		}else if (cmd.equals("/houseupload")){
 			System.out.println("업로드 승인");
 			json = pm.getAjaxhouseupload();
-			
+		}else if (cmd.equals("/requestlist")){
+			System.out.println("업로드 승인");
+			json = pm.getAjaxrequestlist();
+
 		}else if (cmd.equals("/cancelroom")) {
 			System.out.println("예약취소중");
 			String cancel=request.getParameter("cancel");
-			
 			json = mm.cancelroom(cancel);
 		}
-		
-		
 		
 		
 		
