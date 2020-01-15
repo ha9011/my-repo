@@ -21,8 +21,8 @@
 	#checkoutlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 		.checkout{margin-top:20px;}
 		.mainbox{font-size:18px;margin-left:10px;}
-		 #star_grade a{text-decoration: none;color: gray;}
-   		 #star_grade a.on{color:red;}
+		 .star_grade span{text-decoration: none;color: gray;}
+   		 .star_grade span.on{color:red;}
 	
 	
 	
@@ -32,10 +32,64 @@
 h5{display:inline; margin-left:40px;}
 .btn{float: right;margin-right:10px;width:70px;height:50px;}
 
+
+
+body {
+  font-family: sans-serif;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 24px 16px;
+  border-radius: 4px;
+  width: 320px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modal p {
+  font-size: 16px;
+}
+
+.close-wrapper {
+  text-align: right;
+}
+
+#star span{color:red;}
+
+
 </style>
 
 </head>
 <body>
+    <div class="modal-wrapper" style="display: none;">
+      <div class="modal">
+        <div class="modal-title">안녕하세요</div>
+        <div id="star"></div>
+       <input type="text" class="review">
+        <div class="close-wrapper">
+          <button id="conform">확정</button>
+           <button id="close">닫기</button>
+        </div>
+      </div>
+    </div>
+
+
 <div id="body">
 <h1>호스트 마이페이지 </h1>
 <form action="profileupdate" method="post"enctype="multipart/form-data">
@@ -61,16 +115,6 @@ h5{display:inline; margin-left:40px;}
 		
 		<div id="checkoutlist">
 			<h1>체크아웃리스트 및 별점 </h1>
-			<button id="open">버튼 열기</button>
-    		<div class="modal-wrapper" style="display: none;">
-      			<div class="modal">
-        	<div class="modal-title">안녕하세요</div>
-        		<p>모달 내용은 어쩌고 저쩌고..</p>
-       				 <div class="close-wrapper">
-          				<button id="close">닫기</button>
-       			 </div>
-     		 </div>
-    	</div>
 			
 		</div>
 		
@@ -86,6 +130,11 @@ h5{display:inline; margin-left:40px;}
 </div>
 <script>
 //---------------------------------------예상------------마이페이지 정보-----------------------------------------------------------------------------
+
+
+
+
+
 
 
 var $test =${result};  
@@ -260,17 +309,17 @@ $("#requestlist").on('click','.btn',function() {
 
 var $CL =${checkoutlist};  
 console.log($CL);
-
+console.log()
 var checkoutlist = document.getElementById("checkoutlist");
 
 for(intest in $CL ){
 	
-	var o= new Date($reList[intest][0]["R_CHECKOUT"]);
-	var checkout=o.toLocaleDateString();
+	var out= new Date($CL[intest][0]["R_CHECKOUT"]);
+	var checkout=out.toLocaleDateString();
 	console.log(checkout);
 
-	var i= new Date($reList[intest][0]["R_CHECKIN"]);
-	var checkin=i.toLocaleDateString();
+	var ci= new Date($CL[intest][0]["R_CHECKIN"]);
+	var checkin=ci.toLocaleDateString();
 	console.log(checkin);
 	
 	
@@ -282,35 +331,92 @@ for(intest in $CL ){
 		" |체크아웃날짜:"+checkout+"&nbsp"+"&nbsp"+"&nbsp"+
 		'</div>'); 
 	
-	var c =$('<p style="display:inline-block" id="star_grade">'+'<a href="#">★</a>'+'<a href="#">★</a>'+'<a href="#">★</a>'+'<a href="#">★</a>'+'<a href="#">★</a>'+'</p>');
-
 	
-	 $('#star_grade a').click(function(){ //별점 효과
-         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-         $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-         return false;
-     });
+	var c =$('<div>'+'<p style="display:inline-block" name="shownum" class="star_grade">'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'</p>'+'</div>');
+	
+
+	$("#checkoutlist").append(a);
+	a.append(b);
+	a.append(c);
+	
 	
 	 
-	 const open = document.getElementById("open");
-	 const close = document.getElementById("close");
-	 const modal = document.querySelector(".modal-wrapper");
-	 open.onclick = () => {
-	   modal.style.display = "flex";
-	 };
-	 close.onclick = () => {
-	   modal.style.display = "none";
-	 };
 	 
 	 
 
-$("#checkoutlist").append(a);
-a.append(b);
-a.append(c);
+
 
 }
 
+$('.star_grade span').click(function(){ //별점 효과
+	 $('.review').val("");
+	 $('#star').empty();
+	 
+    $(this).parent().children("span").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+     $(this).addClass("on").prevAll("span").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+     //console.log($(this).parent().attr("name"));
+    //#star_grade span.on
+    var star=($(this).parent().children('.on').length);
+    
+    //모달 실행하고 
+	const close = document.getElementById("close");
+	const modal = document.querySelector(".modal-wrapper");
 
+	$("#star").append($(this).parent().children('.on').clone());
+ 	 modal.style.display = "flex";
+	
+		close.onclick = () => {
+ 	 modal.style.display = "none";
+	};
+	
+	
+	
+	
+	var S =$(this).attr($(this).parent().children('.on').length);
+	var I =$(this).html();
+	
+	var num = [];
+	num.push(S);
+	num.push(I);
+	console.log(num);
+	var result = JSON.stringify(num);
+
+	console.log(result);
+	
+    $.ajax({ // 업로드 요청 받아오는 ajax
+    type:'get',
+    url:'hostreview',//restful방식
+    data:{data:result},
+    //서버에서 받을때 
+    dataType:"json",
+    
+    success:function(data){
+    	console.log("ajax 성공")
+    	
+       console.log("승인해야할 것들");
+       console.log(data);
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+    },
+	error:function(error){
+    	console.log("ajax 실패")
+
+		console.log(error);
+	}
+}); //ajax end  	
+     return false;
+});
 
 
 
