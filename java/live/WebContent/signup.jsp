@@ -68,40 +68,40 @@ font-size: 20px; color : black;
 			* 아이디 <br>
 			<br>
 			<input type="text" name="id" placeholder="아이디 입력" id="id"
-				minlength="6" maxlength="20">
+				minlength="6" maxlength="20" required=/>
 			<button type="button" class="btn" id="same">중복확인</button>
 			<div id="checkid"></div>
 			<hr>
 			* 비밀번호<br>
 			<br>
 			<input type="password" name="pw1" id="pw1" minlength="3"
-				maxlength="20" placeholder="비밀번호 입력"> <span
+				maxlength="20" placeholder="비밀번호 입력" required=/> <span
 				id="alert-success"
 				style="display: none; color: blue; font-weight: bold;">비밀번호가
 				일치합니다.</span>
 			<hr>
 			* 비밀번호 확인 <br>
 			<br> <input type="password" name="pw2" id="pw2" minlength="3"
-				maxlength="20" placeholder="비밀번호 재입력"> <span
+				maxlength="20" placeholder="비밀번호 재입력" required=/> <span
 				id="alert-danger"
 				style="display: none; color: #d92742; font-weight: bold;">비밀번호가
 				일치하지 않습니다.</span>
 			<hr>
 			* 이름 <br>
 			<br>
-			<input type="text" name="name" placeholder="이름 입력">
+			<input type="text" name="name" placeholder="이름 입력" required=/>
 			<hr>
 			* 성별 <br>
-			<br> <input type="radio" name="gender" value="1" checked>남자
+			<br> <input type="radio" name="gender" value="1"  required=>남자
 			<input type="radio" name="gender" value="2">여자
 			<hr>
 			* 이메일 <br>
 			<br>
-			<input type="text" name="email" placeholder="이메일 입력">
+			<input type="text" name="email" placeholder="이메일 입력" required=/>
 			<hr>
 			* 전화번호 <br>
 			<br>
-			<input type="text" name="phonenum" placeholder="전화번호 입력">
+			<input type="text" name="phonenum" placeholder="전화번호 입력" required=/>
 			<hr>
 			<input type="radio" name="h_or_g" value="1" checked>게스트 <input
 				type="radio" name="h_or_g" value="2">호스트

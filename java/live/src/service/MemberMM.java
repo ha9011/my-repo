@@ -67,54 +67,47 @@ public class MemberMM {
 	}
 
 	// 아이디 찾기시 실행되는 포워드
-	public Forward searchId() {
+	public String searchId(ArrayList<String> mList) {
 
-		String name = request.getParameter("name"); // 이름이랑 이메일 받아옴
-		String email = request.getParameter("email");
-		String findId = null;
+		
+		String findId = "";
 		MemberDao mDao = new MemberDao(); // DB연결
 
-		findId = mDao.findId(name, email);
-
-		if (findId.equals("")) {
-			request.setAttribute("id", "아이디가 없습니다.");// 찾는 정보와 일치하지 않을 때
-		} else {
-			request.setAttribute("id", findId);
-		}
-
-		fw = new Forward();
-		fw.setPath("./SearchId.jsp");
-		fw.setRedireact(false);
-		return fw;
+		 findId = mDao.findId(mList); // 엠다오에 인풋리플 리턴값을 리플에 담기 //엠다오로 가
+		 
+		 mDao.close();
+		
+		if(findId.equals("")) {
+			findId="아이디가 존재하지 않습니다.";
+		} 
+		// 엠다오 연결 클로스
+		return findId;
 	}
 
 	// 비밀번호 찾기 시 실행되는 포워드
-	public Forward searchPw() {
+	public String searchPw(ArrayList<String> mList) {
 
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String findPw = null;
+		
+		String findPw = "";
 		MemberDao mDao = new MemberDao();
 
-		findPw = mDao.findPw(id, email, name);
-
-		if (findPw.equals("")) {
-			request.setAttribute("pw", "비밀번호가 없습니다."); // 찾는 정보와 일치하지 않을 때
-		} else {
-			request.setAttribute("pw", findPw);
-		}
-
-		fw = new Forward();
-		fw.setPath("./SearchPw.jsp");
-		fw.setRedireact(false);
-
-		return fw;
+		findPw = mDao.findPw(mList);
+		 
+		mDao.close();
+		
+		if(findPw.equals("")) {
+			findPw="해당정보의 비밀번호가 존재하지 않습니다.";
+		} 
+			
+		
+		
+		return findPw;
 	}
 
 	// 민호
 	// ----------------------------------------------------------------------------------------------
 	public Forward join() {
+		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw1");
 		String name = request.getParameter("name");
@@ -122,11 +115,11 @@ public class MemberMM {
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		String gest = request.getParameter("h_or_g");
-
+		
 		MemberDao mDao = new MemberDao();
 		mDao.join(id, pw, name, phonenum, email, gest, gender);
 		fw = new Forward();
-		fw.setPath("./index.jsp");
+		fw.setPath("./loginform.jsp");
 		fw.setRedireact(false);
 		return fw;
 	}
