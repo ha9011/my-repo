@@ -13,7 +13,7 @@ import service.MemberMM;
 import service.ProductMM;
 
 
-@WebServlet({ "/joinfrm", "/access", "/logout", "/SearchId", "/SearchPw", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation","/hostreview" })
+@WebServlet({ "/joinfrm", "/access", "/logout", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation","/hostreview" })
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -39,12 +39,7 @@ public class Home extends HttpServlet {
 		} else if (cmd.equals("/logout")) { // 로그아웃으로 연결
 			System.out.println("로그아웃접근");
 			fw = mm.logout();
-		} else if (cmd.equals("/SearchId")) { // 아이디 찾기 연결
-			System.out.println("접근아이디z");
-			fw = mm.searchId();
-		} else if (cmd.equals("/SearchPw")) { // 비밀번호 찾기 연결
-			fw = mm.searchPw();
-		} else if (cmd.equals("/searchHouse")) { // 검색
+		}  else if (cmd.equals("/searchHouse")) { // 검색
 			fw = pm.searchHouse();
 		} else if (cmd.equals("/detailregiinfo")) {
 			System.out.println("디테일 예약 정보");

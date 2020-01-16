@@ -20,7 +20,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked"})
+@WebServlet({ "/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -97,6 +97,28 @@ public class RestController extends HttpServlet {
 			System.out.println("예약취소중");
 			String cancel=request.getParameter("cancel");
 			json = mm.cancelroom(cancel);
+		} else if (cmd.equals("/SearchId")) { // 아이디 찾기 연결
+			System.out.println("아이디 찾기  ajax 접근아이디z");
+			String searchId=request.getParameter("data");
+			
+			Gson gs = new Gson();
+			ArrayList<String> mList= new ArrayList<String>();
+			mList = gs.fromJson(searchId, new TypeToken<ArrayList<String>>() {
+			}.getType());
+			
+			json = mm.searchId(mList);
+			
+		}else if (cmd.equals("/SearchPw")) { // 비밀번호 찾기 연결
+			System.out.println("비밀번호 찾기 접근 ");
+			String searchPw=request.getParameter("data");
+			Gson gs = new Gson();
+			
+			ArrayList<String> mList= new ArrayList<String>();
+			
+			mList = gs.fromJson(searchPw, new TypeToken<ArrayList<String>>() {
+			}.getType());
+			
+			json = mm.searchPw(mList);
 		}
 		
 		
