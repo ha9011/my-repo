@@ -113,22 +113,57 @@
 	width: 70%; /* Could be more or less, depending on screen size */
 }
 
-.star_grade span {
-	text-decoration: none;
-	color: gray;
-}
-
-.star_grade span.on {
-	color: red;
-}
-
 #imgs_wrap {
 	display: inline-block;
 }
+
+ .star_grade span{text-decoration: none;color: gray;}
+          .star_grade span.on{color:red;}
+        
+        
+ .button-3{
+  width:140px;
+  height:50px;
+  border:2px solid #34495e;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 40px 50px;
+}
+.button-3 a{
+  font-family:arial;
+  font-size:16px;
+  color:#34495e;
+  text-decoration:none;
+  line-height:50px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+.eff-3{
+  width:140px;
+  height:50px;
+  bottom:-50px;
+  background:#34495e;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+.button-3:hover .eff-3{
+  bottom:0;
+}
+.button-3:hover a{
+  color:#fff;
+}
+
 </style>
 
 </head>
 <body>
+
 	<div id="body">
 		<h1>게스트 마이페이지</h1>
 		<form action="profileupdate" method="post"
@@ -224,7 +259,10 @@
 			</div>
 		</div>
 
-
+<div class="button-3">
+    <div class="eff-3"></div>
+    <a href="main.jsp"> 뒤로가기 </a>
+  </div>
 
 
 
@@ -698,9 +736,7 @@ $(".cancelRoom").click(function() {
 		
 		
 	});
-
-
-})
+});
 
 
 

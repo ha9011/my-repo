@@ -210,31 +210,31 @@ body{overflow:scroll;
    
  var backindex = 0;
  window.onload = function () {
-	 
-	 playAlert = setInterval(function() {
-		 console.log("백그라운드 번호  : "+backindex);
-		 var backlist = ["./img/main.jpg","./img/main2.jpg"];
-		 backindex++;
-		 
-		 if(backindex >= backlist.length){
-			 backindex=0;
-		 }
-		 
-		 
-		 $("#middleback").fadeOut("slow", function () {
-			 $("#middleback").css({"width":"100%"});  	
-			 $("#middleback").css({"height":"700px"});  	
-			 $("#middleback").css({"background":"url("+backlist[backindex]+")"});  	
-			 $("#middleback").css({"background-repeat":"no-repeat"});  	
-			 $("#middleback").css({"background-size":"100% 100%"});
-			
+    
+    playAlert = setInterval(function() {
+       console.log("백그라운드 번호  : "+backindex);
+       var backlist = ["./img/main.jpg","./img/main2.jpg"];
+       backindex++;
+       
+       if(backindex >= backlist.length){
+          backindex=0;
+       }
+       
+       
+       $("#middleback").fadeOut("slow", function () {
+          $("#middleback").css({"width":"100%"});     
+          $("#middleback").css({"height":"700px"});     
+          $("#middleback").css({"background":"url("+backlist[backindex]+")"});     
+          $("#middleback").css({"background-repeat":"no-repeat"});     
+          $("#middleback").css({"background-size":"100% 100%"});
+         
              $(this).fadeIn("slow");
          });
-		 
-		 
-		}, 5000);
-	 
-	 
+       
+       
+      }, 5000);
+    
+    
     var id1='<%=(String) session.getAttribute("id")%>'; 
     console.log('${sessionScope.id}');
     console.log(id1);

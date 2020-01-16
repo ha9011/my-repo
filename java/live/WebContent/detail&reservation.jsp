@@ -9,12 +9,45 @@
 
 
 <style>
+#header {
+	width: 100%;
+	height: 160px;
+	border: none;
+	text-align: right;
+}
+.log {
+	text-align: right;
+	display: inline;
+	color:white;
+	text-decoration:none;
+}
+
+.logout {
+	text-align: right;
+	display: none;
+	border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B243B;
+}
+
+button{border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B243B;
+}
+
+#rogo {
+	float: left;
+	width: 250px;
+	height: 150px;
+}
 body {
-	margin: 0 5%;
+	margin:1%;
 }
 
 #top {
-	border: 1px solid black;
+	border:none;
 	width: 100%;
 }
 
@@ -27,27 +60,33 @@ body {
 }
 
 #detail {
-	border: 1px solid black;
-	width: 95%;
+	border: none;
+	width: 100%;
 	height: 250px;
 	display: flex;
-	margin: 10px auto;
+	margin-left:10px;
+	float:left; 
 }
 
 .info {
+	font-size:20px;
 	width: 400px;
 	height: 250px;
 	display: inline-block;
-	margin: 0px 0px 0px 20px
+	margin-left: 70px;
+	color:#8F9090;
 }
 
 .mainpic {
-	width: 250px;
+	width: 400px;
 	height: 250px;
 	display: inline-block;
 }
 
 #mainimg {
+	
+	width:50%;
+	
 	
 }
 
@@ -64,18 +103,37 @@ body {
 }
 
 #middle {
+	height:100%;
 	display: flex;;
 	margin: 10px 0px 10px 0px;
 	width: 100%;
 	height: 50%;
-	border: 1px solid black
+	border:none;
 }
 
-#review {
+#rebottom {
 	margin: 5px 5px 5px 5px;
-	border: 1px solid black;
+	border: 5px solid #4774B5;
 	width: 50%;
-	height: 50%;
+	height:100%;
+	
+}
+
+#review{
+	margin:10px;
+	width: 97%;
+	height: 60%;
+	overflow: hidden;
+	border: 1px solid black;
+	
+}
+
+#bottom {
+	margin:10px;
+	width: 97%;
+	height: 300px;;
+	overflow: hidden;
+	border: 1px solid black;
 }
 
 #rightpart {
@@ -86,32 +144,34 @@ body {
 }
 
 #reservation {
-	margin: 5px 5px 5px 5px;
-	width: 97%;
-	height: 200px;
-	border: 1px solid black;
+	width:38%;
+	height: 250px;
+	border: 2px solid #D0D1D2;
 	text-align: center;
+	float:right;
+	margin-top: 10px;
+	margin-left: 200px;
+	color:#525354;
 }
 
 #reple {
 	margin: 5px 5px 5px 5px;
-	width: 97%;
-	height: 50%;
-	border: 1px solid black;
+	width: 50%;
+	height:90%;
+	border: 5px solid #4774B5;
+}
+#replebox{
+	margin:15px;
+	border:none;
 }
 
-#bottom {
-	width: 100%;
-	height: 50%;
-	overflow: hidden;
-	border: 1px solid black;
-}
 
 .inner {
 	display: inline-flex;
 }
 
 #imgdetail {
+
 	text-align: center;
 }
 
@@ -120,8 +180,24 @@ body {
 }
 
 .nextbtn {
+	
+	font-size:50px;
 	display: inline-block;
 }
+/* ---------------------------------------------------------------------------------------------------- */
+#reserInfoP{
+	width:100%;
+	display: flex;
+}
+form{
+	font-size:25px;
+}
+
+.date{
+	margin-bottom:20px;
+	height:20px; 
+}
+
 </style>
 
 </head>
@@ -134,15 +210,21 @@ body {
 
 
 <body>
-
-	<h1>예약 디테일 페이지</h1>
-
+<div id="header">
+		<!-- 아이디 비번 로그인 회원가입 입력-->
+		<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+		 <button class="btn"><a href="signup.jsp" class=log>회원가입</a></button> 
+		 <button class="btn"><a href="loginform.jsp"class=log>로그인</a></button>
+		<!-- 호스트 로그인 된 경우 - 하동원  -->
+		
+		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
+		<button class=logout onclick="mypage_session();">마이페이지</button>
+		<button class ="btn"><a href="registHouse.jsp" class=jib>집등록</a></button>
+	</div>
+	
 	<div>
 		<div id="top">
-
 			<div id="img">
-				<div id="mainimg"></div>
-
 				<div id="imgdetail">
 					<div class="nextbtn">
 						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -153,12 +235,28 @@ body {
 					</div>
 				</div>
 			</div>
+			<div id="reserInfoP">
+				<div id="mainimg"></div> <!--메인이미지 및 정보를 슬라이드 밑으로 가져와서 예약이랑 묶음 -->
+				
+				<div id="reservation">
 
-
+				<h1>날짜를 선택해주세요</h1>
+				<form action="reservation">
+				<img alt="예약달력" width="30px" height="30px" src="./img/date1.JPG"><input class="date" type="text" name="sdate" id="datepicker1"> 
+				~~
+				<img alt="예약달력" width="30px" height="30px"src="./img/date2.JPG"><input class="date" type="text" name="edate" id="datepicker2">
+					<button type="button" id="dtcommit">날짜확정</button>
+					<br> 총액 : <input name="tprice" type="text" id="totalprice"
+						placeholder="">만원<br> 인원 : <input name="tperson"
+						type="number" id="person" value="">명 <input type="hidden"
+						name="hostid" id="hostid" value=${findhostid}> <input
+						type="hidden" name="guestid" id="guestid" value=${id}> <input
+						type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
+					<button style="width:200px">예약하기</button>
+				</form>
+			</div>
+			</div>	
 		</div>
-
-
-
 	</div>
 
 
@@ -166,31 +264,17 @@ body {
 
 	<div id="middle">
 
-
-		<div id="review">
-			<h1>후기</h1>
-		</div>
-
-
-		<div id="rightpart">
-			<div id="reservation">
-
-				<h1>예약</h1>
-				<form action="reservation">
-					<input type="text" name="sdate" id="datepicker1"> ~~ <input
-						type="text" name="edate" id="datepicker2">
-					<button type="button" id="dtcommit">날짜확정</button>
-					<br> 총액 : <input name="tprice" type="text" id="totalprice"
-						placeholder="">원<br> 인원 : <input name="tperson"
-						type="number" id="person" value="">명 <input type="hidden"
-						name="hostid" id="hostid" value=${findhostid}> <input
-						type="hidden" name="guestid" id="guestid" value=${id}> <input
-						type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
-					<button>예약하기</button>
-				</form>
+		<div id="rebottom">
+			<div id="bottom">
+				<h1>주의사항</h1>
 			</div>
-
+			
+			<div id="review">
+				<h1>후기</h1>
+			</div>
+		</div>
 			<div id="reple">
+				<div id="replebox">
 				<h1>문의사항</h1>
 				<hr>
 				<div id="showreple"></div>
@@ -210,17 +294,8 @@ body {
 					<input id="chc" type="checkbox" name="비밀" value="비밀글">비밀글
 				</div>
 			</div>
-		</div>
-
+			</div>
 	</div>
-
-
-
-	<div id="bottom">
-		<h1>주의사항</h1>
-	</div>
-
-
 
 
 	<script>
@@ -711,16 +786,16 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
    var a = $('<div id="detail"></div>'); // DIV새엇ㅇ
    
    //console.log($test[0][0]["H_MAINPIC"]);
-   var b = $('<div class="mainpic"><img width="250" height="250" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
-   var c = $('<div class="info">'+'주소:  '+$test[0][0]["H_ADDRESS"]+'  '+$test[0][0]["H_DETAILADD"]+'<br>'
-         +'숙박가능 날짜:  '+$test[0][0]["H_CHECKIN"]+'~'+$test[0][0]["H_CHECKOUT"]+'<br>'
-         +'수용가능인원:  '+$test[0][0]["H_ATTENDANCE"]+'<br>'
-         +'1박가격:  '+$test[0][0]["H_ONEPRICE"]+'<br>'
-         +'방갯수:  '+$test[0][0]["H_ROOMS"]+'<br>'
-         +'침대수:  '+$test[0][0]["H_BEDROOMS"]+'<br>'
-         +'화장실:  '+$test[0][0]["H_TOLILET"]+'<br>'
-         +'주차가능:  '+$test[0][0]["H_PARKABLE"]+'<br>'
-         +'욕실:  '+$test[0][0]["H_BATHROOMS"]+'<br>'+
+   var b = $('<div class="mainpic"><img width="400px" height="250" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
+   var c = $('<div class="info"><img alt=집 width="30px" height="25px" src="./img/house.JPG">'+'&nbsp'+'&nbsp'+'주소:  '+$test[0][0]["H_ADDRESS"]+'  '+$test[0][0]["H_DETAILADD"]+'<br>'
+         //+'숙박가능 날짜:  '+$test[0][0]["H_CHECKIN"]+'~'+$test[0][0]["H_CHECKOUT"]+'<br>'
+         +'<img alt=돈 width="25px" height="20px" src="./img/money.JPG">' +'&nbsp'+'&nbsp'+'1박가격:  '+$test[0][0]["H_ONEPRICE"]+'만원'+'<br>'
+         +'<img alt=사람 width="25px" height="30px" src="./img/person.JPG">' +'&nbsp'+'&nbsp'+'수용가능인원:  '+$test[0][0]["H_ATTENDANCE"]+'<br>'
+         +'<img alt=주차장 width="30px" height="25px" src="./img/parking.JPG">'+'&nbsp'+'&nbsp' +'주차가능:  '+$test[0][0]["H_PARKABLE"]+'<br>'
+         +'<img alt=방 width="30px" height="25px" src="./img/bed.JPG">'+'&nbsp'+'&nbsp'+'방갯수:  '+$test[0][0]["H_ROOMS"]+'&nbsp'
+         +'& 침대수:  '+$test[0][0]["H_BEDROOMS"]+'<br>'
+         +'<img alt=화장실 width="25px" height="30px" src="./img/tolilet.JPG">'+'&nbsp'+'&nbsp'+'화장실:  '+$test[0][0]["H_TOLILET"]+'<br>'
+         +'<img alt=욕실 width="25px" height="30px" src="./img/bath.JPG">'+'&nbsp'+'&nbsp'+'욕실:  '+$test[0][0]["H_BATHROOMS"]+'<br>'+
          '</div>')
          
          
@@ -763,14 +838,14 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	console.log(result);	
 
 	let indexpic = [0,1,2];
-	
+	 
 	
 	for(let i in result){
 		if(i<=2){  // 3 이상일때
-			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="200px" height="200px" src="'+result[i] +'" ></div>') );
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:inline-block"> <img width="500px" height="400px" src="'+result[i] +'" ></div>') );
 				
 		}else{
-			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="200px" height="200px" src="'+result[i] +'" ></div>')  );
+			$("#imgs_wrap").append( $('<div class="mySlides" style="display:none"> <img width="500px" height="400px" src="'+result[i] +'" ></div>')  );
 			
 		}
 		
@@ -1032,6 +1107,77 @@ for(i in checkeddate){
 
 	console.log("????");
 	console.log(${findhostid})
+</script>
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<script>//header 부분 
+var id2="";
+
+
+window.onload = function () {
+	
+	 var id1='<%=(String) session.getAttribute("id")%>'; 
+	 console.log('${sessionScope.id}');
+	 console.log(id1);
+	 console.log("-------------")
+	 var ocn=document.getElementsByClassName("log");
+
+
+	 var ocn3=document.getElementsByClassName("logout")
+	 
+	 id2='<%=session.getAttribute("membertype")%>';
+		console.log(id2);
+		console.log("-------------")
+		var ocn2 = document.getElementsByClassName("jib");
+
+		if (id1 != "null") {
+			console.log(id1);
+			console.log(ocn);
+			console.log("zzzzzzzzzzzzzzzzzzzzz");
+			ocn[0].style.display = 'none';
+			ocn[1].style.display = 'none';
+			ocn3[0].style.display = 'inline';
+			ocn3[1].style.display = 'inline';
+
+		} //집등록 버튼 
+
+		if (id2 == "1") {
+			console.log("-------------")
+
+			ocn2[0].style.display = 'none';
+		} else if (id2 == "2") {
+			console.log(ocn2);
+			console.log(id2);
+			console.log(typeof id2);
+			ocn2[0].style.display = 'block';
+		} else
+			ocn2[0].style.display = 'none';
+
+	}
+
+	function logout_session() {
+		console.log("logout");
+		location.href = 'logout'; //url logout 쏴주기
+	}
+	
+	function mypage_session() {
+		
+		alert("마이페이지로 이동");
+		
+		if(id2 =="1"){
+			console.log("게스트입니다");
+			location.href = "guestInfo";
+		}else if (id2 == "2"){
+			console.log("호스트입니다");
+			location.href = "HostInfo";
+		}else {
+			console.log("어드민");
+			location.href = "AdminInfo";
+		}
+		
+	}
+
+
+
 </script>
 
 

@@ -4,37 +4,68 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>숙소검색</title>
 <style>
+#header {
+	border: none;
+	text-align: right;
+}
+.log {
+	text-align: right;
+	display: inline;
+	color:white;
+	text-decoration:none;
+}
+
+.logout {
+	text-align: right;
+	display: none;
+	border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B243B;
+}
+
+button{border:none;
+	font-size:20px;
+	color:white;
+	background-color:#0B243B;
+}
+
+/*------------------------------------------------------  */
+
 #body {
-	margin: 0 5%
+	margin:1%;
 }
 
 #searchbox {
-	border: 3px solid #0B3861;
-	width: 40%;
+	float:left;
+	border: 2px solid #0B3861;
+	width: 34%;
 	height: 60px;
 	text-align: center;
-	margin-bottom: 30px;
 }
 
 input {
 	border: none;
-	width: 500px;
+	width: 80%;
 	height: 50px;
-	font-size: 15px;
+	font-size: 20px;
 	font-weight: bold;
 	margin-top: 1px;
 }
 
-button {
+#btn1 {
+	float:right;
+	margin-right:5px;
+	margin-top:5px;
 	background-color: #0B3861;
 	border: none;
-	width: 70px;
+	width: 90px;
 	height: 50px;
 	color: white;
 	font-weight: bold;
-}
+} 
 
 #middle {
 	width: 100%;
@@ -44,14 +75,15 @@ button {
 }
 
 #list {
-	border: none;
+	border:none;
 	float: left;
-	width: 40%;
+	width: 42%;
+	
 }
 
 .out {
-	border: 2px solid #0B3861;;
-	width: 100%;
+	border-bottom:2px solid #0B3861;
+	width: 90%;
 	height: 150px;
 	display: flex;
 	margin-bottom: 10px;
@@ -69,11 +101,25 @@ button {
 	font-size: 20px;
 }
 
-#map {
-	border: 2px solid #0B3861;
+
+#maplay {
+	border-left:2px solid #0B3861;
 	float: right;
 	width: 56%;
 }
+
+#map{
+	 margin-left:25px;
+}
+
+
+#rogo {
+	float:left;
+	width: 200px;
+	height: 130px;
+}
+
+
 </style>
 
 
@@ -81,10 +127,20 @@ button {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
+	<div id="header">
+		<!-- 아이디 비번 로그인 회원가입 입력-->
+		<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+		 <button class="btn"><a href="signup.jsp" class=log>회원가입</a></button> 
+		 <button class="btn"><a href="loginform.jsp"class=log>로그인</a></button>
+		<!-- 호스트 로그인 된 경우 - 하동원  -->
+		
+		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
+		<button class=logout onclick="mypage_session();">마이페이지</button>
+		<button class ="btn"><a href="registHouse.jsp" class=jib>집등록</a></button>
+	</div>
+<!---------------------------헤더부분 추가--------------------------------------------------------------------------  -->
 	<div id="body">
-		<h1>검색 키워드 입력후 보이는 창</h1>
-
-
+		
 		<div id="searchbox">
 			<input id="subsearch" type="text" name="destination"
 				value=${destination}>
@@ -96,12 +152,7 @@ button {
 
 
 			<div id="maplay">
-
-
-
-
-				<div id="map" style="width: 50%; height: 800px;"></div>
-
+					<div id="map" style="width: 98%; height: 1000px;"></div>
 			</div>
 		</div>
 
@@ -194,7 +245,10 @@ button {
     	        console.log("하트 이미지 로그인 안됨")
      	  
       }else{  // 로그인 하트 보이게
-    	  var likelist = ${searchLike};
+
+    	  var likelistt = '${searchLike}';
+    	  var likelist = JSON.parse(likelistt);
+
 	        console.log("하트 이미지 로그인 됨")
 	        console.log("해당 방 번호 : "+$test[intest][0]["H_RGNUM"])
 	        
@@ -684,5 +738,80 @@ console.log($("#daum.maps.Marker.Area:1"));
 
 
 </script>
+
+<!-- -------------------------------------------------------------------------------------------------------------------------------------------------- -->
+<script>//header 부분 
+var id2="";
+
+
+window.onload = function () {
+	
+	 var id1='<%=(String) session.getAttribute("id")%>'; 
+	 console.log('${sessionScope.id}');
+	 console.log(id1);
+	 console.log("-------------")
+	 var ocn=document.getElementsByClassName("log");
+
+
+	 var ocn3=document.getElementsByClassName("logout")
+	 
+	 id2='<%=session.getAttribute("membertype")%>';
+		console.log(id2);
+		console.log("-------------")
+		var ocn2 = document.getElementsByClassName("jib");
+
+		if (id1 != "null") {
+			console.log(id1);
+			console.log(ocn);
+			console.log("zzzzzzzzzzzzzzzzzzzzz");
+			ocn[0].style.display = 'none';
+			ocn[1].style.display = 'none';
+			ocn3[0].style.display = 'inline';
+			ocn3[1].style.display = 'inline';
+
+		} //집등록 버튼 
+
+		if (id2 == "1") {
+			console.log("-------------")
+
+			ocn2[0].style.display = 'none';
+		} else if (id2 == "2") {
+			console.log(ocn2);
+			console.log(id2);
+			console.log(typeof id2);
+			ocn2[0].style.display = 'block';
+		} else
+			ocn2[0].style.display = 'none';
+
+	}
+
+	function logout_session() {
+		console.log("logout");
+		location.href = 'logout'; //url logout 쏴주기
+	}
+	
+	function mypage_session() {
+		
+		alert("마이페이지로 이동");
+		
+		if(id2 =="1"){
+			console.log("게스트입니다");
+			location.href = "guestInfo";
+		}else if (id2 == "2"){
+			console.log("호스트입니다");
+			location.href = "HostInfo";
+		}else {
+			console.log("어드민");
+			location.href = "AdminInfo";
+		}
+		
+	}
+
+
+
+</script>
+
+
+
 
 </html>

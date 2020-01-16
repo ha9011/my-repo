@@ -60,6 +60,45 @@
 #firstsubmit {
 	margin: 100px 0 0 0;
 }
+
+.button-3{
+  width:140px;
+  height:50px;
+  border:2px solid #34495e;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 40px 50px;
+}
+.button-3 a{
+  font-family:arial;
+  font-size:16px;
+  color:#34495e;
+  text-decoration:none;
+  line-height:50px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+.eff-3{
+  width:140px;
+  height:50px;
+  bottom:-50px;
+  background:#34495e;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+.button-3:hover .eff-3{
+  bottom:0;
+}
+.button-3:hover a{
+  color:#fff;
+}
+
 </style>
 
 <body>
@@ -81,7 +120,7 @@
 							<label class="input-group-text" for="inputGroupSelect01">집
 								메인 사진</label>
 						</div>
-						<input type="file" class="form-control-file" id="imgInput" name="mainpic">
+						<input type="file" class="form-control-file" id="imgInput" name="mainpic" required/>
 						<img id="image_section" width="100%" src="" alt="your image" />
 					</div>
 
@@ -90,12 +129,12 @@
 
 					<div class="form-group col-md-6">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="inputGroupSelect01">집
+							<label class="input-group-text" for="inputGroupSelect01" required>집
 								유형</label>
 						</div>
 						<select name="housetype" class="custom-select"
 							id="inputGroupSelect01">
-							<option selected>Choose...</option>
+							<option selected required>Choose...</option>
 							<option value="1">아파트</option>
 							<option value="2">주택</option>
 						</select>
@@ -103,11 +142,11 @@
 
 					<div class="form-group col-md-6">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="inputGroupSelect01">수용
+							<label class="input-group-text" for="inputGroupSelect01" required>수용
 								인원</label>
 						</div>
 						<select name="attendanceNum" class="custom-select" id="selbox">
-							<option selected>Choose...</option>
+							<option selected required>Choose...</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -124,7 +163,7 @@
 
 
 				<div class="form-group">
-					<label for="inputAddress">Address</label><br> <input
+					<label for="inputAddress" required>Address</label><br> <input
 						type="text" class="form-control" id="inputAddress" name="address"
 						placeholder="주소를 입력해주세요.">&nbsp;
 					<button type="button" id="LSBtn" class="btn btn-primary">입력</button>
@@ -134,7 +173,7 @@
 					<div class="test">입력한 주소의 위치</div>
 					<div class="test" id="map"></div>
 					<div class="test">
-						<label class="test" for="exampleInputPassword1">상세주소</label> <input
+						<label class="test" for="exampleInputPassword1" required>상세주소</label> <input
 							class=" form-control test" type="text" id="exampleInputPassword1"
 							name="addressDetail" placeholder="ex) 102동 1001호">
 					</div>
@@ -150,6 +189,10 @@
 
 	</div>
 
+<div class="button-3">
+    <div class="eff-3"></div>
+    <a href="main.jsp"> 뒤로가기 </a>
+  </div>
 
 
 	<!-- name : housetype // attendanceNum // attendanceDir // address //  addressDetail -->

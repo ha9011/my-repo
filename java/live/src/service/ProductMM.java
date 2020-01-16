@@ -308,7 +308,6 @@ public Forward searchHouse() { //처음 검색 페이지
 		checkoutlist = pDao.checkoutlist(id);
 		
 		pDao.close();
-		
 		request.setAttribute("checkoutlist",checkoutlist);
 		System.out.println(checkoutlist);
 		
@@ -320,16 +319,40 @@ public Forward searchHouse() { //처음 검색 페이지
 	}
 
 	
-	
 
-	public String getAjaxstarscore(String starscore) {
+
+	public Forward hostreview() {
+		HttpSession session = request.getSession(true); //세션아이디 가져감
+	    
+	    String id = (String) session.getAttribute("id");  
+	    String contents = request.getParameter("contents");
+	    String score =request.getParameter("hscore");
+	    String rgnum =request.getParameter("hrgnum");
+	    int result=0;
+	  
+
+	    System.out.println("방ㄴㄴㄴㄴㄴ");
+	    System.out.println(rgnum);
+	    
+	    
+	    
+	    MemberDao mDao = new MemberDao(); 
+		ProductDao pDao = new ProductDao();
+		result=pDao.hostreview(id,contents,score,rgnum);
 		
-		
-		
-		
-		return null;
+		  if (result == 0) { // 리서트 실패하면 출력 되면 안되니깐 if 문을 열고 리턴 null로 끝
+				System.out.println("인서트 실패");
+				return null;
+			}
+		  
+		  mDao.updatereserveGreview(rgnum);
+		  pDao.close();
+		  
+		  fw = new Forward();
+			fw.setPath("./HostInfo.jsp");
+			fw.setRedireact(false);
+			return fw;
 	}
-
 
 
 	
@@ -556,12 +579,6 @@ public Forward searchHouse() { //처음 검색 페이지
 
 
 
-
-	
-
-
-
-	
 
 
 

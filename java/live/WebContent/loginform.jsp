@@ -20,13 +20,29 @@
 	#search{text-align:center;}
 	button{color:white;font-size:20px;font-weight:bold;width:150px;height:50px;background-color:#0B243B;display:table;margin-left:auto;margin-right:auto;}
 	
+	#hf{margin-top:20px;
+	background-color:#0B243B;
+	color:white;
+}
+	#boong{
+	display: block;
+	width: 100%;
+	height: 200px;
+	
+	}
+	#footer{margin-top:100px;
+		width:100%;
+		height:200px;
+		text-align:center;
+}
+p{text-align:left;}
 </style>
 
 </head>
 <body>
 
 
-	<img id="rogo" alt="살다로고" src="./img/살다.png">
+	<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 	
 	<div id=box>
 	<div id= title>
@@ -40,11 +56,11 @@
 		<div id="input" style="display:flex">
 			<div style="display:inline-block;text-align:right;">
 			<div>
-			ID&nbsp;&nbsp;<input type="text" name="id" id="idput"></input>
+			ID&nbsp;&nbsp;<input type="text" name="id" id="idput" required></input>
 			</div>
 			
 			<div>
-			PW&nbsp;<input type="text" name="pw" ></input>
+			PW&nbsp;<input type="text" name="pw" required></input>
 			</div>
 			</div>
 			
@@ -53,22 +69,34 @@
 			</div>
 			
 		</div>
+		</form>
 		&nbsp;
 		&nbsp;
 		&nbsp;
 		<div id=search>
 		&nbsp;
-		<a href="SearchId">아이디찾기</a>&nbsp;|
-		<a href="SearchPw">비밀번호 찾기</a><br>
+		<a href="SearchId.jsp">아이디찾기</a>&nbsp;|
+		<a href="SearchPw.jsp">비밀번호 찾기</a><br>
 		</div>
 		&nbsp;
 		&nbsp;
-		<a href="joinfrm"><button>회원가입</button></a>
+		<a href="signup.jsp"><button>회원가입</button></a>
+		
 	
-	</form>
+	
 	</div>
-	
-	
+	<div id ="boong"></div>
+	<div id ="hf">
+	<div id="footer">	
+	<br>
+	<br>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;오시는 길 | 사이트맵  | 개인정보 처리 방침  | 영상정보처리기기 | 운영,관리방침이용약관 | 채용안내</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업체명 : ㈜살아보다 사업자등록번호 : 111-11-11111
+			주소 : 인천 남구 학익동 663-1 태승빌딩 5층 (1층 홈플러스) 전화번호 : 032-876-3332
+			Copyrights(c) ㈜살아보다 </p>
+			<h3>since 2020</h3>
+	</div>
+	</div>
 <script>
 	var frm=document.joinform;
 	//frm.longth(); 활용해서 반복문으로 값을 입력했는지 확인

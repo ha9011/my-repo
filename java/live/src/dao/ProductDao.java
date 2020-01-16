@@ -1104,7 +1104,7 @@ public class ProductDao {
 		
 
 		public String checkoutlist(String id) { // 체크아웃 리스트 가져옴
-			String sql="SELECT * FROM RESERVATION WHERE R_CHECKOUT<=SYSDATE AND R_HOSTID=?";
+			String sql="SELECT * FROM RESERVATION WHERE R_CHECKOUT<=SYSDATE AND R_HOSTID=? AND R_GREVIEW=0";
 			
 			ArrayList<ArrayList<HashMap<String,String>>> checkList = new ArrayList<ArrayList<HashMap<String,String>>>();
 			
@@ -1146,8 +1146,22 @@ public class ProductDao {
 			
 	}
 	
-		
-		
+		public int hostreview(String id, String contents, String score, String rgnum) {
+			String sql = "INSERT INTO HOSTREVIEW VALUES(HRV_SEQ.NEXTVAL,?,?,sysdate,?,?)";
+			int result = 0; 
+			try {
+				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,rgnum);
+				pstmt.setNString(2,id);
+				pstmt.setNString(3,contents);
+				pstmt.setNString(4,score);
+				result= pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return result; 
+		}
 	
 	
 	
@@ -1239,6 +1253,8 @@ public class ProductDao {
 			
 		return result;
 	}
+
+
 
 
 	

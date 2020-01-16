@@ -72,23 +72,63 @@ body {
 
 #star span{color:red;}
 
+.button-3{
+  width:140px;
+  height:50px;
+  border:2px solid #34495e;
+  float:left;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  box-sizing:border-box;
+  overflow:hidden;
+  margin:0 0 40px 50px;
+}
+.button-3 a{
+  font-family:arial;
+  font-size:16px;
+  color:#34495e;
+  text-decoration:none;
+  line-height:50px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+.eff-3{
+  width:140px;
+  height:50px;
+  bottom:-50px;
+  background:#34495e;
+  position:absolute;
+  transition:all .5s ease;
+  z-index:1;
+}
+.button-3:hover .eff-3{
+  bottom:0;
+}
+.button-3:hover a{
+  color:#fff;
+}
 
 </style>
 
 </head>
 <body>
+	<form action="hostreview">
     <div class="modal-wrapper" style="display: none;">
       <div class="modal">
         <div class="modal-title">안녕하세요</div>
-        <div id="star"></div>
-       <input type="text" class="review">
+        <div name="rgnum" value=rgnum></div>
+        <input type="text" class="score" name="hscore" id="hscore">
+       <input type="text" class="review" name="contents">
+       <input type="text" class="hreview" name="hrgnum" id="hcontents">
         <div class="close-wrapper">
-          <button id="conform">확정</button>
-           <button id="close">닫기</button>
+          <button id="conform" type="submit">확정</button>
+           <button type="button" id="close">닫기</button>
         </div>
       </div>
     </div>
-
+</form>
 
 <div id="body">
 <h1>호스트 마이페이지 </h1>
@@ -128,6 +168,10 @@ body {
 	
 	
 </div>
+<div class="button-3">
+    <div class="eff-3"></div>
+    <a href="main.jsp"> 뒤로가기 </a>
+  </div>
 <script>
 //---------------------------------------예상------------마이페이지 정보-----------------------------------------------------------------------------
 
@@ -190,6 +234,7 @@ var c = $('<button id = "save">사진저장</button>')
 	
 
 //--------------------------------------------------예상------------게스트 예약요청 ------------------------------------------------------------------------------
+
 var $reList =${reserlist};  
 console.log($reList);
 
@@ -309,9 +354,9 @@ $("#requestlist").on('click','.btn',function() {
 
 var $CL =${checkoutlist};  
 console.log($CL);
-console.log()
-var checkoutlist = document.getElementById("checkoutlist");
 
+var checkoutlist = document.getElementById("checkoutlist");
+  
 for(intest in $CL ){
 	
 	var out= new Date($CL[intest][0]["R_CHECKOUT"]);
@@ -332,7 +377,7 @@ for(intest in $CL ){
 		'</div>'); 
 	
 	
-	var c =$('<div>'+'<p style="display:inline-block" name="shownum" class="star_grade">'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'</p>'+'</div>');
+	var c =$('<div>'+'<p style="display:inline-block" name="'+$CL[intest][0]["R_RGNUM"]+'" class="star_grade">'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'<span>★</span>'+'</p>'+'</div>');
 	
 
 	$("#checkoutlist").append(a);
@@ -340,7 +385,6 @@ for(intest in $CL ){
 	a.append(c);
 	
 	
-	 
 	 
 	 
 
@@ -351,13 +395,19 @@ for(intest in $CL ){
 $('.star_grade span').click(function(){ //별점 효과
 	 $('.review').val("");
 	 $('#star').empty();
-	 
+	 $("#hcontents").val("");
+	     
     $(this).parent().children("span").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
      $(this).addClass("on").prevAll("span").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
      //console.log($(this).parent().attr("name"));
     //#star_grade span.on
     var star=($(this).parent().children('.on').length);
     
+    var rg=($(this).parent().attr("name"));
+    $("#hcontents").val(rg);
+    
+    $("#hscore").val(star);
+     
     //모달 실행하고 
 	const close = document.getElementById("close");
 	const modal = document.querySelector(".modal-wrapper");
@@ -368,57 +418,15 @@ $('.star_grade span').click(function(){ //별점 효과
 		close.onclick = () => {
  	 modal.style.display = "none";
 	};
-	
-	
-	
-	
-	var S =$(this).attr($(this).parent().children('.on').length);
-	var I =$(this).html();
-	
-	var num = [];
-	num.push(S);
-	num.push(I);
-	console.log(num);
-	var result = JSON.stringify(num);
 
-	console.log(result);
-	
-    $.ajax({ // 업로드 요청 받아오는 ajax
-    type:'get',
-    url:'hostreview',//restful방식
-    data:{data:result},
-    //서버에서 받을때 
-    dataType:"json",
-    
-    success:function(data){
-    	console.log("ajax 성공")
-    	
-       console.log("승인해야할 것들");
-       console.log(data);
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-    },
-	error:function(error){
-    	console.log("ajax 실패")
-
-		console.log(error);
-	}
-}); //ajax end  	
      return false;
 });
 
+console.log("예약번호 뽑아보자");	
+console.log($CL[intest][0]["R_RGNUM"]);
 
+var rgnum=($CL[intest][0]["R_RGNUM"]);
+console.log(rgnum);
 
 
 
@@ -456,9 +464,6 @@ for(intest in $home ){
 		"<h5>ㆍㆍㆍ승인대기중ㆍㆍㆍ</h5>"+
 		'</div>'); 
 	
-		
-
-
 
 
 $("#houseupload").append(a);
@@ -500,6 +505,8 @@ $("#myhouselist").append(a);
          
       });
 }
+
+
 
 //--------------------------------------------------예상------------내 집 보유 리스트 끝------------------------------------------------------------------------------
 </script>

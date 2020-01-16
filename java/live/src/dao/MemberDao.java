@@ -40,13 +40,13 @@ public class MemberDao {
 			pstmt.setNString(4, name);
 			pstmt.setNString(5, email);
 			pstmt.setNString(6, phonenum);
-
 			pstmt.setInt(7, Integer.parseInt(gest));
 
 			result = pstmt.executeUpdate();
 			System.out.println("insert test result : " + result);
 			if (result == 0) {// 실패
 				System.out.println("회원가입 실패");
+				
 				return false;
 			}
 
@@ -83,14 +83,14 @@ public class MemberDao {
 	}
 
 	// DB에서 아이디 찾음
-	public String findId(String name, String email) {
+	public String findId(ArrayList<String> mList) {
 
 		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? ";
 		String id = "";
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setNString(1, name);
-			pstmt.setNString(2, email);
+			pstmt.setNString(1, mList.get(0));
+			pstmt.setNString(2,  mList.get(1));
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -98,7 +98,6 @@ public class MemberDao {
 
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -106,19 +105,21 @@ public class MemberDao {
 	}
 
 	// DB에서 비밀번호 찾음
-	public String findPw(String id, String email, String name) {
-		String sql = "SELECT * FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
+	public String findPw(ArrayList<String> mList) {
+		String sql = "SELECT PW FROM MEMBER WHERE NAME=? AND EMAIL=? AND ID=? ";
 		String pw = "";
-
+		System.out.println(mList);
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setNString(1, name);
-			pstmt.setNString(2, email);
-			pstmt.setNString(3, id);
+			pstmt.setNString(1, mList.get(1));
+			pstmt.setNString(2, mList.get(2));
+			pstmt.setNString(3, mList.get(0));
 			rs = pstmt.executeQuery();
+			
 			if (rs.next()) {
 				pw = rs.getNString("PW"); // 미정
-
+				System.out.println("패스워드는");
+				System.out.println(pw);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -665,6 +666,44 @@ public class MemberDao {
 		return result;
 	}
 
+
+	
+	
+	
+	public int updatereserveGreview(String hrenum) {
+	      String sql = "UPDATE RESERVATION SET R_GREVIEW =1 WHERE R_RGNUM = ?";
+	      int result = 0;
+	      try {
+
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setNString(1, hrenum);
+
+	         result = pstmt.executeUpdate();
+	         System.out.println("UPDATE test result : " + result);
+	         if (result == 0) {// 실패
+	            System.out.println("리뷰 확정 실패");
+	            return result;
+
+	         }
+
+	      } catch (SQLException e) {
+	         // TODO Auto-generated catch block
+	         e.printStackTrace();
+	      }
+	      System.out.println("리뷰 확정 성공");
+	      return result;
+	   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
 
 	public String Myinfo(String id) {
