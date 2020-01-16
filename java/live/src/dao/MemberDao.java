@@ -152,8 +152,6 @@ public class MemberDao {
 		return result; // 리설트 값을 리턴
 	}
 
-	
-	
 	public String findHostId(String detailId) {
 
 		System.out.println("detailId : " + detailId);
@@ -173,7 +171,6 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 
 		return result; // 리설트 값을 리턴
 
@@ -234,11 +231,10 @@ public class MemberDao {
 
 	}
 
-	
 	public int updateLike(ArrayList<String> likearr) {
 		// ["0","아이디","68"]
 		String sql = "UPDATE LIKETABLE SET L_TYPE =? WHERE L_H_RGNUM = ? and L_ID = ?";
-		
+
 		int result = 0;
 		try {
 
@@ -246,7 +242,7 @@ public class MemberDao {
 			pstmt.setInt(1, Integer.parseInt(likearr.get(0)));
 			pstmt.setInt(2, Integer.parseInt(likearr.get(2)));
 			pstmt.setNString(3, likearr.get(1));
-			
+
 			result = pstmt.executeUpdate();
 			System.out.println("UPDATE test result : " + result);
 
@@ -265,13 +261,12 @@ public class MemberDao {
 
 	}
 
-	
 	public String checkReserDate(String detailId) {
-		
+
 		String sql = "SELECT * FROM RESERVATION where R_H_RGNUM=? AND R_TYPE = 1"; // 시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
 
 		ArrayList<ArrayList<String>> mList = new ArrayList<ArrayList<String>>();
-        //[ [in1, out1], [in2, out2] ]
+		// [ [in1, out1], [in2, out2] ]
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setNString(1, detailId);
@@ -298,27 +293,93 @@ public class MemberDao {
 		return result; // 리설트 값을 리
 
 	}
-		
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// 게스트가 후기 등록한거 모음..
+	public int insertreview(String hrenum, String id, String tareviewCont, String picscollect, String hscore) {
+		// ["예약번호","아이디","후기내용","사진들","점수]
+		String sql = "insert into guestreview values(GR_SQ.NEXTVAL, ?, ?, SYSDATE, ?, ?, ?)";
+		int result = 0;
+		try {
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, hrenum);
+			pstmt.setString(2, id);
+			pstmt.setString(3, tareviewCont);
+			pstmt.setString(4, picscollect);
+			pstmt.setString(5, hscore);
+
+			result = pstmt.executeUpdate();
+			System.out.println("insert test result : " + result);
+
+			if (result == 0) {// 실패
+				System.out.println("insert 실패");
+				return result;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("insert 성공");
+		return result;
+
+	}
+
+	public int updatereservereview(String hrenum) {
+		String sql = "UPDATE RESERVATION SET R_HREVIEW =1 WHERE R_RGNUM = ?";
+		int result = 0;
+		try {
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, hrenum);
+
+			result = pstmt.executeUpdate();
+			System.out.println("UPDATE test result : " + result);
+			if (result == 0) {// 실패
+				System.out.println("리뷰 확정 실패");
+				return result;
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("리뷰 확정 성공");
+		return result;
+	}
+
+	public String showguestreview(String showreview) {
+
+		HashMap<String, String> result = new HashMap<String, String>();
+
+		String sql = "SELECT * FROM guestreview WHERE GRV_R_GRNUM = ?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, showreview);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				result.put("GRV_CONTENT", rs.getNString("GRV_CONTENT"));
+				result.put("GRV_PICS", rs.getNString("GRV_PICS"));
+				result.put("GRV_SCORE", rs.getNString("GRV_SCORE"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Gson gs = new Gson();
+
+		String resultHM = gs.toJson(result);
+
+		System.out.println("review select result : " + resultHM);
+
+		return resultHM;
+	} // 마이페이지 끝
+
 	// ------------////////////민호
 	// 구역------------------------------------------------------------------------------------------------------------
 
@@ -326,7 +387,6 @@ public class MemberDao {
 
 		String sql = "INSERT INTO REPLE VALUES(RP_SEQ.NEXTVAL,?,SYSDATE,?,?,?)"; // 시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
 		int result = 0;
-
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -386,7 +446,6 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 
-
 		Gson gs = new Gson(); // json으로 받아온걸 자동으로 객체로 전환 하기 위한 gson 오픈
 
 		String result = gs.toJson(mList); // 리설트에 gs.toJson(mList)담기 --->쥐슨으로 제이슨에 엠리스트를 객체로 바꿔서 리설트에 담았다
@@ -441,7 +500,6 @@ public class MemberDao {
 				innerH.put("RRP_TIME", rs.getNString("RRP_TIME"));
 				innerH.put("RRP_CONTENT", rs.getNString("RRP_CONTENT"));
 
-
 				mList1.add(innerH);
 				mList.add(mList1);
 			}
@@ -459,16 +517,60 @@ public class MemberDao {
 		return result;
 
 	}
+
 	
+	// 무슨 페이지 퍼올지 확인해야함.
+	public String pagingInReple(int num, int s, int e) {
+		String sql = "SELECT * FROM (SELECT rownum rum, RP_NUM, RP_ID, RP_TIME, RP_CONTENT, RP_TYPE, RP_RGNUM FROM reple) temp WHERE  temp.rum BETWEEN ? and ? and RP_RGNUM =?";
+		System.out.println("ss ee :" + s +e);
+		ArrayList<ArrayList<HashMap<String, String>>> mList = new ArrayList<ArrayList<HashMap<String, String>>>(); // 데이터
+		// 포장하고
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, s);
+			pstmt.setInt(2, e);
+			pstmt.setInt(3, num);
+			rs = pstmt.executeQuery(); // 결과 값을 rs에 올리고
+
+			while (rs.next()) { // 아이디가 있으면 리설트에 아이디를 넣어준다
+				ArrayList<HashMap<String, String>> mList1 = new ArrayList<HashMap<String, String>>(); // 제일 처음 리스트에서 하나
+				HashMap<String, String> innerH = new HashMap<String, String>(); // 제일 안쪽에 데이터 형식
+
+				innerH.put("RP_NUM", rs.getNString("RP_NUM")); // 데이터를 (키,데이터) 형태로 넣어주기
+				innerH.put("RP_ID", rs.getNString("RP_ID"));
+				innerH.put("RP_TIME", rs.getNString("RP_TIME"));
+				innerH.put("RP_CONTENT", rs.getNString("RP_CONTENT"));
+				innerH.put("RP_TYPE", rs.getNString("RP_TYPE"));
+				innerH.put("RP_RGNUM", rs.getNString("RP_RGNUM"));
+
+				mList1.add(innerH); // 제일 안에 데이터를 하나 밖에 넣어주고
+				mList.add(mList1); // 그 중간 데이터를 제일 밖에 넣어주고
+			}
+
+		} catch (SQLException ee) {
+			ee.printStackTrace();
+		}
+
+		Gson gs = new Gson(); // json으로 받아온걸 자동으로 객체로 전환 하기 위한 gson 오픈
+
+		String result = gs.toJson(mList); // 리설트에 gs.toJson(mList)담기 --->쥐슨으로 제이슨에 엠리스트를 객체로 바꿔서 리설트에 담았다
+
+		System.out.println(result); // 리설트가 잘 넘어왔나 확인하고
+
+		return result; // 리설트 값을 리턴
+
+	}
+
 	public String Write(String id) {
-		String Sql = "SELECT H_MAINPIC,R_RGNUM,R_H_RGNUM,R_HOSTID,R_CHECKIN,R_CHECKOUT,R_PERSON,R_TOTALPRICE,R_TYPE FROM RESERVATION R,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_GUESTID=? AND R_CHECKOUT<SYSDATE";
-		
+		String Sql = "SELECT H_MAINPIC,R_RGNUM,R_H_RGNUM,R_HOSTID,R_CHECKIN,R_CHECKOUT,R_PERSON,R_TOTALPRICE,R_TYPE,R_HREVIEW FROM RESERVATION R,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_GUESTID=? AND R_CHECKOUT<SYSDATE AND R_TYPE = 1";
+
 		ArrayList<ArrayList<HashMap<String, String>>> ReviewList = new ArrayList<ArrayList<HashMap<String, String>>>();
-		 try {
-			pstmt=con.prepareStatement(Sql);
+		try {
+			pstmt = con.prepareStatement(Sql);
 			pstmt.setNString(1, id);
-			rs=pstmt.executeQuery();
-			
+			rs = pstmt.executeQuery();
+
 			while (rs.next()) {
 
 				ArrayList<HashMap<String, String>> Review = new ArrayList<HashMap<String, String>>();
@@ -483,6 +585,7 @@ public class MemberDao {
 				myReview.put("R_PERSON", rs.getNString("R_PERSON"));
 				myReview.put("R_TOTALPRICE", rs.getNString("R_TOTALPRICE"));
 				myReview.put("R_TYPE", rs.getNString("R_TYPE"));
+				myReview.put("R_HREVIEW", rs.getNString("R_HREVIEW"));
 
 				Review.add(myReview);
 				ReviewList.add(Review);
@@ -491,28 +594,14 @@ public class MemberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		  Gson gs = new Gson();
+		Gson gs = new Gson();
 
-			String result = gs.toJson(ReviewList);
-			System.out.println("내 숙박내역");
-			System.out.println(result);
+		String result = gs.toJson(ReviewList);
+		System.out.println("내 숙박내역");
+		System.out.println(result);
 
-			return result;
+		return result;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 	public String MyReser(String id) {
 
@@ -576,15 +665,8 @@ public class MemberDao {
 		return result;
 	}
 
-	
-	
-	
-	
 //--------------예상-----------------------------------------------------------------------	마이페이지 정보를 뿌려줌
-	
-	
-	
-	
+
 	public String Myinfo(String id) {
 		System.out.println("id : " + id);
 		String Sql = "SELECT PROFILE, ID, NAME, EMAIL, PHONE FROM MEMBER WHERE ID=?";
@@ -608,7 +690,6 @@ public class MemberDao {
 
 				info.add(myinfo);
 				List.add(info);
-
 
 			}
 		} catch (SQLException e) {
@@ -646,10 +727,8 @@ public class MemberDao {
 		}
 		System.out.println("프로필 성공");
 
-
 	}
 
-	
 }// 프로필 사진 변경 및 저장 끝
 
 //--------------------------------------------------------------------------------------------------------------------------

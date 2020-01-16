@@ -73,6 +73,7 @@ public class Home extends HttpServlet {
 		}
 
 		
+		
 		if (fw != null) {
 			if (fw.isRedireact()) {
 				response.sendRedirect(fw.getPath());

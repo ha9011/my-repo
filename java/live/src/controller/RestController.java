@@ -20,7 +20,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom","/hostreview", "/likechecked"})
+@WebServlet({ "/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom","/hostreview", "/likechecked", "/showreview", "/pagereple"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -101,7 +101,17 @@ public class RestController extends HttpServlet {
 			System.out.println("호스트가 남긴 게스트 별점");
 			String starscore=request.getParameter("data");
 			json = pm.getAjaxstarscore(starscore);
+		}else if (cmd.equals("/showreview")) {
+			System.out.println("내가작성한리뷰 다시 보기");
+			
+			json = pm.getAjaxshowreview();
+		}else if (cmd.equals("/pagereple")) {
+			System.out.println("페이징 클릭");
+			
+			json = pm.getAjaxShowPageReple();
 		}
+		
+		
 		
 		
 		

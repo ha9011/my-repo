@@ -193,16 +193,18 @@ body {
 			<div id="reple">
 				<h1>문의사항</h1>
 				<hr>
-				<div id="showreple"></div> <!-- 여기에 댓글이 들어감 -->
+				<div id="showreple"></div>
+				<!-- 여기에 댓글이 들어감 -->
 				<br>
-				
-				
-				<div id="rreple"></div>    <!-- 삭제 체크중 -->
-				
+
+
+				<div id="rreple"></div>
+				<!-- 삭제 체크중 -->
+
 				<div id=replepaging></div>
 				<hr>
 				<div id="inputreple">
-					<input  type="text" id="input"
+					<input type="text" id="input"
 						placeholder="주제와 무관한 댓글, 악플은 삭제될 수 있습니다.">
 					<button type="button" id="replepush">등록</button>
 					<input id="chc" type="checkbox" name="비밀" value="비밀글">비밀글
@@ -254,130 +256,333 @@ body {
 		   console.log(b);
 		   
 		   a.append(b);
-			a.append(c);	
+		   a.append(c);	
 		   $("#showreple").append(a);
 	   }	   
-	   	
-		
-		
-	
-
 	   
 	}
 	
 	// 페이징 id = replepaging
-	  for(var i = 1 ; i <= Math.ceil(${reple}.length/10) ; i ++){
-		  $("#replepaging").append(i);
+	$("#replepaging").append($("<span class='pgbtn' name='Opage"+1+"'> << </span>"));
+	$("#replepaging").append($("<span class='pgbtn' name='minus'> * </span>"));
+	for(var i = 1 ; i <= Math.ceil(${reple}.length/10) ; i ++){
+		if(i<=5){  
+		$("#replepaging").append($("<span class='pgbtn' name='page"+i+"'> "+i+" </span>"));
+		}  
 	}
+	$("#replepaging").append($("<span class='pgbtn' name='plus'> * </span>"));
+	$("#replepaging").append($("<span class='pgbtn' name='Opage"+Math.ceil(${reple}.length/10)+"'> >> </span>"));
+	$("#replepaging").children(":eq(2)").css("color","red");  // 처음 페이지만
+	
+	console.log("버튼테스트");
+	console.log($("#replepaging").children());
+	
+	
+	//페이지 클릭!!할때 이벤트변화
+	let currentreplepage = 1;  // 현재 페이지
+	let overMove=0;
+	$("#replepaging").on("click",'.pgbtn',function(){
+		
+		var clickpage = $(this).attr("name");
+		console.log(clickpage);
+		console.log(clickpage);
+		//currentreplepage 현재페이지
+		if(clickpage==="plus"){
+			if(currentreplepage===Math.ceil(${reple}.length/10)){
+				
+			}else{
+				currentreplepage++;
+			}
+			
+		}else if(clickpage==="minus"){
+			if(currentreplepage===1){
+				
+			}else{
+				currentreplepage--;
+			}
+			
+			
+		}else{
+			if(clickpage.slice(0, 1)==="O"){
+				console.log("ggggggggggggggggggg")
+				overMove=1;
+				currentreplepage = Number(clickpage.slice(5, clickpage.length));
+			}else{
+				console.log("hhhhhhhhhhhh")
+				currentreplepage = Number(clickpage.slice(4, clickpage.length));
+					
+			}
+			
+		}
+		console.log(currentreplepage)  // 현재 페이지;;
+		
+		
+		var list = [];  // [현재 숙소 번호 , 현재 페이지]
+		var pagergnum = ${rgnum};
+		list.push(pagergnum);
+		list.push(currentreplepage);
+		
+		var listString = JSON.stringify(list);
+		$.ajax({
+			type : 'get',
+			url : "pagereple",
+			data : {reple : listString},
+			datatype:"json",
+			
+			//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
+			
+			success:function(jsondata){
+			
+				console.log("paging 성공 AJAX")
+				
+				console.log(jsondata)
+				var data = JSON.parse(jsondata);
+				//비워야할곳 찾자...
+				 $("#showreple").empty();
+				
+				// 해당 지역에 페이징한 데이터 넣기
+				for(i in data){
+					console.log(data.length);
+					console.log(Math.ceil(data.length/10));  // 페이지 수 // 10페이지당 1개
+					
+					
+					
+				   if(i <=9){  // 10페이지부터 보여주기  - 시작점  총 10개
+					   var a = $('<div class="printreple"></div>');
+					   
+					   var b = $('<div class="reple">'+'댓글번호 :  '+data[i][0]["RP_NUM"]+'아이디 :  '+data[i][0]["RP_ID"]+data[i][0]["RP_TIME"]+'<br>'
+					   				+data[i][0]["RP_CONTENT"]+'<br>'
+					   				+'<button id="'+data[i][0]["RP_NUM"]+'" class="rreplebtn">'+'답글'+'</button>'+'<br>'+'</div>');
+					   				
+					   var c = $('<div class="rreple" id="rreple'+data[i][0]["RP_NUM"]+'"></div>');
+					   var d = 	$('<div class="rreplecnt" id="rreplecnt'+data[i][0]["RP_NUM"]+'"></div>');    // 댓글 쓰면 가장 마지막 페이지로 전환
+					  
+					   
+					   c.append(d);			
+					   
+					   
+//				  	   				+'<div class="rreple" id="rreple'+${reple}[i][0]["RP_NUM"]+'"><div><input type="text" id="rreplecontent'+${reple}[i][0]["RP_NUM"]'">'
+//				  	   				+'<button class="rrepleput" id="'+${reple}[i][0]["RP_NUM"]+'">'+'등록'+'</button></div></div>'); 
+					   		
+					   console.log("--")
+					   console.log(b);
+					   
+					   a.append(b);
+						a.append(c);	
+					   $("#showreple").append(a);
+				   }	   
+				   
+					
+					
+				}
+				
+				// 버튼 모양 바꾸기 1,2,last-1, last 고정 나머지만 변동  // 현재 페이지
+				//Math.ceil(${reple}.length/10) 라스트 페이지
+				console.log("ajax 넘어오고나서  현재페이지 : " + currentreplepage)
+				console.log("막페이지 : " + Math.ceil(${reple}.length/10))
+				console.log("overmove : " + overMove)
+				
+				if(currentreplepage === 1 || currentreplepage === 2 ||  currentreplepage === Math.ceil(${reple}.length/10)-1 || currentreplepage === Math.ceil(${reple}.length/10)){
+					if(currentreplepage===1){
+						if(overMove===1){
+							$("#replepaging").empty();  // 버튼 칸 비우고 
+							$("#replepaging").append($("<span class='pgbtn' name='Opage"+1+"'> << </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='minus'> * </span>"));
+							 
+							$("#replepaging").append($("<span class='pgbtn' name='page"+currentreplepage+"'> "+currentreplepage+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage+1)+"'> "+(currentreplepage+1)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage+2)+"'> "+(currentreplepage+2)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage+3)+"'> "+(currentreplepage+3)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage+4)+"'> "+(currentreplepage+4)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='plus'> * </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='Opage"+Math.ceil(${reple}.length/10)+"'> >> </span>"));
+							
+						}
+						$("#replepaging").children().css("color","black");
+						$("#replepaging").children(":eq(2)").css("color","red");
+					}else if(currentreplepage===2){
+						$("#replepaging").children().css("color","black");
+						$("#replepaging").children(":eq(3)").css("color","red");
+					}else if(currentreplepage===Math.ceil(${reple}.length/10)){
+						if(overMove===1){
+							$("#replepaging").empty();  // 버튼 칸 비우고 
+							$("#replepaging").append($("<span class='pgbtn' name='Opage"+1+"'> << </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='minus'> * </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage-4)+"'> "+(currentreplepage-4)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage-3)+"'> "+(currentreplepage-3)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage-2)+"'> "+(currentreplepage-2)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage-1)+"'> "+(currentreplepage-1)+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='page"+currentreplepage+"'> "+currentreplepage+" </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='plus'> * </span>"));
+							$("#replepaging").append($("<span class='pgbtn' name='Opage"+Math.ceil(${reple}.length/10)+"'> >> </span>"));
+							
+						}
+						$("#replepaging").children().css("color","black");
+						$("#replepaging").children(":eq(6)").css("color","red");
+					}else if(currentreplepage===Math.ceil(${reple}.length/10)-1){
+						$("#replepaging").children().css("color","black");
+						$("#replepaging").children(":eq(5)").css("color","red");
+					}
+				}else{ // 이놈일때만 페이지 버튼 이동  currentreplepage 이놈 기준으로 양 옆 +-2;
+					
+					$("#replepaging").empty();  // 버튼 칸 비우고 
+					$("#replepaging").append($("<span class='pgbtn' name='Opage"+1+"'> << </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='minus'> * </span>"));
+					 
+					$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage-2)+"'> "+(currentreplepage-2)+" </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage-1)+"'> "+(currentreplepage-1)+" </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='page"+currentreplepage+"'> "+currentreplepage+" </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage+1)+"'> "+(currentreplepage+1)+" </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='page"+(currentreplepage+2)+"'> "+(currentreplepage+2)+" </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='plus'> * </span>"));
+					$("#replepaging").append($("<span class='pgbtn' name='Opage"+Math.ceil(${reple}.length/10)+"'> >> </span>"));
+					
+					$("#replepaging").children(":eq(4)").css("color","red");  // 처음 페이지만
+				
+				}
+				
+				
+				
+			}	,
+			error:function(error){
+				console.log(error);
+			}
+			
+			
+		});
+	})
+	
+	
+	
+	
+	
 	
 	
 	
 	//대댓창 보여주는 펑션	AJAX	
-	 $(".rreplebtn").on("click",function(){  //답글창 누르면 나옴   --> ajax로 바꿔줄것. 댓글 나오도록 하는 것 !!
-		 
+	 $(document).on("click",".rreplebtn",function(){  //답글창 누르면 나옴   --> ajax로 바꿔줄것. 댓글 나오도록 하는 것 !!
+		 	var rrpbtn = $(this).text();	
+
 			var temp = $(this).attr('id');  // 해당 댓글 번호 
 			console.log($(this).attr('id'));
-			$('#rreple'+$(this).attr('id')).css("display", "block");   	
+			$('#rreple'+$(this).attr('id')).css("display", "block"); 
 			
-			$.ajax({
-				type : 'get',
-				url : "showrreple",
-				data : {replenum : temp},
-				datatype:"json",
-				
-				//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
-				
-				success:function(rreple){
-				
+			
+	 		if(rrpbtn==="답글" ){
+	 			$.ajax({
+					type : 'get',
+					url : "showrreple",
+					data : {replenum : temp},
+					datatype:"json",
 					
-				var obj=JSON.parse(rreple);
+					//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
 					
-					console.log(typeof obj);
-					console.log(obj);
-					console.dir(obj);
-					console.log("나와줘제발22");
+					success:function(rreple){
 					
-					for(i in obj){
 						
-					   
-					   
-					   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
-							   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
-					   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
-							   
-					   $("#rreplecnt"+temp).append(a);
-					   
-					   
+					var obj=JSON.parse(rreple);
+						
+						console.log(typeof obj);
+						console.log(obj);
+						console.dir(obj);
+						console.log("나와줘제발22");
+						
+						for(i in obj){
+							
+						   
+						   
+						   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
+								   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
+						   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
+								   
+						   $("#rreplecnt"+temp).append(a);
+						   
+						   
+						}
+						
+						var d= $('<input type="text" id="rreplecontent'+temp+'" ><button class="rrepleput" id="'+temp+'">'+'등록'+'</button>');
+						$("#rreplecnt"+temp).after(d);
+						
+						//대댓글 디비에 보내기 성공했음	(ajax)
+						$(".rreple").on('click','.rrepleput',function() {
+							
+							
+							$("#rreplecnt").empty();   // rreplecnt <- 대댓글이 쌓이는 곳 // 댓글 쓰면 타 댓글 다 사라지고 보여짐 일단 몰라
+							var temp =$(this).attr('id');
+							var a=$("#rreplecontent"+temp).val();
+							console.log(a);
+							
+							var rrepledata=[];
+							
+							
+							rrepledata.push(a);
+							rrepledata.push(temp);
+							
+							var result=JSON.stringify(rrepledata);
+							
+							$.ajax({
+								type : 'get',
+								url : "inputrreple",
+								data : {rreple : result},
+								datatype:"json",
+								
+								//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
+								
+								success:function(rreple){
+								
+									$("#rreplecnt"+temp).empty();
+								var obj=JSON.parse(rreple);
+									
+									console.log(typeof obj);
+									console.log(obj);
+									console.dir(obj);
+									for(i in obj){
+										console.log("나와줘제발");
+										console.log(obj[i][0]["RRP_CONTENT"]);
+									   
+									   
+									   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
+											   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
+									   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
+											   
+									   $("#rreplecnt"+temp).append(a);
+									   
+									   console.log("test======temp : " + temp);
+									   console.dir($("#rreplecnt"+temp));
+									
+									}
+								}	,
+								error:function(error){
+									console.log(error);
+								}
+								
+								
+							});
+							
+						}) 
+						
+					}	,
+					error:function(error){
+						console.log(error);
 					}
 					
-					var d= $('<input type="text" id="rreplecontent'+temp+'" ><button class="rrepleput" id="'+temp+'">'+'등록'+'</button>');
-					$("#rreplecnt"+temp).after(d);
 					
-					//대댓글 디비에 보내기 성공했음	(ajax)
-					$(".rreple").on('click','.rrepleput',function() {
-						
-						
-						$("#rreplecnt").empty();   // rreplecnt <- 대댓글이 쌓이는 곳 // 댓글 쓰면 타 댓글 다 사라지고 보여짐 일단 몰라
-						var temp =$(this).attr('id');
-						var a=$("#rreplecontent"+temp).val();
-						console.log(a);
-						
-						var rrepledata=[];
-						
-						
-						rrepledata.push(a);
-						rrepledata.push(temp);
-						
-						var result=JSON.stringify(rrepledata);
-						
-						$.ajax({
-							type : 'get',
-							url : "inputrreple",
-							data : {rreple : result},
-							datatype:"json",
-							
-							//서블릿 성공시 돌아오는곳  $test[0][0]["H_RGNUM"];
-							
-							success:function(rreple){
-							
-								$("#rreplecnt"+temp).empty();
-							var obj=JSON.parse(rreple);
-								
-								console.log(typeof obj);
-								console.log(obj);
-								console.dir(obj);
-								for(i in obj){
-									console.log("나와줘제발");
-									console.log(obj[i][0]["RRP_CONTENT"]);
-								   
-								   
-								   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
-										   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
-								   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
-										   
-								   $("#rreplecnt"+temp).append(a);
-								   
-								   console.log("test======temp : " + temp);
-								   console.dir($("#rreplecnt"+temp));
-								
-								}
-							}	,
-							error:function(error){
-								console.log(error);
-							}
-							
-							
-						});
-						
-					}) 
-					
-				}	,
-				error:function(error){
-					console.log(error);
-				}
-				
-				
-			});
+				});
+	 			
+	 			
+	 			$(this).text("답글닫기");
+	 		}else{
+	 			
+	 			 $("#rreplecnt"+temp).empty();
+	 			 $("#rreplecontent"+temp).detach();
+	 			$(".rrepleput").detach();
+	 			
+	 			
+	 			$(this).text("답글");
+	 		}
+		   	
+			
+			
 			 
 			 
 			 
@@ -391,8 +596,9 @@ body {
 	
 	
 
-
+//[댓글 입력]
 $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버튼 클릭시 클릭 이벤트를 준다
+	console.log("총 페이지 : " + Math.ceil(${reple}.length/10));
 	  $("#showreple").empty(); //쇼리플창  초기화 해주는 곳
 	var type; //비밀인지 아닌지 타입을 담을 변수
 	//
@@ -420,7 +626,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	repledata.push(rep);
 	repledata.push(id1);
 	repledata.push(temp);
-	
+	repledata.push(Math.ceil((${reple}.length+1)/10));
 	console.log(repledata); // 마지막으로 만들어진 배열을 확인해본다
 	
  	var result=JSON.stringify(repledata); //배열을 같은 오브잭트 형식을  스트링파이를  이용해서 스트링으로 바꾸고 리설트에 삽입 
@@ -434,8 +640,10 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 							//서블릿 성공하고 여기로 돌아온다  $test[0][0]["H_RGNUM"];
 		
 		success:function(reple){   //서블릿에서의 과정들 성공후에 돌아온다 리설트리턴 값에는 객체화 된 엠리스트가 돌아온다 
+			
 			var result = JSON.parse(reple); //리서트 제이슨으로 파싱한다-->파싱은 스트링을 오브젝트 형태로 바꿔준다.   
 			
+			// **댓글 찍고, 마지막 페이지에서 보여줘야함!!!!
 			
 			console.log(typeof result); //리설트에 타입을 알아보기 위해
 			console.log(result); // 단순 리설트 값
@@ -443,17 +651,44 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 			for(i in result){ // i에 리설트를 다 담고
 				console.log(result[i]);
 			   
-			   var a = $('<div class="printreple"></div>'); //div생성하는 a 변수
-			   
-			   var b = $('<div class="reple">'+'댓글번호 :  '+result[i][0]["RP_NUM"]+'아이디 :  '+result[i][0]["RP_ID"]+'<br>'
-					   +'     '+result[i][0]["RP_TIME"]+'<br>'
-			   				+'<div class innerreple>'+result[i][0]["RP_CONTENT"]+'<br>'+result[i][0]["RP_TYPE"]+'</div>'+'</div>')
-					   //필요한 데이터를 필요한 형태로 출력하는 b 변수
-			   a.append(b); //a에 b를 넣는다. 필요한 정보의 형태를 다 만든거
-			   
-			   $("#showreple").append(a); //출력하고자 하는 부분에 완성된 a변수를 뿌려준다
+				   var a = $('<div class="printreple"></div>');
+				   
+				   var b = $('<div class="reple">'+'댓글번호 :  '+result[i][0]["RP_NUM"]+'아이디 :  '+result[i][0]["RP_ID"]+result[i][0]["RP_TIME"]+'<br>'
+				   				+result[i][0]["RP_CONTENT"]+'<br>'
+				   				+'<button id="'+result[i][0]["RP_NUM"]+'" class="rreplebtn">'+'답글'+'</button>'+'<br>'+'</div>');
+				   				
+				   var c = $('<div class="rreple" id="rreple'+result[i][0]["RP_NUM"]+'"></div>');
+				   var d = 	$('<div class="rreplecnt" id="rreplecnt'+result[i][0]["RP_NUM"]+'"></div>');    // 댓글 쓰면 가장 마지막 페이지로 전환
+				  
+				   
+				   c.append(d);			
+				   
+			   		
+				   console.log("--")
+				   console.log(b);
+				   
+				   a.append(b);
+					a.append(c);	
+				   $("#showreple").append(a);
 			
+			   
 			}
+			   
+			   $("#replepaging").empty();  // 버튼 칸 비우고 
+				$("#replepaging").append($("<span class='pgbtn' name='Opage"+1+"'> << </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='minus'> * </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='page"+(Math.ceil((${reple}.length+1)/10)-4)+"'> "+(Math.ceil((${reple}.length+1)/10)-4)+" </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='page"+(Math.ceil((${reple}.length+1)/10)-3)+"'> "+(Math.ceil((${reple}.length+1)/10)-3)+" </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='page"+(Math.ceil((${reple}.length+1)/10)-2)+"'> "+(Math.ceil((${reple}.length+1)/10)-2)+" </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='page"+(Math.ceil((${reple}.length+1)/10)-1)+"'> "+(Math.ceil((${reple}.length+1)/10)-1)+" </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='page"+Math.ceil((${reple}.length+1)/10)+"'> "+Math.ceil((${reple}.length+1)/10)+" </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='plus'> * </span>"));
+				$("#replepaging").append($("<span class='pgbtn' name='Opage"+Math.ceil((${reple}.length+1)/10)+"'> >> </span>"));
+				$("#replepaging").children().css("color","black");
+				$("#replepaging").children(":eq(6)").css("color","red");
+			   
+			   
+			
 		}	,
 		error:function(error){ //에러시 에러 뜨게하기
 			console.log(error);
@@ -520,7 +755,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	
 	//하동원 detail 사진!
 	
-	
+	//사진 넣기
 	var a = $test[0][0]["H_DETAILPICS"];
 	var jbSplit = a.split(',');
 	console.log(jbSplit);	
@@ -625,7 +860,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		    showMonthAfterYear: true,
 		  
-		    minDate:new Date($test[0][0]["H_CHECKIN"].substr(0,10)),
+		    minDate:new Date(),
 		    maxDate: new Date($test[0][0]["H_CHECKOUT"].substr(0,10)),
 			beforeShowDay:function(date){
 		        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
@@ -679,7 +914,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 		    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
 		    showMonthAfterYear: true,
 		  
-		    minDate:new Date($test[0][0]["H_CHECKIN"].substr(0,10)),
+		    minDate:new Date(),
 		    maxDate: new Date($test[0][0]["H_CHECKOUT"].substr(0,10)),
 			beforeShowDay:function(date){
 		        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);

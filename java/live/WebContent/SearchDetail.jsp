@@ -111,7 +111,7 @@ button {
 //---------------------------예상--------------------------------------------
 	console.log("좋아요 리스트 ==");
 	console.log('${searchLike}');
-	var likelist = ${searchLike};
+	
 	
 	
    var $test =${result};  
@@ -194,7 +194,7 @@ button {
     	        console.log("하트 이미지 로그인 안됨")
      	  
       }else{  // 로그인 하트 보이게
-
+    	  var likelist = ${searchLike};
 	        console.log("하트 이미지 로그인 됨")
 	        console.log("해당 방 번호 : "+$test[intest][0]["H_RGNUM"])
 	        

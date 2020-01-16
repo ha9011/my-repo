@@ -1216,7 +1216,7 @@ public class ProductDao {
 	public int reservation(String regnum, String guestid, String hostid, String sdate, String edate, String tperson, String tprice) {
 		int result = 0;
 			
-		String sql = "INSERT INTO RESERVATION VALUES(RESER_SQ.NEXTVAL,?,?,?,?,?,?,0,?)";
+		String sql = "INSERT INTO RESERVATION VALUES(RESER_SQ.NEXTVAL,?,?,?,?,?,?,0,?,0,0)";
 		
 		try {
 			pstmt = con.prepareStatement(sql);

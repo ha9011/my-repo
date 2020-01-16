@@ -91,17 +91,22 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		System.out.println("아이디 검사 : " +  loginID);
 		if(loginID==null) {
+			request.setAttribute("searchLike","[]");
 		}else {
 			System.out.println("라이크 검사 ");
 			searchLike = pDao.searchLike(loginID);
+			request.setAttribute("searchLike",searchLike);
 		}
 		
 		
 		
 		pDao.close();
+		
 		request.setAttribute("result",searchHouse);
+		
 		request.setAttribute("destination",destination);
-		request.setAttribute("searchLike",searchLike);
+		
+		
 		
 		
 		
@@ -372,8 +377,52 @@ public Forward searchHouse() { //처음 검색 페이지
 	}
 	
 	
+	public String getAjaxshowreview() {
+
+		String showreview=request.getParameter("showreview"); // 각 예약 번호
+		System.out.println("각 예약 번호 : "+showreview);
+		
+		HashMap<String, String> greview = new HashMap<String, String>();
+		
+		MemberDao mDao = new MemberDao();    // select 부터 있는지 없는 지 검색 // 1 아니면 0을 뱉어야함  (있고 / 없고)
+		
+		
+		
+		return mDao.showguestreview(showreview); 
+	}
 	
 	
+	
+	//paging reple show
+	public String getAjaxShowPageReple() {
+		
+		String pagingReple=request.getParameter("reple"); // 각 예약 번호
+		ArrayList<String> likearr = new ArrayList<String>();
+		Gson gs = new Gson();
+		
+		likearr = gs.fromJson(pagingReple, new TypeToken<ArrayList<String>>(){}.getType());
+		
+		MemberDao mDao = new MemberDao();
+		String inrreple= null;
+		
+		int num = Integer.parseInt(likearr.get(0));
+		int e = Integer.parseInt(likearr.get(1))*10;
+		int s = e-9;
+
+		System.out.println("시작 : "+ s);
+		System.out.println("끝 : "+ e);
+		//셀렉트 조건 긁어오기
+		inrreple=mDao.pagingInReple(num,s,e);
+		
+		
+		System.out.println("대댓글 입력");
+		//System.out.println(inrreple);
+		
+		
+		
+		return inrreple;
+	}
+
 	
 	
 	
@@ -504,6 +553,15 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		return inrreple;
 	}
+
+
+
+
+	
+
+
+
+	
 
 
 

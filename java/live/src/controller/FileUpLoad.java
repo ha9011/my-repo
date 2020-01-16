@@ -12,7 +12,7 @@ import service.FileServiceMM;
 import service.MemberMM;
 import service.ProductMM;
 
-@WebServlet({"/registHouse","/registHouseDetail","/registHousechdate","/profileupdate"})
+@WebServlet({"/registHouse","/registHouseDetail","/registHousechdate","/profileupdate", "/registGuestReview"})
 public class FileUpLoad extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,6 +39,9 @@ public class FileUpLoad extends HttpServlet {
 		}else if(cmd.equals("/profileupdate")) { //집 마지막 데이터
 			System.out.println("프로필변경");
 			fw=fs.updateprofile();
+		}else if(cmd.equals("/registGuestReview")) { // 게스트 -> 리뷰 -> 사진 등록
+			System.out.println("게스트 수정");
+			fw=fs.updateguestreview();
 		}
 		
 		

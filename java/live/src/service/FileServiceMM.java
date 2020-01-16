@@ -308,23 +308,153 @@ public class FileServiceMM {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//게스트 리뷰 입니다. == 동원 ==
+	public Forward updateguestreview() {
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		String hrenum = "";
+		String hscore = "";
+		String tareviewCont = "";    
+		
+		String picscollect = "";   // 사진의 모든 경로 담기
+		
+		String Myinfo = null;
+		String MyReser = null;
+		String Write=null;
+		
+		
+		
+		System.out.println("id : " +id);		
+		
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request); // multipart로 전송되었는가를 체크
+		if (isMultipart) { // multipart로 전송 되었을 경우
+			File temporaryDir = new File("c:/tmp/"); // 업로드 된 파일의 임시 저장 폴더를 설정
+			
+			//C:\git_repo\my-repo\java\live\WebContent\img\mainhouse
+			//String uploadPath = "C:/git_repo/my-repo/java/live/WebContent/img/mainhouse/";
+			
+			String realDir = "C:/git_repo/my-repo/java/live/WebContent/img/reviewpics/";
+			String uploadRealPath = "./img/reviewpics/";
+			// tmp의 폴더의 전송된 파일을 upload 폴더로 카피 한다.
+			
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			factory.setSizeThreshold(1 * 1024 * 1024); // 1메가가 넘지 않으면 메모리에서 바로 사용
+			factory.setRepository(temporaryDir); // 1메가 이상이면 temporaryDir 경로 폴더로 이동
+			// 실제 구현단계 아님 설정단계였음
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			upload.setSizeMax(10 * 1024 * 1024);
+			// 최대 파일 크기(10M)
+			List<FileItem> items;
+			
+			
+			try {
+				items = upload.parseRequest(request);
+				Iterator iter = items.iterator(); // Iterator 사용
+				while (iter.hasNext()) {
+					FileItem fileItem = (FileItem) iter.next(); // 파일을 가져온다
+
+					if (fileItem.isFormField()) { // 업로드도니 파일이 text형태인지 다른 형태인지 체크
+													// text형태면 if문에 걸림
+						try {
+							System.out.println("폼 파라미터: " + fileItem.getFieldName() + "=" + fileItem.getString("UTF-8"));
+							
+							//request 영역에 저장 저장 할 필요없음.
+							//request.setAttribute(fileItem.getFieldName(), fileItem.getString("UTF-8")); // 제일 중요 <= 침대 욕조 수 등 갯수 정리
+							
+							if(fileItem.getFieldName().equals("hrenum")) {  // 예약 번호 담기
+								hrenum = fileItem.getString("UTF-8");
+							}else if(fileItem.getFieldName().equals("hscore")) { // 점수 담기
+								hscore = fileItem.getString("UTF-8");
+							}else if(fileItem.getFieldName().equals("tareviewCont")) { // 글 내용 담기
+								tareviewCont = fileItem.getString("UTF-8");
+							}
+						
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else { // 파일이면 이부분의 루틴을 탄다
+						if (fileItem.getSize() > 0) { // 파일이 업로드 되었나 안되었나 체크 size>0이면 업로드 성공
+							String fieldName = fileItem.getFieldName();
+							String fileName = fileItem.getName();
+							String contentType = fileItem.getContentType();
+							boolean isInMemory = fileItem.isInMemory();
+							long sizeInBytes = fileItem.getSize();
+							
+							System.out.println("파일 [fileName] : " + fileName );
+						
+							
+							
+
+							
+							//파일 이름 변경
+							File uploadedFile = new File(realDir, id+hrenum+"_"+fileName); // 실제 디렉토리에 fileName으로 카피 된다.   // 파일 이름 변경
+							//파일 이름에 다 넣기
+							picscollect+=uploadRealPath+id+hrenum+"_"+fileName+",";
+							
+							
+							
+							try {
+								fileItem.write(uploadedFile);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							fileItem.delete(); // 카피 완료후 temp폴더의 temp파일을 제거
+						}
+					}
+				}
+			} catch (FileUploadException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // 실제 업로드 부분(이부분에서 파일이 생성된다)
+
+			
+		} else {
+			System.out.println("인코딩 타입이 multipart/form-data 가 아님.");
+		}
+
+		
+		//System.out.println("reginum ** 확인 : " + reginum);
+		//System.out.println(picscollect);
+		//request.setAttribute("picscollect", picscollect);            // 제일 중요 <= 침대 욕조 수 등 갯수 정리
+		
+		//Insert에 넣고, 
+//		String id = (String)session.getAttribute("id");
+//		String hrenum = "";
+//		String hscore = "";
+//		String tareviewCont = "";    
+//		
+//		String picscollect = ""; 
+		
+		MemberDao mDao = new MemberDao();
+		
+		 mDao.insertreview(hrenum,id,tareviewCont,picscollect,hscore);
+		
+		//Reservation 업데이트 하기-> 확정으로 바꿔주기 0->1
+		 
+		 mDao.updatereservereview(hrenum);  //R_REVIEW
+		
+		 
+		 
+		
+			Myinfo = mDao.Myinfo(id);
+			MyReser = mDao.MyReser(id);
+			Write = mDao.Write(id);
+			
+			mDao.close();
+
+			request.setAttribute("result", Myinfo);
+			request.setAttribute("MyReser", MyReser);
+			request.setAttribute("sleepwell", Write);
+
+		 
+		fw = new Forward();
+		fw.setPath("./guestInfo.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
 	
 	
 	
@@ -430,6 +560,10 @@ public class FileServiceMM {
 
 	
 	
+	}
+
+	
+	
 	
 	
 	
@@ -447,4 +581,4 @@ public class FileServiceMM {
 	
 	
 
-}
+
