@@ -63,7 +63,7 @@
 		</div>
 		&nbsp;
 		&nbsp;
-		<a href="joinfrm"><button>회원가입</button></a>
+		<a href=""><button>회원가입</button></a>
 		
 	
 	</form>
