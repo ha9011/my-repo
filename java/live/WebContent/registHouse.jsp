@@ -8,7 +8,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
@@ -27,10 +30,10 @@
 
 #outfrm {
 	width: 600px;
-	height: 1200px;
-	border: 1px solid gray;
+	height: 950px;
+	border: 1px solid #34495e;
 	text-align: left;
-	margin: 100px auto;
+	margin: 50px auto;
 }
 
 #innerfrm {
@@ -50,8 +53,11 @@
 	display: inline-block;
 	width: 500px;
 }
-
+#signin{
+background-color: #34495e;
+}
 #LSBtn {
+background-color: #34495e;
 	margin: 0 0 5px 0;
 }
 
@@ -59,55 +65,104 @@
 	margin: 100px 0 0 0;
 }
 
-.button-3{
-  width:140px;
-  height:50px;
-  border:2px solid #34495e;
-  float:left;
-  text-align:center;
-  cursor:pointer;
-  position:relative;
-  box-sizing:border-box;
-  overflow:hidden;
-  margin:0 0 40px 50px;
-}
-.button-3 a{
-  font-family:arial;
-  font-size:16px;
-  color:#34495e;
-  text-decoration:none;
-  line-height:50px;
-  transition:all .5s ease;
-  z-index:2;
-  position:relative;
-}
-.eff-3{
-  width:140px;
-  height:50px;
-  bottom:-50px;
-  background:#34495e;
-  position:absolute;
-  transition:all .5s ease;
-  z-index:1;
-}
-.button-3:hover .eff-3{
-  bottom:0;
-}
-.button-3:hover a{
-  color:#fff;
+.button-3 {
+  margin-right: 50px;
+	width: 140px;
+	height: 50px;
+	border: 2px solid #34495e;
+	position: relative;
+	text-align: center;
+	cursor: pointer;
+	box-sizing: border-box;
+	overflow: hidden;
+	margin: 0 0 40px 50px;
 }
 
+.button-3 a {
+padding: auto;
+	font-family: arial;
+	font-size: 16px;
+	color: #34495e;
+	text-decoration: none;
+	line-height: 50px;
+	transition: all .5s ease;
+	z-index: 2;
+	position: relative;
+}
+
+.eff-3 {
+	width: 140px;
+	height: 50px;
+	bottom: -50px;
+	background: #34495e;
+	position: absolute;
+	transition: all .5s ease;
+	z-index: 1;
+}
+
+.button-3:hover .eff-3 {
+	bottom: 0;
+}
+p{text-align:left;}
+	#hf{margin-top:20px;
+	background-color:#0B243B;
+	color:white;
+}
+.button-3:hover a {
+	color: #fff;
+}
+h3{text-align: center;
+}
+
+#menu{
+
+float: right;
+background-color: #0B243B;
+height: 950px;
+width: 225px;
+text-align: center;
+}
+
+#big{
+width : 2400px;
+border-right: 1px solid 0B243B;
+}
 </style>
 
 <body>
 
-
-
-
-
+<div id="big">
+<div id="menu">
+<div class="button-3">
+		<div class="eff-3"></div>
+		<a href="main.jsp"> 뒤로가기 </a>
+	</div>
+<div class="button-3">
+		<div class="eff-3"></div>
+		<a href="main.jsp"> 메인페이지 </a>
+	</div>
+<div class="button-3">
+		<div class="eff-3"></div>
+		<a href="loginform.jsp"> 로그인 </a>
+	</div>
+<div class="button-3">
+		<div class="eff-3"></div>
+		<a href="signup.jsp"> 회원가입</a>
+	</div>
+<div class="button-3">
+		<div class="eff-3"></div>
+		<a href="main.jsp"> 살아보다 </a>
+	</div>
+	
+	
+	
+	</div>
+	
 	<div id="outfrm">
+	
 		${id}님의 호스트 하우스 등록
-		<form id="innerfrm" action="registHouse" method="post" enctype="multipart/form-data">
+		<form id="innerfrm" action="registHouse" method="post"
+			enctype="multipart/form-data">
 			<div>
 				<div class="form-row">
 
@@ -118,8 +173,9 @@
 							<label class="input-group-text" for="inputGroupSelect01">집
 								메인 사진</label>
 						</div>
-						<input type="file" class="form-control-file" id="imgInput" name="mainpic" required/>
-						<img id="image_section" width="100%" src="" alt="your image" />
+						<input type="file" class="form-control-file" id="imgInput"
+							name="mainpic" required /> <img id="image_section" width="100%"
+							src="" alt="your image" />
 					</div>
 
 
@@ -171,9 +227,10 @@
 					<div class="test">입력한 주소의 위치</div>
 					<div class="test" id="map"></div>
 					<div class="test">
-						<label class="test" for="exampleInputPassword1" required>상세주소</label> <input
-							class=" form-control test" type="text" id="exampleInputPassword1"
-							name="addressDetail" placeholder="ex) 102동 1001호">
+						<label class="test" for="exampleInputPassword1" required>상세주소</label>
+						<input class=" form-control test" type="text"
+							id="exampleInputPassword1" name="addressDetail"
+							placeholder="ex) 102동 1001호">
 					</div>
 
 				</div>
@@ -181,17 +238,26 @@
 
 			</div>
 			<div id="firstsubmit">
-				<button type="submit" class="btn btn-primary">Sign in</button>
+				<button type="submit" id="signin"class="btn btn-primary">Sign in</button>
 			</div>
+			
 		</form>
 
 	</div>
+	</div>
 
-<div class="button-3">
-    <div class="eff-3"></div>
-    <a href="main.jsp"> 뒤로가기 </a>
-  </div>
-
+	
+<div id ="hf">
+	<div id="footer">	
+	<br>
+	<br>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;오시는 길 | 사이트맵  | 개인정보 처리 방침  | 영상정보처리기기 | 운영,관리방침이용약관 | 채용안내</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업체명 : ㈜살아보다 사업자등록번호 : 111-11-11111
+			주소 : 인천 남구 학익동 663-1 태승빌딩 5층 (1층 홈플러스) 전화번호 : 032-876-3332
+			Copyrights(c) ㈜살아보다 </p>
+			<h3>since 2020</h3>
+	</div>
+	</div>
 
 	<!-- name : housetype // attendanceNum // attendanceDir // address //  addressDetail -->
 
@@ -243,8 +309,6 @@ $("#selbox").change(function() {
 		
 
 	}) 
-
-	
 
 });
 

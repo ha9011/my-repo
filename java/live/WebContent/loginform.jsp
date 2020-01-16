@@ -27,7 +27,7 @@
 	#boong{
 	display: block;
 	width: 100%;
-	height: 200px;
+	height: 530px;
 	
 	}
 	#footer{margin-top:100px;
