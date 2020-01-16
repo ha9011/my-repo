@@ -19,6 +19,7 @@
 	#oo{visibility:hidden;}
 	#info{font-size:20px;font-weight:bold;}
 
+.btn{float: right;margin-right:10px;width:70px;height:50px;color:white;background-color:#0B243B;}
 </style>
 
 </head>
@@ -145,8 +146,8 @@ c.on("click",test);
 
 $("#houseupload").append(a);
 $("#houseupload").append(b);
-$("#houseupload").append(c);
-$("#houseupload").append(d);
+b.append(c);
+b.append(d);
 
 }
 
@@ -229,6 +230,7 @@ $("#houseupload").on('click','.btn',function() {
 
 	
 //---------------------------------------------------예상----------------------------------------------------------------------------------
+//게시물 승인목록
 
 
 </script>

@@ -22,12 +22,16 @@
 </head>
 <style>
 #outfrm {
-	font-family: "문체부훈민정음";
 	width: 600px;
 	height: 1200px;
 	border: 1px solid gray;
 	text-align: left;
 	margin: 100px auto;
+}
+
+button{
+	color: white;
+	background-color: #0B243B;
 }
 </style>
 

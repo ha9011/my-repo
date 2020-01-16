@@ -15,26 +15,28 @@
 	border: none;
 	text-align: right;
 }
+
 .log {
 	text-align: right;
 	display: inline;
-	color:white;
-	text-decoration:none;
+	color: white;
+	text-decoration: none;
 }
 
 .logout {
 	text-align: right;
 	display: none;
-	border:none;
-	font-size:20px;
-	color:white;
-	background-color:#0B243B;
+	border: none;
+	font-size: 20px;
+	color: white;
+	background-color: #0B243B;
 }
 
-button{border:none;
-	font-size:20px;
-	color:white;
-	background-color:#0B243B;
+button {
+	border: none;
+	font-size: 20px;
+	color: white;
+	background-color: #0B243B;
 }
 
 #rogo {
@@ -42,12 +44,13 @@ button{border:none;
 	width: 250px;
 	height: 150px;
 }
+
 body {
-	margin:1%;
+	margin: 1%;
 }
 
 #top {
-	border:none;
+	border: none;
 	width: 100%;
 }
 
@@ -64,17 +67,17 @@ body {
 	width: 100%;
 	height: 250px;
 	display: flex;
-	margin-left:10px;
-	float:left; 
+	margin-left: 10px;
+	float: left;
 }
 
 .info {
-	font-size:20px;
+	font-size: 20px;
 	width: 400px;
 	height: 250px;
 	display: inline-block;
 	margin-left: 70px;
-	color:#8F9090;
+	color: #8F9090;
 }
 
 .mainpic {
@@ -84,10 +87,7 @@ body {
 }
 
 #mainimg {
-	
-	width:50%;
-	
-	
+	width: 50%;
 }
 
 #imgs_wrap {
@@ -103,37 +103,35 @@ body {
 }
 
 #middle {
-	height:100%;
+	height: 100%;
 	display: flex;;
 	margin: 10px 0px 10px 0px;
 	width: 100%;
 	height: 50%;
-	border:none;
+	border: none;
 }
 
 #rebottom {
 	margin: 5px 5px 5px 5px;
 	border: 5px solid #4774B5;
 	width: 50%;
-	height:100%;
-	
+	height: 100%;
 }
 
-#review{
-	margin:10px;
+#review {
+	margin: 10px;
 	width: 97%;
 	height: 60%;
 	overflow: hidden;
-	border: 1px solid black;
-	
+	border: none;
 }
 
 #bottom {
-	margin:10px;
+	margin: 10px;
 	width: 97%;
-	height: 300px;;
+	height: 400px;;
 	overflow: hidden;
-	border: 1px solid black;
+	border-bottom:3px solid #D0D1D2;
 }
 
 #rightpart {
@@ -144,34 +142,38 @@ body {
 }
 
 #reservation {
-	width:38%;
+	width: 38%;
 	height: 250px;
 	border: 2px solid #D0D1D2;
 	text-align: center;
-	float:right;
+	float: right;
 	margin-top: 10px;
 	margin-left: 200px;
-	color:#525354;
+	color: #525354;
 }
 
 #reple {
 	margin: 5px 5px 5px 5px;
 	width: 50%;
-	height:90%;
+	height: 90%;
 	border: 5px solid #4774B5;
 }
-#replebox{
-	margin:15px;
-	border:none;
+
+.replee{
+	margin-left:50px; 
+
 }
 
+#replebox {
+	margin: 15px;
+	border: none;
+}
 
 .inner {
 	display: inline-flex;
 }
 
 #imgdetail {
-
 	text-align: center;
 }
 
@@ -180,24 +182,28 @@ body {
 }
 
 .nextbtn {
-	
-	font-size:50px;
+	font-size: 150px;
 	display: inline-block;
 }
 /* ---------------------------------------------------------------------------------------------------- */
-#reserInfoP{
-	width:100%;
+#reserInfoP {
+	width: 100%;
 	display: flex;
 }
-form{
-	font-size:25px;
+
+form {
+	font-size: 25px;
 }
 
-.date{
-	margin-bottom:20px;
-	height:20px; 
+.date {
+	margin-bottom: 20px;
+	height: 20px;
 }
 
+#nolist {
+	display: flex;
+}
+#aa{margin:15px;}
 </style>
 
 </head>
@@ -210,18 +216,24 @@ form{
 
 
 <body>
-<div id="header">
+	<div id="header">
 		<!-- 아이디 비번 로그인 회원가입 입력-->
 		<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
-		 <button class="btn"><a href="signup.jsp" class=log>회원가입</a></button> 
-		 <button class="btn"><a href="loginform.jsp"class=log>로그인</a></button>
+		<button class="btn">
+			<a href="signup.jsp" class=log>회원가입</a>
+		</button>
+		<button class="btn">
+			<a href="loginform.jsp" class=log>로그인</a>
+		</button>
 		<!-- 호스트 로그인 된 경우 - 하동원  -->
-		
-		<button class=logout id=logout onclick="logout_session();">로그아웃</button> 
+
+		<button class=logout id=logout onclick="logout_session();">로그아웃</button>
 		<button class=logout onclick="mypage_session();">마이페이지</button>
-		<button class ="btn"><a href="registHouse.jsp" class=jib>집등록</a></button>
+		<button class="btn">
+			<a href="registHouse.jsp" class=jib>집등록</a>
+		</button>
 	</div>
-	
+
 	<div>
 		<div id="top">
 			<div id="img">
@@ -236,26 +248,29 @@ form{
 				</div>
 			</div>
 			<div id="reserInfoP">
-				<div id="mainimg"></div> <!--메인이미지 및 정보를 슬라이드 밑으로 가져와서 예약이랑 묶음 -->
-				
+				<div id="mainimg"></div>
+				<!--메인이미지 및 정보를 슬라이드 밑으로 가져와서 예약이랑 묶음 -->
+
 				<div id="reservation">
 
-				<h1>날짜를 선택해주세요</h1>
-				<form action="reservation">
-				<img alt="예약달력" width="30px" height="30px" src="./img/date1.JPG"><input class="date" type="text" name="sdate" id="datepicker1"> 
-				~~
-				<img alt="예약달력" width="30px" height="30px"src="./img/date2.JPG"><input class="date" type="text" name="edate" id="datepicker2">
-					<button type="button" id="dtcommit">날짜확정</button>
-					<br> 총액 : <input name="tprice" type="text" id="totalprice"
-						placeholder="">만원<br> 인원 : <input name="tperson"
-						type="number" id="person" value="">명 <input type="hidden"
-						name="hostid" id="hostid" value=${findhostid}> <input
-						type="hidden" name="guestid" id="guestid" value=${id}> <input
-						type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
-					<button style="width:200px">예약하기</button>
-				</form>
+					<h1>날짜를 선택해주세요</h1>
+					<form action="reservation">
+						<img alt="예약달력" width="30px" height="30px" src="./img/date1.JPG"><input
+							class="date" type="text" name="sdate" id="datepicker1">
+						~~ <img alt="예약달력" width="30px" height="30px"
+							src="./img/date2.JPG"><input class="date" type="text"
+							name="edate" id="datepicker2">
+						<button type="button" id="dtcommit">날짜확정</button>
+						<br> 총액 : <input name="tprice" type="text" id="totalprice"
+							placeholder="">만원<br> 인원 : <input name="tperson"
+							type="number" id="person" value="">명 <input type="hidden"
+							name="hostid" id="hostid" value=${findhostid}> <input
+							type="hidden" name="guestid" id="guestid" value=${id}> <input
+							type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
+						<button style="width: 200px">예약하기</button>
+					</form>
+				</div>
 			</div>
-			</div>	
 		</div>
 	</div>
 
@@ -266,21 +281,44 @@ form{
 
 		<div id="rebottom">
 			<div id="bottom">
-				<h1>주의사항</h1>
+				<div id="aa">
+					<h1>유의사항</h1>
+					<h4>체크인:오후 4:00 - 오후 10:00</h4>
+					<h4>체크아웃:오전 11:00</h4>
+					<div id="nolist">
+						<div>
+							<img width="50px;" height="50px;" src="./img/no.JPG">흡연금지
+						</div>
+						&nbsp&nbsp &nbsp &nbsp &nbsp
+						<div>
+							<img width="50px;" height="50px;" src="./img/nopet.JPG">애완동물
+							출입금지
+						</div>
+						&nbsp&nbsp &nbsp &nbsp &nbsp
+						<div>
+							<img width="50px;" height="50px;" src="./img/party.png">파티금지
+						</div>
+						&nbsp&nbsp &nbsp &nbsp &nbsp
+					</div>
+					<h3>예약 취소</h3>
+					<h3>48시간 동안 취소 수수료 없음</h3>
+					<h4>그 이후로 체크인 5일 전까지 취소하면 서비스 수수료를 제외한 전액이 환불됩니다.</h4>
+				</div>
 			</div>
-			
 			<div id="review">
 				<h1>후기</h1>
 			</div>
 		</div>
-			<div id="reple">
-				<div id="replebox">
+
+
+
+		<div id="reple">
+			<div id="replebox">
 				<h1>문의사항</h1>
 				<hr>
 				<div id="showreple"></div>
 				<!-- 여기에 댓글이 들어감 -->
 				<br>
-
 
 				<div id="rreple"></div>
 				<!-- 삭제 체크중 -->
@@ -294,7 +332,7 @@ form{
 					<input id="chc" type="checkbox" name="비밀" value="비밀글">비밀글
 				</div>
 			</div>
-			</div>
+		</div>
 	</div>
 
 
@@ -566,8 +604,8 @@ form{
 							
 						   
 						   
-						   var a = $('<div class="replee">'+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
-								   +'     '+obj[i][0]["RRP_TIME"]+'<br>'
+						   var a = $('<div class="replee"><img width="20px"height="20px" src="./img/reple.png">'+"&nbsp"+'댓글번호 :  '+obj[i][0]["RRP_NUM"]+"<br>"+'아이디 :  '+obj[i][0]["RRP_ID"]+'<br>'
+								   +'             '+obj[i][0]["RRP_TIME"]+'<br>'
 						   				+'<div class=innerreple>'+obj[i][0]["RRP_CONTENT"]+'<br>'+obj[i][0]["RRP_RP_NUM"]+'</div>'+'</div>')
 								   
 						   $("#rreplecnt"+temp).append(a);
@@ -1108,8 +1146,8 @@ for(i in checkeddate){
 	console.log("????");
 	console.log(${findhostid})
 </script>
-<!-- -------------------------------------------------------------------------------------------------------------------------------------------------- -->
-<script>//header 부분 
+	<!-- -------------------------------------------------------------------------------------------------------------------------------------------------- -->
+	<script>//header 부분 
 var id2="";
 
 

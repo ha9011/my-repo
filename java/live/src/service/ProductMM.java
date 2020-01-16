@@ -356,7 +356,14 @@ public Forward searchHouse() { //처음 검색 페이지
 
 
 	
+
+
+
 	
+
+
+
+
 	
 	
 	
@@ -576,9 +583,6 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		return inrreple;
 	}
-
-
-
 
 
 

@@ -19,7 +19,6 @@
 </head>
 <style>
 #map {
-	font-family: "문체부훈민정음";
 	width: 98%;
 	height: 400px;
 	border: none;
@@ -27,7 +26,6 @@
 }
 
 #outfrm {
-	font-family: "문체부훈민정음";
 	width: 600px;
 	height: 1200px;
 	border: 1px solid gray;
