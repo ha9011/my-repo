@@ -9,6 +9,10 @@
 <title>Insert title here</title>
 
 <style>
+#main{
+	margin-left:40px;
+
+}
 div {
 	
 	background-color: #F2F2F2;
@@ -39,6 +43,7 @@ hr {
 }
 
 #middle {
+	width:600px;
 	font-size: 20px; color : black;
 	margin: auto;
 	background-color:#F2F2F2;
@@ -48,23 +53,33 @@ font-size: 20px; color : black;
 	margin: auto;
 	background-color:#F2F2F2;
 }
-#boot{align-content:center;}
+#boot{
+	align-content:center;
+}
 
 #middle{
 		margin:auto;
 }
+#rogo {
+	margin-left:150px;
+	width: 250px;
+	height: 150px;
+}
+
+
 </style>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-
+	
 	<div id="middle">
 		<form action="joinfrm">
-			<h1>회원가입</h1>
-
-
+			<div>
+			<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+			</div><br>
+			<div id ="main">
 			* 아이디 <br>
 			<br>
 			<input type="text" name="id" placeholder="아이디 입력" id="id"
@@ -108,9 +123,10 @@ font-size: 20px; color : black;
 
 			<DIV ID="boot">
 				<hr>
-				<button type="submit" class="btn">회원가입</button>
+				<button type="submit" id="join" class="btn">회원가입</button>
 				<button id="cancel" type="button" href="main화면으로 보내자" class="btn">취소</button>
 			</DIV>
+			</div>
 		</form>
 
 	</div>

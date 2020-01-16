@@ -36,10 +36,11 @@ body {
 
 #detail {
 	border: 1px solid black;
-	width: 95%;
+	width: 100%;
 	height: 250px;
 	display: flex;
 	margin: 10px auto;
+	float:left; 
 }
 
 .info {
@@ -55,7 +56,9 @@ body {
 	display: inline-block;
 }
 
-#mainimg {margin: 5px 5px 5px 5px;
+#mainimg {
+	width:50%;
+	
 	
 }
 
@@ -83,7 +86,6 @@ body {
 	margin: 5px 5px 5px 5px;
 	border: 1px solid black;
 	width: 50%;
-	height: 50%;
 }
 
 #rightpart {
@@ -94,17 +96,18 @@ body {
 }
 
 #reservation {
-	margin: 5px 5px 5px 5px;
-	width: 50%;
-	height: 200px;
+	width:50%;
+	height: 250px;
 	border: 1px solid black;
 	text-align: center;
 	float:right;
+	margin-top: 10px;
+	margin-left: 20px;
 }
 
 #reple {
 	margin: 5px 5px 5px 5px;
-	width: 97%;
+	width: 50%;
 	height: 50%;
 	border: 1px solid black;
 }
@@ -134,7 +137,10 @@ body {
 	display: inline-block;
 }
 /* ---------------------------------------------------------------------------------------------------- */
-#reserInfoP{display: flex;}
+#reserInfoP{
+	width:100%;
+	display: flex;
+}
 </style>
 
 </head>
@@ -196,26 +202,6 @@ body {
 		<div id="review">
 			<h1>후기</h1>
 		</div>
-
-
-		<div id="rightpart">
-			<div id="reservation">
-
-				<h1>예약</h1>
-				
-				<form action="reservation">
-					<input type="text" name="sdate" id="datepicker1"> ~~ <input
-						type="text" name="edate" id="datepicker2">
-					<button type="button" id="dtcommit">날짜확정</button>
-					<br> 총액 : <input name="tprice" type="text" id="totalprice"
-						placeholder="">원<br> 인원 : <input name="tperson"
-						type="number" id="person" value="">명 <input type="hidden"
-						name="hostid" id="hostid" value=${findhostid}> <input
-						type="hidden" name="guestid" id="guestid" value=${id}> <input
-						type="hidden" name="regnum" id="regnum" value=${rgnum}><br>
-					<button>예약하기</button>
-				</form>
-			</div>
 
 			<div id="reple">
 				<h1>문의사항</h1>
@@ -505,13 +491,13 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
    //console.log($test[0][0]["H_MAINPIC"]);
    var b = $('<div class="mainpic"><img width="250" height="250" alt=사진없음 src="'+$test[0][0]["H_MAINPIC"]+'"></div>');
    var c = $('<div class="info">'+'주소:  '+$test[0][0]["H_ADDRESS"]+'  '+$test[0][0]["H_DETAILADD"]+'<br>'
-         +'숙박가능 날짜:  '+$test[0][0]["H_CHECKIN"]+'~'+$test[0][0]["H_CHECKOUT"]+'<br>'
-         +'수용가능인원:  '+$test[0][0]["H_ATTENDANCE"]+'<br>'
+         //+'숙박가능 날짜:  '+$test[0][0]["H_CHECKIN"]+'~'+$test[0][0]["H_CHECKOUT"]+'<br>'
          +'1박가격:  '+$test[0][0]["H_ONEPRICE"]+'<br>'
+         +'<img alt=사진없음 width="40px" height="30px" src="./img/person.jpg">' +'수용가능인원:  '+$test[0][0]["H_ATTENDANCE"]+'<br>'
+         +'주차가능:  '+$test[0][0]["H_PARKABLE"]+'<br>'
          +'방갯수:  '+$test[0][0]["H_ROOMS"]+'<br>'
          +'침대수:  '+$test[0][0]["H_BEDROOMS"]+'<br>'
          +'화장실:  '+$test[0][0]["H_TOLILET"]+'<br>'
-         +'주차가능:  '+$test[0][0]["H_PARKABLE"]+'<br>'
          +'욕실:  '+$test[0][0]["H_BATHROOMS"]+'<br>'+
          '</div>')
          
@@ -555,7 +541,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	console.log(result);	
 
 	let indexpic = [0,1,2];
-	
+	 
 	
 	for(let i in result){
 		if(i<=2){  // 3 이상일때

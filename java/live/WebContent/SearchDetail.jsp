@@ -12,11 +12,11 @@
 
 #searchbox {
 	float:left;
-	border: 3px solid #0B3861;
-	width: 40%;
+	border: 2px solid #0B3861;
+	width: 34%;
 	height: 60px;
 	text-align: center;
-	margin-bottom: 30px;
+	margin-top:50px;
 }
 
 input {
@@ -84,7 +84,15 @@ button {
 #map{
 	 margin-left:25px;
 }
-	
+
+
+#rogo {
+	float:left;
+	width: 200px;
+	height: 130px;
+}
+
+
 </style>
 
 
@@ -92,8 +100,11 @@ button {
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<div id="body">
+			<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+	
 
+	<div id="body">
+		
 		<div id="searchbox">
 			<input id="subsearch" type="text" name="destination"
 				value=${destination}>
@@ -115,7 +126,7 @@ button {
 //---------------------------예상--------------------------------------------
 	console.log("좋아요 리스트 ==");
 	console.log('${searchLike}');
-	var likelist = ${searchLike};
+	
 	
 	
    var $test =${result};  
@@ -198,6 +209,8 @@ button {
     	        console.log("하트 이미지 로그인 안됨")
      	  
       }else{  // 로그인 하트 보이게
+    	  var likelistt = '${searchLike}';
+    	  var likelist = JSON.parse(likelistt);
 
 	        console.log("하트 이미지 로그인 됨")
 	        console.log("해당 방 번호 : "+$test[intest][0]["H_RGNUM"])
