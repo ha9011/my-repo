@@ -301,7 +301,6 @@ body{overflow:scroll;
    
    function mypage_session() {
       
-      alert("마이페이지로 이동");
       
       if(id2 =="1"){
          console.log("게스트입니다");

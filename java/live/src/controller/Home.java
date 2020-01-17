@@ -32,7 +32,7 @@ public class Home extends HttpServlet {
 			System.out.println("회원가입 접근");
 			fw = mm.join();
 		}else if (cmd.equals("/main")) { // 로그인 폼으로 연결
-				System.out.println("로그인접속");
+				System.out.println("메인보여줌");
 				fw = pm.tophouse();
 				fw = pm.topstar();
 		} else if (cmd.equals("/access")) { // 로그인 폼으로 연결
@@ -46,6 +46,7 @@ public class Home extends HttpServlet {
 		} else if (cmd.equals("/detailregiinfo")) {
 			System.out.println("디테일 예약 정보");
 			fw = pm.detailregiinfo();
+			fw = pm.reviewdetail();
 		} else if (cmd.equals("/guestInfo")) {
 			System.out.println("게스트마이페이지");
 			fw = mm.guestInfo();
