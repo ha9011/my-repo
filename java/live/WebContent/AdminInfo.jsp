@@ -22,8 +22,12 @@
 	#houselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 	#oo{visibility:hidden;}
 	#info{font-size:20px;font-weight:bold;}
-
+.mainpic{display: inline-block; font-size:18px;border:1px solid #0B3861;margin:15px;}
 .btn{float: right;margin-right:10px;width:70px;height:50px;color:white;background-color:#0B243B;}
+button{background-color: #0B243B;
+	   color:white;
+	   border: none;
+}
 </style>
 
 
@@ -141,9 +145,9 @@
 			c.on("click", test);
 
 			$("#houseupload").append(a);
-			$("#houseupload").append(b);
-			$("#houseupload").append(c);
-			$("#houseupload").append(d);
+			a.append(b);
+			b.append(c);
+			b.append(d);
 
 		}
 
