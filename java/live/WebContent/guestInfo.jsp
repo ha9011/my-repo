@@ -72,6 +72,8 @@
 
 .review {
 	display: flex;
+	border:1px solid #0B3861;margin:15px;
+	width:520px;
 }
 
 #myhouselist {
@@ -106,12 +108,21 @@
 #GuestCont {
 	width: 600px;
 }
+
 .myscore{
 	display : inline-block;
 	border : 2px solid black;
 	padding : 5px;
 	margin : 5px ;
 	color : blue;
+
+
+button{background-color: #0B243B;
+	   color:white;
+	   border: none;
+}
+.WriteReview{
+	float:right; 
 }
 </style>
 

@@ -15,12 +15,12 @@
 	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;display:flex;}
 	
 	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:30px;overflow:scroll;}
-		.mainpic{display: inline-block; font-size:18px;}
+		.mainpic{display: inline-block; font-size:18px;border:1px solid #0B3861;margin:15px;}
 	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;text-align:center;}
 	#checkoutlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 		.checkout{margin-top:20px;}
-		.mainbox{font-size:18px;margin-left:10px;}
+		.mainbox{font-size:18px;margin-left:10px;border:1px solid #0B3861;margin:15px;}
 		 .star_grade span{text-decoration: none;color: gray;}
    		 .star_grade span.on{color:red;}
 	
@@ -118,7 +118,12 @@ body {
 	margin:15px;
 	font-size: 25px;
 }
+button{background-color: #0B243B;
+	   color:white;
+	   border: none;
+}
 
+.btn{margin-bottom:20px;}
 </style>
 
 </head>
@@ -455,7 +460,7 @@ var houseup = document.getElementById("houseupload");
 
 
 for(intest in $home ){
-	var a = $('<div class= "mainpic"style="display:flex;"><img id ="pro" width=100px height=50px src = "'+$home[intest][0]["H_MAINPIC"]+'"></div>');
+	var a = $('<div class= "mainpic"style="display:flex;"><img id ="pro" width=200px; height=100px;src = "'+$home[intest][0]["H_MAINPIC"]+'"></div>');
 	
 	var b = $('<div class= "request" >'+
 		" |주소:"+$home[intest][0]["H_ADDRESS"]+
