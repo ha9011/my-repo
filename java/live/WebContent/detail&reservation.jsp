@@ -1073,7 +1073,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	
 	
 var listDate = [];
-var checkeddate = ${findhostid};
+var checkeddate = ${checkDate};
 for(i in checkeddate){
 	
 	var st = new Date(checkeddate[i][0]);

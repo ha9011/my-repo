@@ -592,7 +592,7 @@ public Forward searchHouse() { //처음 검색 페이지
 		mDao3.close();
 		
 		
-		request.setAttribute("findhostid", checkDate);
+		request.setAttribute("checkDate", checkDate);
 		
 		
 		request.setAttribute("rgnum", detailId);
