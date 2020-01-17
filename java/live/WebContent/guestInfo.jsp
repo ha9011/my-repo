@@ -106,6 +106,13 @@
 #GuestCont {
 	width: 600px;
 }
+.myscore{
+	display : inline-block;
+	border : 2px solid black;
+	padding : 5px;
+	margin : 5px ;
+	color : blue;
+}
 </style>
 
 <!--모달창 -->
@@ -185,7 +192,7 @@
 
 	<div id="body">
 		<h1>게스트 마이페이지</h1>
-		<form action="profileupdate" method="post"
+		<form id="savepic" method="post"
 			enctype="multipart/form-data">
 			<input type="file" id="oo" name="propic">
 
@@ -310,7 +317,7 @@ var propic = document.getElementById("img");
 
 var a = $('<div class= "propic"><img id ="pro" width=300px height=250px src = "'+$test[0][0]["PROFILE"]+'"></div>');
 var b = $('<button type="button" id ="change">사진변경</button>')
-var c = $('<button id = "save">사진저장</button>')	
+var c = $('<button type="button" id ="save">사진저장</button>')	
  	 b.on('click',function() {
  		 
 		console.log("사진변경");
@@ -327,7 +334,7 @@ var c = $('<button id = "save">사진저장</button>')
 	
 	
 	
-	function readURL(input) {
+	function readURLpro(input) {
 		
 		 if (input.files && input.files[0]) {
 			console.log(input.files[0]);
@@ -346,13 +353,17 @@ var c = $('<button id = "save">사진저장</button>')
 	}
 	
 	$("#oo").change(function(){//--사진 변경되면서 클릭시 저장실행되는 것 
-		readURL(this);
+		readURLpro(this);
 	})
 	
 	var d = $('<div class = "myinfo">'+"아이디:"+$test[0][0]["ID"]+"<br>"+"이름:"+$test[0][0]["NAME"]+"<br>"+"이메일:"+$test[0][0]["EMAIL"]+"<br>"+"전화번호:"+$test[0][0]["PHONE"]+"<br>"+'</div>')
-		$("#info").append(d);
+	$("#info").append(d);
 	
-
+	var myscore = ${myscore};
+	var e = $('<div class="myscore"> 총 리뷰 : ' +myscore[0][0]["GCNT"]+'개 | 총 점수 : '+myscore[0][0]["GAVG"]+'점</div>')
+    $("#info").append(e);
+	
+	//내 점수 뽑기.
 	
 //---------------------------------------------------동원----------------------------------------------------------------------------------
 
@@ -379,8 +390,8 @@ $(function() {
     
 });
 
-
-function readURL(input,indexpic) {  // 업로드한 이미지 읽어서 쏴주기
+//업로드한 이미지 읽어서 쏴주기
+function readURL(input,indexpic) {  
 	
 	
 	let files = input.files;          
@@ -394,7 +405,10 @@ function readURL(input,indexpic) {  // 업로드한 이미지 읽어서 쏴주�
 			return;
 		}
 		console.log(i);
-
+		
+		console.log("이미지 변경시 indexpic ");
+		console.log(i);
+		console.log(e);
 		console.log(indexpic)
 		console.log(indexpic.indexOf(i))
 		
@@ -432,8 +446,38 @@ function readURL(input,indexpic) {  // 업로드한 이미지 읽어서 쏴주�
 	return filesArr;
 }
 
+//파일 저장 누르기
 
+$(document).on("click","#save",function(){
+	alert("사진저장");
+	
+	var form = $('#savepic')[0];
 
+    // FormData 객체 생성
+    var formData = new FormData(form);
+
+    // 코드로 동적으로 데이터 추가 가능.
+//                formData.append("userId", "testUser!");
+
+    $.ajax({
+        type: "POST",
+        enctype: 'multipart/form-data',
+        url: "profileupdate",
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function (data) {
+            console.log("SUCCESS : ", data);
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+
+	
+	
+})
+})
 
 function readListURL(indexpic) {    // 특정 놈 안보이고 보이게 하기, 버튼의 핵심;
 	

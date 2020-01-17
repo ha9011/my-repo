@@ -180,6 +180,7 @@ public class MemberMM {
 		String MyReser = null;
 		String Write=null;
 		String likehouse= null;
+		String myscore= null;
 		
 		
 		MemberDao mDao = new MemberDao();
@@ -187,12 +188,15 @@ public class MemberMM {
 		MyReser = mDao.MyReser(id);
 		Write = mDao.Write(id);
 		likehouse = mDao.likehouse(id);
+		myscore = mDao.myscore(id);
 		mDao.close();
 
 		request.setAttribute("result", Myinfo);
 		request.setAttribute("MyReser", MyReser);
 		request.setAttribute("sleepwell", Write);
 		request.setAttribute("likehouse", likehouse);
+		request.setAttribute("myscore", myscore);
+		
 		
 		fw = new Forward();
 		fw.setPath("./guestInfo.jsp");

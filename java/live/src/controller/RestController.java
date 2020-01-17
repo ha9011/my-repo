@@ -15,12 +15,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import service.FileServiceMM;
 import service.MemberMM;
 import service.ProductMM;
 
 
 
-@WebServlet({ "/cancellike","/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked", "/showreview", "/pagereple"})
+@WebServlet({ "/profileupdate","/cancellike","/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked", "/showreview", "/pagereple"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,10 +31,9 @@ public class RestController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String cmd = request.getServletPath();
 		System.out.println("rest CMD : " + cmd);
-
+		FileServiceMM fs = new FileServiceMM(request, response);
 		MemberMM mm = new MemberMM(request, response);
-		ProductMM pm = new ProductMM(
-				request, response);
+		ProductMM pm = new ProductMM(request, response);
 
 		String json = null;
 
@@ -133,6 +133,9 @@ public class RestController extends HttpServlet {
 			String cancellist =request.getParameter("cancellike");
 			
 			json = mm.cancellikelist(cancellist);
+		}else if(cmd.equals("/profileupdate")) { //집 마지막 데이터
+			System.out.println("프로필변경");
+			json=fs.updateprofile();
 		}
 		
 		

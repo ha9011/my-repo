@@ -451,7 +451,7 @@ public class MemberDao {
 	}
 
 	public String outreple(String string) {
-		String sql = "SELECT * FROM reple where RP_RGNUM=?"; // 시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
+		String sql = "SELECT * FROM reple where RP_RGNUM=? order by RP_NUM"; // 시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
 
 		ArrayList<ArrayList<HashMap<String, String>>> mList = new ArrayList<ArrayList<HashMap<String, String>>>(); // 데이터
 																													// 포장하고
@@ -560,7 +560,7 @@ public class MemberDao {
 	
 	// 무슨 페이지 퍼올지 확인해야함.
 	public String pagingInReple(int num, int s, int e) {
-		String sql = "SELECT * FROM (SELECT rownum rum, RP_NUM, RP_ID, RP_TIME, RP_CONTENT, RP_TYPE, RP_RGNUM FROM reple) temp WHERE  temp.rum BETWEEN ? and ? and RP_RGNUM =?";
+		String sql = "SELECT * FROM (SELECT rownum rum, RP_NUM, RP_ID, RP_TIME, RP_CONTENT, RP_TYPE, RP_RGNUM FROM reple order by RP_NUM) temp WHERE  temp.rum BETWEEN ? and ? and RP_RGNUM =? ";
 		System.out.println("ss ee :" + s +e);
 		ArrayList<ArrayList<HashMap<String, String>>> mList = new ArrayList<ArrayList<HashMap<String, String>>>(); // 데이터
 		// 포장하고
@@ -839,6 +839,40 @@ public class MemberDao {
 
 		String result = gs.toJson(ReviewList);
 		System.out.println("내 좋아요 목록");
+		System.out.println(result);
+
+		return result;
+	}
+
+	public String myscore(String id) {
+		String Sql = "SELECT count(*) as GCNT , avg(H.HRV_SCORE) as GAVG FROM HOSTREVIEW H, RESERVATION R WHERE H.HRV_R_RGNUM = R.R_RGNUM and R.R_GUESTID=?";
+
+		ArrayList<ArrayList<HashMap<String, String>>> ReviewList = new ArrayList<ArrayList<HashMap<String, String>>>();
+		try {
+			pstmt = con.prepareStatement(Sql);
+			pstmt.setNString(1, id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				ArrayList<HashMap<String, String>> Review = new ArrayList<HashMap<String, String>>();
+				HashMap<String, String> myReview = new HashMap<String, String>();
+
+				myReview.put("GCNT", rs.getNString("GCNT"));
+				myReview.put("GAVG",rs.getNString("GAVG"));
+				
+
+				Review.add(myReview);
+				ReviewList.add(Review);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Gson gs = new Gson();
+
+		String result = gs.toJson(ReviewList);
+		System.out.println("내 스코어 목록");
 		System.out.println(result);
 
 		return result;

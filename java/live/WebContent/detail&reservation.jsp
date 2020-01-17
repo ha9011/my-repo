@@ -400,6 +400,9 @@ form {
 	//페이지 클릭!!할때 이벤트변화
 	let currentreplepage = 1;  // 현재 페이지
 	let overMove=0;
+	
+	
+	
 	$("#replepaging").on("click",'.pgbtn',function(){
 		
 		var clickpage = $(this).attr("name");
@@ -721,11 +724,13 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 	  $("#showreple").empty(); //쇼리플창  초기화 해주는 곳
 	var type; //비밀인지 아닌지 타입을 담을 변수
 	//
+	
 	if($("#chc").prop('checked')){ //체크박스 값을 담는다
 	 type=1;
 	}else{
 	 type=0;	
-	} 
+	}
+	
 	console.log($("#chc").prop('checked')); // 체크박스 동작 확인
 	//
 	
@@ -793,7 +798,7 @@ $("#replepush").click(function() { //아이디 리플푸쉬를 갖고 있는 버
 			   
 			}
 			   
-			   $("#replepaging").empty();  // 버튼 칸 비우고 
+			    $("#replepaging").empty();  // 버튼 칸 비우고 
 				$("#replepaging").append($("<span class='pgbtn' name='Opage"+1+"'> << </span>"));
 				$("#replepaging").append($("<span class='pgbtn' name='minus'> * </span>"));
 				$("#replepaging").append($("<span class='pgbtn' name='page"+(Math.ceil((${reple}.length+1)/10)-4)+"'> "+(Math.ceil((${reple}.length+1)/10)-4)+" </span>"));
@@ -1149,8 +1154,7 @@ for(i in checkeddate){
 	console.log(disabledDays);
 
 
-	console.log("????");
-	console.log(${findhostid})
+	
 	//----------------------------------------------------------------------------------------------------------------------------------------------
 	
 	

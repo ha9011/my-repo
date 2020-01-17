@@ -473,7 +473,7 @@ public class FileServiceMM {
 	
 	
 //-----------------------------------------------------------------------------예상
-	public Forward updateprofile() {
+	public String updateprofile() {
 		HttpSession session = request.getSession();
 		// db sq번호 얻기
 		//db에 넣기 
@@ -482,7 +482,7 @@ public class FileServiceMM {
 		String re = "";
 		
 		
-		String uploadPath= "C:/gitlive/my-repo/java/live/WebContent/img/profile/";
+		String uploadPath= "C:/git_repo/my-repo/java/live/WebContent/img/profile/";
 		System.out.println(uploadPath);
 		
 		//C:\gitlive\my-repo\java\live\WebContent\img\profile
@@ -561,11 +561,11 @@ public class FileServiceMM {
 		  
 		  mDao.close();
 		  
-		  request.setAttribute("result",Myinfo);
-		  fw = new Forward();
-		  fw.setPath("./guestInfo.jsp");
-		  fw.setRedireact(false);
-		  return fw;
+	//	  request.setAttribute("result",Myinfo);
+	//	  fw = new Forward();
+		//  fw.setPath("./guestInfo.jsp");
+		//  fw.setRedireact(false);
+		  return "전달성공";
 
 	}
 
