@@ -20,29 +20,37 @@
 	#search{text-align:center;}
 	button{color:white;font-size:20px;font-weight:bold;width:150px;height:50px;background-color:#0B243B;display:table;margin-left:auto;margin-right:auto;}
 	
-	#hf{margin-top:20px;
-	background-color:#0B243B;
-	color:white;
-}
 	#boong{
 	display: block;
 	width: 100%;
-	height: 200px;
+	height: 280px;
 	
 	}
-	#footer{margin-top:100px;
-		width:100%;
-		height:200px;
-		text-align:center;
+	#hf{
+		background-color:#0B243B;
+   		color:white;
+   		text-align:center;
+   		width:100%;
+   		height:150px;
 }
-p{text-align:left;}
+	#footer{
+			margin-top:50px;
+			background:#0B243B;
+			color:white;
+			width:100%;
+			height:100px;
+			
+}
+p{
+	margin-top:100px;
+	text-align:center;}
 </style>
 
 </head>
 <body>
 
 
-	<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+	<a href="main"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 	
 	<div id=box>
 	<div id= title>
@@ -86,17 +94,14 @@ p{text-align:left;}
 	
 	</div>
 	<div id ="boong"></div>
-	<div id ="hf">
-	<div id="footer">	
-	<br>
-	<br>
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;오시는 길 | 사이트맵  | 개인정보 처리 방침  | 영상정보처리기기 | 운영,관리방침이용약관 | 채용안내</p>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업체명 : ㈜살아보다 사업자등록번호 : 111-11-11111
-			주소 : 인천 남구 학익동 663-1 태승빌딩 5층 (1층 홈플러스) 전화번호 : 032-876-3332
-			Copyrights(c) ㈜살아보다 </p>
-			<h3>since 2020</h3>
-	</div>
-	</div>
+	<div id="hf">
+	<div id="footer">
+      <p>업체명 : ㈜살아보다 사업자등록번호 : 111-11-11111
+         주소 : 인천 남구 학익동 663-1 태승빌딩 5층 (1층 홈플러스) 전화번호 : 032-876-3332
+         Copyrights(c) ㈜살아보다 </p>
+         <h3>since 2020</h3>
+   </div>
+   </div>
 <script>
 	var frm=document.joinform;
 	//frm.longth(); 활용해서 반복문으로 값을 입력했는지 확인

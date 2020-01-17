@@ -9,12 +9,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
-#body{margin:0,auto;overflow:scroll;}
+#body{margin-left:300px;overflow:scroll;}
 	#header{width:1200px;height:300px;overflow:hidden;border:none;}
 		#img{border:2px solid #0B3861;float:left;width:300px;height:280px;}
-	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;}
+	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;display:flex;}
 	
-	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:30px;overflow:scroll;}
 		.mainpic{display: inline-block; font-size:18px;}
 	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;text-align:center;}
@@ -58,7 +58,8 @@ body {
 }
 
 .modal-title {
-  font-size: 24px;
+  text-align:center;
+  font-size: 15px;
   font-weight: bold;
 }
 
@@ -109,6 +110,14 @@ body {
 .button-3:hover a{
   color:#fff;
 }
+.review{
+	width:90%;
+	height:40px;
+}
+.myinfo{
+	margin:15px;
+	font-size: 25px;
+}
 
 </style>
 
@@ -117,11 +126,11 @@ body {
 	<form action="hostreview">
     <div class="modal-wrapper" style="display: none;">
       <div class="modal">
-        <div class="modal-title">안녕하세요</div>
+        <div class="modal-title">게스트에 대한 후기를 남겨주세요 </div>
         <div name="rgnum" value=rgnum></div>
-        <input type="text" class="score" name="hscore" id="hscore">
+        <input type="hidden" class="score" name="hscore" id="hscore">
        <input type="text" class="review" name="contents">
-       <input type="text" class="hreview" name="hrgnum" id="hcontents">
+       <input type="hidden" class="hreview" name="hrgnum" id="hcontents">
         <div class="close-wrapper">
           <button id="conform" type="submit">확정</button>
            <button type="button" id="close">닫기</button>
@@ -143,27 +152,26 @@ body {
 			</div>
 
 			<div id="info">
-				
 			</div>
 		
 		</div>
 </form>		
 		
 		<div id="requestlist">
-			<h1>게스트 예약 요청 </h1>
+			<h1>요청받은 예약 리스트  </h1>
 		</div>
 		
 		<div id="checkoutlist">
-			<h1>체크아웃리스트 및 별점 </h1>
+			<h1> 체크아웃한 게스트에게 후기를 남기세요 </h1>
 			
 		</div>
 		
 		<div id="houseupload">
-			<h1>업로드 요청 리스트</h1>
+			<h1>내 게시물 등록현황</h1>
 		</div>
 		
 		<div id="myhouselist">
-			<h1>내 보유 집 목록 </h1>
+			<h1>내 집 목록 </h1>
 		</div>
 	
 	
@@ -229,7 +237,7 @@ var c = $('<button id = "save">사진저장</button>')
 		readURL(this);
 	})
 	
-	var d = $('<div class = "myinfo">'+"아이디:"+$test[0][0]["ID"]+"<br>"+"이름:"+$test[0][0]["NAME"]+"<br>"+"이메일:"+$test[0][0]["EMAIL"]+"<br>"+"전화번호:"+$test[0][0]["PHONE"]+"<br>"+'</div>')
+	var d = $('<div class = "myinfo">'+"호스트 아이디:"+$test[0][0]["ID"]+"<br>"+"호스트 이름:"+$test[0][0]["NAME"]+"<br>"+"내 이메일:"+$test[0][0]["EMAIL"]+"<br>"+"내 전화번호:"+$test[0][0]["PHONE"]+"<br>"+'</div>')
 		$("#info").append(d);
 	
 

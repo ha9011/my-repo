@@ -13,7 +13,7 @@ import service.MemberMM;
 import service.ProductMM;
 
 
-@WebServlet({ "/joinfrm", "/access", "/logout", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation","/hostreview" })
+@WebServlet({ "/main","/joinfrm", "/access", "/logout", "/searchHouse","/detailregiinfo","/guestInfo", "/AdminInfo", "/HostInfo", "/hostupload", "/reservation","/hostreview" })
 
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,8 +31,10 @@ public class Home extends HttpServlet {
 
 			System.out.println("회원가입 접근");
 			fw = mm.join();
-		
-
+		}else if (cmd.equals("/main")) { // 로그인 폼으로 연결
+				System.out.println("로그인접속");
+				fw = pm.tophouse();
+				fw = pm.topstar();
 		} else if (cmd.equals("/access")) { // 로그인 폼으로 연결
 			System.out.println("로그인접속");
 			fw = mm.access();

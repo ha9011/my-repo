@@ -386,8 +386,51 @@ public Forward searchHouse() { //처음 검색 페이지
 	}
 
 
+
+
+	public Forward tophouse() {
+		
+		String tophouse = null;
+		
+		ProductDao pDao = new ProductDao();
+		tophouse = pDao.tophouse();
+		
+		pDao.close();
+		
+		request.setAttribute("tophouselist",tophouse);
+		System.out.println(tophouse);
+		System.out.println("여기까지 오니?");
+		fw = new Forward();
+		fw.setPath("./main.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
 	
 	
+
+	public Forward topstar() {
+		
+		String topstar = null;
+		
+		ProductDao pDao = new ProductDao();
+		topstar = pDao.topstar();
+		
+		pDao.close();
+		
+		request.setAttribute("topstarlist",topstar);
+		System.out.println(topstar);
+		System.out.println("오고 있니???");
+		fw = new Forward();
+		fw.setPath("./main.jsp");
+		fw.setRedireact(false);
+		return fw;
+		
+	}
+	
+
+
+
+
 	
 	
 	
@@ -607,7 +650,6 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		return inrreple;
 	}
-
 
 
 

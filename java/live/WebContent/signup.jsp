@@ -77,7 +77,7 @@ font-size: 20px; color : black;
 	<div id="middle">
 		<form action="joinfrm">
 			<div>
-			<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+			<a href="main"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 			</div><br>
 			<div id ="main">
 			* 아이디 <br>

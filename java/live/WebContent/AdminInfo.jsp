@@ -12,52 +12,20 @@
 	margin: 0, auto;
 }
 
-#header {
-	width: 1200px;
-	height: 300px;
-	overflow: hidden;
-	border: none;
-}
 
-#img {
-	border: 2px solid #0B3861;
-	float: left;
-	width: 300px;
-	height: 280px;
-}
+#body{margin-left:300px;overflow:scroll;}
+	#header{width:1200px;height:300px;overflow:hidden;border:none;}
+		#img{border:2px solid #0B3861;float:left;width:300px;height:280px;}
+	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;}
+	
+	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+	#houselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
+	#oo{visibility:hidden;}
+	#info{font-size:20px;font-weight:bold;}
 
-#info {
-	border: 2px solid #0B3861;
-	float: right;
-	width: 870px;
-	height: 280px;
-}
-
-#houseupload {
-	border: 2px solid #0B3861;
-	width: 1200px;
-	height: 700px;
-	margin-bottom: 20px;
-	overflow: scroll;
-}
-
-#houselist {
-	border: 2px solid #0B3861;
-	width: 1200px;
-	height: 700px;
-	margin-bottom: 20px;
-	overflow: scroll;
-}
-
-#oo {
-	visibility: hidden;
-}
-
-#info {
-	font-size: 20px;
-	font-weight: bold;
-}
+.btn{float: right;margin-right:10px;width:70px;height:50px;color:white;background-color:#0B243B;}
 </style>
+
 
 </head>
 <body>
@@ -121,6 +89,7 @@
 
 				var reader = new FileReader();
 
+
 				reader.onload = function(e) {
 					console.log(e);
 
@@ -148,6 +117,7 @@
 
 	<script>
 	
+
 		var $test2 = ${HU};
 		console.log($test2)
 		var houseup = document.getElementById("houseupload");
@@ -177,6 +147,8 @@
 
 		}
 
+//---------------------------------------------------예상----------------------------------------------------------------------------------
+//게시물 승인목록
 		
 		
 		

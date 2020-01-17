@@ -9,7 +9,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 #body {
-	margin: 0, auto;
+	margin-left:300px;
+	overflow:scroll;
 }
 .out {
 	border-bottom:2px solid #0B3861;
@@ -403,7 +404,7 @@ function readURL(input,indexpic) {  // 업로드한 이미지 읽어서 쏴주�
 			reader.onload = function(r){
 				console.dir(r);
 				
-				let img_html = "<div class='mySlides pic"+i+"'  style='display:inline-block' >  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
+				let img_html = "<div class='mySlides pic"+i+"'style='display:inline-block' >  <div class='numbertext'>"+(i+1)+" / "+total+"</div> "
 				+ " <img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
 	     	//	var img_html = "<img width='100px' height='100px' src=\""+r.target.result+"\" /> </div>";
 	     		

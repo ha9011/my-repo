@@ -25,7 +25,6 @@
 </head>
 <style>
 #outfrm {
-	font-family: "문체부훈민정음";
 	width: 600px;
 	height: 900px;
 	border: 1px solid gray;
@@ -58,7 +57,10 @@
 #firstsubmit {
 	margin: 100px 0 0 0;
 }
-
+button{
+	color: white;
+	background-color: #0B243B;
+}
 
 </style>
 

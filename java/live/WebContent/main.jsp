@@ -95,31 +95,39 @@ body{overflow:scroll;
 }
 /* --------------------------------------------header & middle end---------------------------------------------------------------------------- */
 #hf{margin-top:20px;
-   background-color:#0B243B;
+   background-color:#0A1B2A;
    color:white;
 }
 
 #home{width:100%;
      height:50%;
-     border:1px solid black;
+     border:none;
      display:flex;
 }
 #review{width:47%;
       height:45%;
-      border:1px solid black;
+      border:none;
       margin: auto;
+}
+
+#toprv{display: flex;
 }
 
 #topstar{width:47%;
       height:45%;
-      border:1px solid black;
+      border:none;
       margin: auto;
 }
+
+#topst{display: flex;
+}
+
 #footer{margin-top:100px;
       width:100%;
       height:30%;
       text-align:center;
 }
+
 
 </style>
 
@@ -133,7 +141,7 @@ body{overflow:scroll;
    <!-- 로그인 안된 경우  -->
    <div id="header">
       <!-- 아이디 비번 로그인 회원가입 입력-->
-      <a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+      <a href="main"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
        <button class="btn"><a href="signup.jsp" class=log>회원가입</a></button> 
        <button class="btn"><a href="loginform.jsp"class=log>로그인</a></button>
       <!-- 호스트 로그인 된 경우 - 하동원  -->
@@ -180,11 +188,23 @@ body{overflow:scroll;
    <div id ="home">
    
       <div id="review">
-         <h1>후기 높은 숙소</h1>
+      	<div>
+         	<h1>베스트 후기를 가진 숙소 TOP3</h1>
+        </div>
+        
+        <div id="toprv">
+         	
+        </div>
       </div>
       
       <div id="topstar">
-         <h1>별점 높은 숙소</h1>
+         <div>
+         	<h1>베스트 평점을 가진 숙소 TOP3</h1>
+        </div>
+        
+        <div id="topst">
+         	
+        </div>
       </div>
       
    </div>
@@ -213,7 +233,7 @@ body{overflow:scroll;
     
     playAlert = setInterval(function() {
        console.log("백그라운드 번호  : "+backindex);
-       var backlist = ["./img/main.jpg","./img/main2.jpg"];
+       var backlist = ["./img/main.jpg","./img/main2.png","./img/main3.jpg"];
        backindex++;
        
        if(backindex >= backlist.length){
@@ -232,7 +252,7 @@ body{overflow:scroll;
          });
        
        
-      }, 5000);
+      }, 4000);
     
     
     var id1='<%=(String) session.getAttribute("id")%>'; 
@@ -304,10 +324,35 @@ body{overflow:scroll;
 
 
 //후기 높은 숙소 불러오기
+ var house = ${tophouselist};
+ console.log(house);
+ 
+ var tophouse = document.getElementById("toprv");
 
 
+ for(intest in house ){
+	 
+		var a = $('<div class= "mainpic"style="margin:10px;"><img class= "mainpicc" name = '+house[intest][0]["H_RGNUM"]+' id ="pro" width=270px height=170px src = "'+house[intest][0]["H_MAINPIC"]+'"></div>');
+		
+		var b = $('<div class= "request" >'+
+			" 주소:"+house[intest][0]["H_ADDRESS"]+"<br>"+
+			" |상세주소:"+house[intest][0]["H_DETAILADD"]+"&nbsp"+"&nbsp"+
+			"누적 후기("+house[intest][0]["H_cont"]+"건)"+
+			'</div>'); 
+		
+	$("#toprv").append(a);
+		a.append(b);
 
+		 $(".mainpicc").on('click', function() {
 
+	         console.log("z");
+	         console.log($(this).attr("name"));
+	         location.href="detailregiinfo?rgnum="+$(this).attr("name");
+	         
+	      });
+	}
+
+ 
 
 
 
@@ -317,9 +362,33 @@ body{overflow:scroll;
 
 //별점 높은 숙소 불러오기 
 
+var topstar= ${topstarlist};
+	console.log(topstar);
+
+	 var tophouse = document.getElementById("topst");
 
 
+	 for(intest in topstar ){
+		 
+			var a = $('<div class= "mainpic"style="margin:10px;"><img class= "mainpicc" name = '+topstar[intest][0]["H_RGNUM"]+' id ="pro" width=270px height=170px src = "'+topstar[intest][0]["H_MAINPIC"]+'"></div>');
+			
+			var b = $('<div class= "request" >'+
+				" |주소:"+topstar[intest][0]["H_ADDRESS"]+"<br>"+
+				" |상세주소:"+topstar[intest][0]["H_DETAILADD"]+"&nbsp"+"&nbsp"+
+				"★"+"("+topstar[intest][0]["GRV_SCORE"]+")"+
+				'</div>'); 
+			
+		$("#topst").append(a);
+			a.append(b);
 
+			 $(".mainpicc").on('click', function() {
+
+		         console.log("z");
+		         console.log($(this).attr("name"));
+		         location.href="detailregiinfo?rgnum="+$(this).attr("name");
+		         
+		      });
+		}
 
 
 

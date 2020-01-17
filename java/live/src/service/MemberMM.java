@@ -50,7 +50,7 @@ public class MemberMM {
 		}
 
 		fw = new Forward();
-		fw.setPath("./main.jsp");
+		fw.setPath("./main");
 		fw.setRedireact(false);
 		return fw;
 	}
@@ -62,7 +62,7 @@ public class MemberMM {
 		session.invalidate();// 세션 초기화
 
 		fw = new Forward();
-		fw.setPath("./main.jsp");
+		fw.setPath("./main");
 		fw.setRedireact(false);
 		return fw;
 	}
@@ -164,7 +164,7 @@ public class MemberMM {
 		System.out.println("reservation : " + result);
 
 		fw = new Forward();
-		fw.setPath("./main.jsp");
+		fw.setPath("./main");
 		fw.setRedireact(false);
 		return fw;
 	}
@@ -287,6 +287,7 @@ public class MemberMM {
 			}
 		return null;
 	}
+
 
 	public String cancellikelist(String cancellist) {
 		int updateRs =0;
