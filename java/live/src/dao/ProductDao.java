@@ -626,7 +626,7 @@ public class ProductDao {
 
 	public void registerHouse(String reginum, String id, String housetype, String attendance, String address, String addressDetail,
 			String realFileName, String parkarea, String roomscnt, String bathcnt, String bedcnt, String toiletcnt,
-			String picscollect, String mindate, String maxdate, int oneprice) {
+			String picscollect, String mindate, String maxdate, int oneprice, String y, String x) {
 		
 		//String sql = "INSERT INTO REGISTHOUSE VALUSE(REGI_SQ.CURRVAL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		String sql = "update REGISTHOUSE " + 
@@ -643,7 +643,9 @@ public class ProductDao {
 				"    H_DETAILPICS = ?," + 
 				"    H_CHECKIN = ?," + 
 				"    H_CHECKOUT = ?," + 
-				"    H_ONEPRICE = ?" + 
+				"    H_ONEPRICE = ?," +  
+				"    X = ?," +  
+				"    Y = ?" + 
 				"    WHERE H_RGNUM = ? and H_ID = ?";
 		try {
 			
@@ -663,9 +665,12 @@ public class ProductDao {
 			pstmt.setNString(12, mindate);
 			pstmt.setNString(13, maxdate);
 			pstmt.setInt(14, oneprice);
-			pstmt.setInt(15, Integer.parseInt(reginum));
-			pstmt.setNString(16, id);
 			
+			pstmt.setFloat(15, Float.parseFloat(x));
+			pstmt.setFloat(16, Float.parseFloat(y));
+			
+			pstmt.setInt(17, Integer.parseInt(reginum));
+			pstmt.setNString(18, id);
 			
 			int result = pstmt.executeUpdate();
 			
@@ -715,7 +720,7 @@ public class ProductDao {
 	public String searchHouse(String destination, String checkin, String checkout, String person) { //---메인에서 검색함
 		String sql= "SELECT * FROM REGISTHOUSE WHERE H_ADDRESS LIKE '%'||?||'%' AND H_CHECKIN <=? AND H_CHECKOUT >= ? AND H_ATTENDANCE >= ? AND H_CHECK=1";
 				
-		
+		 
 		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
 		
 		try {
@@ -729,9 +734,11 @@ public class ProductDao {
 			while(rs.next()) {
 				ArrayList<HashMap<String,String>> seardetail = new ArrayList<HashMap<String,String>>();
 				HashMap<String,String>  innerH = new HashMap<String,String>();
+				
 				innerH.put("H_MAINPIC", rs.getNString("H_MAINPIC"));
 				innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
 				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				innerH.put("H_DETAILADD", rs.getNString("H_DETAILADD"));
 				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
 				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
 				innerH.put("H_ONEPRICE", rs.getNString("H_ONEPRICE"));
@@ -1254,6 +1261,96 @@ public class ProductDao {
 		return result;
 	}
 
+	public String adminP() {
+		String sql= "SELECT * FROM REGISTHOUSE WHERE H_CHECK = 1 OR H_CHECK = 2 ";
+		
+		ArrayList<ArrayList<HashMap<String,String>>> houseup = new ArrayList<ArrayList<HashMap<String,String>>>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<HashMap<String,String>> houseInfo = new ArrayList<HashMap<String,String>>();
+				
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+				innerH.put("H_ID",rs.getNString("H_ID"));
+				innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+				innerH.put("H_ATTENDANCE", rs.getNString("H_ATTENDANCE"));
+				innerH.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				innerH.put("H_DETAILADD", rs.getNString("H_DETAILADD"));
+				innerH.put("H_PARKABLE", rs.getNString("H_PARKABLE"));
+				innerH.put("H_ROOMS", rs.getNString("H_ROOMS"));
+				innerH.put("H_BATHROOMS", rs.getNString("H_BATHROOMS"));
+				innerH.put("H_BEDROOMS", rs.getNString("H_BEDROOMS"));
+				innerH.put("H_TOLILET", rs.getNString("H_TOLILET"));
+				innerH.put("H_CHECK", rs.getNString("H_CHECK"));
+
+				
+				houseInfo.add(innerH); 
+				houseup.add(houseInfo);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		
+		Gson gs = new Gson();
+		
+		String HU = gs.toJson(houseup); 
+		
+		System.out.println(HU);
+		
+		return HU;
+	}
+
+	
+	
+	public String showlikereviewcnt() {
+		
+		String sql= "SELECT B.ravg  , B.rcnt, A.H_RGNUM FROM REGISTHOUSE A," + 
+		        "(SELECT  ROUND(AVG(GRV_SCORE),1) ravg, COUNT(*) rcnt, RH.H_RGNUM t FROM GUESTREVIEW G, RESERVATION RV,REGISTHOUSE RH WHERE G.GRV_R_GRNUM = RV.R_RGNUM AND RV.R_H_RGNUM=RH.H_RGNUM GROUP BY RH.H_RGNUM) B WHERE B.t =  A.H_RGNUM ";
+		 
+		ArrayList<ArrayList<HashMap<String,String>>> List = new ArrayList<ArrayList<HashMap<String,String>>>();
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArrayList<HashMap<String,String>> seardetail = new ArrayList<HashMap<String,String>>();
+				HashMap<String,String>  innerH = new HashMap<String,String>();
+				
+				innerH.put("RAVG", rs.getNString("RAVG"));
+				innerH.put("RCNT",rs.getNString("RCNT"));
+				innerH.put("H_RGNUM", rs.getNString("H_RGNUM"));
+				
+				
+				seardetail.add(innerH); 
+				List.add(seardetail);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		
+		Gson gs = new Gson();
+		
+		String result = gs.toJson(List); 
+		
+		System.out.println(result);
+		
+		return result;
+	} //메인 검색 끝
 
 
 

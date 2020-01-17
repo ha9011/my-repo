@@ -182,9 +182,12 @@
 
 
 			</div>
+			<input type="text" name="y"  id="y" />
+			<input type="text" name="x"  id="x" />
 			<div id="firstsubmit">
 				<button type="submit" class="btn btn-primary">Sign in</button>
 			</div>
+			
 		</form>
 
 	</div>
@@ -250,8 +253,12 @@ $("#selbox").change(function() {
 
 });
 
+
+//지도 클릭
 $("#LSBtn").click(()=>{
-	let locationSearch = $("#inputAddress").val();
+	
+	let locationSearch = $("#inputAddress").val(); // 검색 값
+	
 	console.log("클릭확인")
 	$(".test").css("display", "block");
 
@@ -277,8 +284,9 @@ $("#LSBtn").click(()=>{
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
 
-	    	
 
+				$("#y").val(result[0].y);
+				$("#x").val(result[0].x);
 	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
 	        // 결과값으로 받은 위치를 마커로 표시합니다

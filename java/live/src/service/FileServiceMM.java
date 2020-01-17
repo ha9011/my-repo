@@ -54,6 +54,8 @@ public class FileServiceMM {
 		String attendance = null;
 		String address = null;
 		String addressDetail = null;
+		String x = null;
+		String y = null;
 
 		String sysfileName = null;// upload폴더(서버)에 저장된 파일이름
 		String orifileName = null;// 원래 파일 이름
@@ -74,6 +76,8 @@ public class FileServiceMM {
 			addressDetail = multi.getParameter("addressDetail");
 			orifileName = multi.getOriginalFileName("mainpic");
 			sysfileName = multi.getFilesystemName("mainpic");
+			x = multi.getParameter("x");
+			y = multi.getParameter("y");
 			// 응닫페이지 출력
 
 			System.out.println("housetype : " + housetype);
@@ -82,7 +86,8 @@ public class FileServiceMM {
 			System.out.println("addressDetail : " + addressDetail);
 			System.out.println("orifileName : " + orifileName);
 			System.out.println("sysfileName : " + sysfileName);
-
+			System.out.println("x : " + x);
+			System.out.println("y : " + y);
 			System.out.println("uploadPath : " + uploadPath);
 
 			request.setAttribute("housetype", housetype);
@@ -92,7 +97,8 @@ public class FileServiceMM {
 			request.setAttribute("orifileName", orifileName);
 			request.setAttribute("sysfileName", sysfileName);
 			request.setAttribute("reginum", reginum);
-			
+			request.setAttribute("x", x);
+			request.setAttribute("y", y);
 			
 
 			int i = -1;
@@ -244,6 +250,8 @@ public class FileServiceMM {
 		String toiletcnt = request.getParameter("toiletcnt");
 		String picscollect = request.getParameter("picscollect");
 		
+		String x = request.getParameter("x");
+		String y = request.getParameter("y");
 		
 		System.out.println("넘어온 값 확인 ");
 		System.out.println("첫날 : "+mindate);
@@ -290,10 +298,13 @@ public class FileServiceMM {
 		System.out.println("첫날 : "+mindate);//
 		System.out.println("막날 : "+maxdate);//
 		System.out.println("1박가격 : "+oneprice);//
+
+		System.out.println("x : "+x);//
+		System.out.println("y : "+y);//
 		
 		//db에 넣기 
 		ProductDao pDao = new ProductDao();
-		pDao.registerHouse(reginum, id,housetype, attendance, address, addressDetail, realFileName, parkarea, roomscnt, bathcnt, bedcnt, toiletcnt, picscollect, mindate, maxdate, oneprice);
+		pDao.registerHouse(reginum, id,housetype, attendance, address, addressDetail, realFileName, parkarea, roomscnt, bathcnt, bedcnt, toiletcnt, picscollect, mindate, maxdate, oneprice,y,x);
 		
 		
 		

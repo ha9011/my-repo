@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -178,18 +179,20 @@ public class MemberMM {
 		String Myinfo = null;
 		String MyReser = null;
 		String Write=null;
+		String likehouse= null;
 		
 		
 		MemberDao mDao = new MemberDao();
 		Myinfo = mDao.Myinfo(id);
 		MyReser = mDao.MyReser(id);
 		Write = mDao.Write(id);
+		likehouse = mDao.likehouse(id);
 		mDao.close();
 
 		request.setAttribute("result", Myinfo);
 		request.setAttribute("MyReser", MyReser);
 		request.setAttribute("sleepwell", Write);
-		
+		request.setAttribute("likehouse", likehouse);
 		
 		fw = new Forward();
 		fw.setPath("./guestInfo.jsp");
@@ -283,6 +286,29 @@ public class MemberMM {
 				return null;
 			}
 		return null;
+	}
+
+	public String cancellikelist(String cancellist) {
+		int updateRs =0;
+		String selectRs = null;
+		Gson gs = new Gson();
+		System.out.println("tttt : " + cancellist );
+		ArrayList<String> mList= new ArrayList<String>();  //[방번, 아이디]
+		mList = gs.fromJson(cancellist, new TypeToken<ArrayList<String>>() {}.getType());
+		
+		MemberDao mDao = new MemberDao();
+		//업데이트   좋아요에서 퍼 오면 되고.
+		updateRs = mDao.updateLikeCancel(mList);  // 좋아요 1 -> 놉 0
+		
+		//셀렉트
+		selectRs = mDao.likehouse(mList.get(1));
+		
+		mDao.close();
+
+		System.out.println("좋아요 목록 : ");
+		System.out.println(selectRs);
+		
+		return selectRs;
 	}
 
 }

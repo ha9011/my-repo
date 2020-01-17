@@ -20,7 +20,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({ "/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked", "/showreview", "/pagereple"})
+@WebServlet({ "/cancellike","/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked", "/showreview", "/pagereple"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -128,11 +128,16 @@ public class RestController extends HttpServlet {
 			}.getType());
 			
 			json = mm.searchPw(mList);
+		}else if (cmd.equals("/cancellike")) { // 비밀번호 찾기 연결
+			System.out.println("좋아욕 목록 지우기 ");
+			String cancellist =request.getParameter("cancellike");
+			
+			json = mm.cancellikelist(cancellist);
 		}
 		
 		
 		
-		
+		//cancelroom
 		
 		
 		

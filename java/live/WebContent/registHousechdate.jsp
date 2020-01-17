@@ -94,7 +94,11 @@
 				<input type="hidden" value="${picscollect}" name="picscollect">
 			</div>
 
-			
+			<div><input type="hidden" value="${x}" name="x">
+					</div>
+					
+					<div><input type="hidden" value="${y}" name="y">
+					</div>
 					
 			<button>완료</button>
 		</form>

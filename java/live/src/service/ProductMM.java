@@ -84,6 +84,7 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		String searchLike = null;
 		
+		String showlikereviewcnt = null;
 		
 		ProductDao pDao = new ProductDao();
 		
@@ -98,14 +99,16 @@ public Forward searchHouse() { //처음 검색 페이지
 			request.setAttribute("searchLike",searchLike);
 		}
 		
+		showlikereviewcnt = pDao.showlikereviewcnt();
 		
 		
 		pDao.close();
 		
-		request.setAttribute("result",searchHouse);
+		request.setAttribute("result",searchHouse);  // 집 
 		
-		request.setAttribute("destination",destination);
+		request.setAttribute("destination",destination);  // 검색창에 목적지 
 		
+		request.setAttribute("showlikereviewcnt",showlikereviewcnt);  // 검색창에 목적지 
 		
 		
 		
@@ -143,13 +146,18 @@ public Forward searchHouse() { //처음 검색 페이지
 	
 	public Forward houseupload() {//관리자 게시글 승인
 		String adminH = null;
-		
+		String adminP = null;
 		ProductDao pDao = new ProductDao();
 		adminH = pDao.adminH();
+		adminP = pDao.adminP();
+		
+		
 		
 		pDao.close();
 		
 		request.setAttribute("HU",adminH);
+		
+		request.setAttribute("DOWN",adminP);
 		
 		
 		fw = new Forward();
@@ -162,26 +170,49 @@ public Forward searchHouse() { //처음 검색 페이지
 	
 
 	public String getAjaxhouseupload() { //-- 승인, 거절 AJAX
-		String adminH = null;
+		
+		
+		ArrayList<String> resultList = new ArrayList<String>();
 		String data=request.getParameter("data");
+		
 		ArrayList<String> app = new  ArrayList<String>();
+		
 		Gson gs = new Gson();
 		app = gs.fromJson(data, new TypeToken<ArrayList<String>>() {
 		}.getType());
 		
 		System.out.println(app);//[,]
 		
+		
+		String adminH = null;
+		String adminP = null;
 		String req = null;
+		
 		
 		ProductDao pDao = new ProductDao();
 		
-		pDao.req(app);
+		pDao.req(app);// insert
 		
-		adminH = pDao.adminH();
+		adminH = pDao.adminH(); // select
+		
+		adminP = pDao.adminP(); // select
+		
+		
+		System.out.println("======================");
+		System.out.println(adminH);
+		System.out.println(adminP);
+		resultList.add(adminH);
+		resultList.add(adminP);
+		
 		
 		pDao.close();
 		
-		return adminH ;
+		
+		String result = gs.toJson(resultList);
+		System.out.println("#####");
+		System.out.println(result);
+		
+		return result ;
 	}//-- 승인, 거절 AJAX 끝
 
 	

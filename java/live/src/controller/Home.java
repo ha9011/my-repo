@@ -51,7 +51,7 @@ public class Home extends HttpServlet {
 		} else if (cmd.equals("/AdminInfo")) {
 			System.out.println("관리자마이페이지");
 			fw = mm.AdminInfo();// 관리자 마이페이지
-			fw = pm.houseupload();// 관리자가 받은 집 게시물 등록요청
+			fw = pm.houseupload();// 관리자가 받은 집 게시물 등록요청   // 위, 아래 둘다 하겠음용
 		} else if (cmd.equals("/HostInfo")) {
 			System.out.println("호스트마이페이지");
 			fw = mm.HostInfo();// 호스트 마이페이지

@@ -261,7 +261,45 @@ public class MemberDao {
 		return result;
 
 	}
+	
+	
+	
+	public int updateLikeCancel(ArrayList<String> likelist) {
+		// [방번,"아이디"]
+		String sql = "UPDATE LIKETABLE SET L_TYPE =0 WHERE L_H_RGNUM = ? and L_ID = ?";
 
+		int result = 0;
+		try {
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(likelist.get(0)));
+			pstmt.setNString(2, likelist.get(1));
+			
+
+			result = pstmt.executeUpdate();
+			System.out.println("UPDATE test result : " + result);
+
+			if (result == 0) {// 실패
+				System.out.println("UPDATE 실패");
+				return result;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("UPDATE 성공");
+		return result;
+
+	}
+
+	
+	
+	
+	
+	
+	
 	public String checkReserDate(String detailId) {
 
 		String sql = "SELECT * FROM RESERVATION where R_H_RGNUM=? AND R_TYPE = 1"; // 시퀀스로 댓글번호,아이디 ,시간,댓글내용,비밀글,방번호
@@ -766,6 +804,44 @@ public class MemberDao {
 		}
 		System.out.println("프로필 성공");
 
+	}
+
+	public String likehouse(String id) {
+		String Sql = "SELECT * FROM REGISTHOUSE R, LIKETABLE L WHERE R.H_RGNUM =L.L_H_RGNUM and L.L_ID=? and L.L_TYPE=1";
+
+		ArrayList<ArrayList<HashMap<String, String>>> ReviewList = new ArrayList<ArrayList<HashMap<String, String>>>();
+		try {
+			pstmt = con.prepareStatement(Sql);
+			pstmt.setNString(1, id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				ArrayList<HashMap<String, String>> Review = new ArrayList<HashMap<String, String>>();
+				HashMap<String, String> myReview = new HashMap<String, String>();
+
+				myReview.put("H_MAINPIC", rs.getNString("H_MAINPIC"));
+				myReview.put("H_RGNUM",rs.getNString("H_RGNUM"));
+				myReview.put("H_ADDRESS", rs.getNString("H_ADDRESS"));
+				myReview.put("H_ROOMS", rs.getNString("H_ROOMS"));
+				myReview.put("H_TOLILET", rs.getNString("H_TOLILET"));
+				myReview.put("H_ONEPRICE", rs.getNString("H_ONEPRICE"));
+				myReview.put("L_TYPE", rs.getNString("L_TYPE"));
+
+				Review.add(myReview);
+				ReviewList.add(Review);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Gson gs = new Gson();
+
+		String result = gs.toJson(ReviewList);
+		System.out.println("내 좋아요 목록");
+		System.out.println(result);
+
+		return result;
 	}
 
 }// 프로필 사진 변경 및 저장 끝

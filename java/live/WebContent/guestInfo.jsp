@@ -11,7 +11,25 @@
 #body {
 	margin: 0, auto;
 }
+.out {
+	border-bottom:2px solid #0B3861;
+	width: 90%;
+	height: 150px;
+	display: flex;
+	margin-bottom: 10px;
+}
 
+.inner {
+	display: inline-flex;
+}
+
+.info {
+	margin-left: 20px;
+	width: 200px;
+	height: 150px;
+	display: inline-flex;
+	font-size: 20px;
+}
 #header {
 	width: 1200px;
 	height: 300px;
@@ -189,6 +207,16 @@
 			<div id="sleepwell"></div>
 
 		</div>
+		
+		<div id="myhouselist">
+			<h1>좋아요</h1>
+			<div id="likehouse"></div>
+
+		</div>
+		
+		
+		
+		
 
 		<!--모달 만들기  -->
 		<div id="modal" class="searchModal">
@@ -721,7 +749,7 @@ $(".cancelRoom").click(function() {
 		
 
 		success:function(cancel){  
-			console.log ("방취소성공 ");
+			console.log ("방취소성공?? ");
 			
 			$("#showReser"+by).text("예약취소");
 			$("#showReserbtn"+by).prop("disabled", true);
@@ -738,6 +766,121 @@ $(".cancelRoom").click(function() {
 	});
 });
 
+
+
+//[찜 목록]
+
+var $test2 =${likehouse}; //[내 예약 목록]가 담겨져 있다.   
+console.log("예약정보 출력");
+
+for(intest in $test2){
+var checkin=new Date($test2[intest][0]["R_CHECKIN"]);  
+var checkout=new Date($test2[intest][0]["R_CHECKOUT"]);
+
+var checkintime=checkin.toLocaleDateString();
+var checkouttime=checkout.toLocaleDateString();
+
+var a = $('<div class="out" name = '+$test2[intest][0]["H_RGNUM"]+'></div>')
+
+var b = $('<div class="inner" ><img name = '+$test2[intest][0]["H_RGNUM"]+' class="gg" width="200"height="150" alt=사진없음 src="'+$test2[intest][0]["H_MAINPIC"]+'"></div>')
+
+var c = $('<div class="info">'+'주소지:'+$test2[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test2[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test2[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test2[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+
+a.append(b);
+a.append(c);
+
+
+var e=$('<button style="height: 25px; "class="cancellike" id="cancellike'+$test2[intest][0]["H_RGNUM"]+'" name="'+$test2[intest][0]["H_RGNUM"]+'">'+"좋아요 삭제"+'</button>'); //예약취소
+console.log(e);
+
+
+		
+	
+$("#likehouse").append(a);		
+c.after(e);		
+	
+
+}
+
+
+
+
+//좋아요 삭제
+$(document).on('click',".cancellike",function() {
+	
+	
+	var cancellikelist = [];
+	var by=$(this).attr("name");
+	var id='${id}';
+
+	cancellikelist.push(by);
+	cancellikelist.push(id);
+	
+	
+	var result = JSON.stringify(cancellikelist);
+	console.log(by);
+
+	console.log(result)
+	
+	
+	console.log("=====")
+	
+	
+	
+	$.ajax({
+		type : 'get',
+		url : "cancellike",
+		data : {cancellike : result},
+		datatype:"json",
+		
+
+		success:function(cancellike){  
+			$("#likehouse").empty();	
+			console.log(cancellike);
+
+			console.log(typeof cancellike);
+			console.dir(cancellike);
+			
+			var result = JSON.parse(cancellike);
+			
+			for(intest in result){
+				var checkin=new Date(result[intest][0]["R_CHECKIN"]);  
+				var checkout=new Date(result[intest][0]["R_CHECKOUT"]);
+
+				var checkintime=checkin.toLocaleDateString();
+				var checkouttime=checkout.toLocaleDateString();
+
+				var a = $('<div class="out" name = '+result[intest][0]["H_RGNUM"]+'></div>')
+
+				var b = $('<div class="inner" ><img name = '+result[intest][0]["H_RGNUM"]+' class="gg" width="200"height="150" alt=사진없음 src="'+result[intest][0]["H_MAINPIC"]+'"></div>')
+
+				var c = $('<div class="info">'+'주소지:'+result[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+result[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+result[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+result[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+
+				a.append(b);
+				a.append(c);
+
+
+				var e=$('<button style="height: 25px; "class="cancellike" id="cancellike'+result[intest][0]["H_RGNUM"]+'" name="'+result[intest][0]["H_RGNUM"]+'">'+"좋아요 삭제"+'</button>'); //예약취소
+				console.log(e);
+
+
+						
+					
+				$("#likehouse").append(a);		
+				c.after(e);		
+			}
+			
+			
+			
+		}	,
+		error:function(error){ //에러시 에러 뜨게하기
+			console.log(error);
+		}
+		
+		
+	});
+	
+});
 
 
 

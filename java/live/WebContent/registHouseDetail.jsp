@@ -187,7 +187,11 @@
 					<div><input type="hidden" value="${realFileName}" name="realFileName">
 					</div>
 					
+					<div><input type="hidden" value="${x}" name="x">
+					</div>
 					
+					<div><input type="hidden" value="${y}" name="y">
+					</div>
 					
 					
 					

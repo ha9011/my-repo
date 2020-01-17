@@ -160,8 +160,7 @@ input {
 </body>
 <script>
 //---------------------------예상--------------------------------------------
-	console.log("좋아요 리스트 ==");
-	console.log('${searchLike}');
+	
 	
 	
 	
@@ -225,6 +224,7 @@ input {
          }
       })
       
+      
       var b = $('<div class="inner" ><img name = '+$test[intest][0]["H_RGNUM"]+' class="gg" width="200"height="150" alt=사진없음 src="'+$test[intest][0]["H_MAINPIC"]+'"></div>')
       
        $(document).on('click','.gg', function() {
@@ -233,7 +233,7 @@ input {
                       location.href="detailregiinfo?rgnum="+$(this).attr("name");
                    } );
       
-      var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
+      var c = $('<div class="info">'+'주소지:'+$test[intest][0]["H_ADDRESS"]+$test[intest][0]["H_DETAILADD"]+'<br>'+'방 개수:'+$test[intest][0]["H_ROOMS"]+'<br>'+'화장실 개수:'+$test[intest][0]["H_TOLILET"]+'<br>'+'1박 가격:'+$test[intest][0]["H_ONEPRICE"]+'만원'+'</div>')
       
       a.append(b);
       a.append(c);
@@ -241,9 +241,30 @@ input {
       var idcheck = '${id}';
       
       
+      
+      //여기서 보여주기 ${showlikereviewcnt} ravg+'/'+rcnt
+      
+      var ravg= 0;
+      var rcnt= 0;
+      var reviewcntlist = ${showlikereviewcnt}
+      
+      for(i in reviewcntlist){
+    	  if($test[intest][0]["H_RGNUM"]===reviewcntlist[i][0]["H_RGNUM"]){
+    		  rcnt = reviewcntlist[i][0]["RCNT"]
+    		  ravg = reviewcntlist[i][0]["RAVG"]
+    	  }
+      }
+      
+      
+      
+      
       if(idcheck===''){ // 비로그인 //하트 안보이게
     	        console.log("하트 이미지 로그인 안됨")
-     	  
+    	        var d = $('<div style="text-align:right; width:220px"><div "class="like"></div><div>');
+      	      	var e = $('<span> 평점 : '+ravg+'  /    리뷰 수 : '+rcnt+'</span>');
+      	      
+      	         d.append(e);
+        	     a.append(d);
       }else{  // 로그인 하트 보이게
 
     	  var likelistt = '${searchLike}';
@@ -261,17 +282,23 @@ input {
   	        console.log("로그인 하트")
 
   	        var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="1" width="40" height="40" src="./img/like.png"></div><div>');
-    	      
+  	      var e = $('<span> 평점 : '+ravg+'  /    리뷰 수 : '+rcnt+'</span>');
+  	      
+  	          d.append(e);
     	      a.append(d);
     	  }else if(likelist[$test[intest][0]["H_RGNUM"]]===0){
     		  console.log("로그인 하트X")
     		  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
-    	      
+    		  var e = $('<span> 평점 : '+ravg+'  /    리뷰 수 : '+rcnt+'</span>');
+      	       
+    		  d.append(e);
     	      a.append(d);
     	  }else{
     		  console.log("로그인 하트Xx")
 			  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
-    	      
+    		  var e = $('<span> 평점 : '+ravg+'  /    리뷰 수 : '+rcnt+'</span>');
+      	      
+    		  d.append(e);
     	      a.append(d);
     	  }
       }
@@ -344,7 +371,7 @@ input {
 
      
 
-      
+//검색 창 안에서 다시 검색      
     $('#btn1').click(function() {
       console.log("ajax검색");
       var a =$("#subsearch").val()
@@ -434,6 +461,43 @@ input {
                   
                   
                   $("#list").append(a)
+                  
+                  
+                  
+           if(idcheck===''){ // 비로그인 //하트 안보이게
+          	  console.log("하트 이미지 로그인 안됨")
+           	  
+            }else{  // 로그인 하트 보이게
+
+          	  var likelistt = '${searchLike}';
+          	  var likelist = JSON.parse(likelistt);
+
+      	        console.log("하트 이미지 로그인 됨")
+      	        console.log("해당 방 번호 : "+$test[intest][0]["H_RGNUM"])
+      	        
+      	        console.log("해당 방 번호 : "+ typeof $test[intest][0]["H_RGNUM"])
+      	        
+      	        console.log("해당 방 번호 : "+typeof likelist)
+      	        
+      	        
+          	  if(likelist[$test[intest][0]["H_RGNUM"]]===1){ 
+        	        console.log("로그인 하트")
+
+        	        var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="1" width="40" height="40" src="./img/like.png"></div><div>');
+          	      
+          	      a.append(d);
+          	  }else if(likelist[$test[intest][0]["H_RGNUM"]]===0){
+          		  console.log("로그인 하트X")
+          		  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
+          	      
+          	      a.append(d);
+          	  }else{
+          		  console.log("로그인 하트Xx")
+      			  var d = $('<div style="text-align:right; width:220px"><div "class="like"><img class="likech" data-name = '+$test[intest][0]["H_RGNUM"]+' name="0" width="40" height="40" src="./img/donlike.png"></div><div>');
+          	      
+          	      a.append(d);
+          	  }
+            }
                  
                }
             
@@ -571,6 +635,9 @@ input {
             console.log(error);
 
          }
+         
+         
+         
          
      })//ajax end
    }); 
@@ -806,8 +873,6 @@ window.onload = function () {
 		}
 		
 	}
-
-
 
 </script>
 
