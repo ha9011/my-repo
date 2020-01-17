@@ -1164,9 +1164,115 @@ public class ProductDao {
 		}
 	
 	
+		
+
+		public String tophouse() { // 후기 많은 숙소 3건 노출 
+			String sql="SELECT B.rcnt, A.H_MAINPIC, A.H_RGNUM, A.H_ADDRESS, A.H_DETAILADD FROM REGISTHOUSE A," + 
+					"(SELECT COUNT(*) AS rcnt, RH.H_RGNUM AS t FROM GUESTREVIEW G, RESERVATION RV,REGISTHOUSE RH WHERE G.GRV_R_GRNUM = RV.R_RGNUM AND RV.R_H_RGNUM=RH.H_RGNUM GROUP BY RH.H_RGNUM) B WHERE B.t =  A.H_RGNUM  AND ROWNUM <=3 ORDER BY B.rcnt desc";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> houselist = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+					innerH.put("H_ADDRESS",rs.getNString("H_ADDRESS"));
+					innerH.put("H_DETAILADD",rs.getNString("H_DETAILADD"));
+					innerH.put("H_cont",rs.getNString("rcnt"));
+					
+					
+					list.add(innerH); 
+					houselist.add(list);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String tophouselist = gs.toJson(houselist); 
+			
+			System.out.println(tophouselist);
+			
+			return tophouselist;
+			
+	}
 	
+		
+		
+		
+
+		public String topstar() {
+			String sql="SELECT  B.rcnt, A.H_MAINPIC, A.H_RGNUM, A.H_ADDRESS, A.H_DETAILADD FROM REGISTHOUSE A," + 
+					"(SELECT  ROUND(AVG(GRV_SCORE),1) AS rcnt, RH.H_RGNUM t FROM GUESTREVIEW G, RESERVATION RV,REGISTHOUSE RH WHERE G.GRV_R_GRNUM = RV.R_RGNUM AND RV.R_H_RGNUM=RH.H_RGNUM GROUP BY RH.H_RGNUM) B WHERE B.t =  A.H_RGNUM AND ROWNUM <=3 ORDER BY B.rcnt desc";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> topsList = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+					innerH.put("H_ADDRESS",rs.getNString("H_ADDRESS"));
+					innerH.put("H_DETAILADD",rs.getNString("H_DETAILADD"));
+					innerH.put("GRV_SCORE",rs.getNString("rcnt"));
+					
+					
+					list.add(innerH); 
+					topsList.add(list);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String topstarlist = gs.toJson(topsList); 
+			
+			System.out.println(topstarlist);
+			
+			return topstarlist;
+			
+	}
+
+
 	
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 	
@@ -1253,8 +1359,6 @@ public class ProductDao {
 			
 		return result;
 	}
-
-
 
 
 	

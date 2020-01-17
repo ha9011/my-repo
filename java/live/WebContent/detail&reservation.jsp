@@ -218,7 +218,7 @@ form {
 <body>
 	<div id="header">
 		<!-- 아이디 비번 로그인 회원가입 입력-->
-		<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+		<a href="main"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 		<button class="btn">
 			<a href="signup.jsp" class=log>회원가입</a>
 		</button>

@@ -9,7 +9,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
-#body{margin:0,auto;}
+#body{margin-left:300px;overflow:scroll;}
 	#header{width:1200px;height:300px;overflow:hidden;border:none;}
 		#img{border:2px solid #0B3861;float:left;width:300px;height:280px;}
 	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;}
@@ -21,6 +21,7 @@
 
 .btn{float: right;margin-right:10px;width:70px;height:50px;color:white;background-color:#0B243B;}
 </style>
+
 
 </head>
 <body>

@@ -42,7 +42,7 @@ p{text-align:left;}
 <body>
 
 
-	<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+	<a href="main"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 	
 	<div id=box>
 	<div id= title>

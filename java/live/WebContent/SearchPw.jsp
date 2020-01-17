@@ -20,7 +20,7 @@
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <body>
-<a href="main.jsp"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
+<a href="main"><img id="rogo" alt="살다로고" src="./img/살다.png"></a>
 <div id="main">
 
 	<form action="SearchPw">
