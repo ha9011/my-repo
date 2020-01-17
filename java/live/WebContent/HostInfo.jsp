@@ -430,12 +430,6 @@ $('.star_grade span').click(function(){ //별점 효과
      return false;
 });
 
-console.log("예약번호 뽑아보자");	
-console.log($CL[intest][0]["R_RGNUM"]);
-
-var rgnum=($CL[intest][0]["R_RGNUM"]);
-console.log(rgnum);
-
 
 
 

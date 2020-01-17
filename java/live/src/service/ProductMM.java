@@ -431,6 +431,27 @@ public Forward searchHouse() { //처음 검색 페이지
 
 
 
+	public Forward reviewdetail() {
+		
+		String reviewdetail = null;
+		
+		ProductDao pDao = new ProductDao();
+		reviewdetail = pDao.reviewdetail();
+		
+		pDao.close();
+		
+		request.setAttribute("topstarlist",reviewdetail);
+		System.out.println(reviewdetail);
+		System.out.println("오고 있니???");
+		fw = new Forward();
+		fw.setPath("./detail&reservation.jsp");
+		fw.setRedireact(false);
+		return fw;
+	}
+
+
+
+
 	
 	
 	

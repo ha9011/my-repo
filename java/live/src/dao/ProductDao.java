@@ -1264,7 +1264,47 @@ public class ProductDao {
 	}
 
 
-	
+		public String reviewdetail() {
+			
+			String sql="SELECT * FROM GUESTREVIEW";
+			
+			ArrayList<ArrayList<HashMap<String,String>>> topsList = new ArrayList<ArrayList<HashMap<String,String>>>();
+			
+			try {
+				pstmt = con.prepareStatement(sql);
+				rs= pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+					
+					HashMap<String,String>  innerH = new HashMap<String,String>();
+					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
+					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
+					innerH.put("H_ADDRESS",rs.getNString("H_ADDRESS"));
+					innerH.put("H_DETAILADD",rs.getNString("H_DETAILADD"));
+					innerH.put("GRV_SCORE",rs.getNString("rcnt"));
+					
+					
+					list.add(innerH); 
+					topsList.add(list);
+					
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			// TODO Auto-generated method stub
+			
+			Gson gs = new Gson();
+			
+			String topstarlist = gs.toJson(topsList); 
+			
+			System.out.println(topstarlist);
+			
+			return topstarlist;
+		}
 		
 		
 		
@@ -1457,6 +1497,11 @@ public class ProductDao {
 		
 		return result;
 	} //메인 검색 끝
+
+	
+	
+	
+	
 
 	
 
