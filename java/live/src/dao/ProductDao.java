@@ -1264,29 +1264,31 @@ public class ProductDao {
 	}
 
 
-		public String reviewdetail() {
+		public String reviewdetail(String detailId) {
 			
-			String sql="SELECT * FROM GUESTREVIEW";
-			
-			ArrayList<ArrayList<HashMap<String,String>>> topsList = new ArrayList<ArrayList<HashMap<String,String>>>();
+			String sql="SELECT R_PERSON, H_MAINPIC,R_RGNUM, R_GUESTID,R_CHECKIN,R_CHECKOUT,R_TOTALPRICE,GRV_CONTENT,GRV_SCORE FROM RESERVATION R ,REGISTHOUSE H, GUESTREVIEW G WHERE  R.R_H_RGNUM=H.H_RGNUM AND G.GRV_R_GRNUM = R.R_RGNUM AND H.H_RGNUM=? ";
+			ArrayList<ArrayList<HashMap<String,String>>> reL = new ArrayList<ArrayList<HashMap<String,String>>>();
 			
 			try {
 				pstmt = con.prepareStatement(sql);
+				pstmt.setNString(1,detailId);
 				rs= pstmt.executeQuery();
 				
 				while(rs.next()) {
-					ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+					ArrayList<HashMap<String,String>> reserL = new ArrayList<HashMap<String,String>>();
 					
 					HashMap<String,String>  innerH = new HashMap<String,String>();
 					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
-					innerH.put("H_RGNUM",rs.getNString("H_RGNUM"));
-					innerH.put("H_ADDRESS",rs.getNString("H_ADDRESS"));
-					innerH.put("H_DETAILADD",rs.getNString("H_DETAILADD"));
-					innerH.put("GRV_SCORE",rs.getNString("rcnt"));
+					innerH.put("R_RGNUM",rs.getNString("R_RGNUM"));
+					innerH.put("R_GUESTID",rs.getNString("R_GUESTID"));
+					innerH.put("R_CHECKIN",rs.getNString("R_CHECKIN"));
+					innerH.put("R_CHECKOUT",rs.getNString("R_CHECKOUT"));
+					innerH.put("GRV_CONTENT",rs.getNString("GRV_CONTENT"));
+					innerH.put("GRV_SCORE",rs.getNString("GRV_SCORE"));
 					
 					
-					list.add(innerH); 
-					topsList.add(list);
+					reserL.add(innerH); 
+					reL.add(reserL);
 					
 				}
 				
@@ -1299,12 +1301,14 @@ public class ProductDao {
 			
 			Gson gs = new Gson();
 			
-			String topstarlist = gs.toJson(topsList); 
+		
+			String reserlist = gs.toJson(reL); 
 			
-			System.out.println(topstarlist);
+			System.out.println(reserlist);
 			
-			return topstarlist;
-		}
+			return reserlist;
+	
+	}
 		
 		
 		

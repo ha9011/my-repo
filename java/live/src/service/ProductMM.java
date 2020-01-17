@@ -431,23 +431,7 @@ public Forward searchHouse() { //처음 검색 페이지
 
 
 
-	public Forward reviewdetail() {
-		
-		String reviewdetail = null;
-		
-		ProductDao pDao = new ProductDao();
-		reviewdetail = pDao.reviewdetail();
-		
-		pDao.close();
-		
-		request.setAttribute("topstarlist",reviewdetail);
-		System.out.println(reviewdetail);
-		System.out.println("오고 있니???");
-		fw = new Forward();
-		fw.setPath("./detail&reservation.jsp");
-		fw.setRedireact(false);
-		return fw;
-	}
+	
 
 
 
@@ -587,11 +571,10 @@ public Forward searchHouse() { //처음 검색 페이지
 		String outreple = null;
 		String hostId = null;
 		String checkDate = null;
-		
+		String reviewdetail=null;
 		
 		ProductDao pDao = new ProductDao();
 		detailregiinfo = pDao.detailregiinfo(detailId);
-		pDao.close();
 		request.setAttribute("result",detailregiinfo);
 		
 		
@@ -618,9 +601,14 @@ public Forward searchHouse() { //처음 검색 페이지
 		
 		request.setAttribute("rgnum", detailId);
 		
-		
-		
 
+		reviewdetail = pDao.reviewdetail(detailId);
+		
+		request.setAttribute("reviewdetail", reviewdetail);
+		
+		pDao.close();
+			
+		
 	
 		fw = new Forward(); // 값을 가지고 가기위한 포워딩 객체
 		fw.setPath("./detail&reservation.jsp"); //여기까지 범위 설정 

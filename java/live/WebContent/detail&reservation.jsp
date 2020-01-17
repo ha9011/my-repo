@@ -204,6 +204,12 @@ form {
 	display: flex;
 }
 #aa{margin:15px;}
+
+.request{width:100%;
+		 height:100px; 
+}
+	
+
 </style>
 
 </head>
@@ -1148,7 +1154,35 @@ for(i in checkeddate){
 	//----------------------------------------------------------------------------------------------------------------------------------------------
 	
 	
-	
+	var reviewdetail= ${reviewdetail};
+	console.log(reviewdetail);
+
+	 var tophouse = document.getElementById("review");
+
+
+	 for(intest in reviewdetail ){
+		 
+			var a = $('<div class= "mainpic"style="display:flex; margin:10px;"><img class= "mainpicc" name = '+reviewdetail[intest][0]["H_RGNUM"]+' id ="pro" width=150px height=80px src = "'+reviewdetail[intest][0]["H_MAINPIC"]+'"></div>');
+			
+			var b = $('<div class= "request" >'+
+				" |주소:"+reviewdetail[intest][0]["H_ADDRESS"]+"<br>"+
+				" |상세주소:"+reviewdetail[intest][0]["H_DETAILADD"]+"<br>"+
+				" |후기내용:"+reviewdetail[intest][0]["GRV_CONTENT"]+
+				"★"+"("+reviewdetail[intest][0]["GRV_SCORE"]+")"+
+				
+				'</div>'); 
+			
+		$("#review").append(a);
+			a.append(b);
+
+			 $(".mainpicc").on('click', function() {
+
+		         console.log("z");
+		         console.log($(this).attr("name"));
+		         location.href="detailregiinfo?rgnum="+$(this).attr("name");
+		         
+		      });
+		}
 	
 	
 	
@@ -1236,6 +1270,8 @@ window.onload = function () {
 	}
 
 
+	
+	
 
 </script>
 
