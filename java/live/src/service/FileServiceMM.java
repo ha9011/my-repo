@@ -312,7 +312,7 @@ public class FileServiceMM {
 		//
 		
 		fw = new Forward();
-		fw.setPath("./main.jsp");
+		fw.setPath("./main");
 		fw.setRedireact(false);
 		return fw;
 		

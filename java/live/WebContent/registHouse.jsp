@@ -103,11 +103,7 @@ padding: auto;
 .button-3:hover .eff-3 {
 	bottom: 0;
 }
-p{text-align:left;}
-	#hf{margin-top:20px;
-	background-color:#0B243B;
-	color:white;
-}
+
 .button-3:hover a {
 	color: #fff;
 }
@@ -126,6 +122,11 @@ text-align: center;
 #big{
 width : 2400px;
 border-right: 1px solid 0B243B;
+}
+
+button{
+	color: white;
+	background-color: #0B243B;
 }
 </style>
 
@@ -249,17 +250,7 @@ border-right: 1px solid 0B243B;
 	</div>
 
 	
-<div id ="hf">
-	<div id="footer">	
-	<br>
-	<br>
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;오시는 길 | 사이트맵  | 개인정보 처리 방침  | 영상정보처리기기 | 운영,관리방침이용약관 | 채용안내</p>
-		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;업체명 : ㈜살아보다 사업자등록번호 : 111-11-11111
-			주소 : 인천 남구 학익동 663-1 태승빌딩 5층 (1층 홈플러스) 전화번호 : 032-876-3332
-			Copyrights(c) ㈜살아보다 </p>
-			<h3>since 2020</h3>
-	</div>
-	</div>
+
 
 	<!-- name : housetype // attendanceNum // attendanceDir // address //  addressDetail -->
 
