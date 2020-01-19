@@ -115,9 +115,10 @@
 	padding : 5px;
 	margin : 5px ;
 	color : blue;
+}
 
-
-button{background-color: #0B243B;
+button{
+	background-color: #0B243B;
 	   color:white;
 	   border: none;
 }

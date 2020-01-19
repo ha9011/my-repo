@@ -1027,7 +1027,7 @@ public class ProductDao {
 	
 		public String reservlist(String id) {
 			
-			String sql="SELECT R_PERSON, H_MAINPIC,R_RGNUM, R_GUESTID,R_CHECKIN,R_CHECKOUT,R_TOTALPRICE FROM RESERVATION R ,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_HOSTID=?AND R_TYPE=0";
+			String sql="SELECT R_PERSON, R_H_RGNUM, H_MAINPIC,R_RGNUM, R_GUESTID,R_CHECKIN,R_CHECKOUT,R_TOTALPRICE FROM RESERVATION R ,REGISTHOUSE H WHERE  R.R_H_RGNUM=H.H_RGNUM AND R_HOSTID=?AND R_TYPE=0";
 			
 			ArrayList<ArrayList<HashMap<String,String>>> reL = new ArrayList<ArrayList<HashMap<String,String>>>();
 			
@@ -1042,6 +1042,7 @@ public class ProductDao {
 					HashMap<String,String>  innerH = new HashMap<String,String>();
 					innerH.put("H_MAINPIC",rs.getNString("H_MAINPIC"));
 					innerH.put("R_RGNUM",rs.getNString("R_RGNUM"));
+					innerH.put("R_H_RGNUM",rs.getNString("R_H_RGNUM"));
 					innerH.put("R_GUESTID",rs.getNString("R_GUESTID"));
 					innerH.put("R_PERSON",rs.getNString("R_PERSON"));
 					innerH.put("R_CHECKIN",rs.getNString("R_CHECKIN"));
@@ -1501,6 +1502,41 @@ public class ProductDao {
 		
 		return result;
 	} //메인 검색 끝
+
+	public void reserlistcancel(ArrayList<String> ap) {
+		// ap.get(2) checkin  ap.get(3) checkout ap.get(4) 방번호 ...걸 삭제해야함 
+		String sql = "UPDATE RESERVATION SET R_TYPE =2 WHERE  R_H_RGNUM = ? and ((R_CHECKout BETWEEN ? and ?) or (R_CHECKin BETWEEN ? and ?))";
+		
+		
+		int result = 0;
+		
+		System.out.println(sql);
+		System.out.println(ap);
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,Integer.parseInt(ap.get(4)));
+			pstmt.setNString(2,ap.get(2));
+			pstmt.setNString(3,ap.get(3));
+			pstmt.setNString(4,ap.get(2));
+			pstmt.setNString(5,ap.get(3));
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("UPDATE test result : " + result);
+			
+			if(result==0) {//실패
+				System.out.println("승인실패123");
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		}// 호스트 예약 승인  AJAX 끝
 
 	
 	

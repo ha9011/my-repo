@@ -15,7 +15,7 @@
 	#info{border:2px solid #0B3861;float:right;width:870px;height:280px;display:flex;}
 	
 	#requestlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:30px;overflow:scroll;}
-		.mainpic{display: inline-block; font-size:18px;border:1px solid #0B3861;margin:15px;}
+		.mainpic{display: inline-block; font-size:18px;border:1px solid #0B3861;margin:15px;padding:2px;}
 	#houseupload{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
 	#myhouselist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;text-align:center;}
 	#checkoutlist{border:2px solid #0B3861;width:1200px;height:700px;margin-bottom:20px;overflow:scroll;}
@@ -124,10 +124,66 @@ button{background-color: #0B243B;
 }
 
 .btn{margin-bottom:20px;}
+
+
+.modal-wrappersr {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalsr {
+  background: white;
+  padding: 24px 16px;
+  border-radius: 4px;
+  width: 600px;
+}
+
+.modal-titlesr {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.modalsr p {
+  font-size: 16px;
+}
+
+.close-wrappersr {
+  text-align: right;
+}
+
+
+.myscore{
+	
+	border : 2px solid black;
+	padding : 5px;
+	margin : 5px ;
+	color : blue;
+}
+.myscorecnt{
+	display:inline-block;
+	border : 2px solid black;
+	padding : 5px;
+	margin : 5px ;
+	color : blue;
+}
+
+.layoutcontent{
+	text-align: center;
+	border : 1px solid black;
+}
 </style>
 
 </head>
 <body>
+
+
 	<form action="hostreview">
     <div class="modal-wrapper" style="display: none;">
       <div class="modal">
@@ -143,6 +199,27 @@ button{background-color: #0B243B;
       </div>
     </div>
 </form>
+
+
+
+
+ <div class="modal-wrappersr" style="display: none;">
+      <div class="modalsr">
+      <div class="layoutcontent">
+        <div class="modal-titlesr"></div>
+ 		<div class="modal-contentsr"></div>
+        <div class="close-wrappersr">
+        </div>
+          <button id="closesr">닫기</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
 
 <div id="body">
 <h1>호스트 마이페이지 </h1>
@@ -251,28 +328,34 @@ var c = $('<button id = "save">사진저장</button>')
 var $reList =${reserlist};  
 console.log($reList);
 
+
+
+
+//
 var reservation = document.getElementById("requestlist");
 
 
 for(intest in $reList ){
 	
-	var o= new Date($reList[intest][0]["R_CHECKOUT"]);
-	var checkout=o.toLocaleDateString();
+	console.log("날짜 확인");
+	var o = new Date($reList[intest][0]["R_CHECKOUT"]);
+    console.log(o);
+	var checkout=getFormatDate(o);
 	console.log(checkout);
 
 	var i= new Date($reList[intest][0]["R_CHECKIN"]);
-	var checkin=i.toLocaleDateString();
+	var checkin=getFormatDate(i);
 	console.log(checkin);
 	
 	
 	var a = $('<div class= "mainpic" style="display:flex;"><img id ="pro" width=150px height=70px src = "'+$reList[intest][0]["H_MAINPIC"]+'"></div>');
-	var b = $('<div class= "request">'+
+	var b = $('<div class= "request" name="'+$reList[intest][0]["R_GUESTID"]+'">'+
 		" |예약 요청자:"+$reList[intest][0]["R_GUESTID"]+
 		" |요청인원:"+$reList[intest][0]["R_PERSON"]+
-		" |체크인날짜:"+checkin+
-		" |체크아웃날짜:"+checkout+
+		" |체크인날짜:<span id='chi"+$reList[intest][0]["R_RGNUM"]+"'  name='chi"+$reList[intest][0]["R_RGNUM"]+"'>"+checkin+"</span>"+
+		" |체크아웃날짜:<span id='cho"+$reList[intest][0]["R_RGNUM"]+"' name='cho"+$reList[intest][0]["R_RGNUM"]+"'>"+checkout+"</span>:"+
 		" |전체 가격:"+$reList[intest][0]["R_TOTALPRICE"]+"만원"+"&nbsp"+"&nbsp"+"&nbsp"+
-		'</div>'); 
+		'</div><input type="hidden" id="rhnum'+$reList[intest][0]["R_RGNUM"]+'" value="'+$reList[intest][0]["R_H_RGNUM"]+'"/>'); 
 		
 	
 	
@@ -282,29 +365,95 @@ var d = $('<button class= "btn" name="'+$reList[intest][0]["R_RGNUM"]+'" id = "c
 
 $("#requestlist").append(a);
 a.append(b);
-b.append(d);
-b.append(c);
+a.append(c);
+a.append(d);
 
 }
 
 
 
+const modalsr = document.querySelector(".modal-wrappersr");
+$(document).on("click",".request",function(){
+	
+	
+	
+	 var reviewname = $(this).attr('name');
+	
+	
+	 modalsr.style.display = "flex";
+	 
+	 
+	 
+	 $.ajax({ // 업로드 요청 받아오는 ajax
+		    type:'get',
+		    url:'showreviews',//restful방식
+		    data:{data:reviewname},
+		    //서버에서 받을때 
+		    dataType:"json",
+		    
+		    success:function(data){
+		    	console.log("ajax 성공")
+		    	console.log(data)
+		    	console.log(typeof data)
+		    	var totalreview = JSON.parse(data[0]);
+		    	var totalreviewlist = JSON.parse(data[1]);
+		    	$(".modal-contentsr").empty();
+		    	var d = $('<div class="myscore"> 총 리뷰 : ' +totalreview[0][0]["GCNT"]+'개 | 총 점수 : '+totalreview[0][0]["GAVG"]+'점</div>');
+		    	$(".modal-contentsr").append(d);
+		    //  모달에 아이디 추가 $reList[intest][0]["R_GUESTID"]
+		    
+		    
+		    $(".modal-titlesr").html(reviewname+"님의 리뷰");
+		    
+		    
+		    
+		    
+		    //modal-contentsr
+				for(i in totalreviewlist){
+		    		
+					var e = $('<div class="myscore"> 리뷰 : ' +totalreviewlist[0][0]["HRV_CONTENT"]+'<div class="myscorecnt">'+totalreviewlist[0][0]["GAVG"]+'점</div></div>');
+					$(".modal-contentsr").append(e);	
+		    	
+				}
+		    	
+		    	
+		    	
+		    	
+			},
+			error:function(error){
+		    	
+			}
+		});
+	
+})
 
- var test = function(){
-	console.log("ttt");
-}
+const closesr = document.getElementById("closesr");
+closesr.onclick = () => {
+	console.log("??")
+  modalsr.style.display = "none";
+};
 
-
-
+//클릭하면
 $("#requestlist").on('click','.btn',function() {
 	console.log("클릭")
 	console.log($(this).attr("name"));
-	var app =$(this).attr("name");
-	var can =$(this).html();
+	
+	var app =$(this).attr("name");//방번호
+	var can =$(this).html(); // 성공인지 실퍠인지 
+	var chi = $("#chi"+app).html();
+	var cho = $("#cho"+app).html();
+	var rhnum = $("#rhnum"+app).val();
+	console.log("클릭하면 나오는 날짜 chi : "+ chi);
+	console.log("클릭하면 나오는 날짜 cho : "+ cho);
+	console.log("방번호 : "+ rhnum);
 	
 	var num = [];
 	num.push(app);
 	num.push(can);
+	num.push(chi);
+	num.push(cho);
+	num.push(rhnum);
+	
 	console.log(num);
 	var result = JSON.stringify(num);
 
@@ -313,8 +462,8 @@ $("#requestlist").on('click','.btn',function() {
 	 $.ajax({ // 업로드 요청 받아오는 ajax
     type:'get',
     url:'requestlist',//restful방식
-    data:{data:result},
     //서버에서 받을때 
+    data:{data:result},
     dataType:"json",
     
     success:function(data){
@@ -328,22 +477,22 @@ $("#requestlist").on('click','.btn',function() {
     for(intest in data){
     	
     	var o= new Date(data[intest][0]["R_CHECKOUT"]);
-    	var checkout=o.toLocaleDateString();
+    	var checkout=getFormatDate(o);
     	console.log(checkout);
 
     	var i= new Date(data[intest][0]["R_CHECKIN"]);
-    	var checkin=i.toLocaleDateString();
+    	var checkin=getFormatDate(i);;
     	console.log(checkin);
     	
     	
     	var a = $('<div class= "mainpic" style="display:flex;"><img id ="pro" width=150px height=70px src = "'+data[intest][0]["H_MAINPIC"]+'"></div>');
-    	var b = $('<div class= "request">'+
+    	var b = $('<div class= "request" name="'+data[intest][0]["R_GUESTID"]+'">'+
     		" |예약 요청자:"+data[intest][0]["R_GUESTID"]+
     		" |요청인원:"+data[intest][0]["R_PERSON"]+
-    		" |체크인날짜:"+checkin+
-    		" |체크아웃날짜:"+checkout+
+    		" |체크인날짜:<span id='chi"+data[intest][0]["R_RGNUM"]+"'  name='chi"+data[intest][0]["R_RGNUM"]+"'>"+checkin+"</span>"+
+    		" |체크아웃날짜:<span id='cho"+data[intest][0]["R_RGNUM"]+"' name='cho"+data[intest][0]["R_RGNUM"]+"'>"+checkout+"</span>:"+
     		" |전체 가격:"+data[intest][0]["R_TOTALPRICE"]+"만원"+"&nbsp"+"&nbsp"+"&nbsp"+
-    		'</div>'); 
+    		'</div><input type="hidden" id="rhnum'+data[intest][0]["R_RGNUM"]+'" value="'+data[intest][0]["R_H_RGNUM"]+'"/>'); 
     		
     	
     	
@@ -353,10 +502,9 @@ $("#requestlist").on('click','.btn',function() {
 
     $("#requestlist").append(a);
     a.append(b);
-    b.append(d);
-    b.append(c);
+    a.append(c);
+    a.append(d);
     }
-       
 	},
 	error:function(error){
     	console.log("ajax 실패")
@@ -431,7 +579,7 @@ $('.star_grade span').click(function(){ //별점 효과
 	$("#star").append($(this).parent().children('.on').clone());
  	 modal.style.display = "flex";
 	
-		close.onclick = () => {
+	close.onclick = () => {
  	 modal.style.display = "none";
 	};
 
@@ -471,7 +619,7 @@ for(intest in $home ){
 		" |화장실:"+$home[intest][0]["H_TOLILET"]+
 		" |샤워실:"+$home[intest][0]["H_PARKABLE"]+
 		" |주차장:"+$home[intest][0]["H_PARKABLE"]+
-		"<h5>ㆍㆍㆍ승인대기중ㆍㆍㆍ</h5>"+
+		"<br><h5>ㆍㆍㆍ승인대기중ㆍㆍㆍ</h5>"+
 		'</div>'); 
 	
 
@@ -516,6 +664,16 @@ $("#myhouselist").append(a);
       });
 }
 
+
+//날짜 계산기
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;
+}
 
 
 //--------------------------------------------------예상------------내 집 보유 리스트 끝------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ import service.ProductMM;
 
 
 
-@WebServlet({ "/profileupdate","/cancellike","/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked", "/showreview", "/pagereple"})
+@WebServlet({ "/showreviews","/profileupdate","/cancellike","/SearchId","/SearchPw","/duplicateID","/changeprofilepic","/inputreple","/inputrreple","/showrreple" ,"/changeSearch","/houseupload","/requestlist", "/cancelroom", "/likechecked", "/showreview", "/pagereple"})
 
 public class RestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -91,7 +91,7 @@ public class RestController extends HttpServlet {
 			json = pm.getAjaxlikechecked();
 			System.out.println(json);
 		}else if (cmd.equals("/requestlist")){
-			System.out.println("업로드 승인");
+			System.out.println("호스트 승인-취소");
 			json = pm.getAjaxrequestlist();
 		}else if (cmd.equals("/cancelroom")) {
 			System.out.println("예약취소중");
@@ -136,6 +136,9 @@ public class RestController extends HttpServlet {
 		}else if(cmd.equals("/profileupdate")) { //집 마지막 데이터
 			System.out.println("프로필변경");
 			json=fs.updateprofile();
+		}else if(cmd.equals("/showreviews")) { //집 마지막 데이터
+			System.out.println("showreviews 보기");
+			json = mm.showreviews();
 		}
 		
 		

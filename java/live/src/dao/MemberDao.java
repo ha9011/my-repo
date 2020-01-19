@@ -878,6 +878,40 @@ public class MemberDao {
 		return result;
 	}
 
+	public String showreviews(String showreviews) {
+		String Sql = "SELECT H.HRV_CONTENT , H.HRV_SCORE as gavg FROM HOSTREVIEW H, RESERVATION R WHERE H.HRV_R_RGNUM = R.R_RGNUM and R.R_GUESTID=?";
+
+		ArrayList<ArrayList<HashMap<String, String>>> ReviewList = new ArrayList<ArrayList<HashMap<String, String>>>();
+		try {
+			pstmt = con.prepareStatement(Sql);
+			pstmt.setNString(1, showreviews);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				ArrayList<HashMap<String, String>> Review = new ArrayList<HashMap<String, String>>();
+				HashMap<String, String> myReview = new HashMap<String, String>();
+
+				myReview.put("HRV_CONTENT", rs.getNString("HRV_CONTENT"));
+				myReview.put("GAVG",rs.getNString("GAVG"));
+				
+
+				Review.add(myReview);
+				ReviewList.add(Review);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Gson gs = new Gson();
+
+		String result = gs.toJson(ReviewList);
+		System.out.println("고객 스코어 목록");
+		System.out.println(result);
+
+		return result;
+	}
+
 }// 프로필 사진 변경 및 저장 끝
 
 //--------------------------------------------------------------------------------------------------------------------------

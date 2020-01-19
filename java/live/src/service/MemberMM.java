@@ -316,4 +316,24 @@ public class MemberMM {
 		return selectRs;
 	}
 
+	
+
+	public String showreviews() {
+		ArrayList<String> showreviews = new ArrayList<String>();
+		String guestid = request.getParameter("data");
+		Gson gs = new Gson();
+		MemberDao mDao = new MemberDao();
+		//셀렉트
+		showreviews.add(mDao.myscore(guestid));
+		showreviews.add(mDao.showreviews(guestid));
+		
+		mDao.close();
+
+		System.out.println("좋아요 목록 : ");
+		System.out.println(showreviews);
+		
+		
+		return gs.toJson(showreviews);
+	}
+
 }

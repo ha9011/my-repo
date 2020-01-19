@@ -311,15 +311,23 @@ public Forward searchHouse() { //처음 검색 페이지
 			
 		}.getType());
 		
-		System.out.println(ap);//[,]
+		
+		
+		System.out.println(ap);//[예약번호,성공or실패,chi,cho]
 		
 
 		
 		ProductDao pDao = new ProductDao();
 		
-		pDao.reserlist(ap);
+		if(ap.get(1).equals("승인")) {  // 승인이면 모든 조건에 해당하는 놈 2번(취소로 바꾸고)
+			System.out.println("승인이니 날짜 겹치는 거 취소로 바꾸기");
+			pDao.reserlistcancel(ap);  // 업데이트 //승인한놈 업데이트
 
-		reservlist = pDao.reservlist(id);
+		}
+
+		pDao.reserlist(ap);  // 업데이트 //승인한놈 업데이트  // 승인된 친구만 1번으로 바꾸기.
+
+        reservlist = pDao.reservlist(id); // 셀렉트 // 모두 셀렉트
 		
 		pDao.close();
 		return reservlist ;
